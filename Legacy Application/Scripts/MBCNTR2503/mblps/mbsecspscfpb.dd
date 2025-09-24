@@ -1,0 +1,102 @@
+mb-client-no, 0, 3, Number, 0
+mb-filler, 3, 1, Text, 0
+mb-loan-no, 4, 7, Packed Number, 0
+mb-rec-code, 11, 1, Text, 0
+mb-rec-no, 12, 3, Number, 0
+mb-net-disb, 15, 6, Packed Number, 2
+mb-payee, 21, 10, Text, 0
+mb-ctl-fld, 31, 6, Packed Number, 0
+mb-total-recd-s, 37, 6, Packed Number, 2
+mb-prin-pd-s, 43, 6, Packed Number, 2
+mb-int-pd-s, 49, 5, Packed Number, 2
+mb-escrow-pd-s, 54, 5, Packed Number, 2
+mb-l-c-pd-s, 59, 5, Packed Number, 2
+mb-bsc-pd-s, 64, 5, Packed Number, 2
+mb-a-h-pd-s, 69, 5, Packed Number, 2
+mb-life-pd-s, 74, 5, Packed Number, 2
+mb-suspense-amt-s, 79, 5, Packed Number, 2
+mb-res-esc-pd-s, 84, 6, Packed Number, 2
+mb-fha-penalty-s, 90, 3, Packed Number, 2
+mb-refund-adv-s, 93, 6, Packed Number, 2
+mb-replace-res-s, 99, 5, Packed Number, 2
+mb-235-fee-s, 104, 3, Packed Number, 2
+mb-hud-part-s, 107, 4, Packed Number, 2
+mb-misc-pd-s, 111, 6, Packed Number, 2
+mb-re-app-pd-s, 117, 2, Packed Number, 2
+mb-c-o-pd-s, 119, 3, Packed Number, 2
+mb-fee-code-s, 122, 1, Text, 0
+mb-proc-date-s, 123, 6, Text, 0
+mb-proc-yy-s, 123, 2, Number, 0
+mb-proc-mm-s, 125, 2, Number, 0
+mb-proc-dd-s, 127, 2, Number, 0
+mb-prev-paid-yy-s, 129, 2, Packed Number, 0
+mb-prev-paid-mm-s, 131, 2, Number, 0
+mb-prev-paid-dd-s, 133, 2, Number, 0
+mb-prev-paid-from-yy-s, 135, 2, Packed Number, 0
+mb-prev-paid-from-mm-s, 137, 2, Number, 0
+mb-prev-paid-from-dd-s, 139, 2, Number, 0
+mb-int-due-pd-s, 141, 6, Packed Number, 2
+sps-147, 147, 66, Text, 0
+ip2131-filler, 213, 50, Text, 0
+sps-tran, 263, 3, Text, 0
+sps-date, 266, 6, Text, 0
+sps-amount, 272, 5, Packed Number, 2
+sps-code, 277, 1, Text, 0
+sps-tran, 278, 3, Text, 0
+sps-date, 281, 6, Text, 0
+sps-amount, 287, 5, Packed Number, 2
+sps-code, 292, 1, Text, 0
+sps-tran, 293, 3, Text, 0
+sps-date, 296, 6, Text, 0
+sps-amount, 302, 5, Packed Number, 2
+sps-code, 307, 1, Text, 0
+sps-tran, 308, 3, Text, 0
+sps-date, 311, 6, Text, 0
+sps-amount, 317, 5, Packed Number, 2
+sps-code, 322, 1, Text, 0
+sps-tran, 323, 3, Text, 0
+sps-date, 326, 6, Text, 0
+sps-amount, 332, 5, Packed Number, 2
+sps-code, 337, 1, Text, 0
+sps-tran, 338, 3, Text, 0
+sps-date, 341, 6, Text, 0
+sps-amount, 347, 5, Packed Number, 2
+sps-code, 352, 1, Text, 0
+sps-tran, 353, 3, Text, 0
+sps-date, 356, 6, Text, 0
+sps-amount, 362, 5, Packed Number, 2
+sps-code, 367, 1, Text, 0
+sps-tran, 368, 3, Text, 0
+sps-date, 371, 6, Text, 0
+sps-amount, 377, 5, Packed Number, 2
+sps-code, 382, 1, Text, 0
+sps-tran, 383, 3, Text, 0
+sps-date, 386, 6, Text, 0
+sps-amount, 392, 5, Packed Number, 2
+sps-code, 397, 1, Text, 0
+sps-tran, 398, 3, Text, 0
+sps-date, 401, 6, Text, 0
+sps-amount, 407, 5, Packed Number, 2
+sps-code, 412, 1, Text, 0
+sps-tran, 413, 3, Text, 0
+sps-date, 416, 6, Text, 0
+sps-amount, 422, 5, Packed Number, 2
+sps-code, 427, 1, Text, 0
+sps-tran, 428, 3, Text, 0
+sps-date, 431, 6, Text, 0
+sps-amount, 437, 5, Packed Number, 2
+sps-code, 442, 1, Text, 0
+sps-tran, 443, 3, Text, 0
+sps-date, 446, 6, Text, 0
+sps-amount, 452, 5, Packed Number, 2
+sps-code, 457, 1, Text, 0
+sps-tran, 458, 3, Text, 0
+sps-date, 461, 6, Text, 0
+sps-amount, 467, 5, Packed Number, 2
+sps-code, 472, 1, Text, 0
+sps-tran, 473, 3, Text, 0
+sps-date, 476, 6, Text, 0
+sps-amount, 482, 5, Packed Number, 2
+sps-code, 487, 1, Text, 0
+sps-eor, 488, 512, Text, 0
+

@@ -1,0 +1,47 @@
+Client, 0, 4, Text, 0
+Account, 4, 20, Text, 0
+Address1, 24, 60, Text, 0
+Address2, 84, 60, Text, 0
+Address3, 144, 60, Text, 0
+Address4, 204, 60, Text, 0
+Address5, 264, 60, Text, 0
+ForeignAddress, 324, 32, Text, 0
+City, 324, 30, Text, 0
+State, 354, 2, Text, 0
+Zip5, 356, 5, Text, 0
+Zip4, 361, 4, Text, 0
+Dpbc, 365, 3, Text, 0
+Country, 368, 50, Text, 0
+DestMailTrackingBar, 418, 7, Packed Number, 0
+FillA, 425, 8, Text, 0
+OriginMailTrackingBar, 433, 7, Packed Number, 0
+FillB, 440, 8, Text, 0
+PostalError, 448, 11, Text, 0
+IntelligentMailBar, 459, 31, Text, 0
+Height, 490, 4, Text, 0
+Width, 494, 4, Text, 0
+Weight, 498, 5, Text, 0
+Thickness, 503, 5, Text, 0
+Rate, 508, 5, Text, 0
+FillC, 513, 9, Text, 0
+PostalKey, 522, 24, Text, 0
+ImbId, 546, 9, Text, 0
+ImbSequence, 555, 9, Text, 0
+ImbServiceType, 564, 3, Text, 0
+PostalCodes, 567, 65, Text, 0
+Pocket2, 632, 1, Text, 0
+Pocket3, 633, 1, Text, 0
+Pocket4, 634, 1, Text, 0
+Pocket5, 635, 1, Text, 0
+Pocket6, 636, 1, Text, 0
+Pocket7, 637, 1, Text, 0
+ProductCode, 638, 4, Text, 0
+ViewProductCode, 642, 4, Text, 0
+StatementDate, 646, 10, Text, 0
+FillD, 656, 11, Text, 0
+OrigCszOffset, 667, 2, Text, 0
+OrigCszLength, 669, 2, Text, 0
+FormattedAccount, 671, 20, Text, 0
+NZip, 691, 5, Text, 0
+RecordIndex, 696, 4, Text, 0
+

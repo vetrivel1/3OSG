@@ -1,0 +1,345 @@
+if [ $# -lt 1 ]
+ then
+    echo ""
+    echo " $0   takes parameters of the type"
+    echo ""
+    echo "     $0 c-0310 /users/public/16860347.bil j-16860"
+    echo ""
+    echo "Defined parameter types are"
+    echo " 0-display parameter set (YES)"
+    echo " 2-work2length"
+    echo " a-append grp to filename"
+    echo " b-stack size"
+    echo " c-client"
+    echo " d-clientdept"
+    echo " e-container path"
+    echo " f-CSZ field name"
+    echo " g-stagger size"
+    echo " h-input record length"
+#    echo " i-input path"
+    echo " j-job"
+    echo " k-container key"
+    echo " l-lower case"
+    echo " m-imb format (input dd)"
+    echo " p-parsecsz"
+    echo " r-project"
+    echo " s-subscriber"
+    echo " t-service type"
+    echo " u-piece attribute"
+ exit
+fi
+
+# Default values for parameters go here
+DisplayParameterSet=NO
+Append=NOAPPEND
+StackSize=0
+CszField=NOFIELD
+Stagger=0
+LowerCase=LOWERCASE
+ParseCSZ=NOPARSE
+Subscriber=000546
+ServiceType=320
+PieceAttr=ncp1stclass1ozimbnew
+ContainerKey=-1
+Work2Length=0
+ContainerPath=/users/programs/container
+OptionPath=NONE
+
+# Get parameters from the command line
+limit=$#
+count=0
+while [ count -lt limit ]
+do
+   x=$1
+   xLength=${#x}
+   if [ $xLength -gt 2 ]
+    then
+       xType=`expr substr $x 1 1`
+       xDash=`expr substr $x 2 1`
+       if [ $xType = / ]
+        then
+           InPath=$x
+#           echo "OK"
+#           echo "xType=$xType"
+#           echo "xDash=$xDash"
+#           echo ""
+       elif ! [ $xDash = - ]
+        then
+           echo ""
+           echo "    Invalid parameter:  $x"
+           echo ""
+           exit 1
+       else
+          xValueLength=`expr $xLength - 2`
+          xValue=`expr substr $x 3 $xValueLength`
+          if [ $xType = 0 ]
+           then
+              DisplayParameterSet=$xValue
+          elif [ $xType = 2 ]
+           then
+              Work2Length=$xValue
+          elif [ $xType = a ]
+           then
+              Append=$xValue
+          elif [ $xType = b ]
+           then
+              StackSize=$xValue
+          elif [ $xType = c ]
+           then
+              Client=$xValue
+          elif [ $xType = d ]
+           then
+              ClientDept=$xValue
+          elif [ $xType = e ]
+           then
+              ContainerPath=$xValue
+          elif [ $xType = f ]
+           then
+              CszField=$xValue
+          elif [ $xType = g ]
+           then
+              Stagger=$xValue
+          elif [ $xType = h ]
+           then
+              InLength=$xValue
+#          elif [ $xType = i ]
+#           then
+#              InPath=$xValue
+          elif [ $xType = j ]
+           then
+              Job=$xValue
+          elif [ $xType = k ]
+           then
+              ContainerKey=$xValue
+          elif [ $xType = l ]
+           then
+              LowerCase=$xValue
+          elif [ $xType = m ]
+           then
+              ImbFormat=$xValue
+          elif [ $xType = p ]
+           then
+              ParseCSZ=$xValue
+          elif [ $xType = r ]
+           then
+              Project=$xValue
+          elif [ $xType = s ]
+           then
+              Subscriber=$xValue
+          elif [ $xType = t ]
+           then
+              ServiceType=$xValue
+          elif [ $xType = u ]
+           then
+              PieceAttr=$xValue
+          else
+              echo ""
+              echo "    Invalid parameter:  $x"
+              echo ""
+              exit 1
+          fi
+       fi
+    else
+       echo ""
+       echo "    Invalid parameter:  $x"
+       echo ""
+       exit 1
+   fi
+   shift
+   count=`expr $count + 1`
+done
+
+# Conditional logic for parameters
+if [ $Work2Length -eq 0 ]
+ then
+    Work2Length=$InLength
+fi
+if [ $ParseCSZ = "PARSECSZ" ]
+ then
+    CszField=City
+fi
+
+##-----------------------------------------
+## Change ServiceType 036 to 320  US28126
+##-----------------------------------------
+if [ $ServiceType = "036" ]
+ then
+    ServiceType=320
+fi
+
+#echo "DisplayParameterSet=$DisplayParameterSet"
+if [ $DisplayParameterSet = "YES" ]
+ then
+    echo ""
+    echo "BEGIN"
+    echo "$0 PARAMETER SET"
+    echo "Append=$Append"
+    echo "Client=$Client"
+    echo "InPath=$InPath"
+    echo "CszField=$CszField"
+    echo "Stagger=$Stagger"
+    echo "InLength=$InLength"
+    echo "Job=$Job"
+    echo "ContainerKey=$ContainerKey"
+    echo "LowerCase=$LowerCase"
+    echo "ImbFormat=$ImbFormat"
+    echo "ParseCSZ=$ParseCSZ"
+    echo "Project=$Project"
+    echo "ClientDept=$ClientDept"
+    echo "Subscriber=$Subscriber"
+    echo "ServiceType=$ServiceType"
+    echo "PieceAttribute=$PieceAttr"
+    echo "Work2Length=$Work2Length"
+    echo "ContainerPath=$ContainerPath"
+    echo "END"
+    echo ""
+fi
+
+Work2Path=/users/public/$Job.$Work2Length
+ddPath=$ContainerPath/$Project
+dda=$ddPath/$Project.dd
+NcpJaxPath=/users/public/$Job.ncpjax
+if [ -f $NcpJaxPath ]
+ then
+    read ddNcpJax < $NcpJaxPath
+    dda=$ddPath/$ddNcpJax
+# else
+#    echo ""
+#    echo "$NcpJaxPath not found"
+#    echo ""
+#    exit 1
+fi
+
+ddOption=$ddPath/option.$Client.dd
+lldbPath=$ddPath/$Project.flexfields
+
+#ddNcpContainer=ncpcontainer.cbl.dd
+ddNcpContainer=ncpcontainer.cbl.dd.new
+ddNcpContainerPath=/users2/letters/dd/aztest/$ddNcpContainer
+Delimiter='|'
+IsText=1
+ImbLength=3422
+
+if [ -f $ddOption ]
+ then
+    /users/programs/cnpextractvalues.out $InPath $InLength $ddOption
+    read OutLength < $Work2Path.txt.length
+    /users/programs/ncptexttofixed.out $InPath.tab $OutLength
+    OptionPath=$InPath.option
+    mv $InPath.tab.$OutLength $OptionPath
+fi
+if [ $? -gt 0 ]
+ then
+    exit 1
+fi
+InDir=${InPath%/*}
+InDirLength=${#InDir}
+InPathLength=${#InPath}
+StartPos=`expr $InDirLength + 2`
+InFileLength=`expr $InPathLength - $InDirLength - 1`
+InFile=`expr substr $InPath $StartPos $InFileLength`
+InFileNoExt=${InFile%.*}
+
+if [ $Append = "APPEND" ]
+ then
+    WorkPath=$InDir/$InFile.cntr.wrk
+    GrpPath=$InDir/$InFile.cntr.grp
+    aGrpPath=$InDir/a$InFile.cntr.grp
+    qGrpPath=$InDir/?$InFile.cntr.grp
+    StkPath=$InDir/$InFile.cntr.stk
+ else
+    WorkPath=$InDir/$InFileNoExt.cntr.wrk
+    GrpPath=$InDir/$InFileNoExt.cntr.grp
+    aGrpPath=$InDir/a$InFileNoExt.cntr.grp
+    qGrpPath=$InDir/?$InFileNoExt.cntr.grp
+    StkPath=$InDir/$InFileNoExt.cntr.stk
+fi
+
+#echo ""
+#echo "WorkPath=$WorkPath"
+#echo ""
+
+#
+# build the 3422 record for "cnpimb.script"
+#
+if ! [ $Work2Length -eq 3722 ]
+ then
+    echo ""
+    cp $dda.iomap $WorkPath.dd.iomap
+    echo ""
+    chmod 777 $WorkPath.dd.iomap
+    echo ""
+    cp $dda $WorkPath.dd
+    echo ""
+    chmod 777 $WorkPath.dd
+
+    /users/programs/ncpcntr2.out $WorkPath.dd $Work2Length
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        echo ""
+        exit 1
+    fi
+
+    /users/programs/cnpextractvalues.out $InPath $InLength $WorkPath.dd.extract
+    if [ $? -gt 0 ]
+     then
+        exit 1
+    fi
+    cat $InPath.tab >> $WorkPath.dd.header
+    mv $WorkPath.dd.header $WorkPath.tab
+    rm $InPath.tab
+    /users/programs/cnptabtofixed.out $WorkPath.tab 1 $Delimiter NOCLIP NOTRIM $WorkPath.dd.fields
+    /users/programs/ncpcntr2a.out $WorkPath.dd.extract $WorkPath.tab.fixed.dd
+    mv $WorkPath.tab.fixed.dd.new $WorkPath.tab.fixed.dd
+    /users/programs/ncpcntr6.out $WorkPath.tab.fixed $Project
+    if [ $? -gt 0 ]
+     then
+        exit 1
+    fi
+    mv $WorkPath.tab.fixed.3422 $WorkPath
+fi
+if [ $Work2Length -eq 3722 ]
+ then
+    /users/programs/cnp37to34.out $InPath
+    mv $InPath.3422 $WorkPath
+fi
+
+/users/programs/cnpformattedaccount.out $WorkPath $Client
+mv $WorkPath.out $WorkPath
+rm $WorkPath.dd*
+rm $WorkPath.tab*
+
+echo ""
+ddImb=$InFileNoExt.dd
+ddImbPath=/users2/letters/dd/aztest/$ddImb
+cp $ddNcpContainerPath $ddImbPath
+if [ -f $lldbPath ]
+ then
+    /users/programs/ncpflexfields.out $lldbPath $ddImbPath
+    mv $ddImbPath.new $ddImbPath
+fi
+
+if [ -f $aGrpPath ]
+ then
+    rm $qGrpPath
+fi
+
+cnpimbv2.script 0-YES j-$Job i-$WorkPath h-$ImbLength m-$ddImb u-$PieceAttr d-$Subscriber t-$ServiceType p-$ParseCSZ g-$Stagger f-$CszField a-$Append l-$LowerCase
+
+rm $ddImbPath
+
+if [ -f $aGrpPath ]
+ then
+    find $qGrpPath -prune -size +0c -exec ncpcntr1v2.script {} w-$Work2Path c-$Client o-$OptionPath b-$StackSize \;
+ else
+#    echo ""
+#    echo "GrpPath=$GrpPath"
+#    echo "Work2Path=$Work2Path"
+#    echo "Work2Length=$Work2Length"
+#    echo "Client=$Client"
+#    echo "OptionPath=$OptionPath"
+#    echo ""
+    ncpcntr1v2.script $GrpPath w-$Work2Path c-$Client o-$OptionPath b-$StackSize
+fi
+

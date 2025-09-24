@@ -1,0 +1,43 @@
+if [ $# -lt 1 ]
+ then
+         echo ""
+         echo " $0   takes 1 parameter"
+         echo ""
+         echo " Parm1 - Job Number (5 digit)"
+         echo ""
+         echo "     For example:  $0 16860"
+         echo ""
+ exit
+fi
+
+# '10000' equals the last five digits of the min valid job# in "100000" range + 10000
+# '89999' equals the last five digits of the max valid job# in "100000" range - 10000
+# For example, if current job range is 600000 - 699999
+# then min valid job# in "600000" range is "00000" + "10000" = '10000'
+# and  max valid job# in "600000" range is "99999" - "10000" = '89999'
+
+Job=$1
+read JobFive < /users/public/edilive/job.five
+read JobNormal < /users/public/edilive/job.normal
+read JobElse < /users/public/edilive/job.else
+
+if [ $JobFive -lt '10000' ]
+ then
+    if [ $Job -gt '89999' ]
+     then
+        exit $JobElse
+     else
+        exit $JobNormal
+    fi
+elif [ $JobFive -gt '89999' ]
+ then
+    if [ $Job -lt '10000' ]
+     then
+        exit $JobElse
+     else
+        exit $JobNormal
+    fi
+else
+    exit $JobNormal
+fi
+

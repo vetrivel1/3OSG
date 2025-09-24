@@ -1,0 +1,226 @@
+if [ $# -lt 9 ]
+ then
+    echo ""
+    echo "Usage is:  $0 A B C D E F G H I"
+    echo "  A - InFile"
+    echo "  B - Piece Attribute"
+    echo "  C - AorP"
+    echo "  D - Ext"
+    echo "  E - RecordLength"
+    echo "  F - ImbFormat"
+    echo "  G - InPathSave"
+    echo "  H - MrgPath"
+    echo "  I - Job"
+    echo "  J - Append (optional)"
+    echo "  K - LowerCase (optional)"
+    echo ""
+    echo "For example:  $0 6860bbbbbb1.400 ncp1stclass1ozimb P grp 400"
+    echo "                      imbcdg400.dd /users/cdg/6860bbbbbb1.400"
+    echo "                      /users/public/6860bbbbbb1.400 16860 APPEND LOWERCASE"
+    echo ""
+    exit 1
+fi
+InFile=$1
+PieceAttr=$2
+AorP=$3
+Ext=$4
+RecordLength=$5
+ImbFormat=$6
+InPathSave=$7
+MrgPath=$8
+Job=$9
+Append=0
+if [ $# -gt 9 ]
+ then
+    shift
+    if [ $9 = "APPEND" ]
+     then
+        Append=1
+    fi
+fi
+LowerCase=U
+if [ $# -gt 9 ]
+ then
+    shift
+    if [ $9 = "LOWERCASE" ]
+     then
+        LowerCase=L
+    fi
+fi
+MailLength=700
+OutLength=`expr $RecordLength + $MailLength`
+InPath=/users/public/$InFile
+
+InDirSave=${InPathSave%/*}
+InDirSaveLength=${#InDirSave}
+InPathSaveLength=${#InPathSave}
+StartPos=`expr $InDirSaveLength + 2`
+InFileSaveLength=`expr $InPathSaveLength - $InDirSaveLength - 1`
+InFileSave=`expr substr $InPathSave $StartPos $InFileSaveLength`
+InFileSaveNoExt=${InFileSave%.*}
+InFileSaveNoExtLength=${#InFileSaveNoExt}
+InFileSaveExtLength=`expr $InFileSaveLength - $InFileSaveNoExtLength - 1`
+StartPos=`expr $InFileSaveNoExtLength + 2`
+InFileSaveExt=`expr substr $InFileSave $StartPos $InFileSaveExtLength`
+
+InFileNoExt=${InFile%.*}
+if [ Append -eq 1 ]
+ then
+    OutPath=$InDirSave/$InFile.grp
+ else
+    OutPath=$InDirSave/$InFileNoExt.grp
+    InRptPath=/users/public/$InFile.rpt
+    OutRptPath=/users/public/$InFileNoExt.rpt
+    InLblPath=/users/public/postrpt/$InFile.lbl
+    OutLblPath=/users/public/postrpt/$InFileNoExt.lbl
+fi
+
+#echo ""
+#echo "InFile=$InFile"
+#echo "PieceAttr=$PieceAttr"
+#echo "AorP=$AorP"
+#echo "Ext=$Ext"
+#echo "RecordLength=$RecordLength"
+#echo "ImbFormat=$ImbFormat"
+#echo "InPathSave=$InPathSave"
+#echo "OutPath=$OutPath"
+#echo ""
+
+#echo $InPathLength
+#echo $InFileLength
+#echo $InDir
+#echo $InDirLength
+#echo $StartPos
+#echo $InFile
+#echo $InFileNoExt
+
+if [ $InDirSave = /users/public ]
+ then
+    PUBLIC=1
+ else
+    PUBLIC=0
+    if [ $InDirSave = /users/coupons ]
+     then
+        COUPON=1
+     else
+        COUPON=0
+    fi
+fi
+StartPos=`expr $InPathSaveLength - 8`
+InPathSaveEnd=`expr substr $InPathSave $StartPos 9`
+#echo ""
+#echo "InPathSaveEnd=$InPathSaveEnd"
+#echo ""
+if [ $InPathSaveEnd = .cntr.wrk ]
+ then
+    CONTAINER=1
+    COUPON=0
+ else
+    CONTAINER=0
+fi
+if [ -f /users/public/$Job.cnpimb1.failure ]
+ then
+    echo "exiting $0 due to cnpimb1 processing failure"
+    exit 1
+fi
+echo "END CNPIMB1.script"
+
+#####################################################
+#BCC = New Process to unpack Fields sent to Group 1 Process 
+# 1.	Account
+#     a.	If packed, it is unpacked into 13 byte string of digits followed at the last byte by the last half-byte (will be either ‘f’ or ‘c’)
+#     b.	I can change this if you want, but I thought it would be a good idea to put the last half byte in the last byte of “Account”
+# 2.	RecordIndex
+#     a.	Converted to a 9 byte string of digits at offset 691
+# 3.	oCszOffset
+#     a.	Converted to a 5 byte string of digits at offset 656
+# 4.	oCszLength
+#     a.	Converted to a 3 byte string of digits at offset 662
+#######################################################
+/users/eric/imbsetup3.out /users/public/$InFile.imb0
+mv /users/public/$InFile.imb0.3 /users/public/$InFile.imb0
+
+/users/scripts/gp1ncpbase700imb.script $InFile $InFile.imb0 $PieceAttr $AorP $LowerCase
+#/users/daren/bcc/bccncpbase700imb.script $InFile $InFile.imb0 $PieceAttr $AorP $LowerCase
+#exit
+if [ CONTAINER -eq 1 ]
+ then
+#    mv $InPath.imb0 /users/public/imb0/$InFileNoExt.grp.imb0
+    cp $InPath.$Ext /users/public/imb0/$InFileNoExt.grp.imb0
+fi
+rm $InPath.imb0
+/users/programs/imbsetup1.out $InPath.$Ext $MailLength $AorP
+if [ $? -gt 0 ]
+ then
+    echo ""
+    touch /users/public/$Job.cnpimb1.failure
+    exit 1
+fi
+mv $InPath.$Ext.imb1 $InPath.$Ext
+#echo ""
+#echo "MrgPath=$MrgPath"
+#echo "RecordLength=$RecordLength"
+#echo "InPath.Ext=$InPath.$Ext"
+#echo "ImbFormat=$ImbFormat"
+#echo ""
+
+### BCC = Needs path changed to script once live.  New version needs to be checked in
+/users/eric/ncpmailmerge.out $MrgPath $RecordLength $InPath.$Ext $ImbFormat
+if [ $? -gt 0 ]
+ then
+    echo ""
+    touch /users/public/$Job.cnpimb1.failure
+    exit 1
+fi
+
+#echo ""
+#echo "mv $MrgPath.merged $OutPath"
+#echo ""
+
+#mv $MrgPath.merged $InPath.$Ext
+mv $MrgPath.merged $OutPath
+
+if [ $Append -eq 0 ]
+ then
+    rm $InPath.$Ext
+    mv $InRptPath $OutRptPath
+    mv $InLblPath $OutLblPath
+ elif [ $PUBLIC -eq 0 ]
+  then
+    rm $InPath.$Ext
+    rm $InPath
+fi
+
+if [ $PUBLIC -eq 0 ]
+ then
+    echo ""
+    echo "mv $OutPath $InPathSave"
+    echo ""
+    if [ $COUPON -eq 1 ]
+     then
+        InPathSave=/users/coupons/$InFileNoExt.$InFileSaveExt
+        mv $OutPath $InPathSave
+        OutPath=$InPathSave
+    fi
+fi
+
+if [ $PieceAttr = "orgorder" ]
+ then
+    /users/programs/ncphexsort.out $OutPath $OutLength 696 4
+fi
+
+job1.script $Job
+JobSix=$?$Job
+/users/programs/imbsetup2.out $OutPath $OutLength $ImbFormat $JobSix
+if [ $? -gt 0 ]
+ then
+    rm $OutPath
+    echo ""
+    echo ""
+    echo "$OutPath removed."
+    echo ""
+    echo "CHECK FORMATTED ACCOUNT values."
+    echo "Check with PROGRAMMING."
+    echo ""
+fi
+

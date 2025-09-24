@@ -1,0 +1,8 @@
+<Field Name="client-no" Id="0" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="client-suffix" Id="1" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="loan-no" Id="2" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="rec-code" Id="3" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="rec-number" Id="4" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="fee-balance-table" Id="5" ParentId="-1" RepeatedCount="36" RepeatedBy="-1"/>
+<Field Name="fee-bal" Id="6" ParentId="5" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="total-fee-bal" Id="7" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>

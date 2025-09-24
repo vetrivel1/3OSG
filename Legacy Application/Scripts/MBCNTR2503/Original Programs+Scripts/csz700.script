@@ -1,0 +1,62 @@
+if [ $# != 2 ]
+   then
+      echo ""
+      echo "Usage is:  $0 A B"
+      echo "   A - InPath"
+      echo "   B - Record Length"
+      echo ""
+      echo "For example:  $0 /users/public/16860f.out 800"
+      echo ""
+      exit 1
+fi
+
+InPath=$1
+RecordLength=$2
+
+Ye=/users/ye
+Programs=/users/programs
+CszOffset=324
+CszLength=41
+TempLength=`expr $RecordLength + $CszLength + 1`
+ResultOffset=`expr $RecordLength + $CszLength`
+
+InPathLength=${#InPath}
+StartPos=`expr $InPathLength - 13`
+InPathEnd=`expr substr $InPath $StartPos 14`
+#echo ""
+#echo "InPathEnd=$InPathEnd"
+#echo ""
+if [ $InPathEnd = .cntr.wrk.imb0 ]
+ then
+    CONTAINER=1
+ else
+    CONTAINER=0
+fi
+if [ CONTAINER -eq 1 ]
+ then
+    /users/programs/imbparsecsz0.out $InPath
+    mv $InPath.ready $InPath
+fi
+$Ye/cnpfixaddress0.out $InPath $RecordLength $CszOffset,$CszLength
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+$Programs/cnpparsecsz.out $InPath.add0 $TempLength $RecordLength $CszLength 0 $ResultOffset
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+$Ye/cnpfixaddress1.out $InPath.add0.csz $TempLength $RecordLength $ResultOffset $RecordLength,$CszOffset,$CszLength
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+
+rm $InPath.add0
+rm $InPath.add0.csz
+mv $InPath.add0.csz.add1 $InPath
+

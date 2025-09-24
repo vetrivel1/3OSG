@@ -1,0 +1,170 @@
+if [ $# -lt 1 ]
+ then
+    echo ""
+    echo " $0   takes parameters of the type"
+    echo ""
+    echo "     $0 c-0976 /users/public/16860.template.delimited j-16860 2-3500 r-ollw0976templ e-/users/devel/container"
+    echo ""
+    echo "Defined parameter types are"
+    echo " 0-display parameter set (YES)"
+    echo " 2-work2length"
+    echo " c-client"
+    echo " d-delimited"
+    echo " e-container path"
+#    echo " i-input path"
+    echo " j-job"
+    echo " r-project"
+    echo " v-mbp.dd,mblps.dd,option.0628.dd,option.0346.dd"
+    echo " x-IGNORE_SUSPECT_EXIT"
+ exit
+fi
+
+# Default values for parameters go here
+Work2Length=0
+ProjectBase=/users/programs/container
+Delimited=NO
+ignoreExit=NO
+
+# Get parameters from the command line
+limit=$#
+count=0
+while [ count -lt limit ]
+do
+   x=$1
+   xLength=${#x}
+   if [ $xLength -gt 2 ]
+    then
+       xType=`expr substr $x 1 1`
+       xDash=`expr substr $x 2 1`
+       if [ $xType = / ]
+        then
+           InPath=$x
+#           echo "OK"
+#           echo "xType=$xType"
+#           echo "xDash=$xDash"
+#           echo ""
+       elif ! [ $xDash = - ]
+        then
+           echo ""
+           echo "    Invalid parameter:  $x"
+           echo ""
+           exit 1
+       else
+          xValueLength=`expr $xLength - 2`
+          xValue=`expr substr $x 3 $xValueLength`
+          if [ $xType = 0 ]
+           then
+              DisplayParameterSet=$xValue
+          elif [ $xType = 2 ]
+           then
+              Work2Length=$xValue
+          elif [ $xType = c ]
+           then
+              Client=$xValue
+          elif [ $xType = d ]
+           then
+              Delimited=$xValue
+          elif [ $xType = e ]
+           then
+              ProjectBase=$xValue
+#          elif [ $xType = i ]
+#           then
+#              InPath=$xValue
+          elif [ $xType = j ]
+           then
+              Job=$xValue
+          elif [ $xType = r ]
+           then
+              Project=$xValue
+          elif [ $xType = v ]
+           then
+              ddPrevious=$xValue
+          elif [ $xType = x ]
+           then
+              ignoreExit=$xValue
+          else
+              echo ""
+              echo "    Invalid parameter:  $x"
+              echo ""
+              exit 1
+          fi
+       fi
+    else
+       echo ""
+       echo "    Invalid parameter:  $x"
+       echo ""
+       exit 1
+   fi
+   shift
+   count=`expr $count + 1`
+done
+
+# Conditional logic for parameters
+
+if [ $DisplayParameterSet = "YES" ]
+ then
+    echo ""
+    echo "BEGIN"
+    echo "$0 PARAMETER SET"
+    echo "Client=$Client"
+    echo "InPath=$InPath"
+    echo "Job=$Job"
+    echo "Project=$Project"
+    echo "Work2Length=$Work2Length"
+    echo "ProjectBase=$ProjectBase"
+    echo "Delimited=$Delimited"
+    echo "ddPrevious=$ddPrevious"
+    echo "END"
+    echo ""
+fi
+
+Work2Path=/users/public/$Job.$Work2Length
+OutPath=/users/public/$Job.out
+
+/users/programs/ncpcntr0.out $Client $InPath $Work2Length $Project $ProjectBase $ddPrevious
+ret=$?
+if [ $ret -gt 0 ]
+ then
+    exit $ret
+fi
+mv $InPath.asc $Work2Path
+echo ""
+if [ $Delimited = "NO" ]
+ then
+    /users/programs/ncpcntrextract.out $Work2Path $Work2Length $Project $ProjectBase $ddPrevious
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        echo ""
+        exit 1
+    fi
+    mv $Work2Path.tab $Work2Path.txt
+    /users/programs/ncpcntrextractvalidation.out $Work2Path.txt
+    if [ -s $Work2Path.txt.suspect ]
+     then
+        echo ""
+        echo "Please check $Work2Path.txt.suspect"
+        echo ""
+        if [ $ignoreExit = IGNORE_SUSPECT_EXIT ]
+        then
+           echo 'Ignore suspect text ' 
+        else
+           exit 1
+        fi
+    fi
+    /users/programs/ncpcntr5.out $Work2Path.txt $Work2Length
+ else                       
+     echo "$Work2Length" > $Work2Path.txt.length
+fi
+/users/programs/cntrvalue.out $Job $Project $ProjectBase
+#
+# can implement the following check when all CONTAINER projects are in PVCS
+#
+#if ! [ -f /users/public/$Job.ncpjax ]
+# then
+#    echo ""
+#    echo "NCPJAX missing in $ProjectBase/$Project/ddcontrol.txt"
+#    echo ""
+#    exit 1
+#fi
+

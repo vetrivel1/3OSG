@@ -1,0 +1,6 @@
+<Field Name="r-type" Id="0" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="r-account" Id="1" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="r-disb-data" Id="2" ParentId="-1" RepeatedCount="3" RepeatedBy="-1"/>
+<Field Name="r-disb-tran" Id="3" ParentId="2" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="r-disb-desc" Id="4" ParentId="2" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="r-disb-amt" Id="5" ParentId="2" RepeatedCount="1" RepeatedBy="-1"/>

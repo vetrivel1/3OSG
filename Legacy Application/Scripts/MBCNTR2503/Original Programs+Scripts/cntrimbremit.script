@@ -1,0 +1,146 @@
+if [ $# -lt 6 ]
+ then
+    echo ""
+    echo "Usage is:  $0 A B C D E F G"
+    echo "  A - Job"
+    echo "  B - InPath"
+    echo "  C - Record Length"
+    echo "  D - Subscriber ID"
+    echo "  E - Service Type"
+    echo "  F - Product"
+    echo "  G - Client"
+    echo ""
+    echo "For example:"
+    echo "  $0 16861 /users/public/16861241.cntr.grp 1"
+    echo "           000546 050 1000 0310"
+    echo ""
+    exit 1
+fi
+Job=$1
+InPath=$2
+RecordLength=$3
+Subscriber=$4
+ServiceType=$5
+Product=$6
+Client=$7
+
+if ! [ -f $InPath -a -s $InPath ]
+ then
+    echo ""
+    echo "$InPath doesn't exist or has zero bytes "
+    echo ""
+    exit
+fi
+
+if [ $ServiceType = "050" ]
+ then
+    TRACK=1
+ else
+    TRACK=0
+fi
+
+InDir=${InPath%/*}
+InDirLength=${#InDir}
+InPathLength=${#InPath}
+StartPos=`expr $InDirLength + 2`
+InFileLength=`expr $InPathLength - $InDirLength - 1`
+InFile=`expr substr $InPath $StartPos $InFileLength`
+InFileNoExt=${InFile%.*}
+Imb0Path=/users/public/imb0/$InFile.imb0
+
+/users/programs/isvalidjobnumber.out $Job
+if [ $? -gt 0 ]
+ then
+    exit 1
+fi
+job1.script $Job
+JobSix=$?$Job
+#
+# need different logic for COUPONS
+# the following logic assumes ONE remittance item per mailing piece
+#
+
+/users/programs/cnprecordcount.out $Imb0Path 700
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+read Count < $Imb0Path.700
+if [ $? -gt 0 ]
+ then
+    echo ""
+    echo "Script read of $Imb0Path.700 failed"
+    echo ""
+    exit 1
+fi
+rm $Imb0Path.700
+
+#
+# need different logic for COUPONS
+# the preceding logic assumes ONE remittance item per mailing piece
+#
+
+/users/programs/cnpgetseq.out $Job $Count $InPath.start $Subscriber $InFile
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+read ImbStart < $InPath.start
+if [ $? -gt 0 ]
+ then
+    echo ""
+    echo "Script read of $InPath.start failed"
+    echo ""
+    exit 1
+fi
+rm $InPath.start
+
+#
+# add STARTING REMIT SEQUENCE NUMBER at 431 in IMB portion of record
+#
+/users/programs/imbremit0.out $Imb0Path 700 $ImbStart $Subscriber
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+mv $Imb0Path.remit0 $Imb0Path
+
+#
+# this should be one program call:  "setmtzip.c"
+# and client should be passed as a parameter
+#
+# no time right now
+#
+if [ $Client = "0140" ]
+ then
+    /users/programs/setmtzip.0140.out $Imb0Path
+    mv $Imb0Path.mtzip $Imb0Path
+ elif [ $Client = "0310" ]
+ then
+    /users/programs/setmtzip.0310.out $Imb0Path
+    mv $Imb0Path.mtzip $Imb0Path
+ else
+    /users/programs/setmtzip.out $Imb0Path $Client
+    mv $Imb0Path.mtzip $Imb0Path
+fi
+
+
+/users/programs/imbremit1.out $Imb0Path 700 $Subscriber $ServiceType
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+
+/users/programs/imbremit5.out $InPath $RecordLength
+mv $InPath.remit2 $InPath
+
+if [ $TRACK -eq 1 ]
+ then
+    /users/programs/imbremit6.out $InPath $JobSix $Product $Client
+    mv $InPath $InPath.pending
+fi
+

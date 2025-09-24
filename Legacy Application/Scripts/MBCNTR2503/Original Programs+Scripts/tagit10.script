@@ -1,0 +1,3 @@
+/users/programs/ncp10addprodcode.out /users/public/$1 $2 $3 $4
+mv /users/public/$1 /users/public/$1.org
+mv /users/public/$1.add /users/public/$1

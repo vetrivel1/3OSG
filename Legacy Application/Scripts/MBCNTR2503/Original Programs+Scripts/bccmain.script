@@ -1,0 +1,51 @@
+# PARM1 = FileName No Extention 
+# PARM2 = Presort Flag 'A' = Ace Only, 'P' = Ace and Presort, 'N' = NCOA 
+# PARM3 = Piece Attribute
+# PARM4 = 'L' for Mixed Case else all UPPER
+EXT=$1
+NOEXT1=${EXT%.*}
+cp /users/public/gp1setup/$1.txt /users/public/gp1setup/$1.mjb
+cp /users/public/gp1setup/$1.txt /users/public/gp1setup/$1.mds
+
+if [ $3 = carolstreamletter ] || [ $3 = CarolStreamLetter ]
+   then
+      echo 'CarolStream BCC'
+      ssh jxpbcc01 "cmd /c c:\batch\getbccjobCarolStream.bat" $1
+      
+   else
+      ssh jxpbcc01 "cmd /c c:\batch\getbccjob.bat" $1
+fi
+
+/users/scripts/modifyjob.bcc.script $1 $2 $3 $4
+chmod 777 /users/public/gp1setup/$1*
+/users/programs/ncptopload.out /users/public/gp1setup/$1.txt 700 24 60 5
+mv /users/public/gp1setup/$1.txt.topload /users/public/gp1setup/$1.txt.bcc
+
+if [ $3 = carolstreamletter ] || [ $3 = CarolStreamLetter ]
+   then
+      echo 'CarolStream Presort BCC'
+      ssh jxpbcc01 "cmd /c c:\batch\runbccpresortCarolStream.bat" $1 $NOEXT1
+   else
+      ssh jxpbcc01 "cmd /c c:\batch\runbccpresort.bat" $1 $NOEXT1
+fi
+
+if [ $2 = 'P' ]
+	then 
+#echo "Is Presort"
+		if [ -s /users/public/postrpt/bcc/$1.grp ]
+		  then
+#echo ".grp Exist"
+				mv /users/public/postrpt/bcc/$1.grp /users/public/
+		else
+#echo "presort does not exist"
+		  ssh jxpbcc01 "cmd /c c:\batch\getbccjob.bat" $1
+			/users/scripts/modifyjob.bcc.script $1 $2 $3 $4
+			ssh jxpbcc01 "cmd /c c:\batch\runbccpresortCarolStream.bat" $1 $NOEXT1
+#echo "moving $1.grp for second try"
+		  mv /users/public/postrpt/bcc/$1.grp /users/public/$1.grp
+		fi  
+else
+#echo "Not Presort Just Ace or NCOA"
+	mv /users/public/postrpt/bcc/$1.ace /users/public/
+	mv /users/public/postrpt/bcc/$1.nca /users/public/
+fi

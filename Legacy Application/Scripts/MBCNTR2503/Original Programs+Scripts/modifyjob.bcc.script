@@ -1,0 +1,44 @@
+#/users/eric/getdropdate.script $2 0150 01 0994 $1
+#read DropDate < /users/public/$1.drop.txt
+#echo $DropDate
+#wdate=`date +%m%d%y`
+#echo $wdate
+#if [ $? -gt 0 ]
+#  then
+#    echo 'bad drop date.  seeds will not be generated.'
+#    exit
+#fi
+if [ $4 = L ]
+  then
+     wCase=MIXED
+else
+     wCase=UPPER
+fi
+echo $wCase
+
+# Replaces Parm Values within the job file template with unique info. Template is on jxpbcc01.  bcc/fs/jobs/ncp700.mjb copied by ssh batches to /u/p/gp1/optionname.mjb
+
+cp /users/public/gp1setup/$1.mjb /users/public/gp1setup/$1.mjb.org
+
+if [ $2 = N ]
+  then
+     echo 'You are running NCOA'
+     cat /users/public/gp1setup/$1.mjb | sed -e s@PARM_1_Option@$1@g -e s@PARM_2_Presort@Y@g -e s@PARM_3_NonPresort@N@g -e s@PARM_4_Ncoa@N@g -e s@PARM_5_Encoded@Y@g -e s@PARM_6_PstSettings@$3@g -e s@PARM_7_LowerCase@$wCase@g > /users/public/gp1setup/$1.mjb.new
+elif [ $2 = A ]
+  then
+     echo 'You are running ACE'
+     cat /users/public/gp1setup/$1.mjb | sed -e s@PARM_1_Option@$1@g -e s@PARM_2_Presort@Y@g -e s@PARM_3_NonPresort@N@g -e s@PARM_4_Ncoa@Y@g -e s@PARM_5_Encoded@N@g -e s@PARM_6_PstSettings@$3@g -e s@PARM_7_LowerCase@$wCase@g > /users/public/gp1setup/$1.mjb.new
+elif [ $2 = P ]
+  then
+     echo 'You are running PRESORT'
+     cat /users/public/gp1setup/$1.mjb | sed -e s@PARM_1_Option@$1@g -e s@PARM_2_Presort@N@g -e s@PARM_3_NonPresort@Y@g -e s@PARM_4_Ncoa@Y@g -e s@PARM_5_Encoded@N@g -e s@PARM_6_PstSettings@$3@g -e s@PARM_7_LowerCase@$wCase@g > /users/public/gp1setup/$1.mjb.new
+fi
+
+cp /users/public/gp1setup/$1.mjb.new /users/public/gp1setup/$1.mjb
+
+# Updates Parms within Mail.dat settings file 
+cp /users/public/gp1setup/$1.mds /users/public/gp1setup/$1.mds.org
+     cat /users/public/gp1setup/$1.mds | sed -e s@PARM_1_Option@$1@g > /users/public/gp1setup/$1.mds.new
+
+cp /users/public/gp1setup/$1.mds.new /users/public/gp1setup/$1.mds
+

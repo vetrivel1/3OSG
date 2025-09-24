@@ -1,0 +1,320 @@
+if [ $# -lt 2 ]
+ then
+         echo ""
+         echo " $0   takes parameters of the type"
+         echo ""
+         echo "  c-"
+         echo "  i-"
+         echo "  j-"
+         echo ""
+         echo "     $0 c-0310 i-/users/public/16860347.bil j-16860"
+         echo ""
+         echo "Defined parameter types are"
+         echo " 0-display parameter set (YES)"
+         echo " a-append grp to filename"
+         echo " c-client"
+         echo " d-clientdept"
+         echo " f-CSZ field name"
+         echo " g-stagger size"
+         echo " h-input record length"
+         echo " i-input path"
+         echo " j-job"
+         echo " l-lower case"
+         echo " m-imb format (input dd)"
+         echo " p-parsecsz"
+         echo " s-subscriber"
+         echo " t-service type"
+         echo " u-piece attribute"
+ exit
+fi
+
+# Default values for parameters go here
+DisplayParameterSet=NO
+Append=NOAPPEND
+CszField=NOFIELD
+Stagger=0
+LowerCase=LOWERCASE
+ParseCSZ=NOPARSE
+ClientDept=000546
+ServiceType=036
+PieceAttr=ncp1stclass1ozimbnew
+
+# Get parameters from the command line
+limit=$#
+count=0
+while [ count -lt limit ]
+do
+   x=$1
+   xLength=${#x}
+   if [ $xLength -gt 2 ]
+    then
+       xType=`expr substr $x 1 1`
+       xDash=`expr substr $x 2 1`
+       if ! [ $xDash = - ]
+        then
+           echo ""
+           echo "    Invalid parameter:  $x"
+           echo ""
+           exit 1
+       fi
+       xValueLength=`expr $xLength - 2`
+       xValue=`expr substr $x 3 $xValueLength`
+       if [ $xType = 0 ]
+        then
+           DisplayParameterSet=$xValue
+       elif [ $xType = a ]
+        then
+           Append=$xValue
+       elif [ $xType = c ]
+        then
+           Client=$xValue
+       elif [ $xType = d ]
+        then
+           ClientDept=$xValue
+       elif [ $xType = f ]
+        then
+           CszField=$xValue
+       elif [ $xType = g ]
+        then
+           Stagger=$xValue
+       elif [ $xType = h ]
+        then
+           RecordLength=$xValue
+       elif [ $xType = i ]
+        then
+           InPath=$xValue
+       elif [ $xType = j ]
+        then
+           Job=$xValue
+       elif [ $xType = l ]
+        then
+           LowerCase=$xValue
+       elif [ $xType = m ]
+        then
+           ImbFormat=$xValue
+       elif [ $xType = p ]
+        then
+           ParseCSZ=$xValue
+       elif [ $xType = s ]
+        then
+           Subscriber=$xValue
+       elif [ $xType = t ]
+        then
+           ServiceType=$xValue
+       elif [ $xType = u ]
+        then
+           PieceAttr=$xValue
+       else
+           echo ""
+           echo "    Invalid parameter:  $x"
+           echo ""
+           exit 1
+       fi
+    else
+       echo ""
+       echo "    Invalid parameter:  $x"
+       echo ""
+       exit 1
+   fi
+   shift
+   count=`expr $count + 1`
+done
+
+# Conditional logic for parameters
+
+echo "DisplayParameterSet=$DisplayParameterSet"
+if [ $DisplayParameterSet = "YES" ]
+ then
+    echo ""
+    echo "BEGIN"
+    echo "$0 PARAMETER SET"
+    echo "Append=$Append"
+    echo "Client=$Client"
+    echo "InPath=$InPath"
+    echo "CszField=$CszField"
+    echo "Stagger=$Stagger"
+    echo "RecordLength=$RecordLength"
+    echo "Job=$Job"
+    echo "LowerCase=$LowerCase"
+    echo "ImbFormat=$ImbFormat"
+    echo "ParseCSZ=$ParseCSZ"
+    echo "ClientDept=$ClientDept"
+    echo "Subscriber=$Subscriber"
+    echo "ServiceType=$ServiceType"
+    echo "PieceAttribute=$PieceAttr"
+    echo "END"
+    echo ""
+fi
+
+if [ $ParseCSZ = "PARSECSZ" ]
+ then
+    ParseCSZ=1
+ else
+    ParseCSZ=0
+fi
+
+if ! [ -f $InPath -a -s $InPath ]
+ then
+    echo ""
+    echo "$InPath doesn't exist or has zero bytes "
+    echo ""
+    exit
+fi
+
+pa6=`expr substr $PieceAttr 1 6`
+if [ $pa6 = "ncpstd" -a ! $ServiceType = "037" ]
+ then
+    echo ""
+    echo "If Piece Attribute '$PieceAttr' begins with '$pa6'"
+    echo " then ServiceType must be 037"
+    echo ""
+    exit
+fi
+
+/users/programs/isvalidjobnumber.out $Job
+if [ $? -gt 0 ]
+ then
+    exit 1
+fi
+
+/users/programs/cnprecordcount.out $InPath $RecordLength
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+read Count < $InPath.$RecordLength
+if [ $? -gt 0 ]
+ then
+    echo ""
+    echo "Script read of $InPath.$RecordLength failed"
+    echo ""
+    exit 1
+fi
+rm $InPath.$RecordLength
+
+if [ $Count -lt 250 -o $PieceAttr = "orgorder" ]
+ then
+    AorP=A
+    Ext=ace
+ else
+    AorP=P
+    Ext=grp
+fi
+MailLength=700
+OutLength=`expr $RecordLength + $MailLength`
+InDir=${InPath%/*}
+InDirLength=${#InDir}
+InPathLength=${#InPath}
+StartPos=`expr $InDirLength + 2`
+InFileLength=`expr $InPathLength - $InDirLength - 1`
+InFile=`expr substr $InPath $StartPos $InFileLength`
+InFileNoExt=${InFile%.*}
+#OutPath=$InDir/$InFileNoExt.grp
+
+#echo $InPathLength
+#echo $InFileLength
+#echo $InDir
+#echo $InDirLength
+#echo $StartPos
+#echo $InFile
+#echo $InFileNoExt
+#exit
+
+if [ $InDir = /users/public ]
+ then
+    PUBLIC=1
+ else
+    PUBLIC=0
+fi
+
+InPathSave=$InPath
+if [ $PUBLIC -eq 0 ]
+ then
+#  "/users/public/$InFile" is where IMB POSTAL SORT looks for input
+    InPath=/users/public/$InFile
+    mv $InPathSave $InPath
+fi
+
+/users/programs/cnpgetsubscriber.out $Job $ClientDept
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+if [ -s /users/public/$Job.$ClientDept.subscriber ]
+ then
+    read Subscriber < /users/public/$Job.$ClientDept.subscriber
+#    rm /users/public/$Job.$ClientDept.subscriber
+ else
+    Subscriber=$ClientDept
+fi
+/users/programs/cnpgetseq.out $Job $Count $InPath.start $Subscriber $InFile
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+
+read ImbStart < $InPath.start
+if [ $? -gt 0 ]
+ then
+    echo ""
+    echo "Script read of $InPath.start failed"
+    echo ""
+    exit 1
+fi
+rm $InPath.start
+
+/users/programs/imbsetup0.out $InPath $RecordLength $ImbFormat $ImbStart $Subscriber $ServiceType $ParseCSZ $CszField
+if [ $? -gt 0 ]
+ then
+    echo ""
+    exit 1
+fi
+if [ $ParseCSZ -eq 1 ]
+ then
+    csz700.script $InPath.imb0 $MailLength
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        exit 1
+    fi
+fi
+echo ""
+echo "$0:  Append=$Append"
+echo ""
+if [ $Count -gt $Stagger -a $Stagger -gt 0 ]
+ then
+    echo ""
+    echo "Stagger logic goes here"
+    echo ""
+    ZipOffset=356
+    rm /users/public/?$InFile
+    /users/programs/ncphexsort.out $InPath.imb0 $MailLength $ZipOffset 5
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        exit 1
+    fi
+    /users/programs/cnpstagger2.out $InPath.imb0 $MailLength $Stagger
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        exit 1
+    fi
+    rm $InPath.imb0
+    cd /users/public
+    if [ -f /users/public/$Job.cnpimb1.failure ]
+     then
+        rm /users/public/$Job.cnpimb1.failure
+    fi
+    find ?$InFile -prune -exec cnpimb1v2.script 0-YES {} u-$PieceAttr r-$AorP e-$Ext h-$RecordLength m-$ImbFormat v-$InPathSave n-$InPath j-$Job a-$Append l-$LowerCase \;
+ else
+    if [ -f /users/public/$Job.cnpimb1.failure ]
+     then
+        rm /users/public/$Job.cnpimb1.failure
+    fi
+    cnpimb1v2.script 0-YES b-$InFile u-$PieceAttr r-$AorP e-$Ext h-$RecordLength m-$ImbFormat v-$InPathSave n-$InPath j-$Job a-$Append l-$LowerCase
+fi
+

@@ -1,0 +1,30 @@
+if [ $# < 4 ]
+   then
+      echo "          New NCP 700 byte Base record for all NCP IMB Records           "
+      echo "proper usage is gp1ncpbase700imb  <filename no ext> <filename With ext> <pst no ext>  A or P or N for ace or presort or NCOA"
+      echo "for example -- gp1ncpbase700imb 12345 12345.out ncp1stclass1ozimb"
+      echo "please try again                           "
+      echo "Available Piece Attribute Files: "
+      echo "ncp1stclass1ozimb"
+      echo "ncp1stclass2ozimb"
+      exit
+fi
+
+
+echo 
+cd /users/public/
+rm /users/public/postrpt/$1.*
+rm /users/public/$1.rpt
+rm /users/public/$1.grp
+rm /users/public/$1.dlb
+rm /users/public/gp1setup/$1.txt
+rm /users/public/gp1out/try//$1*.*
+cp /users/public/$2 /users/public/gp1setup/$1.txt
+echo
+echo
+echo ##### New BCC Ace and Presort Process   #####
+echo
+
+/users/scripts/bccmain.script $1 $4 $3 $5
+
+rm /users/public/gp1setup/$1.* 

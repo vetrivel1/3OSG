@@ -1,0 +1,8 @@
+mb-client-no, 0, 4, Number, 0
+mb-loan-no, 4, 7, Packed Number, 0
+mb-rec-code, 11, 1, Text, 0
+mb-rec-no, 12, 3, Number, 0
+mb-net-disb, 15, 6, Packed Number, 2
+mb-payee, 21, 10, Text, 0
+mb-ctl-fld, 31, 6, Packed Number, 0
+mb-disb-desc, 37, 963, Text, 0

@@ -1,0 +1,71 @@
+if [ $# -lt 3 ]
+ then
+         echo ""
+         echo " $0 A B C"
+         echo "    A - Client#"
+         echo "    B - Job#"
+         echo "    C - Input File"
+         echo ""
+         echo " For example:  $0 0077 60168 60168.dat"
+         echo ""
+ exit
+fi
+
+Client=$1
+Job=$2
+PriName=$2p.asc
+PriPath=/users/public/$2p.asc
+SecPath=/users2/billsec/$2s.asc
+InFile=$3
+InPath=/users/public/$3
+OutPath=$InPath.asc
+OutLength=1500
+if [ $Client = '0277' -o $Client = '0588' ]
+ then
+    SecLength=502
+ else
+    SecLength=152
+fi
+
+job1.script $Job
+JobSix=$?$Job
+
+/users/programs/mbcnvt0.out $Client $InPath
+if [ $? -gt 0 ]
+ then
+    exit 1
+fi
+
+if [ $Client = '0310' ]
+ then
+    mv $OutPath $PriPath
+    /users/programs/setmb2000.out $Client $PriName $JobSix
+    mv /users/public/$2p.set /users/public/$2p.asc
+    exit
+fi
+/users/programs/ncpsplitall.out $OutLength 11 1 $OutPath
+
+if [ $Client = '0277' ]
+ then
+    mv $OutPath.11.1.d /users/public/c$Client/$Job.tbl
+ else
+    rm $OutPath.11.1.d
+fi
+if ! [ -f $OutPath.11.1.s ]
+ then
+    touch $OutPath.11.1.s
+fi
+
+/users/programs/cnpfilekeys.out $OutLength $OutLength 4 4 7 1080 7 3 $OutPath.11.1.p $OutPath.11.1.s
+rm $OutPath.11.1.p
+mv $OutPath.11.1.p.keyed $PriPath
+mv $OutPath.11.1.s $OutPath
+/users/ye/cnpchangerecordlength.out $OutPath $OutLength $SecLength
+mv $OutPath.$OutLength.$SecLength $OutPath
+/users/programs/cnpcrlf.out $SecLength $SecLength $OutPath
+rm $OutPath
+mv $OutPath.sec $SecPath
+
+/users/programs/setmb2000.out $Client $PriName $JobSix
+mv /users/public/$2p.set /users/public/$2p.asc
+

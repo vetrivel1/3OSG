@@ -1,0 +1,111 @@
+if [ $# -lt 2 ]
+ then
+    echo ""
+    echo "Usage is:  $0 A B"
+    echo "  A - Job number"
+    echo "  B - Source file"
+    echo ""
+    echo "For example:  $0 16864 test"
+    echo ""
+    exit
+fi
+
+clear
+
+banner Monthly Bill... 2503
+date
+ClientDept=250301
+ServiceType=320
+PieceAttribute=ncp1stclass1ozimbnew
+job=$1
+
+Client=2503
+Work2Len=4300
+
+ProjectBase=/users/programs/container
+#ProjectBase=/users/devel/container
+Project=mblps
+ContainerKey=1941
+OptionLen=2000
+
+
+# SII WORK
+
+#/users/scripts/sii.script $1 BK
+
+# END OF SII WORK
+#if [ -s /users/public/$1.dat.err ]
+#then
+#    echo "Problem running SII. Quitting"
+#    exit
+#fi
+
+#job=$( cat "/users/public/$1.sii_output")
+#if [ $job -eq 100 ]
+#then
+#    exit
+#fi
+
+InPath=/users/public/$job.dat
+Work2Path=/users/public/$job.$Work2Length
+
+#Supplemental file
+#cp /users/programs/2503supp.txt /users/public/$job.se1
+#Changed to new supplemental table iaw US28097
+cp /users/programs/2503supptable.txt /users/public/$job.se1
+
+#Container Step 1
+ncpcntr5v2.script j-$job $InPath c-$Client 2-$Work2Len r-$Project e-$ProjectBase
+
+#Convert to option record (mb2000)
+#/users/al/setmb2000.script 0503 $job $job.dat
+/users/scripts/setmb2000.script 0503 $job $job.dat
+
+#Ebill split
+/users/programs/cnpsplit4.out 2000 1318 1 E 0 0 /users/public/$job'e.txt' ASCII /users/public/$job'p.asc'
+mv /users/public/$job'p.asc' /users/public/$job'p.asc.org'
+mv /users/public/$job'p.asc.match' /users/public/$job'e.asc'
+mv /users/public/$job'p.asc.unmatch' /users/public/$job'p.asc'
+
+find /users/public/$job*.asc -prune -size +0c -exec ncpcntr0v2.script 0-YES {} h-$OptionLen r-$Project e-$ProjectBase j-$job c-$Client u-$PieceAttribute d-$ClientDept t-$ServiceType g-100000 k-$ContainerKey 2-$Work2Len \;
+ 
+#Add Product Codes to Record
+cd /users/public/
+find *$job'p.cntr.grp' -exec /users/moonpie/tagit10.script {} 1000 0170 N \;
+/users/moonpie/tagit10.script $job'e.cntr.grp' 1041 0170 N
+
+#1st Pass GMC to get Extra Page Totals
+WFDProgram=gjs_002503_0001_lpsbill.wfd
+cd /users/public
+find *$job*.cntr.grp -exec ssh 207.98.205.66 'cmd /c d:\scripts\mbcntrfirstpassgmc.bat' {} $WFDProgram \;
+#find *$job*.cntr.grp -exec ssh 207.98.205.66 'cmd /c d:\daren\mbcntrfirstpassgmc.bat' {} $WFDProgram \;
+rm /users/public/?$job'e.cntr.grp.txt'
+rm /users/public/$job'e.cntr.grp.txt'
+find /users/public/*$job*.cntr.grp.txt -exec /users/programs/cnpautocount.out 266 33 3 SEPARATE {} \;
+rm /users/public/*$job*.cntr.grp.txt.33.3.000.auto
+cat /users/public/*$job*.cntr.grp.txt.33.3.*.auto > /users/public/$job'count.auto'
+
+#R/R
+if [ -s a$job'p.cntr.grp' ]
+   then 
+      /users/programs/ncpcntrsample0.out /users/public/a$job'p.cntr.grp' P0001 97 1
+      mv /users/public/a$job'p.cntr.grp.total' /users/public/$job'p.cntr.grp.total'
+      mv /users/public/a$job'p.cntr.grp.sample' /users/public/$job'p.cntr.grp.sample'
+   else 
+      /users/programs/ncpcntrsample0.out /users/public/$job'p.cntr.grp' P0001 97 1
+fi
+                  
+/users/programs/ncpcntrsample0.out /users/public/$job'e.cntr.grp' P0001 97 1
+
+/users/programs/cnpautolabel2.out MBILLCNTR 2503 $2 $job
+
+#14e file creation
+cat /users/public/*$job*.cntr.grp > /users/public/$job.all.grp
+
+sleep 1
+#Mail Tracking Container
+cntrimbremit.script $1 /users/public/$1p.cntr.grp 1 000546 050 1000 2503
+cnpimbremit1.script $job 2503 /users/public
+
+# Call back the script again using original arguments
+#/users/scripts/mbcntr2503.script $1 $2

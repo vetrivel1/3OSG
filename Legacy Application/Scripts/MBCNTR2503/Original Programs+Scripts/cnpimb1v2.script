@@ -1,0 +1,371 @@
+if [ $# -lt 2 ]
+ then
+         echo ""
+         echo " $0   takes parameters of the type"
+         echo ""
+         echo "     $0 c-0310 i-/users/public/16860347.bil j-16860"
+         echo ""
+         echo "Defined parameter types are"
+         echo " 0-display parameter set (YES)"
+         echo " a-append grp to filename"
+         echo " b-input file"
+         echo " c-client"
+         echo " d-clientdept"
+         echo " e-ext"
+         echo " f-CSZ field name"
+         echo " g-stagger size"
+         echo " h-input record length"
+         echo " i-input path"
+         echo " j-job"
+         echo " l-lower case"
+         echo " m-imb format (input dd)"
+         echo " n-mrgpath"
+         echo " p-parsecsz"
+         echo " r-AorP"
+         echo " s-subscriber"
+         echo " t-service type"
+         echo " u-piece attribute"
+         echo " v-inpathsave"
+ exit
+fi
+
+# Default values for parameters go here
+DisplayParameterSet=NO
+Append=NOAPPEND
+CszField=NOFIELD
+Stagger=0
+LowerCase=LOWERCASE
+ParseCSZ=NOPARSE
+ClientDept=000546
+ServiceType=036
+PieceAttr=ncp1stclass1ozimbnew
+
+# Get parameters from the command line
+limit=$#
+count=0
+while [ count -lt limit ]
+do
+   x=$1
+   xLength=${#x}
+   if [ $xLength -gt 2 ]
+    then
+       xType=`expr substr $x 1 1`
+       xDash=`expr substr $x 2 1`
+       if ! [ $xDash = - ]
+        then
+           InFile=$x
+        else
+           xValueLength=`expr $xLength - 2`
+           xValue=`expr substr $x 3 $xValueLength`
+           if [ $xType = 0 ]
+            then
+               DisplayParameterSet=$xValue
+           elif [ $xType = a ]
+            then
+               Append=$xValue
+           elif [ $xType = b ]
+            then
+               InFile=$xValue
+           elif [ $xType = c ]
+            then
+               Client=$xValue
+           elif [ $xType = d ]
+            then
+               ClientDept=$xValue
+           elif [ $xType = e ]
+            then
+               Ext=$xValue
+           elif [ $xType = f ]
+            then
+               CszField=$xValue
+           elif [ $xType = g ]
+            then
+               Stagger=$xValue
+           elif [ $xType = h ]
+            then
+               RecordLength=$xValue
+           elif [ $xType = i ]
+            then
+               InPath=$xValue
+           elif [ $xType = j ]
+            then
+               Job=$xValue
+           elif [ $xType = l ]
+            then
+               LowerCase=$xValue
+           elif [ $xType = m ]
+            then
+               ImbFormat=$xValue
+           elif [ $xType = n ]
+            then
+               MrgPath=$xValue
+           elif [ $xType = p ]
+            then
+               ParseCSZ=$xValue
+           elif [ $xType = r ]
+            then
+               AorP=$xValue
+           elif [ $xType = s ]
+            then
+               Subscriber=$xValue
+           elif [ $xType = t ]
+            then
+               ServiceType=$xValue
+           elif [ $xType = u ]
+            then
+               PieceAttr=$xValue
+           elif [ $xType = v ]
+            then
+               InPathSave=$xValue
+           else
+               echo ""
+               echo "    Invalid parameter:  $x"
+               echo ""
+               exit 1
+           fi
+       fi
+    else
+       echo ""
+       echo "    Invalid parameter:  $x"
+       echo ""
+       exit 1
+   fi
+   shift
+   count=`expr $count + 1`
+done
+
+# Conditional logic for parameters
+
+echo "DisplayParameterSet=$DisplayParameterSet"
+if [ $DisplayParameterSet = "YES" ]
+ then
+    echo ""
+    echo "BEGIN"
+    echo "$0 PARAMETER SET"
+    echo "Append=$Append"
+    echo "InFile=$InFile"
+    echo "Client=$Client"
+    echo "Ext=$Ext"
+    echo "InPath=$InPath"
+    echo "CszField=$CszField"
+    echo "Stagger=$Stagger"
+    echo "RecordLength=$RecordLength"
+    echo "Job=$Job"
+    echo "LowerCase=$LowerCase"
+    echo "ImbFormat=$ImbFormat"
+    echo "MrgPath=$MrgPath"
+    echo "ParseCSZ=$ParseCSZ"
+    echo "AorP=$AorP"
+    echo "ClientDept=$ClientDept"
+    echo "Subscriber=$Subscriber"
+    echo "ServiceType=$ServiceType"
+    echo "PieceAttribute=$PieceAttr"
+    echo "InPathSave=$InPathSave"
+    echo "END"
+    echo ""
+fi
+
+if [ $Append = "APPEND" ]
+ then
+    Append=1
+ else
+    Append=0
+fi
+if [ $LowerCase = "LOWERCASE" ]
+ then
+    LowerCase=L
+ else
+    LowerCase=U
+fi
+MailLength=700
+OutLength=`expr $RecordLength + $MailLength`
+InPath=/users/public/$InFile
+
+InDirSave=${InPathSave%/*}
+InDirSaveLength=${#InDirSave}
+InPathSaveLength=${#InPathSave}
+StartPos=`expr $InDirSaveLength + 2`
+InFileSaveLength=`expr $InPathSaveLength - $InDirSaveLength - 1`
+InFileSave=`expr substr $InPathSave $StartPos $InFileSaveLength`
+InFileSaveNoExt=${InFileSave%.*}
+InFileSaveNoExtLength=${#InFileSaveNoExt}
+InFileSaveExtLength=`expr $InFileSaveLength - $InFileSaveNoExtLength - 1`
+StartPos=`expr $InFileSaveNoExtLength + 2`
+InFileSaveExt=`expr substr $InFileSave $StartPos $InFileSaveExtLength`
+
+InFileNoExt=${InFile%.*}
+
+#echo ""
+#echo "InFile=$InFile"
+#echo "PieceAttr=$PieceAttr"
+#echo "AorP=$AorP"
+#echo "Ext=$Ext"
+#echo "RecordLength=$RecordLength"
+#echo "ImbFormat=$ImbFormat"
+#echo "InPathSave=$InPathSave"
+#echo "OutPath=$OutPath"
+#echo ""
+
+#echo $InPathLength
+#echo $InFileLength
+#echo $InDir
+#echo $InDirLength
+#echo $StartPos
+#echo $InFile
+#echo $InFileNoExt
+
+if [ $InDirSave = /users/public ]
+ then
+    PUBLIC=1
+ else
+    PUBLIC=0
+    if [ $InDirSave = /users/coupons ]
+     then
+        COUPON=1
+     else
+        COUPON=0
+    fi
+fi
+StartPos=`expr $InPathSaveLength - 8`
+InPathSaveEnd=`expr substr $InPathSave $StartPos 9`
+#echo ""
+#echo "InPathSaveEnd=$InPathSaveEnd"
+#echo ""
+if [ $InPathSaveEnd = .cntr.wrk ]
+ then
+    CONTAINER=1
+    COUPON=0
+    InFileLength=${#InFile}
+    StartLength=`expr $InFileLength - 9`
+    InFileBegin=`expr substr $InFile 1 $StartLength`
+#    echo ""
+#    echo "InFileBegin=$InFileBegin"
+#    echo ""
+ else
+    CONTAINER=0
+fi
+
+if [ Append -eq 1 -a CONTAINER -eq 1 ]
+ then
+    OutPath=$InDirSave/$InFileBegin.cntr.grp
+#    echo ""
+#    echo "OutPath=$OutPath"
+#    echo ""
+elif [ Append -eq 1 -a CONTAINER -eq 0 ]
+ then
+    OutPath=$InDirSave/$InFile.grp
+ else
+    OutPath=$InDirSave/$InFileNoExt.grp
+    InRptPath=/users/public/$InFile.rpt
+    OutRptPath=/users/public/$InFileNoExt.rpt
+    InLblPath=/users/public/postrpt/$InFile.lbl
+    OutLblPath=/users/public/postrpt/$InFileNoExt.lbl
+fi
+
+if [ -f /users/public/$Job.cnpimb1.failure ]
+ then
+    echo "exiting $0 due to cnpimb1 processing failure"
+    exit 1
+fi
+echo "END CNPIMB1.script"
+
+#####################################################
+#BCC = New Process to unpack Fields sent to Group 1 Process
+#####################################################
+/users/programs/imbsetup3.out /users/public/$InFile.imb0
+mv /users/public/$InFile.imb0.3 /users/public/$InFile.imb0
+
+if [ $PieceAttr = "skipbcc" ]
+ then
+    echo ""
+    echo "PieceAttr equals $PieceAttr"
+    echo ""
+    /users/programs/ncpmailmerge.out $MrgPath $RecordLength $InPath.imb0 $ImbFormat
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        touch /users/public/$Job.cnpimb1.failure
+        exit 1
+    fi
+ else
+    /users/scripts/bccncpbase700imb.script $InFile $InFile.imb0 $PieceAttr $AorP $LowerCase
+    if [ CONTAINER -eq 1 ]
+     then
+    #    mv $InPath.imb0 /users/public/imb0/$InFileNoExt.grp.imb0
+        cp $InPath.$Ext /users/public/imb0/$InFileNoExt.grp.imb0
+    fi
+    rm $InPath.imb0
+    /users/programs/imbsetup1.out $InPath.$Ext $MailLength $AorP
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        touch /users/public/$Job.cnpimb1.failure
+        exit 1
+    fi
+    mv $InPath.$Ext.imb1 $InPath.$Ext
+    #echo ""
+    #echo "MrgPath=$MrgPath"
+    #echo "RecordLength=$RecordLength"
+    #echo "InPath.Ext=$InPath.$Ext"
+    #echo "ImbFormat=$ImbFormat"
+    #echo ""
+    /users/programs/ncpmailmerge.out $MrgPath $RecordLength $InPath.$Ext $ImbFormat
+    if [ $? -gt 0 ]
+     then
+        echo ""
+        touch /users/public/$Job.cnpimb1.failure
+        exit 1
+    fi
+fi
+
+#echo ""
+#echo "mv $MrgPath.merged $OutPath"
+#echo ""
+
+#mv $MrgPath.merged $InPath.$Ext
+mv $MrgPath.merged $OutPath
+
+if [ $Append -eq 0 ]
+ then
+    rm $InPath.$Ext
+    mv $InRptPath $OutRptPath
+    mv $InLblPath $OutLblPath
+ elif [ $PUBLIC -eq 0 ]
+  then
+    rm $InPath.$Ext
+    rm $InPath
+fi
+
+if [ $PUBLIC -eq 0 ]
+ then
+    echo ""
+    echo "mv $OutPath $InPathSave"
+    echo ""
+    if [ $COUPON -eq 1 ]
+     then
+        InPathSave=/users/coupons/$InFileNoExt.$InFileSaveExt
+        mv $OutPath $InPathSave
+        OutPath=$InPathSave
+    fi
+fi
+
+if [ $PieceAttr = "orgorder" ]
+ then
+    /users/programs/ncphexsort.out $OutPath $OutLength 696 4
+fi
+
+job1.script $Job
+JobSix=$?$Job
+/users/programs/imbsetup2.out $OutPath $OutLength $ImbFormat $JobSix
+if [ $? -gt 0 ]
+ then
+    rm $OutPath
+    echo ""
+    echo ""
+    echo "$OutPath removed."
+    echo ""
+    echo "CHECK FORMATTED ACCOUNT values."
+    echo "Check with PROGRAMMING."
+    echo ""
+fi
+

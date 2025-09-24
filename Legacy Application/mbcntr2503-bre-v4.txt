@@ -1,0 +1,646 @@
+   
+   
+   
+   
+   
+   MBCNTR2503 LEGACY APPLICATION BUSINESS REVERSE ENGINEERING DOCUMENT
+     V-4.0
+     BY LOWCODEMINDS
+       
+
+Abstract
+      The MBCNTR2503 – Mortgage Billing and Container Processing System is a legacy enterprise application used by financial institutions and mortgage servicers to transform large volumes of raw loan data into compliant billing outputs. Each month, the system ingests fixed-length data files, validates and converts them, applies client-specific business rules, and generates both postal-ready and electronic billing files.
+      This Business Reverse Engineering (BRE) document provides a structured analysis of the system. It explains the purpose and function of each script, program, and configuration file, and translates the technical workflows into plain business terms so both technical and non-technical stakeholders can understand how the system operates.
+      Special attention has been given to documenting Client 2503’s specific business rules, ensuring that unique requirements such as branding, data layouts, and e-bill routing are captured for future reference.
+      The findings presented in this document serve two key purposes: to provide a clear and accessible reference of how the MBCNTR2503 system currently operates, and to establish a solid foundation for modernizing the application into a maintainable, scalable solution built on contemporary technologies.
+
+
+Table of Content
+Abstract	2
+Table of Content	3
+Introduction	4
+Problem Statement	5
+System Overview	6
+System Features	7
+System Process	8
+mbcntr2503.script	8
+Container Step 1 Processing	10
+C Programs - Core Container Processing	12
+1. ncpcntr0.c	12
+2 ncpcntrextract.c	14
+3. ncpcntrextractvalidation.c	16
+4. ncpcntr5.c	18
+5 cntrvalue.c	20
+MB2000 Conversion	22
+1.	mbcnvt0.c	24
+2.	ncpsplitall.c	26
+3.	cnpfilekeys.c	28
+4.	setmb2000.cbl	30
+5.	job1.script	32
+E-BILL SPLIT	33
+cnpsplit4.c	33
+       
+       
+
+Introduction
+       The MBCNTR2503 – Mortgage Billing and Container Processing System is a long-standing enterprise application used to manage large-scale mortgage billing and loan servicing operations. It has been in production for years within financial institutions and mortgage servicers, where accuracy, compliance, and reliability are critical.
+       The system’s role is straightforward but essential: each billing cycle, it takes in a large mortgage loan data file and converts it into a set of structured “container” files. These outputs are designed to be ready for downstream billing statement generation, postal sortation, and Intelligent Mail Barcode (IMB) workflows.
+       MBCNTR2503 achieves this by combining multiple technologies:
+* Shell scripts coordinate the sequence of jobs and manage overall flow.
+* C utilities handle low-level tasks such as encoding conversion, record formatting, validation, and file splitting.
+* COBOL copybooks and programs define the rigid record layouts (1500-byte and 2000-byte formats) required for mortgage industry compliance.
+* Data Definition (DD) files and client configuration tables allow the same core system to apply client-specific rules, layouts, and branding without rewriting the programs.
+
+       From a business perspective, the application ensures that millions of statements can be processed accurately and consistently. It embeds compliance checks, maintains structured data for auditability, and provides flexibility so each client receives files that reflect their own operational and branding requirements.
+       This reverse-engineering document layout the system in detail. It captures the major scripts, programs, and supporting files, and explains their purpose not only from a technical angle but also from the business context they support. 
+       
+
+Problem Statement
+       The MBCNTR2503 system has been a critical component of mortgage billing and loan servicing operations for decades. While it continues to perform its core functions reliably, the system is built on outdated technologies—a mixture of Unix shell scripts, C programs, COBOL modules, and static Data Definition files. This legacy stack presents several challenges:
+1. Maintenance and Support Risk
+* Skilled resources familiar with COBOL, EBCDIC, and mainframe-style processing are increasingly scarce.
+* Any change requires specialized knowledge, making updates costly and time-consuming.
+2. Limited Flexibility
+* Adding new client rules or modifying existing business logic often requires program-level changes.
+* The system relies on rigid file formats (1500-byte and 2000-byte records) that are difficult to adapt to evolving business needs.
+3. Integration Constraints
+* Outputs are designed for legacy postal and billing systems, making it harder to integrate with modern digital channels such as APIs, cloud storage, and real-time dashboards.
+4. Operational Risks
+* The reliance on fixed-length binary files and EBCDIC encoding increases the risk of data errors during conversion.
+* Debugging issues often requires manual inspection of binary files, which is inefficient and error-prone.
+5. Client-Specific Complexity
+* Customizations for individual clients, such as Client 2503, are scattered across COBOL programs, C utilities, and DD files.
+* Without clear documentation, these rules are difficult to trace and may be lost during modernization.
+
+       If left unaddressed, these challenges will continue to increase operational costs, reduce system reliability, and make compliance with evolving industry and regulatory requirements more difficult.
+       
+
+System Overview 
+       Each month, the MBCNTR2503 system takes in a large mortgage billing file from the client and prepares it for billing and postal delivery. The process runs in two major stages:
+       Stage 1 – Preparing and Checking the Data
+* The system starts by looking up client-specific reference information (such as branding, contact details, and rules).
+* It selects the relevant records from the raw billing file and converts them into a consistent, readable format.
+* The data is then checked: totals are calculated, fields are extracted into text tables, and any unusual or suspicious records are flagged for review.
+* At the end of this stage, the data is normalized and ready for further processing.
+
+       Stage 2 – Converting and Organizing for Output
+* The normalized data is converted into a modern character format so it can be worked with more easily.
+* The records are split into smaller, logical groups (for example, print statements vs. electronic billing).
+* Unique keys and identifiers are added to help track each record through the mailing process.
+* Client-specific formatting rules are applied, ensuring the final output matches regulatory standards and the client’s own requirements.
+* The records are then divided into print and e-billing streams, so they are ready to be sent to the right delivery channel.
+       Final Outputs
+* A complete set of files for printing and postal delivery.
+* A corresponding set of files for electronic billing (e-bill).
+       In simple terms, the system acts like a factory line for billing data: it takes in raw loan records, cleans and checks them, applies the client’s special rules, and produces neat, ready-to-use billing outputs for both paper and digital channels.
+       
+
+System Features
+       The MBCNTR2503 – Mortgage Billing and Container Processing System provides a structured, end-to-end pipeline for mortgage billing data preparation. Its main features include:
+1. End-to-End Workflow Orchestration
+       Shell scripts coordinate the full monthly billing cycle, from input file validation through to final container generation.
+2. Data Conversion and Normalization
+       C utilities transform raw EBCDIC-encoded records into ASCII and apply client-specific data dictionaries to ensure standardized processing.
+3. Record Layout Management
+       COBOL copybooks define strict 1500-byte and 2000-byte record formats, supporting regulatory compliance and industry-wide interoperability.
+4. Data Extraction and Validation
+       Dedicated C programs extract fields into human-readable tab-delimited text and perform line-by-line quality checks, isolating suspicious records.
+5. Container Assembly and Key Generation
+       Final record sets are merged, length-checked, and assigned unique container keys and identifiers for postal tracking and audit.
+6. Client Customization
+       DD files and configuration tables enable client-specific branding, business rules, and option handling without requiring system-wide changes.
+7. Splitting and Routing
+       Utilities split input records into multiple output streams (e.g., e-bill vs. paper statements) based on configurable selection lists.
+8. Output Readiness
+       Generates container files, tracking files, and postal preparation outputs that are production-ready for mailing and electronic distribution.
+       
+    
+
+System Process
+mbcntr2503.script 
+       
+Purpose of the Process:
+       This script is the main controller for processing monthly bill containers. It organizes, processes, and prepares billing and mailing information so that monthly bills and related documents can be sent to customers smoothly and accurately.
+Flow Diagram:										
+		
+Main Functions – Step by Step:
+1. Job Number Validation and Setup
+       The system checks and sets up the correct Job Number (a unique number identifying the billing batch) and ensures that the input data file is ready for processing.
+2. Supplemental Table Integration
+       Any extra data required for processing the billing is added automatically.
+3. Container Step 1 Processing
+       The initial container data is processed to set up the basic structure for billing.
+4. Option Record Conversion
+       Special billing options are converted into a standard format needed for further processing.
+5. Ebill Split Processing
+       Large input data files are automatically split into smaller parts to manage processing easily.
+6. Final Container Processing
+       The final structure of billing containers is created, ensuring they are ready for delivery.
+7. Mail Tracking Container Generation
+       Files are generated to track mail and postage for the billing containers, helping monitor the delivery status.
+      
+Inputs Required:
+* Job Number (example: 69172)
+* Source Data File (example: 69172.dat)
+Outputs Produced:
+* Supplemental File: 69172.se1 (contains additional integrated data needed for processing)
+Business Benefit:
+       This automated process ensures that monthly bills are accurately organized and prepared for mailing, reducing manual work and minimizing errors. It improves efficiency and ensures timely delivery of customer bills.
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+Container Step 1 Processing 
+Script Name: ncpcntr5v2.script
+Type: Unix Shell Script
+Purpose:
+       The ncpcntr5v2.script serves as the initial step in container data processing for monthly bill container operations. It automates the preparation of data by parsing arguments, converting data formats, extracting and validating information, formatting records, and computing control values necessary for further processing steps.
+Flow Diagram:
+       
+      
+      
+Key Functions:
+1. Argument Parsing and Setup
+       Parses input arguments such as the job number and file paths to ensure correct execution parameters are provided.
+2. Data Conversion (EBCDIC to ASCII)
+       Converts input data from EBCDIC encoding to ASCII format, enabling compatibility with modern processing tools.
+3. Data Extraction and Formatting
+       Extracts required data fields from the input and formats them into a structured layout suitable for container processing.
+4. Data Validation
+       Validates extracted data to ensure completeness, correctness, and adherence to expected formats.
+5. Final Container Data Processing
+       Processes the validated data into container files that conform to the expected structure for downstream operations.
+6. Container Value Generation
+       Computes control totals and key values required to track and verify the integrity of container data.
+Dependencies:
+* C Programs:
+1. ncpcntr0.c
+2. ncpcntrextract.c
+3. ncpcntrextractvalidation.c
+4. ncpcntr5.c
+5. cntrvalue.c
+
+* Data Definition Files:
+ Define the structure and format of input and output data.
+Business Benefit:
+      This script enables reliable and automated preparation of container data. It reduces manual effort, enforces data consistency, prevents errors, and ensures that billing data is structured and ready for subsequent processing stages.
+
+
+
+
+C Programs - Core Container Processing 
+1. ncpcntr0.c
+Process Description
+File Name: ncpcntr0.c
+Type: C Source File
+Purpose:
+       This program acts like a translator for raw data. It takes messy or differently formatted data records and turns them into clean, standardized ASCII container records. It does this by using configuration files that tell it how to interpret the data layouts (called DD layouts), how to map fields from the input to the output (IOMAP), and what metadata rules to apply. After processing, it creates summary reports and output files that other programs can use easily.
+Flow Diagram:
+       Key Functions
+* Data Definition File Loading and Management
+       Loads configuration files that define how input data should be processed and structured.
+* EBCDIC to ASCII Conversion
+   Converts data from EBCDIC encoding to ASCII format to ensure compatibility with modern systems.
+* Record Type Identification
+       Identifies the type of each record for proper processing logic.
+* Multi-format Support
+Supports multiple input data formats:
+* Fixed-length records
+* Delimited records
+* GMC Standard format
+* Field Mapping Between Input and Output Layouts
+       Maps and transforms fields based on predefined mappings between input and output data layouts.
+* Container ID Management
+       Manages container identification numbers used for tracking processed records.
+
+Dependencies
+* cnp01.h (Header file containing definitions and constants)
+* Data Definition Files (Define the structure and rules for processing data)
+
+Inputs and Outputs
+      Input      Description[Job Number].datRaw input data file containing records in EBCDIC or other legacy formats      Output      Description[Job Number].4300Standardized ASCII container data file for downstream processing[Job Number].dat.rectypeFile listing types of records identified during processing[Job Number].dat.totalSummary file containing record counts and control totals      
+Business Benefit
+       This utility standardizes and validates incoming raw data, converting it into a structured, consistent format that is directly usable by downstream billing and container processing systems. It improves data integrity, simplifies integration, and reduces manual preprocessing effort, thus increasing operational efficiency and reducing errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 ncpcntrextract.c 
+Process Description
+File Name: ncpcntrextract.c
+Type: C Source File
+Purpose
+	This program takes fixed-length binary data (structured container records) and converts it into a readable, text-based format. It uses data definition (DD) files to understand how to extract each piece of data from the binary input. The output is a pipe (|) or tab-delimited .tab text file, which makes it easier for other systems or tools to use the data.
+Flow Diagram:
+      
+Key Functions
+* Field Extraction: Pulls individual data fields from fixed-length container records.
+* Output Generation: Creates pipe-delimited .tab files for easy reading and processing.
+* Record Length Calculation: Measures record lengths to ensure completeness.
+* Data Validation: Checks that extracted data follows expected formatting rules.
+Dependencies
+* cnp01.h (Header file containing definitions and constants)
+
+Inputs and Outputs
+      Input      Description[JobNumber].4300      Raw binary container data file
+      Output      Description[JobNumber].tab      Pipe-delimited ASCII file containing extracted fieldsBusiness Benefit
+      
+ 	This utility transforms complex binary data into a readable, structured format. It ensures data consistency, reduces manual handling, and provides reliable input for further processing systems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. ncpcntrextractvalidation.c
+File Name: ncpcntrextractvalidation.c
+Type: C Source File
+Purpose
+       This program checks the quality of data in a text file by reading it line by line. It looks for unusual or suspicious characters—like incorrect line endings, the 0xFF byte, or other control characters that don't belong in clean data. Each line is given a "suspicion score" based on how many problems it has. Lines that seem especially problematic are saved into a separate .suspect file so they can be reviewed later.
+Flow Diagram:
+      
+ 
+Key Functions
+* Data Quality Validation: Ensures the extracted data is correct and consistent.
+* Suspect Record Identification: Detects lines with anomalies such as bad endings, control characters, or unexpected values.
+* Validation Reporting: Creates a .suspect file listing problematic records.
+Dependencies
+* cnp01.h
+
+
+
+Inputs and Outputs
+      Input      Description[JobNumber].txt      Pipe-delimited text file from ncpcntrextract.c      
+      Output      Description[JobNumber].suspect      File containing lines flagged for review      
+Business Benefit
+       This program helps maintain data integrity by catching errors early. It reduces the risk of bad data propagating downstream and allows teams to correct anomalies before further processing.
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+4. ncpcntr5.c
+File Name: ncpcntr5.c
+Type: C Source File
+Purpose
+	This program combines two pieces of data to build final output records. It takes each line from a tab-delimited text file and merges it with the last 300 bytes from the matching binary container record. The result is a new, complete fixed-length record, which it saves to a .new output file. It also calculates and writes the length of these new records to a separate .length file for reference.
+Flow Diagram:
+      
+Key Functions
+* Record Merging: Combines cleaned text with original binary record data.
+
+* Final Container Formatting: Creates new fixed-length records ready for downstream processing.
+* Output File Generation: Writes merged records to .new files and lengths to .length files.
+Dependencies
+* cnp01.h
+Inputs and Outputs
+      Input      Description[JobNumber].tab      Pipe-delimited text fileOriginal container record      Last 300 bytes used for merging      
+      Output      Description[JobNumber].new      New fixed-length container records[JobNumber].length      File containing total record lengths      
+Business Benefit
+       Ensures final container records include all necessary information in a consistent format. Helps downstream systems process data reliably, minimizing errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5 cntrvalue.c
+File Name: cntrvalue.c
+Type: C Source File
+Purpose
+	This program reads a file called ddcontrol.txt to extract two specific pieces of information:
+1. The container key
+2. The NCPJAX identifier (a job-related value).
+       It then saves these values into separate output files named after the job number. For example, if the job number is 12345, it will create:
+       ? 12345.cntrkey
+       ? 12345.ncpjax
+       These files are stored in the /users/public/ directory for other processes to use.
+Flow Diagram:
+      
+Key Functions
+* Container Key Generation: Extracts unique container identifiers.
+* NCPJAX Value Calculation: Determines the NCPJAX value from the control file.
+* Output File Generation: Writes results into [JobNumber].cntrkey and [JobNumber].ncpjax.
+Dependencies
+       ? cnp01.h
+
+
+
+Inputs and Outputs
+Input      Descriptionddcontrol.txt      Control file defining container and NCPJAX rules      
+      Output      Description[JobNumber].cntrkey      File containing container key[JobNumber].ncpjax      File containing NCPJAX identifier      
+Business Benefit
+       Generates unique identifiers for tracking processed records. Supports auditing and downstream system processing by providing standardized reference files.
+       
+
+
+
+
+
+
+
+
+
+
+MB2000 Conversion 
+Script Name: setmb2000.script
+Type: Unix Shell Script
+Purpose:
+       The setmb2000.script automates the transformation of client billing data by converting 1500-byte input records into 2000-byte option records. It orchestrates the generation of MB2000 primary and secondary files by applying client-specific logic and formatting rules, executing a series of C utilities and a COBOL program in a structured workflow.
+Flow Diagram:
+
+
+
+Key Functions:
+1. Job Number Processing
+Processes and validates the job number using job1.script.
+2. Data Conversion
+Converts input data to an intermediate format via mbcnvt0.c.
+3. MB2000 Processing
+Applies business-specific formatting and logic using setmb2000.cbl (COBOL program).
+4. Record Splitting
+Splits records into manageable parts using ncpsplitall.c.
+5. File Key Processing
+Processes and generates file keys through cnpfilekeys.c.
+6. Record Length Conversion
+Converts record lengths from 1500 bytes to 2000 bytes using cnpchangerecordlength.c.
+7. Line Ending Conversion
+Normalizes line endings using cnpcrlf.c to ensure compatibility across systems.
+Dependencies:
+* Scripts and Programs:
+o 3 C Programs:
+* mbcnvt0.c
+* Ncpsplitall.c
+* Cnpfilekeys.c
+o 1 COBOL Program:
+* setmb2000.cbl
+o 1 Shell Script: job1.script
+
+Business Benefit:
+       This script ensures that client billing data is transformed into a standardized format, applying required business logic and structural rules. The automation of these processes reduces manual workload, increases data consistency, and ensures that the data is ready for subsequent billing container steps.
+
+
+
+
+
+
+
+
+1. mbcnvt0.c
+       
+File Name: mbcnvt0.c
+Type: C Source File
+Purpose
+       This program reads fixed-length container records that are 4000 bytes each and encoded in EBCDIC (an older text format often used on mainframes). It identifies the type of each record, converts the data to ASCII (a modern, readable format), and applies client-specific rules using data dictionaries. The processed data is then saved into output and summary files, customized per client.
+Flow Diagram:
+      
+      
+Key Functions
+* EBCDIC to ASCII Conversion: Converts legacy data into a readable, modern format compatible with current systems.
+* LPS Record Processing: Handles specific types of records (LPS records) according to client rules.
+* Output File Generation: Produces client-specific ASCII files and summary reports for downstream processing.
+
+Dependencies
+* cnp01.h (Header file containing necessary definitions and constants)
+
+
+
+Inputs and Outputs
+      Input      Description{Job_Number}.dat      Raw input data file containing records in EBCDIC or other legacy formats      
+      Output      Description{Job_Number}.dat.asc      Convert and store the EBCDIC to ASCII      
+Business Benefit
+       This program standardizes legacy EBCDIC container data into a readable and client-ready format. It ensures data consistency, supports multiple client-specific rules, simplifies integration with modern systems, and reduces manual data handling errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. ncpsplitall.c
+File Name: ncpsplitall.c
+Location: MBCNTR2503/Original Programs+Scripts/ncpsplitall.c
+Type: C Source File
+Purpose
+      The ncpsplitall.c program reads large fixed-length data records from an input file, extracts the value of a specific field (such as a customer ID, region code, etc.), and splits the data into multiple output files. Each output file is named after the extracted field value (cleaned of any special characters) and contains all records matching that field.
+Flow Diagram:
+      
+Key Functions
+* Field-Based File Splitting: Identifies a key field in each record and uses it to determine which output file the record belongs to.
+* Multiple Output File Generation: Automatically creates separate output files for each distinct field value found in the data.
+* Split Criteria Processing: Applies rules to clean the field values so they are valid as file names.
+Dependencies
+* cnp01.h (Header file with required definitions and constants)
+Inputs and Outputs
+      Input      Description{Job_Number}.dat.asc      Contains the ASCII value data      
+      Output      Description{Job_Number}.dat.asc.11.1.p/s/d      Field-based split files      
+Business Benefit
+      This program standardizes legacy EBCDIC container data into a readable and client-ready format. It ensures data consistency, supports multiple client-specific rules, simplifies integration with modern systems, and reduces manual data handling errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. cnpfilekeys.c
+File Name: cnpfilekeys.c
+Type: C Source File
+Purpose
+	This program takes two files containing fixed-length records and merges them by matching on account numbers. For each record in the primary file, it finds matching records in the secondary file and adds two pieces of information:
+* A key indicating the position of the first matching record in the secondary file
+* A count showing how many matches were found
+
+       The program then saves these enhanced primary records to a new output file named after the primary input file, with .keyed appended.
+Flow Diagram:
+Key Functions
+* Account Number-Based File Merging: Matches records from two input files by comparing account numbers.
+* Key Field Processing: Adds the key and count fields to the primary records.
+* Output File Generation: Produces an output file named {PrimaryInput}.keyed, which contains the enriched records with additional matching information.
+Dependencies
+* cnp01.h (Header file with required definitions and constants)
+
+
+
+
+Inputs and Outputs
+      Input      Description{Job_Number}.dat.asc.11.1.p      Two fixed-length record files      
+      Output      Description{Job_Number}.dat.asc.11.1.p.keyed      Primary file with match info      
+Business Benefit
+       This utility automates the process of linking related data from different files by account number. It helps improve data integrity and makes it easy to track relationships between records. This is essential for downstream processing tasks such as reconciliation, reporting, or analytics.
+
+
+
+
+
+
+
+
+
+
+
+
+4. setmb2000.cbl
+File Name: setmb2000.cbl
+Path: MBCNTR2503/Original Programs+Scripts/setmb2000.cbl
+Type: COBOL Source File
+Purpose
+	The setmb2000.cbl program converts billing records from an older 1500-byte format into a new 2000-byte format called MBILL (MB2000). It applies a set of both standard rules and specific client requirements to ensure the new records are correctly formatted and valid for further processing.
+Flow Diagram:
+       
+Key Functions
+* Data Format Conversion: Expands records from 1500 bytes to 2000 bytes, adjusting fields as needed.
+* Client-Specific Processing: Supports special formatting or field adjustments for over 25 different clients.
+* Business Logic Implementation: Applies rules to transform and validate data fields according to business requirements.
+* Record Layout Management: Manages the correct structure of the new MBILL records.
+* Data Validation: Ensures input records are valid before conversion.
+* Client Number Validation: Confirms that the client number in each record is valid and supported.
+Dependencies
+* mb1500.cbl (Defines the structure of the original 1500-byte billing records)
+* mb2000.cbl (Defines the structure of the new 2000-byte MBILL records)
+
+
+
+
+Inputs and Outputs
+      Input      Description{Job_Number}p.asc      Primary ASCII values      
+      Output      Description{Job_Number}p.set      Converted 2000-byte MBILL records       
+Business Benefit
+       This program ensures that billing records are updated to a modern, standardized format while also addressing specific client needs. It improves data accuracy, supports multiple client requirements, reduces manual data rework, and ensures seamless integration into billing and reporting systems.
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. job1.script
+Script Name: job1.script
+Type: Unix Shell Script
+Purpose:
+       The job1.script is a simple utility script designed to validate job numbers. It ensures that the provided job number is a valid 5-digit number within an acceptable range and controls the processing flow by returning appropriate exit codes.
+Key Functions:
+1. 5-Digit Job Number Validation
+       Verifies that the job number consists of exactly 5 digits.
+2. Range Checking
+       Ensures the job number falls within the valid range of 10000 to 89999.
+3. Exit Code Management
+       Returns a specific exit code to indicate whether the job number is valid or not, controlling subsequent script execution.
+4. Job Range Control
+       Checks external job control files to determine valid job ranges and dynamically control allowable jobs.
+Dependencies:
+* External Job Control Files
+   Used to define valid job ranges and control logic externally without modifying the script.
+Business Benefit:
+       This utility prevents invalid or out-of-range job numbers from entering the processing pipeline, improving data integrity and avoiding processing errors early in the workflow. It supports dynamic job range control, enabling flexible configuration management.
+
+
+
+
+
+
+
+
+
+E-BILL SPLIT 
+cnpsplit4.c
+File Name: cnpsplit4.c
+Type: C Source File
+Purpose
+       The cnpsplit4.c program reads fixed-length data records from input files and splits them into two separate files based on whether a specific field matches values in a predefined selection list. Records that match the criteria are written to a .match file, while non-matching records go into a .unmatch file. The program supports different data formats and fallback methods to improve matching accuracy.
+Flow Diagram:
+       
+Key Functions
+* Record Splitting Based on Search Criteria: Checks each record’s key field against a selection list to determine where it should be placed.
+* ANY and ASCII Search Modes: Supports flexible matching by allowing exact or partial matches in ASCII format, or using fallback logic.
+* EBCDIC/ASCII Conversion: Converts data from EBCDIC to ASCII when necessary for matching.
+* Packed Decimal Support: Handles numeric fields stored in packed decimal format for accurate comparison.
+* Match/Unmatch File Generation: Separates records into .match (those that meet the criteria) and .unmatch files (those that don’t).
+Dependencies
+* cnp01.h (Header file containing necessary definitions and constants)
+
+
+
+
+
+Inputs and Outputs
+       Input       Description[JobNumber]p.asc       Primary ASCII File       
+       Output       Description[JobNumber].match       File containing records that matched the selection list[JobNumber].unmatch       File containing records that did not matchBusiness Benefit
+This utility efficiently organizes data by splitting it based on defined business rules. It helps downstream processes focus only on relevant data sets, improving processing speed, accuracy, and overall data management. The fallback logic ensures reliable matching even with legacy or non-standard data formats.
+
+
+1
+

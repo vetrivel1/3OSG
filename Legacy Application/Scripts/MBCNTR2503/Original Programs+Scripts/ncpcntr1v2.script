@@ -1,0 +1,160 @@
+if [ $# -lt 1 ]
+ then
+    echo ""
+    echo " $0   takes parameters of the type"
+    echo ""
+    echo "     $0 GrpPath w-Work2Path c-Client o-OptionPath b-StackSize"
+    echo ""
+    echo "GrpPath - 4122 IMB/Grp file (full path)"
+    echo "Defined parameter types are"
+    echo " 0-display parameter set (YES)"
+    echo " b-StackSize"
+    echo " c-client"
+    echo " o-OptionPath"
+    echo " w-Work2Path"
+ exit
+fi
+
+# Default values for parameters go here
+DisplayParameterSet=NO
+StackSize=0
+
+# Get parameters from the command line
+limit=$#
+count=0
+while [ count -lt limit ]
+do
+   x=$1
+   xLength=${#x}
+   if [ $xLength -gt 2 ]
+    then
+       xType=`expr substr $x 1 1`
+       xDash=`expr substr $x 2 1`
+       if [ $xType = / ]
+        then
+           GrpPath=$x
+#           echo "OK"
+#           echo "xType=$xType"
+#           echo "xDash=$xDash"
+#           echo ""
+       elif ! [ $xDash = - ]
+        then
+           echo ""
+           echo "    Invalid parameter:  $x"
+           echo ""
+           exit 1
+       else
+          xValueLength=`expr $xLength - 2`
+          xValue=`expr substr $x 3 $xValueLength`
+          if [ $xType = 0 ]
+           then
+              DisplayParameterSet=$xValue
+          elif [ $xType = b ]
+           then
+              StackSize=$xValue
+          elif [ $xType = c ]
+           then
+              Client=$xValue
+          elif [ $xType = o ]
+           then
+              OptionPath=$xValue
+          elif [ $xType = w ]
+           then
+              Work2Path=$xValue
+          else
+              echo ""
+              echo "    Invalid parameter:  $x"
+              echo ""
+              exit 1
+          fi
+       fi
+    else
+       echo ""
+       echo "    Invalid parameter:  $x"
+       echo ""
+       exit 1
+   fi
+   shift
+   count=`expr $count + 1`
+done
+
+# Conditional logic for parameters
+#echo "DisplayParameterSet=$DisplayParameterSet"
+if [ $DisplayParameterSet = "YES" ]
+ then
+    echo ""
+    echo "BEGIN"
+    echo "$0 PARAMETER SET"
+    echo "GrpPath=$GrpPath"
+    echo "Client=$Client"
+    echo "StackSize=$StackSize"
+    echo "OptionPath=$OptionPath"
+    echo "Work2Path=$Work2Path"
+    echo "END"
+    echo ""
+fi
+
+IsText=1
+if [ $StackSize -gt 1 ]
+ then
+    GrpPathNoExt=${GrpPath%.*}
+    StkPath=$GrpPathNoExt.stk
+    /users/programs/cnpstack2.out 4122 $StackSize 4094 6 grp NONE $GrpPath
+    mv $StkPath $GrpPath
+fi
+
+# create the NCP10 records with a little extra information
+/users/programs/ncpcntr3.out $GrpPath
+if ! [ -f $Work2Path.txt.length ]
+ then
+    echo ""
+    echo "$Work2Path.txt.length not found"
+    echo ""
+    exit
+fi
+
+echo ""
+
+read TabLength < $Work2Path.txt.length
+r4Length=$TabLength
+if [ -f $Work2Path.txt.new ]
+ then
+    r4Path=$Work2Path.txt.new
+ else
+    r4Path=$Work2Path
+fi
+
+# create the container file
+#echo ""
+#echo "$GrpPath.container"
+#echo "$r4Path"
+#echo "$r4Length"
+#echo "$Client"
+#echo "$OptionPath"
+#echo "$IsText"
+#echo ""
+/users/programs/ncpcntr4.out $GrpPath.container $r4Path $r4Length $Client $OptionPath $IsText
+if [ $? -gt 0 ]
+ then
+    exit 1
+fi
+mv $GrpPath.container.new $GrpPath.container
+# add the delimiter value to the NCP10 and NCP89 records in the container
+/users/programs/ncpcontainer6.out $GrpPath.container
+mv $GrpPath.container.delimited $GrpPath
+if [ $StackSize -gt 1 ]
+ then
+    mv $GrpPath $StkPath
+fi
+
+GrpDir=${GrpPath%/*}
+GrpDirLength=${#GrpDir}
+GrpPathLength=${#GrpPath}
+StartPos=`expr $GrpDirLength + 2`
+GrpFileLength=`expr $GrpPathLength - $GrpDirLength - 1`
+GrpFile=`expr substr $GrpPath $StartPos $GrpFileLength`
+GrpFileNoExt=${GrpFile%.*}
+WorkPath=$GrpDir/$GrpFileNoExt.wrk
+mv $GrpPath.container.carrier $WorkPath
+rm $GrpPath.container
+

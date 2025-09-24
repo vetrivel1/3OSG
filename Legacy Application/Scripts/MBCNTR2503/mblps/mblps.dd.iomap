@@ -1,0 +1,46 @@
+MB-BILL-NAME, Address1
+MB-BILL-LINE-2, Address2
+MB-BILL-LINE-3, Address3
+MB-BILL-LINE-4, Address4
+MB-BILL-LINE-5, Address5
+MB-BILL-CITY, City
+MB-BILL-STATE, State
+MB-ZIP-5, Zip5
+MB-ZIP-4, Zip4
+MB-ACCOUNT, Account
+MB-CLIENT3, CustomerBase
+MB-JOB, JobNumber
+"OrTrackId", OriginalTrackingId
+"TrackId", TrackingId
+MB-PRODUCT-CODE, ProductNumber
+MB-VIEW-PRODUCT-CODE, OnlineViewProductNumber
+"01", FileNumber
+MB-FLEXFIELD1, FlexField1
+MB-FLEXFIELD2, FlexField2
+MB-FLEXFIELD3, FlexField3
+MB-FLEXFIELD4, FlexField4
+MB-POCKET-2, Pocket2ActiveBit
+MB-POCKET-3, Pocket3ActiveBit
+MB-POCKET-4, Pocket4ActiveBit
+MB-POCKET-5, Pocket5ActiveBit
+MB-POCKET-6, Pocket6ActiveBit
+MB-POCKET-7, Pocket7ActiveBit
++MB-STATEMENT-MM+"/"+MB-STATEMENT-DD+"/"+MB-STATEMENT-YY, StatementDate
+MB-COUPON-DUE-YY, PaymentDueDate
+MB-TOTAL-AMOUNT-DUE, PaymentAmount
+EbpPaymentDueDate, EbpPaymentDueDate
+EbpPaymentAmount, EbpPaymentAmount
+Email, EbpEmailAddress
+CONTAINER-KEY, SecondaryKey
+"OrTrackId", OriginalTrackingId
+"TrackId", TrackingId
+"0", HouseholdingSeq
+"0", HouseholdingMax
+"Y", PrintDelivery
+"N", ElectronicDeliveryMethod
+"A", OrderType
+"N", RerunRestart
+" ", PullType
+" ", EditRejectIndicator
+" ", EditRejectMessage
+"English", Language

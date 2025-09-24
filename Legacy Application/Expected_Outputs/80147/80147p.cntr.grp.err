@@ -1,0 +1,143 @@
+Inspire Designer NetConsole 8.2 
+"c:\program files\gmc\inspire designer\pnettcnetclient.exe"  -s 207.98.205.66 \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd -difDataInput1 \\207.98.205.10\users\public\80147p.cntr.grp -o FirstPass -nowarnings -useincluded *  -f \\207.98.205.10\users\public\80147p.cntr.grp.txt -la \\207.98.205.10\users\public\80147p.cntr.grp.err              
+23.8.2025 21:08:49.187 open \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd;; -useincluded "*" -nowarnings
+23.8.2025 21:08:49.187 ok;156;52
+23.8.2025 21:08:49.328 run 52 -difDataInput1 \\207.98.205.10\users\public\80147p.cntr.grp -o FirstPass -nowarnings -useincluded *  -f \\207.98.205.10\users\public\80147p.cntr.grp.txt -la \\207.98.205.10\users\public\80147p.cntr.grp.err              
+23.8.2025 21:08:49.328 ok;157
+23.8.2025 21:08:49.406 close 52
+23.8.2025 21:08:49.406 ok;158
+23.8.2025 21:08:49.546 wfjrc 157
+23.8.2025 21:08:53.430 ok;finished;2
+23.8.2025 21:08:53.571 wfjrc 158
+23.8.2025 21:08:53.571 ok;finished;0
+23.8.2025 21:08:53.914 qjm 157
+23.8.2025 21:08:53.914 ok;8241
+23.8.2025 21:08:53.914 Status message 0856:Opening workflow 52 //207.98.205.65/programs/gjs_002503_0001_lpsbill.wfd.
+
+Job Messages:
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/calibri.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/calibrib.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/calibrii.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/wingding.ttf on disk and included file are different, using included file.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1.cnpjax.corp\Programs\AddrBlock_container_DP.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Status message 0857:Opened workflow //207.98.205.65/programs/gjs_002503_0001_lpsbill.wfd.
+Status message 0860:Running commandline -difDataInput1 \\207.98.205.10\users\public\80147p.cntr.grp -o FirstPass -nowarnings -useincluded *  -f \\207.98.205.10\users\public\80147p.cntr.grp.txt -la \\207.98.205.10\users\public\80147p.cntr.grp.err.
+Status message 0884:Running module FirstPass.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.2, program version 8.2.44.0.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Warning 0952:Two or more fields on same level have identical name. Module name: DataAdd1
+Warning 0952:Two or more fields on same level have identical name. Module name: DataInput1
+Warning 0952:Two or more fields on same level have identical name. Module name: DataTransformer10
+Status message 0120:Data Input: Opening: \\207.98.205.205\User Files\0976multi.csv.
+Status message 0596:ImpositionScript1: Imposition script preprocessing started.
+Status message 0120:Data Input: Opening: \\207.98.205.10\users\programs\2503_image.csv. (Image table)
+Status message 0120:Data Input: Opening: \\207.98.205.65\programs\0310_pppenalty.txt.
+Status message 0120:Data Input: Opening: \\jaxgmc1.cnpjax.corp\programs\0976_lossmittable.csv. (Loss Mitt Table)
+Status message 0120:Data Input: Opening: \\207.98.205.10\users\programs\2503_transtable.csv.
+Status message 0596:TransactionsTable: Imposition script preprocessing started.
+Status message 0596:ImpositionScript3: Imposition script preprocessing started.
+Warning 7040:ImpositionScript3: Variable 'sec_zone' has not been used. (5,35)
+Status message 0120:Data Input: Opening: \\207.98.205.10\users\public\80147p.cntr.grp. (DataInput1)
+Status message 0120:Data Input: Opening: \\thehp\users\programs\2503supptable.txt. (DataInput2)
+Status message 0597:ImpositionScript3: Imposition script preprocessing finished.
+Status message 0597:TransactionsTable: Imposition script preprocessing finished.
+Status message 0597:ImpositionScript1: Imposition script preprocessing finished.
+Status message 0045:Data opened (duration 0:00:01.950, records 24).
+Status message 0007:Preprocessing started.
+Status message 0008:Preprocessing finished (duration 0:00:00.047, sheets 52, tempsize 54540).
+Status message 0641:Job started.
+Status message 0003:Job finished (duration 0:00:02.512, sheets 52, sheets/min 1242.04).
+
+Inspire Designer NetConsole 8.2 
+"c:\program files\gmc\inspire designer\pnettcnetclient.exe"  -s 207.98.205.66 \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd -difDataInput1 \\207.98.205.10\users\public\80147p.cntr.grp -o FirstPass -nowarnings -useincluded *  -f \\207.98.205.10\users\public\80147p.cntr.grp.txt -la \\207.98.205.10\users\public\80147p.cntr.grp.err              
+2.9.2025 16:55:33.883 open \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd;; -useincluded "*" -nowarnings
+2.9.2025 16:55:33.883 ok;7203;2400
+2.9.2025 16:55:34.024 run 2400 -difDataInput1 \\207.98.205.10\users\public\80147p.cntr.grp -o FirstPass -nowarnings -useincluded *  -f \\207.98.205.10\users\public\80147p.cntr.grp.txt -la \\207.98.205.10\users\public\80147p.cntr.grp.err              
+2.9.2025 16:55:34.024 ok;7204
+2.9.2025 16:55:34.102 close 2400
+2.9.2025 16:55:34.102 ok;7205
+2.9.2025 16:55:34.242 wfjrc 7204
+2.9.2025 16:55:39.250 ok;finished;2
+2.9.2025 16:55:39.328 wfjrc 7205
+2.9.2025 16:55:39.406 ok;finished;0
+2.9.2025 16:55:39.562 qjm 7204
+2.9.2025 16:55:39.562 ok;8183
+2.9.2025 16:55:39.562 Status message 0856:Opening workflow 2400 //207.98.205.65/programs/gjs_002503_0001_lpsbill.wfd.
+
+Job Messages:
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/calibri.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/calibrib.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/calibrii.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\207.98.205.65\programs\gjs_002503_0001_lpsbill.wfd. File C:/Windows/Fonts/wingding.ttf on disk and included file are different, using included file.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\AddrBlock_Cntr_DP_Rev_M.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Status message 0857:Opened workflow //207.98.205.65/programs/gjs_002503_0001_lpsbill.wfd.
+Status message 0860:Running commandline -difDataInput1 \\207.98.205.10\users\public\80147p.cntr.grp -o FirstPass -nowarnings -useincluded *  -f \\207.98.205.10\users\public\80147p.cntr.grp.txt -la \\207.98.205.10\users\public\80147p.cntr.grp.err.
+Status message 0884:Running module FirstPass.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7883:The .WFD file has been created by a newer version 10.1.1.4, program version 8.2.44.0.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf_Hor_Rev_M.wfd. File C:/Windows/Fonts/arial.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf_Hor_Rev_M.wfd. File C:/Windows/Fonts/arialbd.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf_Hor_Rev_M.wfd. File C:/Windows/Fonts/ariali.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf_Hor_Rev_M.wfd. File C:/Windows/Fonts/arialbi.ttf on disk and included file are different, using included file.
+Warning 7882:Workflow: \\jaxgmc1\programs\NCP_Dist_Print_Perf_Hor_Rev_M.wfd. File C:/Windows/Fonts/ariblk.ttf on disk and included file are different, using included file.
+Warning 0952:Two or more fields on same level have identical name. Module name: DataAdd1
+Warning 0952:Two or more fields on same level have identical name. Module name: DataInput1
+Warning 0952:Two or more fields on same level have identical name. Module name: DataTransformer10
+Status message 0120:Data Input: Opening: \\207.98.205.205\User Files\0976multi.csv.
+Status message 0596:ImpositionScript1: Imposition script preprocessing started.
+Status message 0120:Data Input: Opening: \\207.98.205.10\users\programs\2503_image.csv. (Image table)
+Status message 0120:Data Input: Opening: \\207.98.205.65\programs\0310_pppenalty.txt.
+Status message 0120:Data Input: Opening: \\jaxgmc1.cnpjax.corp\programs\0976_lossmittable.csv. (Loss Mitt Table)
+Status message 0120:Data Input: Opening: \\207.98.205.10\users\programs\2503_transtable.csv.
+Status message 0596:TransactionsTable: Imposition script preprocessing started.
+Status message 0596:ImpositionScript3: Imposition script preprocessing started.
+Warning 7040:ImpositionScript3: Variable 'sec_zone' has not been used. (5,35)
+Status message 0120:Data Input: Opening: \\207.98.205.10\users\public\80147p.cntr.grp. (DataInput1)
+Status message 0120:Data Input: Opening: \\thehp\users\programs\2503supptable.txt. (DataInput2)
+Status message 0597:ImpositionScript3: Imposition script preprocessing finished.
+Status message 0597:TransactionsTable: Imposition script preprocessing finished.
+Status message 0597:ImpositionScript1: Imposition script preprocessing finished.
+Status message 0045:Data opened (duration 0:00:01.966, records 24).
+Status message 0007:Preprocessing started.
+Status message 0008:Preprocessing finished (duration 0:00:00.062, sheets 50, tempsize 53272).
+Status message 0641:Job started.
+Status message 0003:Job finished (duration 0:00:02.387, sheets 50, sheets/min 1256.81).

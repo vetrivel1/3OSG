@@ -1,0 +1,29 @@
+FIXED, 4000
+EBCDIC
+DDLIST
+mba.dd, A, 11, A0001, 3, HEADER
+mbd.dd, D, 11, D0001, 4, HEADER
+mbp.dd, P, 11, P0001, 0, PRIMARY
+mblps.dd, , , , x, NCPJAX
+mbp.dd, 0, 11, P0002, x, SECONDARY
+mbf.dd, F, 11, F0001, x, SECONDARY
+mbu.dd, U, 11, U0001, x, SECONDARY
+mbv.dd, V, 11, V0001, x, SECONDARY
+mbw.dd, W, 11, W0001, x, SECONDARY
+mbx.dd, X, 11, X0001, x, SECONDARY
+mb2s.extract.dd, HEX_3C, 36, S0002, 2, SECONDARY
+mb1s.extract.dd, S, 11, S0001, 1, SECONDARY
+mbn.dd, N, 11, N0001, x, SECONDARY
+colmn.dd, , -1, COLMN, x, CLIENT
+option.0310.dd, , , A0310, x, CLIENT
+dovy.subclient.fields, , , B0310, x, CLIENT
+option.0733.dd, , , A0733, x, CLIENT
+option.0346.dd, , , A0346, x, CLIENT
+option.0277.dd, , , A0277, x, CLIENT
+option.0140.dd, , , A0140, x, CLIENT
+option.0628.dd, , , A0628, x, CLIENT
+yelps750.dd, , , CNPTI, x, SECONDARY
+prop750.dd, , , PROPY, x, SECONDARY
+recon750.dd, , , RECON, x, SECONDARY
+p2750.dd, , , PROP2, x, SECONDARY
+tran750.dd, ALL_OTHER_RECORDS, -1, TRANS, x, SECONDARY

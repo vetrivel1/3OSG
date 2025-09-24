@@ -1,0 +1,51 @@
+# startrun is a file containing the file number currently working. if need to mail to coborrowers,
+# the file may contain number greater than 1
+startrun=/users/public/$1.startrun
+# $1.dat.1.new is the file produced by the ssh command below
+firstDatFile=/users/public/$1.dat.1.new
+# if firstDatFile is not present, then ssh program need to run
+if [ ! -f $firstDatFile ]
+then
+    echo '1' > $startrun
+    cp /users/public/$1.dat /users/public/$1.dat.org
+    ssh 207.98.205.66 'cmd /c \\jaxgmc1\programs\CS_programs\sii\SecondFileCreator.exe '$2' D:\public\'$1'.dat'
+    echo "Creating startrun and writing 1 into it"
+    touch /users/public/$1.se1
+fi
+# reading startrun to figure out which file number to run
+value=$( cat $startrun)
+filename=/users/public/$1.dat.$value.new
+echo "Checking for file:"
+echo $filename
+if [ ! -f $filename ]
+then
+    # if file does not exist, there is nothing more to run.
+    echo "$filename file does not exist. quitting program"
+    rm $startrun
+    echo 100 > "/users/public/$1.sii_output"
+    exit
+fi
+echo $filename" exists"
+# write the next file number to startrun before processing current job
+echo $((value + 1)) > $startrun
+
+#job will contain the value of the job number
+job=$1
+
+if [ $value -ne 1 ]
+then
+    # The value in startrun file is > 1. So, prompt the user for a new job number and copy the filename to this job number    
+    echo "Enter new job number"
+    read job
+    echo "The new job number is $job"
+    cp $filename /users/public/$job.dat.$value.new
+    echo $job.dat.$value.new    
+    echo "sleeping 5"
+    sleep 5
+    cp $1.asc /users/public/$job.se1
+fi
+
+# copy the file to job.dat
+cp /users/public/$job.dat.$value.new /users/public/$job.dat
+echo "end of sii script"
+echo $job > "/users/public/$1.sii_output"

@@ -1,0 +1,5 @@
+<Field Name="mb-client-no" Id="0" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="mb-loan-no" Id="1" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="mb-rec-code" Id="2" ParentId="-1" RepeatedCount="1" RepeatedBy="-1"/>
+<Field Name="column-array" Id="3" ParentId="-1" RepeatedCount="13" RepeatedBy="-1"/>
+<Field Name="value" Id="4" ParentId="3" RepeatedCount="1" RepeatedBy="-1"/>

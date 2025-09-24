@@ -1,0 +1,10 @@
+Client, 0, 3, Text, 0
+fill1, 3, 8, Text, 0
+RecordType, 11, 1, Text, 0
+fill2, 12, 3, Text, 0
+ProcessYear, 15, 2, Packed Number, 0
+ProcessMonth, 17, 2, Text, 0
+ProcessDay, 19, 2, Text, 0
+fill3, 21, 18, Text, 0
+fill4, 39, 3961, Text, 0
+
