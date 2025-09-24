@@ -1,0 +1,121 @@
+MB-CLIENT3, 0, 3, Number, 0
+MB-ACCOUNT, 10, 7, Packed Number, 0
+MB-FORMATTED-ACCOUNT, 17, 10, Number, 0
+MB-SSN, 37, 5, Packed Number, 0
+MB-SSN-TIN-CODE, 42, 1, Text, 0
+MB-CO-SSN, 43, 5, Packed Number, 0
+MB-CO-SSN-TIN-CODE, 48, 1, Text, 0
+MB-FOREIGN-ADDRESS, 49, 1, Text, 0
+MB-BILL-NAME, 50, 60, Text, 0
+MB-BILL-LINE-2, 110, 60, Text, 0
+MB-BILL-LINE-3, 170, 60, Text, 0
+MB-BILL-LINE-4, 230, 60, Text, 0
+MB-BILL-LINE-5, 290, 60, Text, 0
+MB-BILL-LINE-6, 350, 53, Text, 0
+MB-BILL-CITY, 350, 51, Text, 0
+MB-BILL-STATE, 401, 2, Text, 0
+MB-ZIP-5, 403, 5, Text, 0
+MB-ZIP-4, 408, 4, Text, 0
+MB-ACS-CODE, 412, 25, Text, 0
+MB-PROPERTY-STREET, 437, 50, Text, 0
+MB-PROPERTY-CITY, 487, 30, Text, 0
+MB-PROPERTY-STATE, 517, 2, Text, 0
+MB-PROPERTY-ZIP-5, 519, 5, Text, 0
+MB-PROPERTY-ZIP-4, 524, 4, Text, 0
+MB-STATE-CODE, 528, 2, Text, 0
+MB-TELE-NO, 559, 12, Text, 0
+MB-SEC-TELE-NO, 571, 12, Text, 0
+MB-STATEMENT-YY, 583, 4, Text, 0
+MB-STATEMENT-MM, 587, 2, Text, 0
+MB-STATEMENT-DD, 589, 2, Text, 0
+MB-STATEMENT-YY-R, 584, 3, Number, 0
+MB-STATEMENT-MM-R, 587, 2, Number, 0
+MB-STATEMENT-DD-R, 589, 2, Number, 0
+MB-LOAN-DUE-YY, 591, 4, Text, 0
+MB-LOAN-DUE-MM, 595, 2, Text, 0
+MB-LOAN-DUE-DD, 597, 2, Text, 0
+MB-LOAN-DUE-DATE-R, 591, 8, Number, 0
+MB-COUPON-DUE-YY, 599, 4, Text, 0
+MB-COUPON-DUE-MM, 603, 2, Text, 0
+MB-COUPON-DUE-DD, 605, 2, Text, 0
+MB-1ST-DUE-YY, 607, 4, Text, 0
+MB-1ST-DUE-MM, 611, 2, Text, 0
+MB-1ST-DUE-DD, 613, 2, Text, 0
+MB-BEG-HIST-YY, 615, 4, Text, 0
+MB-BEG-HIST-MM, 619, 2, Text, 0
+MB-BEG-HIST-DD, 621, 2, Text, 0
+MB-MATURITY-YY, 623, 4, Text, 0
+MB-MATURITY-MM, 627, 2, Text, 0
+MB-ARM-IR-YY, 629, 4, Text, 0
+MB-ARM-IR-MM, 633, 2, Text, 0
+MB-ARM-IR-DD, 635, 2, Text, 0
+MB-ARM-PI-CHG-YY, 637, 4, Text, 0
+MB-ARM-PI-CHG-MM, 641, 2, Text, 0
+MB-ARM-PI-CHG-DD, 643, 2, Text, 0
+MB-LOAN-YY, 645, 4, Text, 0
+MB-LOAN-MM, 649, 2, Text, 0
+MB-LOAN-DD, 651, 2, Text, 0
+MB-ASSUMP-YY, 653, 4, Text, 0
+MB-ASSUMP-MM, 657, 2, Text, 0
+MB-ASSUMP-DD, 659, 2, Text, 0
+MB-GRACE-DAYS, 661, 2, Number, 0
+MB-GRACE-DAYS-R, 661, 2, Text, 0
+MB-PAYMENT-FREQUENCY, 663, 1, Text, 0
+MB-ANNUAL-INTEREST, 664, 4, Packed Number, 5
+MB-2ND-INTEREST, 668, 4, Packed Number, 5
+MB-TYPE-LOAN, 672, 2, Text, 0
+MB-TYPE-LOAN-A, 672, 1, Text, 0
+MB-TYPE-LOAN-B, 673, 1, Text, 0
+MB-2ND-LOAN-TYPE, 674, 2, Text, 0
+MB-BILL-MODE, 676, 1, Text, 0
+MB-LOAN-TERM, 677, 2, Packed Number, 0
+MB-BANKRUPT-CODE, 679, 2, Text, 0
+MB-FIRST-PRIN-BAL, 681, 7, Packed Number, 2
+MB-2ND-PRIN-BAL, 688, 5, Packed Number, 2
+MB-ESCROW-BAL, 693, 6, Packed Number, 2
+MB-ESCROW-ADVANCE-BAL, 699, 6, Packed Number, 2
+MB-SUSPENSE-BAL, 705, 7, Packed Number, 2
+MB-RES-ESCROW, 712, 6, Packed Number, 2
+MB-REP-RES-BAL, 718, 6, Packed Number, 2
+MB-ACCRUED-LATE-CHG, 724, 5, Packed Number, 2
+MB-DEFERRED-INT, 729, 6, Packed Number, 2
+MB-NSF-BAL, 735, 4, Packed Number, 2
+MB-OTHER-FEES, 739, 5, Packed Number, 2
+MB-CORP-ADV, 744, 5, Packed Number, 2
+MB-PAYMENT-AMOUNT, 749, 6, Packed Number, 2
+MB-FIRST-P-I, 755, 6, Packed Number, 2
+MB-2ND-P-I, 761, 4, Packed Number, 2
+MB-ESCROW-PAYMENT, 765, 5, Packed Number, 2
+MB-COUNTY-TAX, 770, 5, Packed Number, 2
+MB-CITY-TAX, 775, 5, Packed Number, 2
+MB-HAZ-PREM, 780, 5, Packed Number, 2
+MB-MIP, 785, 5, Packed Number, 2
+MB-LIEN, 790, 5, Packed Number, 2
+MB-O-S-SPREAD, 795, 5, Packed Number, 2
+MB-A-H-PREM, 800, 4, Packed Number, 2
+MB-LIFE-PREM, 804, 4, Packed Number, 2
+MB-REP-RES, 808, 5, Packed Number, 2
+MB-MISC-AMT, 813, 5, Packed Number, 2
+MB-HUD-PART, 818, 5, Packed Number, 2
+MB-BSC-AMT, 823, 4, Packed Number, 2
+MB-L-C-AMT, 827, 5, Packed Number, 2
+MB-TOTAL-AMOUNT-DUE, 832, 7, Packed Number, 2
+MB-DELQ-P-I, 839, 7, Packed Number, 2
+MB-DELQ-ESC, 846, 7, Packed Number, 2
+MB-DELQ-L-C, 853, 5, Packed Number, 2
+MB-DELQ-INS, 858, 5, Packed Number, 2
+MB-DELQ-OTHER, 863, 6, Packed Number, 2
+MB-INTEREST-DUE, 869, 4, Packed Number, 2
+MB-PRIN-YTD, 873, 7, Packed Number, 2
+MB-INTEREST-YTD, 880, 7, Packed Number, 2
+MB-TAXES-YTD, 887, 6, Packed Number, 2
+MB-HAZARD-YTD, 893, 5, Packed Number, 2
+MB-MIP-YTD, 898, 5, Packed Number, 2
+MB-LIEN-YTD, 903, 5, Packed Number, 2
+MB-L-C-YTD, 908, 5, Packed Number, 2
+MB-LAST-YEAR-INT-PAID, 913, 5, Packed Number, 2
+MB-LAST-YEAR-TAXES-PAID, 918, 5, Packed Number, 2
+MB-MODIFICATION-STATUS, 923, 2, Text, 0
+... (truncated for brevity in config seed; full file mirrors legacy)
+
+

@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MBCNTR2503.Modernizer", "MBCNTR2503.Modernizer", "{5E8430DD-2DF2-B305-EEEF-416891D5262B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{305C82B0-A1A9-FFC7-BE9A-29048DE34F8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnp.Cli", "MBCNTR2503.Modernizer\src\Cnp.Cli\Cnp.Cli.csproj", "{579A5E94-442B-5BBC-F516-69CC34095E83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnp.Pipeline", "MBCNTR2503.Modernizer\src\Cnp.Pipeline\Cnp.Pipeline.csproj", "{F8EBA052-6257-369E-5EA8-C518D80FBB8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{579A5E94-442B-5BBC-F516-69CC34095E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579A5E94-442B-5BBC-F516-69CC34095E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579A5E94-442B-5BBC-F516-69CC34095E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579A5E94-442B-5BBC-F516-69CC34095E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8EBA052-6257-369E-5EA8-C518D80FBB8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8EBA052-6257-369E-5EA8-C518D80FBB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8EBA052-6257-369E-5EA8-C518D80FBB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8EBA052-6257-369E-5EA8-C518D80FBB8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{305C82B0-A1A9-FFC7-BE9A-29048DE34F8A} = {5E8430DD-2DF2-B305-EEEF-416891D5262B}
+		{579A5E94-442B-5BBC-F516-69CC34095E83} = {305C82B0-A1A9-FFC7-BE9A-29048DE34F8A}
+		{F8EBA052-6257-369E-5EA8-C518D80FBB8F} = {305C82B0-A1A9-FFC7-BE9A-29048DE34F8A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50179A95-3ED5-4AFD-87F3-B5AEECB233FC}
+	EndGlobalSection
+EndGlobal

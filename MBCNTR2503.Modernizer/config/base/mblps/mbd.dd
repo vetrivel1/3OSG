@@ -1,0 +1,9 @@
+Client, 0, 3, Text, 0
+fill1, 3, 8, Text, 0
+RecordType, 11, 1, Text, 0
+fill2, 12, 3, Text, 0
+DisbursementType, 15, 3, Text, 0
+fill3, 18, 2, Text, 0
+DisbursementDesc, 20, 15, Text, 0
+fill4, 35, 3965, Text, 0
+
