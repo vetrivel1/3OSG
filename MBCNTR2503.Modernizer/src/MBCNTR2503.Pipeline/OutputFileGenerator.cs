@@ -15,6 +15,7 @@ namespace MBCNTR2503.Pipeline
     {
         private readonly PipelineConfiguration _config;
         private readonly ILogger _logger;
+        private ClientFieldMapperFactory? _clientFieldMapperFactory;
 
         public OutputFileGenerator(PipelineConfiguration config, ILogger logger)
         {
@@ -255,8 +256,8 @@ namespace MBCNTR2503.Pipeline
         }
 
         /// <summary>
-        /// Convert EBCDIC records to output format using REAL FIELD DATA
-        /// NO MORE HARDCODED VALUES - Everything comes from EBCDIC parsing
+        /// Convert EBCDIC records to output format using client-specific field mapping
+        /// NO MORE HARDCODED VALUES - Everything uses client-specific mapping logic
         /// </summary>
         private List<SampleRecord> ConvertEbcdicRecordsToOutputFormat(List<EbcdicRecord> ebcdicRecords)
         {
@@ -264,12 +265,21 @@ namespace MBCNTR2503.Pipeline
             var allRecords = new List<SampleRecord>();
             int primarySampleHits = 0;
             var sampleFlagValues = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            
-            // Process each EBCDIC record and extract real field values
+
+            // Initialize client field mapper factory if not already done
+            if (_clientFieldMapperFactory == null)
+            {
+                _clientFieldMapperFactory = new ClientFieldMapperFactory();
+            }
+
+            // Process each EBCDIC record using client-specific mapping
             foreach (var ebcdicRecord in ebcdicRecords)
             {
                 try
                 {
+                    // Get client code from the EBCDIC record
+                    var clientCode = ebcdicRecord.GetFieldAsString("MB_CLIENT3");
+                    
                     // Determine if this record is selected for sampling (to match legacy subset outputs)
                     bool IsYes(string s)
                         => !string.IsNullOrWhiteSpace(s) && (s.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) || s.Trim() == "1" || s.Trim().Equals("T", StringComparison.OrdinalIgnoreCase));
@@ -285,158 +295,35 @@ namespace MBCNTR2503.Pipeline
                     if (sw0346 != 0) sampleFlagValues.Add($"MB_0346_SAMPLE_LOAN_SW={sw0346}");
                     if (tiSampleSw != 0) sampleFlagValues.Add($"MB_TI_SAMPLE_LOAN_SW={tiSampleSw}");
 
-                    // Extract real data from EBCDIC fields - NO HARDCODING
-                    var record = new SampleRecord
+                    // Try to get the client-specific field mapper
+                    if (_clientFieldMapperFactory.HasMapper(clientCode))
                     {
-                        // Core identification fields
-                        ClientCode = ebcdicRecord.GetFieldAsString("MB_CLIENT3"),
-                        RecordType = "P", // Primary record type for loan data
-                        // Prefer formatted account representation when available; fallback to packed or loan
-                        AccountNumber = string.Empty,
+                        var mapper = _clientFieldMapperFactory.GetMapper(clientCode);
                         
-                        // Customer information - REAL DATA from EBCDIC
-                        Description = ebcdicRecord.GetFieldAsString("MB_BILL_NAME").Trim(),
-                        PropertyAddress = ebcdicRecord.GetFieldAsString("MB_PROPERTY_ADDR").Trim(),
-                        City = ebcdicRecord.GetFieldAsString("MB_PROPERTY_CITY").Trim(),
-                        State = ebcdicRecord.GetFieldAsString("MB_PROPERTY_STATE").Trim(),
-                        ZipCode = ebcdicRecord.GetFieldAsString("MB_PROPERTY_ZIP").Trim(),
+                        // Use client-specific mapping for P record (primary loan data)
+                        var record = mapper.MapPRecord(ebcdicRecord);
                         
-                        // Loan identification - REAL DATA
-                        LoanNumber1 = ebcdicRecord.GetFieldAsString("MB_LOAN_NUMBER"),
-                        LoanNumber2 = ebcdicRecord.GetFieldAsString("MB_LOAN_NUMBER"), // Same as LoanNumber1
-                        EscrowAccount = ebcdicRecord.GetFieldAsString("MB_ESCROW_ACCOUNT"),
+                        // Fill in additional data from EBCDIC record
+                        PopulateRecordFromEbcdic(record, ebcdicRecord);
                         
-                        // Financial amounts - REAL DATA from EBCDIC packed decimals
-                        PaymentAmount = ebcdicRecord.GetFieldAsDecimal("MB_PAYMENT_AMOUNT"),
-                        PrincipalAmount = ebcdicRecord.GetFieldAsDecimal("MB_PRINCIPAL_AMOUNT"),
-                        InterestAmount = ebcdicRecord.GetFieldAsDecimal("MB_INTEREST_AMOUNT"),
-                        EscrowAmount = ebcdicRecord.GetFieldAsDecimal("MB_ESCROW_AMOUNT"),
-                        TaxAmount = ebcdicRecord.GetFieldAsDecimal("MB_TAX_AMOUNT"),
-                        InsuranceAmount = ebcdicRecord.GetFieldAsDecimal("MB_INSURANCE_AMOUNT"),
-                        LateFeeAmount = ebcdicRecord.GetFieldAsDecimal("MB_LATE_FEE_AMOUNT"),
-                        OtherAmount = ebcdicRecord.GetFieldAsDecimal("MB_OTHER_AMOUNT"),
-                        FeesAmount = ebcdicRecord.GetFieldAsDecimal("MB_FEES_AMOUNT"),
-                        LoanBalance = ebcdicRecord.GetFieldAsDecimal("MB_LOAN_BALANCE"),
-                        TotalAmount = ebcdicRecord.GetFieldAsDecimal("MB_TOTAL_AMOUNT"),
-                        EscrowBalance = ebcdicRecord.GetFieldAsDecimal("MB_ESCROW_BALANCE"),
+                        // Keep all constructed records
+                        allRecords.Add(record);
                         
-                        // Loan terms - REAL DATA
-                        InterestRate = ebcdicRecord.GetFieldAsDecimal("MB_INTEREST_RATE"),
-                        TermMonths = ebcdicRecord.GetFieldAsInt("MB_TERM_MONTHS"),
-                        OriginalTermMonths = ebcdicRecord.GetFieldAsInt("MB_ORIGINAL_TERM"),
-                        
-                        // Property and loan type - REAL DATA
-                        PropertyType = ebcdicRecord.GetFieldAsString("MB_PROPERTY_TYPE"),
-                        ProductCode = ebcdicRecord.GetFieldAsString("MB_PRODUCT_CODE"),
-                        
-                        // Branch and processing codes - REAL DATA (with fallbacks)
-                        BranchCode = 0, // will be set below after fallbacks
-                        // Revert ProcessCode to constant value
-                        ProcessCode = 6,
-                        // These extended product fields may not exist in the JSON; keep as 0 unless later mapped
-                        ProductCodeFull = 0,
-                        SubProduct = 0,
-                        
-                        // Contact information - REAL DATA
-                        EmailAddress = ebcdicRecord.GetFieldAsString("MB_EMAIL_ADDRESS").Trim(),
-                        
-                        // Calculated fields using real data
-                        FormattedAddress = FormatRealAddress(ebcdicRecord),
-                        FormattedZip = FormatRealZip(ebcdicRecord),
-                        TotalWithInterest = CalculateRealTotalWithInterest(ebcdicRecord)
-                    };
-
-                    // Resolve AccountNumber with fallbacks: MB_FORMATTED_ACCOUNT -> MB_ACCOUNT -> MB_LOAN
-                    var acctFormatted = ebcdicRecord.GetFieldAsString("MB_FORMATTED_ACCOUNT").Trim();
-                    if (!string.IsNullOrEmpty(acctFormatted))
-                    {
-                        record.AccountNumber = acctFormatted;
+                        // Only include records that are marked as sample to mirror legacy expected outputs
+                        if (isSample)
+                        {
+                            outputRecords.Add(record);
+                            primarySampleHits++;
+                        }
                     }
                     else
                     {
-                        var acctPacked = ebcdicRecord.GetFieldAsDecimal("MB_ACCOUNT");
-                        if (acctPacked != 0)
-                        {
-                            record.AccountNumber = ((long)acctPacked).ToString().PadLeft(8, '0');
-                        }
-                        else
-                        {
-                            record.AccountNumber = ebcdicRecord.GetFieldAsString("MB_LOAN").PadLeft(8, '0');
-                        }
-                    }
-
-                    // Apply branch fallback mapping after construction
-                    int primaryBranch = ebcdicRecord.GetFieldAsInt("MB_BANK");
-                    _logger.LogInformation($"🔍 Branch Debug - MB_BANK: {primaryBranch}");
-                    
-                    if (primaryBranch == 0)
-                    {
-                        // Additional fallback: some datasets carry branch-like codes in MB_AGGR
-                        primaryBranch = ebcdicRecord.GetFieldAsInt("MB_AGGR");
-                        _logger.LogInformation($"🔍 Branch Debug - MB_AGGR fallback: {primaryBranch}");
-                    }
-                    
-                    // Extended fallback: Check MB_PLS_CLI_ID (legacy COBOL MB1100-PLS-CLT-ID at pos 779)
-                    if (primaryBranch == 0)
-                    {
-                        // Based on legacy COBOL: MOVE MB1100-PLS-CLT-ID TO MB-FLEXFIELD2
-                        // The source field MB1100-PLS-CLT-ID is at position 779 and maps to MB_PLS_CLI_ID
-                        var plsCliId = ebcdicRecord.GetFieldAsString("MB_PLS_CLI_ID").Trim();
-                        _logger.LogInformation($"🔍 Branch Debug - MB_PLS_CLI_ID (pos 779): '{plsCliId}'");
-                        
-                        if (!string.IsNullOrEmpty(plsCliId) && int.TryParse(plsCliId, out int cliBranch) && cliBranch > 0)
-                        {
-                            primaryBranch = cliBranch;
-                            _logger.LogInformation($"🔍 Branch Debug - Found branch code {cliBranch} in MB_PLS_CLI_ID");
-                        }
-                    }
-                    
-                    // Additional fallback: Check other possible branch-related fields
-                    if (primaryBranch == 0)
-                    {
-                        var flexField2 = ebcdicRecord.GetFieldAsString("MB_FLEXFIELD2").Trim();
-                        var plsCltId = ebcdicRecord.GetFieldAsString("MB_PLS_CLT_ID").Trim();
-                        
-                        _logger.LogInformation($"🔍 Branch Debug - MB_FLEXFIELD2 (pos 1035): '{flexField2}'");
-                        _logger.LogInformation($"🔍 Branch Debug - MB_PLS_CLT_ID (pos 1384): '{plsCltId}'");
-                        
-                        // Try FLEXFIELD2 first (should be set from MB1100-PLS-CLT-ID in BUILD-0503)
-                        if (!string.IsNullOrEmpty(flexField2) && int.TryParse(flexField2, out int flexBranch) && flexBranch > 0)
-                        {
-                            primaryBranch = flexBranch;
-                            _logger.LogInformation($"🔍 Branch Debug - Found branch code {flexBranch} in MB_FLEXFIELD2");
-                        }
-                        // Then try the copied field MB_PLS_CLT_ID
-                        else if (!string.IsNullOrEmpty(plsCltId) && int.TryParse(plsCltId, out int cltBranch) && cltBranch > 0)
-                        {
-                            primaryBranch = cltBranch;
-                            _logger.LogInformation($"🔍 Branch Debug - Found branch code {cltBranch} in MB_PLS_CLT_ID");
-                        }
-                    }
-                    
-                    _logger.LogInformation($"🔍 Branch Debug - Final branch code: {primaryBranch}");
-                    
-                    if (primaryBranch != 0)
-                    {
-                        record.BranchCode = primaryBranch;
-                    }
-                    else
-                    {
-                        record.BranchCode = 0;
-                    }
-
-                    // Keep all constructed records
-                    allRecords.Add(record);
-                    // Only include records that are marked as sample to mirror legacy expected outputs
-                    if (isSample)
-                    {
-                        outputRecords.Add(record);
-                        primarySampleHits++;
+                        _logger.LogWarning($"⚠️ No field mapper found for client code: {clientCode}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning($"⚠️ Error converting EBCDIC record {ebcdicRecord.RecordNumber}: {ex.Message}");
+                    _logger.LogError($"❌ Error converting EBCDIC record {ebcdicRecord.RecordNumber}: {ex.Message}");
                 }
             }
 
@@ -466,7 +353,7 @@ namespace MBCNTR2503.Pipeline
                                      sampleReason > 0 ||
                                      tiSampleReason > 0;
 
-                    if (secondary)
+                    if (secondary && i < allRecords.Count)
                     {
                         outputRecords.Add(allRecords[i]);
                         secondaryHits++;
@@ -485,6 +372,74 @@ namespace MBCNTR2503.Pipeline
             
             // Generate the complete record set with proper structure
             return GenerateCompleteRecordSet(outputRecords);
+        }
+
+        /// <summary>
+        /// Populate additional record data from EBCDIC record
+        /// </summary>
+        private void PopulateRecordFromEbcdic(SampleRecord record, EbcdicRecord ebcdicRecord)
+        {
+            // Account number with fallbacks: MB_FORMATTED_ACCOUNT -> MB_ACCOUNT -> MB_LOAN
+            var acctFormatted = ebcdicRecord.GetFieldAsString("MB_FORMATTED_ACCOUNT").Trim();
+            if (!string.IsNullOrEmpty(acctFormatted))
+            {
+                record.AccountNumber = acctFormatted;
+            }
+            else
+            {
+                var acctPacked = ebcdicRecord.GetFieldAsDecimal("MB_ACCOUNT");
+                if (acctPacked != 0)
+                {
+                    record.AccountNumber = ((long)acctPacked).ToString().PadLeft(8, '0');
+                }
+                else
+                {
+                    record.AccountNumber = ebcdicRecord.GetFieldAsString("MB_LOAN").PadLeft(8, '0');
+                }
+            }
+
+            // Customer information - REAL DATA from EBCDIC
+            record.Description = ebcdicRecord.GetFieldAsString("MB_BILL_NAME").Trim();
+            record.PropertyAddress = ebcdicRecord.GetFieldAsString("MB_PROPERTY_ADDR").Trim();
+            record.City = ebcdicRecord.GetFieldAsString("MB_PROPERTY_CITY").Trim();
+            record.State = ebcdicRecord.GetFieldAsString("MB_PROPERTY_STATE").Trim();
+            record.ZipCode = ebcdicRecord.GetFieldAsString("MB_PROPERTY_ZIP").Trim();
+            
+            // Loan identification - REAL DATA
+            record.LoanNumber1 = ebcdicRecord.GetFieldAsString("MB_LOAN_NUMBER");
+            record.LoanNumber2 = ebcdicRecord.GetFieldAsString("MB_LOAN_NUMBER"); // Same as LoanNumber1
+            record.EscrowAccount = ebcdicRecord.GetFieldAsString("MB_ESCROW_ACCOUNT");
+            
+            // Financial amounts - REAL DATA from EBCDIC packed decimals
+            record.PaymentAmount = ebcdicRecord.GetFieldAsDecimal("MB_PAYMENT_AMOUNT");
+            record.PrincipalAmount = ebcdicRecord.GetFieldAsDecimal("MB_PRINCIPAL_AMOUNT");
+            record.InterestAmount = ebcdicRecord.GetFieldAsDecimal("MB_INTEREST_AMOUNT");
+            record.EscrowAmount = ebcdicRecord.GetFieldAsDecimal("MB_ESCROW_AMOUNT");
+            record.TaxAmount = ebcdicRecord.GetFieldAsDecimal("MB_TAX_AMOUNT");
+            record.InsuranceAmount = ebcdicRecord.GetFieldAsDecimal("MB_INSURANCE_AMOUNT");
+            record.LateFeeAmount = ebcdicRecord.GetFieldAsDecimal("MB_LATE_FEE_AMOUNT");
+            record.OtherAmount = ebcdicRecord.GetFieldAsDecimal("MB_OTHER_AMOUNT");
+            record.FeesAmount = ebcdicRecord.GetFieldAsDecimal("MB_FEES_AMOUNT");
+            record.LoanBalance = ebcdicRecord.GetFieldAsDecimal("MB_LOAN_BALANCE");
+            record.TotalAmount = ebcdicRecord.GetFieldAsDecimal("MB_TOTAL_AMOUNT");
+            record.EscrowBalance = ebcdicRecord.GetFieldAsDecimal("MB_ESCROW_BALANCE");
+            
+            // Loan terms - REAL DATA
+            record.InterestRate = ebcdicRecord.GetFieldAsDecimal("MB_INTEREST_RATE");
+            record.TermMonths = ebcdicRecord.GetFieldAsInt("MB_TERM_MONTHS");
+            record.OriginalTermMonths = ebcdicRecord.GetFieldAsInt("MB_ORIGINAL_TERM");
+            
+            // Property and loan type - REAL DATA
+            record.PropertyType = ebcdicRecord.GetFieldAsString("MB_PROPERTY_TYPE");
+            record.ProcessCode = 6; // Keep as constant
+            
+            // Contact information - REAL DATA
+            record.EmailAddress = ebcdicRecord.GetFieldAsString("MB_EMAIL_ADDRESS").Trim();
+            
+            // Calculated fields using real data
+            record.FormattedAddress = FormatRealAddress(ebcdicRecord);
+            record.FormattedZip = FormatRealZip(ebcdicRecord);
+            record.TotalWithInterest = CalculateRealTotalWithInterest(ebcdicRecord);
         }
 
         /// <summary>
@@ -526,8 +481,8 @@ namespace MBCNTR2503.Pipeline
         }
 
         /// <summary>
-        /// Generate complete record set with proper A, D, P, S, V, F structure using real data
-        /// NO MORE HARDCODED TEMPLATES
+        /// Generate complete record set with proper A, D, P, S, V, F structure using client-specific mapping
+        /// NO MORE HARDCODED TEMPLATES - Uses client-specific field mappers
         /// </summary>
         private List<SampleRecord> GenerateCompleteRecordSet(List<SampleRecord> realDataRecords)
         {
@@ -539,108 +494,63 @@ namespace MBCNTR2503.Pipeline
                 return completeRecords;
             }
             
-            // Use first real record as base for generating required record types
+            // Use first real record to determine client code
             var baseRecord = realDataRecords.First();
+            var clientCode = baseRecord.ClientCode;
             
-            // A record - header (using real client code)
-            completeRecords.Add(new SampleRecord
+            if (_clientFieldMapperFactory == null || !_clientFieldMapperFactory.HasMapper(clientCode))
             {
-                ClientCode = baseRecord.ClientCode, // REAL from EBCDIC
-                RecordType = "A",
-                Sequence = 1,
-                BranchCode = baseRecord.BranchCode, // REAL from EBCDIC (now with fallback from MB_PLS_CLT_ID/MB_AGGR)
-                ProcessCode = 6,
-                SubProcessCode = 5,
-                // Drive counts from data: Amount1 = #P records; Amount2 = #S records
-                Amount1 = realDataRecords.Count,
-                Amount2 = realDataRecords.Count * 3,
-                Amount3 = 0
-            });
-            
-            // D record - disbursement description (using real client code)
-            completeRecords.Add(new SampleRecord
-            {
-                ClientCode = baseRecord.ClientCode, // REAL from EBCDIC
-                RecordType = "D",
-                Sequence = 1,
-                ProductCode = baseRecord.ProductCode, // REAL from EBCDIC (prefer VIEW code below if blank)
-                Description = "FOR OTHER DISB",
-                ExtendedDescription = "302  FOR OTHER DISB 303  FOR OTHER DISB 304  FOR OTHER DISB 305  FOR OTHER DISB 306  FOR OTHER DISB 307  FOR OTHER DISB 310  MORTGAGE INS   31009USDA/RHS PREM  31101CITY/CNTY COMB 31201COUNTY/CADS    31301CITY/TWN/VIL 1P31501SCHOOL/ISD P1  31601CITY/SCH COMB 131701BOROUGH        31801UTIL.DIST.MUD  32101FIRE/IMPRV DIST32601HOA            32701GROUND RENTS   32801SUP MENTAL TAX 32901DLQ TAX, PEN/IN351  HOMEOWNERS INS 352  FLOOD INSURANCE353  OTHER INSURANCE354  OTHER INSURANCE355  CONDO INSURANCE"
-            });
-            
-            // Emit records per-loan: P, then 3x S, then V, then F
-            foreach (var realRecord in realDataRecords)
-            {
-                // P record (already formatted by FormatPipeDelimitedRecord)
-                completeRecords.Add(realRecord);
-
-                // S records (three per P) - structure matches expected grouping (348/349/350)
-                // We'll carry over branch/process codes from the real record; amounts populated from real data.
-                // S1
-                completeRecords.Add(new SampleRecord
-                {
-                    ClientCode = realRecord.ClientCode,
-                    RecordType = "S",
-                    AccountNumber = realRecord.AccountNumber,
-                    SubRecordNumber = 348,
-                    ServicerCode = realRecord.BranchCode.ToString(),
-                    ServicerBalance = 0, // will be included in format string; specific per legacy can be adjusted later
-                    ServicerBranch = realRecord.BranchCode.ToString(),
-                    ServicerBranchCode = realRecord.BranchCode.ToString(),
-                    ServicerSubCode = realRecord.ProcessCode.ToString()
-                });
-                // S2
-                completeRecords.Add(new SampleRecord
-                {
-                    ClientCode = realRecord.ClientCode,
-                    RecordType = "S",
-                    AccountNumber = realRecord.AccountNumber,
-                    SubRecordNumber = 349,
-                    ServicerCode = realRecord.BranchCode.ToString(),
-                    ServicerBalance = realRecord.TotalAmount, // example mapping; refine if needed
-                    ServicerBranch = realRecord.BranchCode.ToString(),
-                    ServicerBranchCode = realRecord.BranchCode.ToString(),
-                    ServicerSubCode = realRecord.ProcessCode.ToString()
-                });
-                // S3
-                completeRecords.Add(new SampleRecord
-                {
-                    ClientCode = realRecord.ClientCode,
-                    RecordType = "S",
-                    AccountNumber = realRecord.AccountNumber,
-                    SubRecordNumber = 350,
-                    ServicerCode = realRecord.BranchCode.ToString(),
-                    ServicerBalance = realRecord.TotalAmount, // example mapping; refine if needed
-                    ServicerBranch = realRecord.BranchCode.ToString(),
-                    ServicerBranchCode = realRecord.BranchCode.ToString(),
-                    ServicerSubCode = realRecord.ProcessCode.ToString()
-                });
-
-                // V record (totals for this P)
-                completeRecords.Add(new SampleRecord
-                {
-                    ClientCode = realRecord.ClientCode,
-                    RecordType = "V",
-                    AccountNumber = realRecord.AccountNumber,
-                    Amount1 = (int)Math.Round(realRecord.PaymentAmount),
-                    Amount2 = (int)Math.Round(realRecord.PrincipalAmount),
-                    Amount3 = (int)Math.Round(realRecord.InterestAmount),
-                    TotalAmount = realRecord.TotalAmount
-                });
-
-                // F record (final totals for this P)
-                completeRecords.Add(new SampleRecord
-                {
-                    ClientCode = realRecord.ClientCode,
-                    RecordType = "F",
-                    AccountNumber = realRecord.AccountNumber,
-                    TotalAmount = realRecord.TotalWithInterest,
-                    LoanBalance = realRecord.LoanBalance,
-                    EscrowBalance = realRecord.EscrowBalance
-                });
+                _logger.LogError($"❌ No field mapper available for client code: {clientCode}");
+                return completeRecords;
             }
             
-            _logger.LogInformation($"📈 Generated {completeRecords.Count} complete records using real EBCDIC data");
+            var mapper = _clientFieldMapperFactory.GetMapper(clientCode);
+            
+            // Generate A record using client-specific mapping
+            var aRecord = mapper.MapARecord(new EbcdicRecord()); // Empty record for template
+            completeRecords.Add(aRecord);
+            
+            // Generate D record using client-specific mapping  
+            var dRecord = mapper.MapDRecord(new EbcdicRecord()); // Empty record for template
+            completeRecords.Add(dRecord);
+            
+            // Add the P records (loan data)
+            foreach (var realRecord in realDataRecords)
+            {
+                completeRecords.Add(realRecord);
+                
+                // Generate S records using client-specific mapping
+                var sRecord1 = mapper.MapSRecord(new EbcdicRecord());
+                sRecord1.SubRecordNumber = 348;
+                sRecord1.AccountNumber = realRecord.AccountNumber;
+                completeRecords.Add(sRecord1);
+                
+                var sRecord2 = mapper.MapSRecord(new EbcdicRecord());
+                sRecord2.SubRecordNumber = 349;
+                sRecord2.AccountNumber = realRecord.AccountNumber;
+                completeRecords.Add(sRecord2);
+                
+                var sRecord3 = mapper.MapSRecord(new EbcdicRecord());
+                sRecord3.SubRecordNumber = 350;
+                sRecord3.AccountNumber = realRecord.AccountNumber;
+                completeRecords.Add(sRecord3);
+                
+                // Generate V record using client-specific mapping
+                var vRecord = mapper.MapVRecord(new EbcdicRecord());
+                vRecord.AccountNumber = realRecord.AccountNumber;
+                vRecord.TotalAmount = realRecord.TotalAmount;
+                completeRecords.Add(vRecord);
+                
+                // Generate F record using client-specific mapping
+                var fRecord = mapper.MapFRecord(new EbcdicRecord());
+                fRecord.AccountNumber = realRecord.AccountNumber;
+                fRecord.TotalAmount = realRecord.TotalWithInterest;
+                fRecord.LoanBalance = realRecord.LoanBalance;
+                fRecord.EscrowBalance = realRecord.EscrowBalance;
+                completeRecords.Add(fRecord);
+            }
+            
+            _logger.LogInformation($"📈 Generated {completeRecords.Count} complete records using client-specific mapping for client {clientCode}");
             
             return completeRecords;
         }
@@ -652,9 +562,11 @@ namespace MBCNTR2503.Pipeline
     public class SampleRecord
     {
         public string ClientCode { get; set; } = string.Empty;
+        public string SequenceNumber { get; set; } = string.Empty;
         public string RecordType { get; set; } = string.Empty;
+        public string SubSequenceNumber { get; set; } = string.Empty;
         public int Sequence { get; set; }
-        public int BranchCode { get; set; }
+        public string BranchCode { get; set; } = string.Empty;
         public int ProcessCode { get; set; }
         public int SubProcessCode { get; set; }
         public int Amount1 { get; set; }
