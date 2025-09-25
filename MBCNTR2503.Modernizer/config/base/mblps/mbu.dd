@@ -1,0 +1,178 @@
+CLIENT-NO, 0, 3, Text, 0
+CLIENT-SUFFIX, 3, 1, Text, 0
+LOAN-NO, 4, 7, Text, 0
+REC-CODE, 11, 1, Text, 0
+REC-NUMBER, 12, 3, Number, 0
+DELQ-PYMT-DUE-YR, 15, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 17, 2, Number, 0
+DELQ-PYMT-DUE-DA, 19, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 21, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 27, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 38, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 40, 2, Number, 0
+DELQ-PYMT-DUE-DA, 42, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 44, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 50, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 61, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 63, 2, Number, 0
+DELQ-PYMT-DUE-DA, 65, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 67, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 73, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 84, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 86, 2, Number, 0
+DELQ-PYMT-DUE-DA, 88, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 90, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 96, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 107, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 109, 2, Number, 0
+DELQ-PYMT-DUE-DA, 111, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 113, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 119, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 130, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 132, 2, Number, 0
+DELQ-PYMT-DUE-DA, 134, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 136, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 142, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 153, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 155, 2, Number, 0
+DELQ-PYMT-DUE-DA, 157, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 159, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 165, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 176, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 178, 2, Number, 0
+DELQ-PYMT-DUE-DA, 180, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 182, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 188, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 199, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 201, 2, Number, 0
+DELQ-PYMT-DUE-DA, 203, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 205, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 211, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 222, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 224, 2, Number, 0
+DELQ-PYMT-DUE-DA, 226, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 228, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 234, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 245, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 247, 2, Number, 0
+DELQ-PYMT-DUE-DA, 249, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 251, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 257, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 268, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 270, 2, Number, 0
+DELQ-PYMT-DUE-DA, 272, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 274, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 280, 6, Packed Number, 2
+DELQ-PYMT-DUE-YR, 291, 2, Packed Number, 0
+DELQ-PYMT-DUE-MO, 293, 2, Number, 0
+DELQ-PYMT-DUE-DA, 295, 2, Number, 0
+DELQ-PYMT-DUE-AMT, 297, 6, Packed Number, 2
+DELQ-PMT-AMT-WITH-FEES, 303, 6, Packed Number, 2
+HIST-DUE-YY, 314, 2, Packed Number, 0
+HIST-DUE-MM, 316, 2, Number, 0
+HIST-PROC-YY, 318, 2, Packed Number, 0
+HIST-PROC-MM, 320, 2, Number, 0
+HIST-PROC-DD, 322, 2, Number, 0
+HIST-EFF-YY, 324, 2, Packed Number, 0
+HIST-EFF-MM, 326, 2, Number, 0
+HIST-EFF-DD, 328, 2, Number, 0
+HIST-DUE-DD, 330, 2, Number, 0
+HIST-DUE-YY, 341, 2, Packed Number, 0
+HIST-DUE-MM, 343, 2, Number, 0
+HIST-PROC-YY, 345, 2, Packed Number, 0
+HIST-PROC-MM, 347, 2, Number, 0
+HIST-PROC-DD, 349, 2, Number, 0
+HIST-EFF-YY, 351, 2, Packed Number, 0
+HIST-EFF-MM, 353, 2, Number, 0
+HIST-EFF-DD, 355, 2, Number, 0
+HIST-DUE-DD, 357, 2, Number, 0
+HIST-DUE-YY, 368, 2, Packed Number, 0
+HIST-DUE-MM, 370, 2, Number, 0
+HIST-PROC-YY, 372, 2, Packed Number, 0
+HIST-PROC-MM, 374, 2, Number, 0
+HIST-PROC-DD, 376, 2, Number, 0
+HIST-EFF-YY, 378, 2, Packed Number, 0
+HIST-EFF-MM, 380, 2, Number, 0
+HIST-EFF-DD, 382, 2, Number, 0
+HIST-DUE-DD, 384, 2, Number, 0
+HIST-DUE-YY, 395, 2, Packed Number, 0
+HIST-DUE-MM, 397, 2, Number, 0
+HIST-PROC-YY, 399, 2, Packed Number, 0
+HIST-PROC-MM, 401, 2, Number, 0
+HIST-PROC-DD, 403, 2, Number, 0
+HIST-EFF-YY, 405, 2, Packed Number, 0
+HIST-EFF-MM, 407, 2, Number, 0
+HIST-EFF-DD, 409, 2, Number, 0
+HIST-DUE-DD, 411, 2, Number, 0
+HIST-DUE-YY, 422, 2, Packed Number, 0
+HIST-DUE-MM, 424, 2, Number, 0
+HIST-PROC-YY, 426, 2, Packed Number, 0
+HIST-PROC-MM, 428, 2, Number, 0
+HIST-PROC-DD, 430, 2, Number, 0
+HIST-EFF-YY, 432, 2, Packed Number, 0
+HIST-EFF-MM, 434, 2, Number, 0
+HIST-EFF-DD, 436, 2, Number, 0
+HIST-DUE-DD, 438, 2, Number, 0
+HIST-DUE-YY, 449, 2, Packed Number, 0
+HIST-DUE-MM, 451, 2, Number, 0
+HIST-PROC-YY, 453, 2, Packed Number, 0
+HIST-PROC-MM, 455, 2, Number, 0
+HIST-PROC-DD, 457, 2, Number, 0
+HIST-EFF-YY, 459, 2, Packed Number, 0
+HIST-EFF-MM, 461, 2, Number, 0
+HIST-EFF-DD, 463, 2, Number, 0
+HIST-DUE-DD, 465, 2, Number, 0
+HIST-DUE-YY, 476, 2, Packed Number, 0
+HIST-DUE-MM, 478, 2, Number, 0
+HIST-PROC-YY, 480, 2, Packed Number, 0
+HIST-PROC-MM, 482, 2, Number, 0
+HIST-PROC-DD, 484, 2, Number, 0
+HIST-EFF-YY, 486, 2, Packed Number, 0
+HIST-EFF-MM, 488, 2, Number, 0
+HIST-EFF-DD, 490, 2, Number, 0
+HIST-DUE-DD, 492, 2, Number, 0
+HIST-DUE-YY, 503, 2, Packed Number, 0
+HIST-DUE-MM, 505, 2, Number, 0
+HIST-PROC-YY, 507, 2, Packed Number, 0
+HIST-PROC-MM, 509, 2, Number, 0
+HIST-PROC-DD, 511, 2, Number, 0
+HIST-EFF-YY, 513, 2, Packed Number, 0
+HIST-EFF-MM, 515, 2, Number, 0
+HIST-EFF-DD, 517, 2, Number, 0
+HIST-DUE-DD, 519, 2, Number, 0
+HIST-DUE-YY, 530, 2, Packed Number, 0
+HIST-DUE-MM, 532, 2, Number, 0
+HIST-PROC-YY, 534, 2, Packed Number, 0
+HIST-PROC-MM, 536, 2, Number, 0
+HIST-PROC-DD, 538, 2, Number, 0
+HIST-EFF-YY, 540, 2, Packed Number, 0
+HIST-EFF-MM, 542, 2, Number, 0
+HIST-EFF-DD, 544, 2, Number, 0
+HIST-DUE-DD, 546, 2, Number, 0
+HIST-DUE-YY, 557, 2, Packed Number, 0
+HIST-DUE-MM, 559, 2, Number, 0
+HIST-PROC-YY, 561, 2, Packed Number, 0
+HIST-PROC-MM, 563, 2, Number, 0
+HIST-PROC-DD, 565, 2, Number, 0
+HIST-EFF-YY, 567, 2, Packed Number, 0
+HIST-EFF-MM, 569, 2, Number, 0
+HIST-EFF-DD, 571, 2, Number, 0
+HIST-DUE-DD, 573, 2, Number, 0
+HIST-DUE-YY, 584, 2, Packed Number, 0
+HIST-DUE-MM, 586, 2, Number, 0
+HIST-PROC-YY, 588, 2, Packed Number, 0
+HIST-PROC-MM, 590, 2, Number, 0
+HIST-PROC-DD, 592, 2, Number, 0
+HIST-EFF-YY, 594, 2, Packed Number, 0
+HIST-EFF-MM, 596, 2, Number, 0
+HIST-EFF-DD, 598, 2, Number, 0
+HIST-DUE-DD, 600, 2, Number, 0
+HIST-DUE-YY, 611, 2, Packed Number, 0
+HIST-DUE-MM, 613, 2, Number, 0
+HIST-PROC-YY, 615, 2, Packed Number, 0
+HIST-PROC-MM, 617, 2, Number, 0
+HIST-PROC-DD, 619, 2, Number, 0
+HIST-EFF-YY, 621, 2, Packed Number, 0
+HIST-EFF-MM, 623, 2, Number, 0
+HIST-EFF-DD, 625, 2, Number, 0
+HIST-DUE-DD, 627, 2, Number, 0

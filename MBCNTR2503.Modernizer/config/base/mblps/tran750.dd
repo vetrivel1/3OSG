@@ -1,0 +1,16 @@
+T-TYPE, 0, 1, Text, 0
+T-ACCOUNT, 1, 7, Packed Number, 0
+T-HISTORY-DISB, 8, 6, Packed Number, 2
+TRAN-CODE, 14, 3, Text, 0
+DH-DUE-DATE, 17, 6, Text, 0
+PROC-DATE, 23, 6, Text, 0
+TOT-RECD, 29, 7, Packed Number, 2
+PRIN-PD, 36, 7, Packed Number, 2
+INT-PD, 43, 7, Packed Number, 2
+ESCROW-PD, 50, 6, Packed Number, 2
+L-C-PD, 56, 5, Packed Number, 2
+BSC-PD, 61, 4, Packed Number, 2
+A-H-PD, 65, 4, Packed Number, 2
+LIFE-PD, 69, 4, Packed Number, 2
+SUSPENSE-AMT, 73, 7, Packed Number, 2
+CORP-ADV, 97, 1, Text, 0

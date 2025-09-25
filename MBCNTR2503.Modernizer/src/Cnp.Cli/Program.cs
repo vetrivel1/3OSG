@@ -24,12 +24,14 @@ if (args.Length > 0 && args[0] == "build-schema")
 else if (args.Length > 0 && args[0] == "run-step1")
 {
     string? job = null; string? input = null; string? outDir = null; string? schemaDir = null;
+    bool debug = false;
     for (int i = 1; i < args.Length; i++)
     {
         if (args[i] == "--job" && i + 1 < args.Length) job = args[++i];
         else if (args[i] == "--input" && i + 1 < args.Length) input = args[++i];
         else if (args[i] == "--out" && i + 1 < args.Length) outDir = args[++i];
         else if (args[i] == "--schema" && i + 1 < args.Length) schemaDir = args[++i];
+        else if (args[i] == "--debug") debug = true;
     }
     if (job == null || input == null || outDir == null || schemaDir == null)
     {
@@ -38,6 +40,7 @@ else if (args.Length > 0 && args[0] == "run-step1")
     }
     Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     var compiled = SchemaCompiler.Compile(schemaDir);
+    if (debug) Environment.SetEnvironmentVariable("STEP1_DEBUG", "1");
     var step1 = new Step1Orchestrator(compiled);
     step1.Run(job, input, outDir);
     return;

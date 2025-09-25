@@ -1,0 +1,19 @@
+SubClient, 1070, 3, Text, 0
+MonthlyMessageImage, 1073, 18, Text, 0
+MonthlyFaceImage, 1091, 18, Text, 0
+MonthlyFaceImage2, 1109, 18, Text, 0
+MbHudLoanNo, 1127, 15, Text, 0
+MbDupLockboxCode, 1346, 1, Text, 0
+MbUBT2, 1342, 1, Text, 0
+MbUBT7, 1351, 1, Text, 0
+MbUBT12, 1356, 1, Text, 0
+MbUBT13, 1357, 1, Text, 0
+MbUBT14, 1358, 1, Text, 0
+MbUBT20, 1364, 1, Text, 0
+PrimarySubClient, 1142, 3, Text, 0
+CorpAdvLiveDate, 1145, 6, Text, 0
+Onsert1, 1153, 18, Text
+Onsert2, 1171, 18, Text
+Onsert3, 1189, 18, Text
+Onsert4, 1207, 18, Text
+RegNY, 1225, 1, Text, 0

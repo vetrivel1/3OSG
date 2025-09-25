@@ -1,0 +1,95 @@
+TI-CLIENT, 0, 4, Text, 0
+TI-ACCOUNT, 10, 7, Packed Number, 0
+TI-OTHER-ACCOUNT, 17, 20, Text, 0
+TI-SSN, 37, 5, Packed Number, 0
+TI-SSN-TIN-CODE, 42, 1, Text, 0
+TI-CO-SSN, 43, 5, Packed Number, 0
+TI-CO-SSN-TIN-CODE, 48, 1, Text, 0
+TI-TYPE-LOAN, 49, 2, Text, 0
+TI-STATE, 51, 2, Text, 0
+TI-MTG-CODE, 53, 1, Text, 0
+TI-TRAN-56-SW, 54, 1, Text, 0
+TI-ZERO-PB-CODE, 55, 1, Text, 0
+TI-LOAN-DATE-YR, 56, 2, Packed Number, 0
+TI-LOAN-DATE-MO, 58, 2, Number, 0
+TI-LOAN-DATE-DA, 60, 2, Number, 0
+TI-ASSUMP-YR, 62, 2, Number, 0
+TI-ASSUMPTI-MO, 64, 2, Number, 0
+TI-ASSUMP-DA, 66, 2, Number, 0
+TI-SEQ, 68, 4, Int, 0
+TI-PROCESSING-MM, 72, 2, Number, 0
+TI-PROCESSING-DD, 74, 2, Number, 0
+TI-PROCESSING-YY, 76, 2, Number, 0
+TI-NUM-PROPERTIES, 78, 2, Packed Number, 0
+TI-ACQ-YR, 80, 2, Packed Number, 0
+TI-ACQ-MO, 82, 2, Number, 0
+TI-ACQ-DA, 84, 2, Number, 0
+Y-E-ACQ-RPT-FLAG, 86, 1, Text, 0
+TI-IOE-IORE-WH-YTD, 89, 5, Packed Number, 2
+TI-MAN, 94, 1, Text, 0
+TI-ZONE, 95, 2, Text, 0
+TI-1ST-BASIS-CODE, 97, 3, Text, 0
+TI-AGGR, 100, 3, Text, 0
+TI-BUYDOWN-SUBSIDY-IND, 103, 1, Text, 0
+TI-PRINT-CTRL-SW, 104, 1, Text, 0
+TI-CAP-LOAN-FLAG, 105, 1, Text, 0
+TI-PMI-CODE, 109, 3, Text, 0
+TI-DETAIL-HISTORY, 112, 1, Text, 0
+TI-LPMI-IND, 113, 1, Text, 0
+TI-STMT-SELECTED-AS-SAMPLE, 139, 1, Text, 0
+TI-SAMPLE-REASON, 140, 2, Number, 0
+TI-SAMPLE-LOAN-SW, 142, 1, Text, 0
+TI-FOREIGN-ADDRESS, 169, 1, Text, 0
+TI-BILL-NAME, 170, 40, Text, 0
+TI-BILL-LINE-2, 210, 40, Text, 0
+TI-BILL-LINE-3, 250, 40, Text, 0
+TI-BILL-LINE-4, 290, 40, Text, 0
+TI-BILL-LINE-5, 330, 40, Text, 0
+TI-BILL-LINE-6, 370, 33, Text, 0
+TI-ZIP-CODE, 403, 5, Text, 0
+TI-ZIP-4, 408, 4, Text, 0
+TI-DPBC, 412, 3, Text, 0
+TI-CHECK-DP, 415, 1, Text, 0
+GROUP1-ERROR-CODES, 416, 6, Text, 0
+TI-BANK, 466, 3, Text, 0
+TI-ESCROW-BAL, 469, 5, Packed Number, 2
+TI-ESC-BAL-BEG, 474, 5, Packed Number, 2
+TI-PRIN-BAL, 479, 6, Packed Number, 2
+TI-PRIN-BAL-BEG, 485, 6, Packed Number, 2
+TI-PRIN-YTD, 491, 6, Packed Number, 2
+TI-INT-APP-YTD, 497, 7, Packed Number, 2
+TI-TAXES-YTD, 504, 5, Packed Number, 2
+TI-HAZARD-YTD, 509, 5, Packed Number, 2
+TI-MIP-YTD, 514, 5, Packed Number, 2
+TI-LIEN-YTD, 519, 5, Packed Number, 2
+TI-1098-INT, 524, 7, Packed Number, 2
+TI-LATE-CHG-PD, 531, 5, Packed Number, 2
+TI-POINTS-PD-BY-BORROWER, 536, 6, Packed Number, 2
+TI-INT-ON-ESCROW, 542, 5, Packed Number, 2
+TI-CAL-NET-INT, 547, 7, Packed Number, 2
+TI-REIMBURSED-AMOUNT, 554, 5, Packed Number, 2
+TI-TOTAL-DEDUCTIBLE-MI, 559, 5, Packed Number, 2
+TI-AMT-DISB, 579, 5, Packed Number, 2
+TI-ESC-DEP, 584, 5, Packed Number, 2
+TI-OTHER-DISB, 589, 5, Packed Number, 2
+TI-TOT-PAYMT, 594, 5, Packed Number, 2
+TI-ESCROW-MTH, 599, 4, Packed Number, 2
+TI-DUE-YR, 603, 2, Number, 0
+TI-DUE-MO, 605, 2, Number, 0
+TI-DUE-DA, 607, 2, Number, 0
+TI-REVISED-STMT-SW, 609, 1, Text, 0
+TI-H-FHA-INFO, 610, 14, Text, 0
+TI-H-AS-OF-YY, 624, 2, Text, 0
+TI-H-AS-OF-MM, 626, 2, Text, 0
+TI-H-AS-OF-DD, 628, 2, Text, 0
+TI-H-PAYOFF-AMOUNT, 630, 5, Packed Number, 2
+TI-H-INS-YY, 635, 2, Text, 0
+TI-H-INS-MM, 637, 2, Text, 0
+TI-H-INS-DD, 639, 2, Text, 0
+TI-IRS-PURPOSE-CODE, 641, 1, Text, 0
+TI-KEY, 688, 7, Number, 0
+TI-COUNT, 695, 3, Number, 0
+TI-TRAN-COUNT, 698, 2, Packed Number, 0
+TI-JOB, 700, 6, Text, 0
+TI-STACK, 706, 6, Number, 0
+TI-CLIENT-FIELDS, 720, 30, Text, 0

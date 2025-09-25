@@ -1,0 +1,11 @@
+R-TYPE, 0, 1, Text, 0
+R-ACCOUNT, 1, 7, Packed Number, 0
+R-DISB-TRAN, 8, 3, Text, 0
+R-DISB-DESC, 11, 15, Text, 0
+R-DISB-AMT, 26, 5, Packed Number, 2
+R-DISB-TRAN, 31, 3, Text, 0
+R-DISB-DESC, 34, 15, Text, 0
+R-DISB-AMT, 49, 5, Packed Number, 2
+R-DISB-TRAN, 54, 3, Text, 0
+R-DISB-DESC, 57, 15, Text, 0
+R-DISB-AMT, 72, 5, Packed Number, 2

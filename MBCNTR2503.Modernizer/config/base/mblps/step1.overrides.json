@@ -1,0 +1,14 @@
+{
+  "dds": {
+    "mbp.dd": {
+      "keepRawFields": [
+        "mb-post-petition-amount"
+      ],
+      "rawWindows": [
+        { "start": 2985, "end": 3005, "fillMode": "ascii-space" },
+        { "start": 3715, "end": 3910, "fillMode": "ascii-space" }
+      ]
+    }
+  }
+}
+

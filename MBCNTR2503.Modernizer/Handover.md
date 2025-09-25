@@ -38,21 +38,23 @@ What’s implemented
 Parity status (69172)
 - `69172.dat.total`: size matches expected (5 bytes).
 - `69172.dat.rectype`: sequence and zero counts match expected.
-- `69172.4300`: file size matches expected (137,600 bytes). Small byte deltas remain, concentrated in header regions and a few early fields.
+- `69172.4300`: file size matches expected (137,600 bytes). Residual byte deltas (~0.45%) remain:
+  - MBP filler zones: Legacy `ncpcntr0` leaves a specific pattern (`00 00 00 00 0C` padded with ASCII spaces) in the regions 2985–3005 and 3715–3910; current run emits ASCII spaces only. Need to reproduce the legacy packed-zero pattern when the source is blank.
+  - Blank display numerics (`mb-coupon-mm`, `mb-coupon-dd`, `mb-post-petition-mmdd`, etc.) still default to EBCDIC blanks (`0x40`). Treat “all spaces” numeric fields as ASCII spaces when writing the `.4300`.
+  - `LOAN-NO` in `mbv.dd`/`mbf.dd` should be ASCII digits; current output retains raw EBCDIC digits.
+  - Header fillers (`fill1` in `mba.dd`/`mbd.dd`) must flow through EBCDIC→ASCII so `0xA9` appears instead of `0x0F`.
+  - `step1.overrides.json` will host the final targeted rules once behavior is confirmed.
 
 Compare helpers
 - Count bytes: `wc -c "<expected>" "<actual>"`
 - Byte diff: `cmp -l "<expected>" "<actual>" | head -n 50`
 
 Open items (next steps)
-- Extend per-field conversion across all `dd` layouts referenced in `ddcontrol.txt` (P/U/V/W/F/X/N/S…).
-- Honor data types:
-  - `Text`: convert EBCDIC→ASCII.
-  - `Number`/`Int`: treat as display numerics (EBCDIC digits) only when present; otherwise leave raw.
-  - `Mixed`: leave raw.
-  - Packed/Zoned: leave raw in `.4300` (they’re binary); conversion handled later when extracting text (`.4300.txt`).
-- Verify precise header (`mba.dd`/`mbd.dd`) conversion and filler bytes (keep raw vs space) per legacy behavior.
-- Validate NCP trailer byte-for-byte (offsets and padding) on a sampling of records.
+- Confirm Stage 1 conversion rules in legacy `ncpcntr0` (blank display numerics, filler regions, header fillers) and mirror them in Step 1.
+- Update `Step1Orchestrator` to emit ASCII spaces for blank numeric fields and preserve legacy packed-zero filler patterns.
+- Convert `LOAN-NO` (secondary layouts) via text decoding instead of copying raw EBCDIC.
+- Expand `step1.overrides.json` with explicit fill modes (`raw` vs `ascii-space`) once legacy behavior is verified.
+- Rerun jobs 69172 and 80147 to confirm parity; repeat for remaining fixtures.
 
 Risks/notes
 - Some fields marked `Number` may be display vs binary depending on client; prefer conservative (raw) unless confirmed.

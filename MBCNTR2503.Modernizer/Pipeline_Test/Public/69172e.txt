@@ -1,3 +1,0 @@
-Test record 1 with E-bill marker at position 1318 -> E
-Test record 2 with different marker at position 1318 -> X
-Test record 3 with E-bill marker at position 1318 -> E

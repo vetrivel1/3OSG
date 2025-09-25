@@ -1,0 +1,58 @@
+CLIENT-NO, 0, 3, Text, 0
+CLIENT-SUFFIX, 3, 1, Text, 0
+LOAN-NO, 4, 7, Text, 0
+REC-CODE, 11, 1, Text, 0
+REC-NUMBER, 12, 3, Number, 0
+1ST-PRIN-PD-BTD-AMT, 25, 6, Packed Number, 2
+2ND-PRIN-PD-BTD-AMT, 31, 6, Packed Number, 2
+1ST-INT-PD-BTD-AMT, 37, 6, Packed Number, 2
+2ND-INT-PD-BTD-AMT, 43, 6, Packed Number, 2
+MISC-PD-BTD-AMT, 49, 6, Packed Number, 2
+REP-RES-SUB-PD-BTD-AMT, 55, 6, Packed Number, 2
+HUD-PART-PD-BTD-AMT, 61, 6, Packed Number, 2
+REC-CORP-ADV-PD-BTD-AMT, 67, 6, Packed Number, 2
+1ST-PRIN-PD-YTD-AMT, 73, 6, Packed Number, 2
+2ND-PRIN-PD-YTD-AMT, 79, 6, Packed Number, 2
+1ST-INT-PD-YTD-AMT, 85, 6, Packed Number, 2
+2ND-INT-PD-YTD-AMT, 91, 6, Packed Number, 2
+ESC-PD-YTD-AMT, 97, 6, Packed Number, 2
+LIFE-INS-PD-YTD-AMT, 103, 6, Packed Number, 2
+AH-INS-PD-YTD-AMT, 109, 6, Packed Number, 2
+MISC-PD-YTD-AMT, 115, 6, Packed Number, 2
+FEES-PD-YTD-AMT, 121, 6, Packed Number, 2
+REP-RES-SUB-PD-YTD-AMT, 127, 6, Packed Number, 2
+HUD-PART-PD-YTD-AMT, 133, 6, Packed Number, 2
+REC-CORP-ADV-PD-YTD-AMT, 139, 6, Packed Number, 2
+TOTAL-PD-YTD-AMT, 145, 7, Packed Number, 2
+TOTAL-PD-BTD-AMT, 152, 7, Packed Number, 2
+FEES-BTD-AMT, 159, 6, Packed Number, 2
+REC-CORP-ADV-BTD-AMT, 165, 6, Packed Number, 2
+SUSPENSE-PD-YTD-AMT, 171, 6, Packed Number, 2
+PSH-1ST-PRIN-PD-BTD-AMT, 2219, 6, Packed Number, 2
+PSH-2ND-PRIN-PD-BTD-AMT, 2225, 6, Packed Number, 2
+PSH-1ST-INT-PD-BTD-AMT, 2231, 6, Packed Number, 2
+PSH-2ND-INT-PD-BTD-AMT, 2237, 6, Packed Number, 2
+PSH-ESC-PD-BTD-AMT, 2243, 6, Packed Number, 2
+PSH-LIFE-PD-BTD-AMT, 2249, 6, Packed Number, 2
+PSH-AH-PD-BTD-AMT, 2255, 6, Packed Number, 2
+PSH-MISC-PD-BTD-AMT, 2261, 6, Packed Number, 2
+PSH-L-C-PD-BTD-AMT, 2267, 6, Packed Number, 2
+PSH-REP-RES-SUB-PD-BTD-AMT, 2273, 6, Packed Number, 2
+PSH-HUD-PART-PD-BTD-AMT, 2279, 6, Packed Number, 2
+PSH-REC-CORP-ADV-BTD-AMT, 2285, 6, Packed Number, 2
+PSH-SUSP-PD-BTD-AMT, 2291, 6, Packed Number, 2
+PSH-TOTAL-PD-BTD-AMT, 2297, 7, Packed Number, 2
+PSH-1ST-PRIN-PD-YTD-AMT, 2304, 6, Packed Number, 2
+PSH-2ND-PRIN-PD-YTD-AMT, 2310, 6, Packed Number, 2
+PSH-1ST-INT-PD-YTD-AMT, 2316, 6, Packed Number, 2
+PSH-2ND-INT-PD-YTD-AMT, 2322, 6, Packed Number, 2
+PSH-ESC-PD-YTD-AMT, 2328, 6, Packed Number, 2
+PSH-LIFE-PD-YTD-AMT, 2334, 6, Packed Number, 2
+PSH-AH-PD-YTD-AMT, 2340, 6, Packed Number, 2
+PSH-MISC-PD-YTD-AMT, 2346, 6, Packed Number, 2
+PSH-FEES-PD-YTD-AMT, 2352, 6, Packed Number, 2
+PSH-REP-RES-SUB-PD-YTD-AMT, 2358, 6, Packed Number, 2
+PSH-HUD-PART-PD-YTD-AMT, 2364, 6, Packed Number, 2
+PSH-REC-CORP-ADV-PD-YTD-AMT, 2370, 6, Packed Number, 2
+PSH-SUSP-PD-YTD-AMT, 2376, 6, Packed Number, 2
+PSH-TOTAL-PD-YTD-AMT, 2382, 7, Packed Number, 2
