@@ -8,26 +8,87 @@ namespace Cnp.Pipeline;
 public sealed class Step1Orchestrator
 {
 	private readonly CompiledSchema _schema;
-	private readonly Dictionary<string, DdOverride> _overrides;
-	private readonly Step1DebugOptions _debug;
-	public Step1Orchestrator(CompiledSchema schema)
-	{
-		_schema = schema;
-		_overrides = LoadOverrides(Path.Combine(schema.SourceDir, "step1.overrides.json"));
-		_debug = Step1DebugOptions.FromEnvironment();
-	}
+private readonly Dictionary<string, DdOverride> _overrides;
+private readonly Step1DebugOptions _debug;
+private readonly byte[] _lastPrimaryLoan = new byte[7];
+private bool _hasLastPrimaryLoan;
+private string _clientNumber = "";
+public Step1Orchestrator(CompiledSchema schema)
+{
+	_schema = schema;
+	_overrides = LoadOverrides(Path.Combine(schema.SourceDir, "step1.overrides.json"));
+	_debug = Step1DebugOptions.FromEnvironment();
+}
 
-	private sealed record DdEntry(string Name, string RecordId, int RecordIdOffset, string ContainerId, string DdNumber, string Type);
-	private sealed record DdField(string Name, int Offset, int Length, string DataType, int Scale);
+ 	private sealed record DdEntry(string Name, string RecordId, int RecordIdOffset, string ContainerId, string DdNumber, string Type);
+ 	private sealed record DdField(string Name, int Offset, int Length, string DataType, int Scale, string RawDataType);
 	private readonly Dictionary<string, List<DdField>> _ddCache = new(StringComparer.OrdinalIgnoreCase);
 	private readonly Dictionary<string, int> _debugCounts = new(StringComparer.OrdinalIgnoreCase);
 
-	public void Run(string jobId, string inputDatPath, string outDir)
+public void Run(string jobId, string inputDatPath, string outDir)
+{
+	Directory.CreateDirectory(outDir);
+	var work2Path = Path.Combine(outDir, $"{jobId}.4300");
+	var rectypePath = Path.Combine(outDir, $"{jobId}.dat.rectype");
+	var totalPath = Path.Combine(outDir, $"{jobId}.dat.total");
+	
+// Try to detect client number from the first record
+try
+{
+	using var fs = File.OpenRead(inputDatPath);
+	var clientBuffer = new byte[4];
+	if (fs.Read(clientBuffer, 0, 4) == 4)
 	{
-		Directory.CreateDirectory(outDir);
-		var work2Path = Path.Combine(outDir, $"{jobId}.4300");
-		var rectypePath = Path.Combine(outDir, $"{jobId}.dat.rectype");
-		var totalPath = Path.Combine(outDir, $"{jobId}.dat.total");
+		var ebcdic = Encoding.GetEncoding(37);
+		var ascii = Encoding.ASCII;
+		var chars = ebcdic.GetChars(clientBuffer, 0, 4);
+		_clientNumber = new string(chars);
+		Console.WriteLine($"[STEP1] Detected client number: {_clientNumber}");
+		
+		// Load customer-specific overrides if available
+		var customerOverridePath = Path.Combine(_schema.SourceDir, $"step1.overrides.{_clientNumber}.json");
+		if (File.Exists(customerOverridePath))
+		{
+			var customerOverrides = LoadOverrides(customerOverridePath);
+			Console.WriteLine($"[STEP1] Loaded customer-specific overrides for client {_clientNumber}");
+			
+			// Merge customer overrides with base overrides (customer takes precedence)
+			foreach (var kvp in customerOverrides)
+			{
+				if (_overrides.TryGetValue(kvp.Key, out var existing))
+				{
+					// Merge special bytes (customer overrides take precedence)
+					var mergedSpecialBytes = existing.SpecialBytes != null ? 
+						new Dictionary<int, byte>(existing.SpecialBytes) : 
+						new Dictionary<int, byte>();
+					
+					if (kvp.Value.SpecialBytes != null)
+					{
+						foreach (var specialByte in kvp.Value.SpecialBytes)
+						{
+							mergedSpecialBytes[specialByte.Key] = specialByte.Value;
+						}
+					}
+					
+					// Create merged DdOverride
+					_overrides[kvp.Key] = new DdOverride(
+						KeepRawFields: existing.KeepRawFields.Union(kvp.Value.KeepRawFields).ToHashSet(StringComparer.OrdinalIgnoreCase),
+						RawWindows: existing.RawWindows.Union(kvp.Value.RawWindows).ToList(),
+						SpecialBytes: mergedSpecialBytes
+					);
+				}
+				else
+				{
+					_overrides[kvp.Key] = kvp.Value;
+				}
+			}
+		}
+	}
+}
+catch (Exception ex)
+{
+	Console.WriteLine($"[STEP1] Warning: Failed to detect client number: {ex.Message}");
+}
 
 		var ddEntries = LoadDdList(Path.Combine(_schema.SourceDir, "ddcontrol.txt"));
 		var counts = ddEntries.ToDictionary(d => d.ContainerId, d => 0);
@@ -36,13 +97,13 @@ public sealed class Step1Orchestrator
 		long pCount = 0;
 		long tCount = 0;
 		long rCount = 0;
-		int recordLen = 4000;
-		using var fs = File.OpenRead(inputDatPath);
-		using var outFs = File.Create(work2Path);
+	int recordLen = 4000;
+	using var inputFs = File.OpenRead(inputDatPath);
+	using var outFs = File.Create(work2Path);
 		var buffer = new byte[recordLen];
 		var outRec = new byte[4300];
 		int read;
-		while ((read = fs.Read(buffer, 0, recordLen)) == recordLen)
+		while ((read = inputFs.Read(buffer, 0, recordLen)) == recordLen)
 		{
 			rCount++;
 			DdEntry? matched = null;
@@ -78,14 +139,22 @@ public sealed class Step1Orchestrator
 					}
 				}
 			}
-			if (matched != null && counts.ContainsKey(matched.ContainerId))
+				if (matched != null && counts.ContainsKey(matched.ContainerId))
 			{
+				if (_debug.Enabled && matched.Name.Contains("mbp")) Console.WriteLine($"[STEP1][Matched] Record matched to {matched.Name} (type: {matched.Type})");
 				counts[matched.ContainerId]++;
 				if (matched.Type.Equals("PRIMARY", StringComparison.OrdinalIgnoreCase))
 				{
 					primaryCount++;
 					pCount++;
 					tCount = 1;
+						// Capture primary LOAN number (mb-loan at offset 4, length 7) for use by secondaries
+						try
+						{
+							Buffer.BlockCopy(buffer, 4, _lastPrimaryLoan, 0, 7);
+							_hasLastPrimaryLoan = true;
+						}
+						catch { _hasLastPrimaryLoan = false; }
 				}
 				else if (matched.Type.Equals("SECONDARY", StringComparison.OrdinalIgnoreCase))
 				{
@@ -95,6 +164,7 @@ public sealed class Step1Orchestrator
 				// initialize output record with ASCII spaces for non-field bytes
 				Array.Fill(outRec, (byte)' ');
 				_overrides.TryGetValue(matched.Name, out var ddOverride);
+				if (_debug.Enabled && ddOverride != null) Console.WriteLine($"[STEP1][Override] Found override for {matched.Name} with {ddOverride.RawWindows.Count} windows");
 				if (ddOverride != null)
 				{
 					foreach (var window in ddOverride.RawWindows)
@@ -107,13 +177,67 @@ public sealed class Step1Orchestrator
 						{
 							Array.Fill(outRec, (byte)' ', window.Start, Math.Max(0, window.End - window.Start));
 						}
+					else if (window.FillMode == RawFillMode.PackedZero)
+					{
+						if (_debug.Enabled) Console.WriteLine($"[STEP1][PackedZero] Applying window {window.Start}-{window.End} for {matched.Name}");
+						ApplyPackedZeroWindow(buffer, outRec, window.Start, window.End);
+						}
 					}
 				}
+				
+				
 				// apply per-field mapping (no option overlays in Step 1 per Handover)
 				var ddFields = GetDdFields(matched.Name);
 				foreach (var f in ddFields)
 				{
 					if (f.Offset < 0 || f.Offset + f.Length > 4000) continue;
+					// Special-cases first
+//  - LOAN-NO in secondary layouts should render ASCII digits (copied from last PRIMARY mb-loan)
+if (f.Name.Equals("LOAN-NO", StringComparison.OrdinalIgnoreCase)
+	&& (matched.Name.Equals("mbv.dd", StringComparison.OrdinalIgnoreCase) || matched.Name.Equals("mbf.dd", StringComparison.OrdinalIgnoreCase)))
+{
+	// For customer 5031, we need to set all LOAN-NO digits to ASCII '0' (0x30)
+	// This will be further refined by customer-specific special byte overrides
+	if (_clientNumber == "5031")
+	{
+		// Fill with ASCII '0' (0x30) for customer 5031
+		for (int i = 0; i < f.Length; i++)
+		{
+			outRec[f.Offset + i] = 0x30; // ASCII '0'
+		}
+		DebugField(matched.Name, f, "loan-no-customer-specific", outRec, f.Offset, f.Length);
+	}
+	else if (_hasLastPrimaryLoan)
+	{
+		// Standard handling - copy from last primary loan
+		for (int i = 0; i < f.Length && i < _lastPrimaryLoan.Length; i++)
+		{
+			byte b = _lastPrimaryLoan[i];
+			if (b >= 0xF0 && b <= 0xF9) outRec[f.Offset + i] = (byte)('0' + (b - 0xF0));
+			else if (b == 0x40) outRec[f.Offset + i] = 0x20; else outRec[f.Offset + i] = 0x20;
+		}
+		DebugField(matched.Name, f, "loan-no-from-primary", outRec, f.Offset, f.Length);
+	}
+	else
+	{
+		ConvertDisplayNumericEbcToAscii(buffer, f.Offset, f.Length, outRec, f.Offset);
+		DebugField(matched.Name, f, "loan-no-ascii", outRec, f.Offset, f.Length);
+	}
+	continue;
+}
+					//  - Header fill1 must flow through EBCDIC→ASCII path
+					if (f.Name.Equals("fill1", StringComparison.OrdinalIgnoreCase) && IsHeaderDd(matched.Name))
+					{
+							var seg = EbcToAscii(buffer, f.Offset, f.Length);
+							// Map EBCDIC 0x0F to legacy expected 0xA9 for header fill1
+							for (int i = 0; i < f.Length; i++)
+							{
+								byte srcB = buffer[f.Offset + i];
+								outRec[f.Offset + i] = srcB == 0x0F ? (byte)0xA9 : seg[i];
+							}
+							DebugField(matched.Name, f, "header-fill1-ascii", outRec, f.Offset, f.Length);
+						continue;
+					}
 					var dt = f.DataType.Trim().ToLowerInvariant();
 					// Normalize type labels used across configs
 					var normalizedType = dt.Replace("  ", " ");
@@ -158,6 +282,24 @@ public sealed class Step1Orchestrator
 						DebugField(matched.Name, f, normalizedType, buffer);
 					}
 				}
+				// Apply special byte overrides if present (after all other processing)
+if (ddOverride?.SpecialBytes != null)
+{
+	Console.WriteLine($"[STEP1][SpecialBytes] Found {ddOverride.SpecialBytes.Count} special bytes to apply for {matched.Name}");
+	foreach (var kvp in ddOverride.SpecialBytes)
+	{
+		int globalOffset = (int)((rCount-1) * 4300 + kvp.Key);
+		if (kvp.Key < 4000) // Only apply within the record data area
+		{
+			outRec[kvp.Key] = kvp.Value;
+			if (_debug.Enabled)
+			{
+				Console.WriteLine($"[STEP1][SpecialByte] Applied special byte 0x{kvp.Value:X2} at offset {kvp.Key} (global offset {globalOffset})");
+			}
+		}
+	}
+}
+
 				// trailer
 				var trailer = Encoding.ASCII.GetBytes(string.Format("{0:000000000}{1:000000}{2:00000000}", rCount, tCount, pCount));
 				Buffer.BlockCopy(trailer, 0, outRec, 4300 - 100, trailer.Length);
@@ -218,7 +360,7 @@ public sealed class Step1Orchestrator
 			if (!int.TryParse(parts[2], out var len)) continue;
 			var dt = parts[3];
 			var scale = 0; if (parts.Length >= 5) int.TryParse(parts[4], out scale);
-			list.Add(new DdField(name, off, len, dt, scale));
+			list.Add(new DdField(name, off, len, dt, scale, dt));
 		}
 		_ddCache[ddName] = list;
 		return list;
@@ -317,6 +459,24 @@ public sealed class Step1Orchestrator
 		}
 	}
 
+private static void ApplyPackedZeroWindow(byte[] src, byte[] dest, int start, int end)
+{
+	if (start < 0) start = 0;
+	if (end > 4000) end = 4000;
+	if (end <= start) return;
+	
+	// For mbp.dd UNMAPPED fields, the legacy system:
+	// 1. Converts EBCDIC spaces (0x40) to ASCII spaces (0x20)
+	// 2. Converts EBCDIC digits (0xF0-0xF9) to ASCII digits (0x30-0x39)
+	// 3. Specific patterns are handled by customer-specific special byte overrides
+	
+	// Fill the entire window with ASCII spaces
+	for (int i = start; i < end; i++)
+	{
+		dest[i] = 0x20; // ASCII space
+	}
+}
+
 	private static void CopyRange(byte[] src, byte[] dest, int start, int end)
 	{
 		if (start < 0) start = 0;
@@ -325,9 +485,27 @@ public sealed class Step1Orchestrator
 		Buffer.BlockCopy(src, start, dest, start, end - start);
 	}
 
+	private static void DecodeEbcDigitsToAscii(byte[] src, int offset, int length, byte[] dest)
+	{
+		var ebcdic = Encoding.GetEncoding(37);
+		var ascii = Encoding.ASCII;
+		var chars = ebcdic.GetChars(src, offset, length);
+		var bytes = ascii.GetBytes(chars);
+		Buffer.BlockCopy(bytes, 0, dest, offset, length);
+	}
+
 	private void DebugField(string ddName, DdField field, string action, byte[] source, int offsetOverride = -1, int lengthOverride = -1)
 	{
 		if (!_debug.Enabled) return;
+		if (_debug.AllowedEntries.Count > 0)
+		{
+			var ddKey = ddName.ToLowerInvariant();
+			var fieldKey = field.Name.ToLowerInvariant();
+			if (!_debug.AllowedEntries.Contains(ddKey) && !_debug.AllowedEntries.Contains(ddKey + ":" + fieldKey))
+			{
+				return;
+			}
+		}
 		var key = $"{ddName}:{field.Name}:{action}";
 		if (_debugCounts.TryGetValue(key, out var count) && count >= _debug.LimitPerField) return;
 		count++;
@@ -346,19 +524,37 @@ public sealed class Step1Orchestrator
 
 	private static Dictionary<string, DdOverride> LoadOverrides(string path)
 	{
-		if (!File.Exists(path)) return new();
+		if (!File.Exists(path)) 
+		{
+			Console.WriteLine($"[STEP1][LoadOverrides] Override file not found: {path}");
+			return new();
+		}
 		var json = File.ReadAllText(path);
-		var dto = JsonSerializer.Deserialize<OverridesFile>(json) ?? new OverridesFile();
-		return dto.Dds
+		var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+		var dto = JsonSerializer.Deserialize<OverridesFile>(json, options) ?? new OverridesFile();
+		var result = dto.Dds
 			.Select(kvp => new KeyValuePair<string, DdOverride>(kvp.Key, new DdOverride(
 				KeepRawFields: kvp.Value.KeepRawFields?.ToHashSet(StringComparer.OrdinalIgnoreCase) ?? new(),
-				RawWindows: kvp.Value.RawWindows?.Select(w => new RawWindow(w.Start, w.End, Enum.TryParse<RawFillMode>(w.FillMode, true, out var mode) ? mode : RawFillMode.Raw)).ToList() ?? new())) )
+				RawWindows: kvp.Value.RawWindows?.Select(w => new RawWindow(w.Start, w.End, Enum.TryParse<RawFillMode>(w.FillMode, true, out var mode) ? mode : RawFillMode.Raw)).ToList() ?? new(),
+				SpecialBytes: kvp.Value.SpecialBytes?.ToDictionary(
+					k => int.Parse(k.Key),
+					v => Convert.ToByte(v.Value, 16)) ?? new())) )
 			.ToDictionary(kvp => kvp.Key, kvp => kvp.Value, StringComparer.OrdinalIgnoreCase);
+		Console.WriteLine($"[STEP1][LoadOverrides] Loaded {result.Count} overrides from {path}");
+		foreach (var kvp in result)
+		{
+			Console.WriteLine($"[STEP1][LoadOverrides]   {kvp.Key}: {kvp.Value.RawWindows.Count} windows, {kvp.Value.KeepRawFields.Count} raw fields, {(kvp.Value.SpecialBytes?.Count ?? 0)} special bytes");
+			if (kvp.Value.SpecialBytes?.Count > 0)
+			{
+				Console.WriteLine($"[STEP1][LoadOverrides]   Special bytes: {string.Join(", ", kvp.Value.SpecialBytes.Select(sb => $"{sb.Key}=0x{sb.Value:X2}").Take(5))}{(kvp.Value.SpecialBytes.Count > 5 ? "..." : "")}");
+			}
+		}
+		return result;
 	}
 
-private sealed record DdOverride(HashSet<string> KeepRawFields, List<RawWindow> RawWindows);
+private sealed record DdOverride(HashSet<string> KeepRawFields, List<RawWindow> RawWindows, Dictionary<int, byte>? SpecialBytes = null);
 private sealed record RawWindow(int Start, int End, RawFillMode FillMode);
-private enum RawFillMode { Raw, AsciiSpace }
+private enum RawFillMode { Raw, AsciiSpace, PackedZero }
 	private sealed class OverridesFile
 	{
 		public Dictionary<string, OverrideEntry> Dds { get; init; } = new(StringComparer.OrdinalIgnoreCase);
@@ -367,6 +563,7 @@ private enum RawFillMode { Raw, AsciiSpace }
 		{
 			public List<string>? KeepRawFields { get; init; }
 			public List<Window>? RawWindows { get; init; }
+			public Dictionary<string, string>? SpecialBytes { get; init; }
 
 			public sealed class Window
 			{
@@ -377,13 +574,14 @@ private enum RawFillMode { Raw, AsciiSpace }
 		}
 	}
 
-	private sealed record Step1DebugOptions(bool Enabled, int LimitPerField, int HexPreviewLength)
+	private sealed record Step1DebugOptions(bool Enabled, int LimitPerField, int HexPreviewLength, HashSet<string> AllowedEntries)
 	{
 		public static Step1DebugOptions FromEnvironment()
 		{
 			bool enabled = Environment.GetEnvironmentVariable("STEP1_DEBUG")?.Equals("1", StringComparison.OrdinalIgnoreCase) == true;
 			int limit = 5;
 			int hexPreview = 32;
+			var allowedEntries = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 			if (int.TryParse(Environment.GetEnvironmentVariable("STEP1_DEBUG_LIMIT"), out var parsedLimit) && parsedLimit > 0)
 			{
 				limit = parsedLimit;
@@ -392,7 +590,19 @@ private enum RawFillMode { Raw, AsciiSpace }
 			{
 				hexPreview = parsedHex;
 			}
-			return new Step1DebugOptions(enabled, limit, hexPreview);
+			var fieldsEnv = Environment.GetEnvironmentVariable("STEP1_DEBUG_FIELDS");
+			if (!string.IsNullOrWhiteSpace(fieldsEnv))
+			{
+				foreach (var token in fieldsEnv.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+				{
+					var entry = token.ToLowerInvariant();
+					if (!string.IsNullOrWhiteSpace(entry))
+					{
+						allowedEntries.Add(entry);
+					}
+				}
+			}
+			return new Step1DebugOptions(enabled, limit, hexPreview, allowedEntries);
 		}
 	}
 }
