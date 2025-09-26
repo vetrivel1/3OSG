@@ -371,12 +371,13 @@ if (f.Name.Equals("LOAN-NO", StringComparison.OrdinalIgnoreCase)
 
 		using (var tfs = File.Create(totalPath))
 		{
-			var zeros = new byte[8192];
+			var spaces = new byte[8192];
+			Array.Fill(spaces, (byte)' '); // ASCII space (0x20) instead of zero bytes
 			long remaining = primaryCount;
 			while (remaining > 0)
 			{
-				int chunk = (int)Math.Min(remaining, zeros.Length);
-				tfs.Write(zeros, 0, chunk);
+				int chunk = (int)Math.Min(remaining, spaces.Length);
+				tfs.Write(spaces, 0, chunk);
 				remaining -= chunk;
 			}
 		}
