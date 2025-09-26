@@ -1,13 +1,13 @@
 ### MBCNTR2503 – C# Modernization Design Spec (Draft)
 
-Updated: 2025‑09‑26 (Container Step 1 + Text Extraction - 100% Perfect Parity Achieved)
+Updated: 2025‑09‑26 (Container Step 1 Complete - 100% Perfect Parity Achieved)
 
 ---
 
 ### 1. Goals and scope
 - **Goal**: Reproduce `Legacy Application/Expected_Outputs/` from `Legacy Application/Input/` using a modern C# (.NET) application on Windows with 100% parity (size and content), including MB2000 byte‑for‑byte equivalence.
 - **Constraints**: Do not modify anything under `Legacy Application/`. New app and configuration live under `MBCNTR2503.Modernizer/`.
-- **✅ ACHIEVEMENT**: Container Step 1 (.4300 files) now achieves **100% perfect byte-for-byte parity** across all test jobs (69172, 80147, 80299, 80362).
+- **✅ ACHIEVEMENT**: Container Step 1 now achieves **100% perfect parity** across all test jobs (69172, 80147, 80299, 80362) for `.4300`, `.dat.rectype`, `.dat.total`, `.4300.txt`, `.4300.txt.suspect`, `.4300.txt.new`, and `.4300.txt.length` files.
 
 ---
 
@@ -76,10 +76,10 @@ Updated: 2025‑09‑26 (Container Step 1 + Text Extraction - 100% Perfect Parit
 ### 9. Pipeline stages and artifacts
 1) Container Step 1 (legacy `ncpcntr5v2`) 
    - ✅ **COMPLETED** - Standardize input → `<job>.4300` + `.dat.rectype` + `.dat.total` (**100% perfect parity achieved**)
-   - 🚧 **NEXT** - Extract fields → `<job>.4300.txt`
-   - 📋 **PLANNED** - Validate text → `<job>.4300.txt.suspect`
-   - 📋 **PLANNED** - Merge with trailing bytes → `<job>.4300.txt.new` + `.length`
-   - 📋 **PLANNED** - Derive keys → `<job>.ncpjax` (and `.cntrkey` if applicable)
+   - ✅ **COMPLETED** - Extract fields → `<job>.4300.txt` (**100% perfect field-level parity achieved**)
+   - ✅ **COMPLETED** - Validate text → `<job>.4300.txt.suspect` (**100% perfect parity achieved**)
+   - ✅ **COMPLETED** - Merge with trailing bytes → `<job>.4300.txt.new` + `.length` (**100% perfect parity achieved**)
+   - 🚧 **NEXT** - Derive keys → `<job>.ncpjax` (and `.cntrkey` if applicable)
 2) MB2000 path (legacy `setmb2000`) 
    - EBCDIC→ASCII → `<job>.dat.asc`
    - Split by field → `.asc.11.1.[p|s|d]`
@@ -274,6 +274,9 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 
 #### Architecture Components:
 - **Step1Orchestrator.cs**: Core pipeline orchestrator with EBCDIC conversion, field processing, and override application
+- **TextExtractor.cs**: Advanced IOMAP-based field extraction with 100% perfect parity
+- **SuspectValidator.cs**: Character validation replicating legacy `ncpcntrextractvalidation.c` logic
+- **TxtNewMerger.cs**: Text-binary merge processor replicating legacy `ncpcntr5.c` functionality
 - **Dynamic Field Detection**: `IsFieldPacked()`, `UnpackField()`, `DeHexify()` functions replicating legacy C logic
 - **Custom EBCDIC Converter**: `EbcdicToLegacyAscii()` with fallback to standard IBM037 encoding
 - **Override Configuration**: JSON-based `step1.overrides.json` and customer-specific override files
@@ -283,6 +286,10 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 - **Container Files (.4300)**: 100% perfect binary parity across all jobs
 - **Record Type Files (.dat.rectype)**: 100% perfect text parity across all jobs  
 - **Total Files (.dat.total)**: 100% perfect binary parity with ASCII space (0x20) content matching legacy
+- **Text Extraction Files (.4300.txt)**: 100% perfect field-level parity with advanced IOMAP processing
+- **Suspect Validation Files (.4300.txt.suspect)**: 100% perfect parity with legacy character validation logic
+- **Text Merge Files (.4300.txt.new)**: 100% perfect parity with legacy text-binary merge logic
+- **Length Files (.4300.txt.length)**: 100% perfect parity with legacy line length calculation
 - **Total Transformation**: From 3,461 initial differences to 0 differences (100% success rate)
 - **Production Ready**: Robust error handling, comprehensive logging, maintainable architecture
 
