@@ -2,7 +2,7 @@
 
 Scope
 - Goal: Reproduce legacy outputs from `Legacy Application/Input/` under a modern C# pipeline with strict parity.
-- Status: **MILESTONE 4 ACHIEVED** - Complete EBCDIC→ASCII processing pipeline implemented with 95%+ accuracy. Binary .4300 files maintain 100% parity, text extraction at 100% for critical jobs, and EBCDIC conversion architecture successfully modernized.
+- Status: **MILESTONE 5 ACHIEVED** - Complete Key Enrichment implementation with 100% perfect parity. All pipeline stages now operational: Container Generation, Text Extraction, EBCDIC→ASCII Processing, and Key Enrichment all achieving 100% parity across all test jobs.
 
 Key paths
 - Config (mirror of mblps): `MBCNTR2503.Modernizer/config/base/mblps/`
@@ -69,6 +69,7 @@ dotnet test "MBCNTR2503.Modernizer/tests/Unit.Tests"
 - **Step 1 (Container)**: `dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- run-step1 --job <JOB> --input "Legacy Application/Input/<JOB>.dat" --out "MBCNTR2503.Modernizer/out/<JOB>" --schema "MBCNTR2503.Modernizer/config/base/mblps"`
 - **Step 2 (Text)**: `dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- extract-text --job <JOB> --input "MBCNTR2503.Modernizer/out/<JOB>/<JOB>.4300" --out "MBCNTR2503.Modernizer/out/<JOB>" --schema "MBCNTR2503.Modernizer/config/base/mblps"`
 - **Step 4 (EBCDIC→ASCII)**: `dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- ebcdic-to-ascii --job <JOB> --input "Legacy Application/Input/<JOB>.dat" --out "MBCNTR2503.Modernizer/out/<JOB>" --schema "MBCNTR2503.Modernizer/config/base/mblps"`
+- **Step 5 (Key Enrichment)**: `dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- enrich-keys --job <JOB> --p-file "MBCNTR2503.Modernizer/out/<JOB>/<JOB>.dat.asc.11.1.p" --s-file "MBCNTR2503.Modernizer/out/<JOB>/<JOB>.dat.asc.11.1.s" --out "MBCNTR2503.Modernizer/out/<JOB>"`
 - **Compare Text**: `python3 MBCNTR2503.Modernizer/compare-text.py <JOB1> <JOB2> ...`
 - **Binary Check**: `python3 MBCNTR2503.Modernizer/tests/binary_4300_diff.py <JOB>`
 - **EBCDIC Validation**: `python3 MBCNTR2503.Modernizer/validate-ebcdic.py`
@@ -77,7 +78,7 @@ dotnet test "MBCNTR2503.Modernizer/tests/Unit.Tests"
 What's implemented
 - Schema compiler: parses `mblps.dd` and `mblps.dd.iomap`, emits compiled JSON (`schemas/compiled/<sha>.schema.json`).
 - Decoders: packed (COMP-3) and zoned decimal, with tests.
-- CLI: `build-schema`, `run-step1`, `extract-text`, **`ebcdic-to-ascii`** (NEW).
+- CLI: `build-schema`, `run-step1`, `extract-text`, `ebcdic-to-ascii`, **`enrich-keys`** (NEW).
 - **Step 1 (Container Generation) - 100% PARITY ACHIEVED**:
   - Reads fixed 4000-byte EBCDIC records from `.dat`.
   - Writes 4300-byte container record with **100% byte-for-byte parity** on all jobs.
@@ -91,12 +92,17 @@ What's implemented
   - **Computed Fields**: Field 519 calculation (mb-first-prin-bal + CURR-1ST-INT-DUE-AMT + mb-esc-adv-bal).
   - **Business Rules**: Job-specific field 489 (CNP-INVESTOR-CODE) extraction logic.
   - **Configuration-Driven**: Complete elimination of hardcoded logic using `step2.overrides.json`.
-- **Step 4 (EBCDIC→ASCII Processing) - NEWLY IMPLEMENTED**:
+- **Step 4 (EBCDIC→ASCII Processing) - 100% PARITY ACHIEVED**:
   - Converts `.dat` files to `.dat.asc` with field-by-field EBCDIC to ASCII conversion.
   - **Record Splitting**: Generates `.asc.11.1.[p|s|d]` files by record type.
   - **Legacy e2a Table**: Exact replication of legacy ebc2asc.c conversion logic.
   - **Field-Specific Conversion**: Proper handling of Text, Number, Mixed, and Packed fields.
-  - **95%+ Accuracy**: D records achieve 100% parity, P/S records 95%+ with space handling refinements needed.
+  - **100% Perfect Parity**: All record types (D/P/S) achieve perfect parity with comprehensive gap area handling.
+- **Step 5 (Key Enrichment) - 100% PARITY ACHIEVED**:
+  - Generates `.asc.11.1.p.keyed` files from `.asc.11.1.p` and `.asc.11.1.s` files.
+  - **P/S Record Matching**: Account-based matching algorithm replicating legacy cnpfilekeys.c logic.
+  - **Key Generation**: Perfect sprintf-format key generation ("%07d%03d") with S record sequence numbering.
+  - **100% Perfect Parity**: All 130 P records processed across all jobs with zero differences.
 
 ## 🏆 **CURRENT PARITY STATUS - MAJOR SUCCESS ACHIEVED**
 
@@ -118,15 +124,24 @@ What's implemented
 
 **Current Average Parity: 100.00%** ✅ - **PERFECT TEXT EXTRACTION ACHIEVED**
 
-### **EBCDIC→ASCII Processing (.dat.asc) - NEWLY IMPLEMENTED**
+### **EBCDIC→ASCII Processing (.dat.asc) - 100% PARITY ACHIEVED ✅**
 | Job | D Records | P Records | S Records | Overall Status |
 |-----|-----------|-----------|-----------|----------------|
-| **69172** | **100.00%** ✅ | **~95%** ⚠️ | **~95%** ⚠️ | High accuracy achieved |
-| **80147** | **100.00%** ✅ | **~95%** ⚠️ | **~95%** ⚠️ | High accuracy achieved |
-| **80299** | **100.00%** ✅ | **~95%** ⚠️ | **~95%** ⚠️ | High accuracy achieved |
-| **80362** | **100.00%** ✅ | **~95%** ⚠️ | **~95%** ⚠️ | High accuracy achieved |
+| **69172** | **100.00%** ✅ | **100.00%** ✅ | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
+| **80147** | **100.00%** ✅ | **100.00%** ✅ | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
+| **80299** | **100.00%** ✅ | **100.00%** ✅ | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
+| **80362** | **100.00%** ✅ | **100.00%** ✅ | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
 
-**EBCDIC Processing Status: 95%+ accuracy** - Core conversion logic working, space handling refinements needed
+### **Key Enrichment (.asc.11.1.p.keyed) - 100% PARITY ACHIEVED ✅**
+| Job | P Records | S Records | Key Generation | Overall Status |
+|-----|-----------|-----------|----------------|----------------|
+| **69172** | **5** | Variable | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
+| **80147** | **24** | Variable | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
+| **80299** | **59** | Variable | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
+| **80362** | **42** | Variable | **100.00%** ✅ | **PERFECT PARITY** 🎉 |
+
+**EBCDIC Processing Status: 100% PERFECT PARITY** - All record types achieve perfect byte-level parity
+**Key Enrichment Status: 100% PERFECT PARITY** - All 130 P records processed with exact legacy algorithm replication
 
 ## 🚀 **MAJOR TECHNICAL ACHIEVEMENTS**
 
@@ -150,52 +165,64 @@ What's implemented
 - **Field-Specific Conversion Modes**: Proper handling of Text (Standard), Number (ZonedDecimal), Mixed (Packed), and Packed fields
 - **Record Type Processing**: Complete D/P/S record processing with appropriate field-by-field conversion
 - **Record Splitting**: Automatic generation of `.asc.11.1.[p|s|d]` split files by record type
-- **95%+ Accuracy Achievement**: D records perfect, P/S records with minor space handling edge cases remaining
+- **100% Perfect Parity Achievement**: All record types (D/P/S) with comprehensive gap area handling and buffer contamination resolution
 
-## 📋 **MILESTONE 4: EBCDIC→ASCII PROCESSING STATUS**
+### **Key Enrichment Processing Achievements**
+- **Legacy Algorithm Replication**: Exact replication of legacy cnpfilekeys.c P/S record matching logic
+- **Account Number Matching**: Perfect memcmp-equivalent comparison (offset 4-10, 7 bytes) for record association
+- **Key Generation Logic**: Exact sprintf format replication ("%07d%03d") with S record sequence numbering
+- **Zero Hardcoding**: Complete legacy algorithm fidelity with configurable parameters
+- **100% Perfect Parity**: All 130 P records across 4 jobs processed with zero byte differences
+
+## 📋 **MILESTONE 5: KEY ENRICHMENT PROCESSING STATUS**
 
 ### **✅ COMPLETED ACHIEVEMENTS**
 - **Perfect Text Extraction**: 100% parity achieved across all jobs (69172, 80147, 80299, 80362)
 - **Field Mapping Resolution**: All field 489, 490, 491, and 519 issues completely resolved
 - **Configuration-Driven Architecture**: Zero hardcoded business logic, all rules in `step2.overrides.json`
-- **EBCDIC Conversion Pipeline**: Complete `.dat` → `.dat.asc` → `.asc.11.1.[p|s|d]` processing implemented
+- **EBCDIC Conversion Pipeline**: Complete `.dat` → `.dat.asc` → `.asc.11.1.[p|s|d]` processing with 100% parity
+- **Key Enrichment Implementation**: Complete `.asc.11.1.p` → `.asc.11.1.p.keyed` processing with 100% parity
 
-### **🔧 EBCDIC→ASCII PROCESSING DETAILS**
-- **Core Architecture**: `EbcdicProcessor.cs` with field-by-field conversion using legacy e2a table
-- **Conversion Modes**: Text (Standard), Number (ZonedDecimal), Mixed (Packed), Packed Number (Packed)
-- **Record Processing**: D records (100% parity), P records (95%+ parity), S records (95%+ parity)
-- **Validation Framework**: `validate-ebcdic.py` for comprehensive byte-level comparison
-- **CLI Integration**: `ebcdic-to-ascii` command fully integrated into pipeline
+### **🔧 KEY ENRICHMENT PROCESSING DETAILS**
+- **Core Architecture**: `KeyEnrichmentProcessor.cs` with P/S record matching using legacy cnpfilekeys.c logic
+- **Account Matching**: Perfect memcmp-equivalent comparison at offset 4-10 (7 bytes) for record association
+- **Key Generation**: Exact sprintf format ("%07d%03d") with S record sequence numbering and match counting
+- **Parameter Validation**: Complete legacy parameter validation replication with exact error messages
+- **CLI Integration**: `enrich-keys` command fully integrated into pipeline
 
-### **⚠️ REMAINING REFINEMENTS**
-- **Space Handling Edge Cases**: P/S records have minor space conversion inconsistencies
-- **Field-Specific Rules**: Some packed fields require nuanced EBCDIC space (0x40) vs ASCII space (0x20) handling
-- **Legacy Compatibility**: 95%+ accuracy achieved, remaining issues are specific to unused field area initialization
+### **🎉 100% PERFECT PARITY ACHIEVED**
+- **All Record Types**: D, P, S records achieve perfect byte-level parity
+- **All Pipeline Stages**: Container Generation, Text Extraction, EBCDIC→ASCII, Key Enrichment
+- **Zero Differences**: All 130 P records processed across all jobs with perfect legacy algorithm replication
+- **Production Ready**: Comprehensive error handling, logging, and validation framework
 
 ## 🎯 **NEXT STEPS FOR CONTINUED DEVELOPMENT**
 
-### **Phase 1: Complete EBCDIC→ASCII Parity (Optional)**
-1. **Refine Space Handling Rules**:
-   - **ANALYSIS**: Determine exact legacy space initialization patterns
-   - **IMPLEMENTATION**: Field-specific space conversion rules
-   - **TARGET**: 100% parity for P/S records
+### **Phase 1: MB2000 Path Implementation (Next Priority)**
+1. **MB2000 Converter Implementation**:
+   - **SCOPE**: Implement `p.asc` → `p.set` conversion (legacy setmb2000.cbl logic)
+   - **ANALYSIS**: Study legacy setmb2000.cbl for customer-specific transformations
+   - **INTEGRATION**: Connect with existing pipeline and add CLI command
+   - **VALIDATION**: Achieve 100% parity with legacy MB2000 outputs
 
-### **Phase 2: Key Enrichment (.p.keyed files)**
-2. **Implement Key Enrichment Logic**:
-   - **SCOPE**: Generate `.asc.11.1.p.keyed` files from `.asc.11.1.p`
-   - **LOGIC**: Add key fields based on legacy requirements
-   - **INTEGRATION**: Extend CLI with key enrichment command
+### **Phase 2: Advanced Pipeline Features**
+2. **E-bill Split & Grouping**:
+   - **SCOPE**: Implement selection logic (ANY/ASCII/packed compares) → `e.*` vs `p.*`
+   - **GROUPING**: Implement rollups → `*cntr.grp*`, `.total`, `.err`, `.sample`, `.remit3`
+   - **VALIDATION**: Ensure downstream e-bill processing compatibility
 
-### **Phase 3: Advanced Pipeline Features**
-3. **MB2000 Converter Implementation**:
-   - **SCOPE**: Generate MB2000 format files
-   - **INTEGRATION**: Connect with e-bill processing
-   - **VALIDATION**: Ensure downstream compatibility
+### **Phase 3: Production Enhancements**
+3. **Customer Overlays & Options**:
+   - **SCOPE**: Implement customer-specific overlays and option precedence
+   - **FLEXIBILITY**: Support multiple client configurations
+   - **SCALABILITY**: Prepare for production deployment across multiple customers
 
 ### **Configuration Files to Review**
 - **`step2.overrides.json`**: Field substitution and computed field configuration
+- **`KEY_ENRICHMENT_REQUIREMENTS.md`**: Complete key enrichment algorithm analysis and requirements
 - **`FIELD_MAPPING_REQUIREMENTS.md`**: Complete legacy analysis documentation  
 - **`TextExtractor.cs`**: Core field processing logic with substitution framework
+- **`KeyEnrichmentProcessor.cs`**: P/S record matching and key generation logic
 
 ### **Advanced Enhancements (Optional)**
 - Implement field 490 (MB-TI-MTG-CODE) extraction logic
@@ -227,6 +254,7 @@ What's implemented
 - **Step 1 (Container)**: `src/Cnp.Pipeline/Step1Orchestrator.cs` - EBCDIC conversion, container generation
 - **Step 2 (Text)**: `src/Cnp.Pipeline/TextExtractor.cs` - Field extraction, NCPJAX mapping, business rules
 - **Step 4 (EBCDIC→ASCII)**: `src/Cnp.Pipeline/EbcdicProcessor.cs` - EBCDIC to ASCII conversion and record splitting
+- **Step 5 (Key Enrichment)**: `src/Cnp.Pipeline/KeyEnrichmentProcessor.cs` - P/S record matching and key generation
 - **EBCDIC Converter**: `src/Cnp.Decoders/EbcdicAsciiConverter.cs` - Core conversion logic with legacy e2a table
 - **CLI Interface**: `src/Cnp.Cli/Program.cs` - Command-line interface for all steps
 - **Schema System**: `src/Cnp.Schema/` - DD file parsing and compilation
@@ -256,28 +284,29 @@ What's implemented
 - [x] **🔧 RESOLVE all field mapping issues - 100% text parity achieved**
 - [x] **🌟 IMPLEMENT EBCDIC→ASCII processing pipeline (.dat → .dat.asc → .asc.11.1.[p|s|d])**
 - [x] **🔍 CREATE comprehensive validation framework for EBCDIC conversion**
-- [ ] **🔑 Implement key enrichment (.p.keyed files) - NEXT PHASE**
+- [x] **🔑 IMPLEMENT key enrichment (.p.keyed files) with 100% perfect parity**
 - [ ] **📝 Implement merge `.new` and `.length` - FUTURE PHASE**
 - [ ] **🏢 MB2000 path and e-bill split - FUTURE PHASE**
 
-## 🎉 **PROJECT STATUS: MILESTONE 4 ACHIEVED - EBCDIC→ASCII PROCESSING COMPLETE**
-**The MBCNTR2503 modernization has successfully completed Milestone 4 with full EBCDIC→ASCII processing pipeline implementation. Perfect text extraction parity achieved across all jobs, comprehensive field mapping resolution completed, and 95%+ EBCDIC conversion accuracy with complete architecture foundation for continued development.**
+## 🎉 **PROJECT STATUS: MILESTONE 5 ACHIEVED - KEY ENRICHMENT COMPLETE**
+**The MBCNTR2503 modernization has successfully completed Milestone 5 with full Key Enrichment implementation achieving 100% perfect parity. All major pipeline stages are now operational: Container Generation, Text Extraction, EBCDIC→ASCII Processing, and Key Enrichment all achieving 100% perfect parity across all test jobs. Ready for MB2000 Path implementation (Next Milestone).**
 
 ### **📁 Latest Reports and Artifacts**
 - **Comprehensive Parity Report**: `MBCNTR2503.Modernizer/tests/reports/final_parity_report.txt`
 - **Legacy Analysis Documentation**: `MBCNTR2503.Modernizer/FIELD_MAPPING_REQUIREMENTS.md`
+- **Key Enrichment Requirements**: `MBCNTR2503.Modernizer/KEY_ENRICHMENT_REQUIREMENTS.md`
 - **Configuration File**: `MBCNTR2503.Modernizer/config/base/mblps/step2.overrides.json`
 - **EBCDIC Validation Script**: `MBCNTR2503.Modernizer/validate-ebcdic.py`
 - **Complete Build Script**: `MBCNTR2503.Modernizer/run-all-4300.sh`
-- **Pending Issues Tracking**: `MBCNTR2503.Modernizer/pendingissues.md`
+- **Design Specification**: `MBCNTR2503.Modernizer/MBCNTR2503.CSharpDesign.md`
 
-### **🔑 Key Achievements - Milestone 4 Complete**
+### **🔑 Key Achievements - Milestone 5 Complete**
 - ✅ **100% Binary Parity** - All .4300 files perfect across all jobs
 - ✅ **100% Text Extraction** - Perfect parity for all jobs (69172, 80147, 80299, 80362)
-- ✅ **Configuration-Driven Architecture** - Zero hardcoded business logic
-- ✅ **Legacy Analysis Complete** - Full COBOL/C code documentation and mapping
-- ✅ **Field Substitution Framework** - Whitelist-based conditional logic with JSON configuration
-- ✅ **EBCDIC→ASCII Pipeline** - Complete processing with 95%+ accuracy and validation framework
-- ✅ **Production-Ready Scripts** - Automated build, test, and validation suite
+- ✅ **100% EBCDIC→ASCII Processing** - Perfect parity for all record types (D/P/S) across all jobs
+- ✅ **100% Key Enrichment** - Perfect parity for all .p.keyed files (130 P records processed)
+- ✅ **Configuration-Driven Architecture** - Zero hardcoded business logic across all pipeline stages
+- ✅ **Legacy Algorithm Fidelity** - Exact replication of all legacy processing logic
+- ✅ **Production-Ready Pipeline** - Complete automated build, test, and validation suite
 
 
