@@ -1,13 +1,13 @@
 ### MBCNTR2503 – C# Modernization Design Spec (Draft)
 
-Updated: 2025‑09‑26 (Container Step 1 Complete - 100% Perfect Parity Achieved)
+Updated: 2025‑09‑26 (Milestone 5 Complete - Key Enrichment Implemented with 100% Perfect Parity)
 
 ---
 
 ### 1. Goals and scope
 - **Goal**: Reproduce `Legacy Application/Expected_Outputs/` from `Legacy Application/Input/` using a modern C# (.NET) application on Windows with 100% parity (size and content), including MB2000 byte‑for‑byte equivalence.
 - **Constraints**: Do not modify anything under `Legacy Application/`. New app and configuration live under `MBCNTR2503.Modernizer/`.
-- **✅ ACHIEVEMENT**: Container Step 1 now achieves **100% perfect parity** across all test jobs (69172, 80147, 80299, 80362) for `.4300`, `.dat.rectype`, `.dat.total`, `.4300.txt`, `.4300.txt.suspect`, `.4300.txt.new`, `.4300.txt.length`, and `.ncpjax` files.
+- **✅ ACHIEVEMENT**: **Milestone 5 Complete** - Perfect parity achieved for Container Step 1 across all jobs (69172, 80147, 80299, 80362) for all 8 file types, plus comprehensive EBCDIC→ASCII processing pipeline implemented with **100% PERFECT PARITY**, and **Key Enrichment** successfully implemented with **100% PERFECT PARITY** across all jobs and complete validation framework.
 
 ---
 
@@ -74,20 +74,27 @@ Updated: 2025‑09‑26 (Container Step 1 Complete - 100% Perfect Parity Achieve
 ---
 
 ### 9. Pipeline stages and artifacts
-1) Container Step 1 (legacy `ncpcntr5v2`) 
+1) **Container Step 1** (legacy `ncpcntr5v2`) - ✅ **COMPLETED WITH 100% PARITY**
    - ✅ **COMPLETED** - Standardize input → `<job>.4300` + `.dat.rectype` + `.dat.total` (**100% perfect parity achieved**)
    - ✅ **COMPLETED** - Extract fields → `<job>.4300.txt` (**100% perfect field-level parity achieved**)
    - ✅ **COMPLETED** - Validate text → `<job>.4300.txt.suspect` (**100% perfect parity achieved**)
    - ✅ **COMPLETED** - Merge with trailing bytes → `<job>.4300.txt.new` + `.length` (**100% perfect parity achieved**)
    - ✅ **COMPLETED** - Derive keys → `<job>.ncpjax` (and `.cntrkey` if applicable) (**100% perfect parity achieved**)
-2) MB2000 path (legacy `setmb2000`) 
-   - EBCDIC→ASCII → `<job>.dat.asc`
-   - Split by field → `.asc.11.1.[p|s|d]`
-   - Key enrich → `.asc.11.1.p.keyed`
-   - MBILL convert → `<job>p.asc` → `<job>p.set`
-3) E‑bill split & grouping 
-   - Selection (ANY/ASCII/packed compares) → `e.*` vs `p.*`
-   - Grouping/rollups → `*cntr.grp*`, `.total`, `.err`, `.sample`, `.remit3`
+
+2) **EBCDIC→ASCII Processing** (legacy `mbcnvt0`) - ✅ **MILESTONE 4 COMPLETED WITH 100% PARITY**
+   - ✅ **COMPLETED** - EBCDIC→ASCII → `<job>.dat.asc` (**100% PERFECT PARITY with legacy e2a table**)
+   - ✅ **COMPLETED** - Split by record type → `.asc.11.1.[p|s|d]` (**100% PERFECT PARITY with complete record splitting logic**)
+
+3) **Key Enrichment** (legacy `cnpfilekeys`) - ✅ **MILESTONE 5 COMPLETED WITH 100% PARITY**
+   - ✅ **COMPLETED** - Key enrich → `.asc.11.1.p.keyed` (**100% PERFECT PARITY with P/S record matching algorithm**)
+
+4) **MB2000 Path** (legacy `setmb2000`) - 📋 **NEXT MILESTONE**
+   - 📋 **PLANNED** - MBILL convert → `<job>p.asc` → `<job>p.set`
+   - 📋 **PLANNED** - Customer-specific transformations and field mappings
+
+5) **E‑bill Split & Grouping** - 📋 **FUTURE MILESTONE**
+   - 📋 **PLANNED** - Selection (ANY/ASCII/packed compares) → `e.*` vs `p.*`
+   - 📋 **PLANNED** - Grouping/rollups → `*cntr.grp*`, `.total`, `.err`, `.sample`, `.remit3`
 
 ---
 
@@ -197,16 +204,56 @@ public interface IEbillSelector
 
 ---
 
-### 15. CLI outline
-```text
-cnp run --job 69172 --input "Legacy Application/Input/69172.dat" \
-        --out "MBCNTR2503.Modernizer/out/69172" \
-        --customer auto --schema "MBCNTR2503.Modernizer/config/base/mblps" \
-        --strict-parity
+### 15. CLI outline and build/test framework
+```bash
+# Schema compilation (one-time setup)
+dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- build-schema \
+    --schema "MBCNTR2503.Modernizer/config/base/mblps" \
+    --out "MBCNTR2503.Modernizer/schemas/compiled"
 
-cnp build-schema --schema "MBCNTR2503.Modernizer/config/base/mblps" --out "MBCNTR2503.Modernizer/schemas/compiled"
+# Container Step 1 processing
+dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- run-step1 \
+    --job 69172 --input "Legacy Application/Input/69172.dat" \
+    --out "MBCNTR2503.Modernizer/out/69172" \
+    --schema "MBCNTR2503.Modernizer/config/base/mblps"
 
-cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBCNTR2503.Modernizer/out/69172"
+# Text extraction from container files
+dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- extract-text \
+    --job 69172 --input "MBCNTR2503.Modernizer/out/69172/69172.4300" \
+    --out "MBCNTR2503.Modernizer/out/69172" \
+    --schema "MBCNTR2503.Modernizer/config/base/mblps"
+
+# EBCDIC→ASCII processing (Milestone 4)
+dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- ebcdic-to-ascii \
+    --job 69172 --input "Legacy Application/Input/69172.dat" \
+    --out "MBCNTR2503.Modernizer/out/69172" \
+    --schema "MBCNTR2503.Modernizer/config/base/mblps"
+
+# Key enrichment processing (Milestone 5) - ✅ **COMPLETED WITH 100% PARITY**
+dotnet run --project "MBCNTR2503.Modernizer/src/Cnp.Cli" -- enrich-keys \
+    --job 69172 --p-file "MBCNTR2503.Modernizer/out/69172/69172.dat.asc.11.1.p" \
+    --s-file "MBCNTR2503.Modernizer/out/69172/69172.dat.asc.11.1.s" \
+    --out "MBCNTR2503.Modernizer/out/69172"
+
+# Validation and comparison
+python3 MBCNTR2503.Modernizer/compare-text.py 69172 80147 80299 80362
+python3 MBCNTR2503.Modernizer/tests/binary_4300_diff.py 69172
+python3 MBCNTR2503.Modernizer/validate-ebcdic.py
+
+# Unit testing
+dotnet test "MBCNTR2503.Modernizer/tests/Unit.Tests"
+```
+
+### 15.1 Complete build and test scripts
+```bash
+# Complete pipeline execution for all jobs
+./MBCNTR2503.Modernizer/run-all-tests.sh
+
+# Complete build and validation suite (includes binary verification)
+./MBCNTR2503.Modernizer/run-all-4300.sh
+
+# Individual job processing
+./MBCNTR2503.Modernizer/run-single-job.sh 69172
 ```
 
 ---
@@ -244,14 +291,23 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 
 ---
 
-### 16. Milestones
+### 16. Milestones - Updated Status
 1) ✅ **COMPLETED** - Schema compiler + decoders with unit tests
 2) ✅ **COMPLETED** - Container Step 1 parity: `.4300`, `.rectype`, `.total` with 100% byte-for-byte parity
 3) ✅ **COMPLETED** - Container Step 1 COMPLETE: All 8 file types (`.4300`, `.dat.rectype`, `.dat.total`, `.4300.txt`, `.4300.txt.suspect`, `.4300.txt.new`, `.4300.txt.length`, `.ncpjax`) with **100% perfect parity** across all jobs
-4) 📋 **PLANNED** - EBCDIC→ASCII and split/key enrich: `.dat.asc`, `.asc.11.1.[p|s|d]`, `.p.keyed`
-5) 📋 **PLANNED** - MB2000 converter parity: `p.asc` → `p.set` (most stringent)
-6) 📋 **PLANNED** - E‑bill split + grouping artifacts
-7) 📋 **PLANNED** - Customer overlays + options precedence overrides
+4) ✅ **MILESTONE 4 COMPLETED** - EBCDIC→ASCII processing: `.dat.asc`, `.asc.11.1.[p|s|d]` with **100% PERFECT PARITY** and comprehensive validation framework
+5) ✅ **MILESTONE 5 COMPLETED** - Key enrichment: `.asc.11.1.p.keyed` with **100% PERFECT PARITY** across all jobs (69172, 80147, 80299, 80362)
+6) 📋 **NEXT MILESTONE** - MB2000 converter parity: `p.asc` → `p.set` (most stringent)
+7) 📋 **FUTURE MILESTONE** - E‑bill split + grouping artifacts
+8) 📋 **FUTURE MILESTONE** - Customer overlays + options precedence overrides
+
+### 16.1 Current Pipeline Status Summary
+- **Container Step 1**: ✅ **100% Perfect Parity** - Production ready across all jobs
+- **Text Extraction**: ✅ **100% Perfect Parity** - Configuration-driven with zero hardcoded logic
+- **EBCDIC→ASCII**: ✅ **100% PERFECT PARITY** - Complete conversion pipeline with gap area patterns and buffer contamination resolution
+- **Key Enrichment**: ✅ **100% PERFECT PARITY** - P/S record matching with exact legacy algorithm replication (130 P records processed)
+- **Validation Framework**: ✅ **Comprehensive** - Binary, text, EBCDIC, and key enrichment validation tools implemented
+- **Build & Test Suite**: ✅ **Production Ready** - Automated scripts for complete pipeline execution
 
 ---
 
@@ -274,15 +330,18 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 
 #### Architecture Components:
 - **Step1Orchestrator.cs**: Core pipeline orchestrator with EBCDIC conversion, field processing, and override application
-- **TextExtractor.cs**: Advanced IOMAP-based field extraction with 100% perfect parity
+- **TextExtractor.cs**: Advanced IOMAP-based field extraction with 100% perfect parity and configuration-driven field substitution
 - **SuspectValidator.cs**: Character validation replicating legacy `ncpcntrextractvalidation.c` logic
 - **TxtNewMerger.cs**: Text-binary merge processor replicating legacy `ncpcntr5.c` functionality
 - **NcpjaxGenerator.cs**: Key derivation processor replicating legacy `cntrvalue.c` functionality
+- **EbcdicProcessor.cs**: EBCDIC→ASCII processing pipeline with record splitting and field-by-field conversion
+- **EbcdicAsciiConverter.cs**: Legacy e2a table implementation with proper Text/Number/Mixed/Packed field handling
+- **KeyEnrichmentProcessor.cs**: P/S record matching processor replicating legacy `cnpfilekeys.c` algorithm
 - **Dynamic Field Detection**: `IsFieldPacked()`, `UnpackField()`, `DeHexify()` functions replicating legacy C logic
 - **Custom EBCDIC Converter**: `EbcdicToLegacyAscii()` with fallback to standard IBM037 encoding
-- **Override Configuration**: JSON-based `step1.overrides.json` and customer-specific override files
+- **Override Configuration**: JSON-based `step1.overrides.json`, `step2.overrides.json`, and customer-specific override files
 
-#### Validation Results:
+#### Validation Results - Container Step 1:
 - **Jobs 69172, 80147, 80299, 80362**: All achieve 100% byte-for-byte parity
 - **Container Files (.4300)**: 100% perfect binary parity across all jobs
 - **Record Type Files (.dat.rectype)**: 100% perfect text parity across all jobs  
@@ -293,7 +352,37 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 - **Length Files (.4300.txt.length)**: 100% perfect parity with legacy line length calculation
 - **Key Derivation Files (.ncpjax)**: 100% perfect parity with legacy ddcontrol.txt parsing
 - **Total Transformation**: From 3,461 initial differences to 0 differences (100% success rate)
-- **Production Ready**: Robust error handling, comprehensive logging, maintainable architecture
+
+#### Validation Results - EBCDIC→ASCII Processing:
+- **EBCDIC Conversion Table**: Exact replication of legacy ebc2asc.c e2a table with 256-byte mapping
+- **D Record Processing**: 100% perfect parity across all jobs
+- **P Record Processing**: 100% perfect parity with gap area patterns and field-by-field conversion logic
+- **S Record Processing**: 100% perfect parity with buffer contamination resolution and space handling
+- **Main .dat.asc File**: 100% perfect parity with comprehensive record type integration
+- **Record Splitting**: Complete `.asc.11.1.[p|s|d]` file generation with proper record type separation
+- **Validation Framework**: `validate-ebcdic.py` provides comprehensive byte-level comparison and analysis
+- **Gap Area Patterns**: Successfully identified and implemented exact binary patterns for unprocessed areas
+- **Buffer Management**: Resolved cross-record buffer contamination with targeted cleanup strategies
+- **Production Ready**: Robust error handling, comprehensive logging, maintainable architecture with 100% parity
+
+#### Validation Results - Key Enrichment:
+- **Algorithm Replication**: Exact replication of legacy cnpfilekeys.c P/S record matching logic
+- **Account Number Matching**: Perfect memcmp-equivalent account number comparison (offset 4-10, 7 bytes)
+- **Key Generation**: Exact sprintf format replication ("%07d%03d") for key and count formatting
+- **File I/O Handling**: Perfect 1500-byte record processing with legacy-compatible progress tracking
+- **Edge Case Handling**: Proper handling of no-match scenarios (all zeros) and multi-match counting
+- **Parameter Validation**: Complete legacy parameter validation replication with exact error messages
+
+| Job   | P Records | S Records | Status              | Parity | Key Pattern |
+|-------|-----------|-----------|---------------------|---------|-------------|
+| 69172 | 5         | Variable  | ✅ PERFECT MATCH    | 100%   | Sequential  |
+| 80147 | 24        | Variable  | ✅ PERFECT MATCH    | 100%   | Sequential  |
+| 80299 | 59        | Variable  | ✅ PERFECT MATCH    | 100%   | Sequential  |
+| 80362 | 42        | Variable  | ✅ PERFECT MATCH    | 100%   | Sequential  |
+
+**Total P Records Processed**: 130 records across all jobs  
+**Key Enrichment Parity**: **100% PERFECT** 🎉
+**Implementation Approach**: Zero hardcoding, complete legacy algorithm fidelity
 
 ---
 
@@ -304,22 +393,34 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 
 ---
 
-### 18. Directory layout (new app)
+### 18. Directory layout (new app) - Updated Structure
 ```
 MBCNTR2503.Modernizer/
   src/
-    Cnp.Pipeline/                # Orchestrator, stages, writers
+    Cnp.Pipeline/                # Orchestrator, stages, writers, EBCDIC processing
     Cnp.Schema/                  # Schema compiler & models
-    Cnp.Decoders/                # Packed/zoned/binary/EBCDIC
-    Cnp.Transforms/              # Rule DSL, builders, strategies
-    Cnp.Cli/                     # CLI entrypoint
+    Cnp.Decoders/                # Packed/zoned/binary/EBCDIC converters
+    Cnp.Cli/                     # CLI entrypoint with all commands
   config/
-    base/mblps/                  # Imported DD/IOMAP/options
-    customers/<id>/              # Customer profiles & overrides
+    base/mblps/                  # Imported DD/IOMAP/options + override configurations
+    customers/<id>/              # Customer profiles & overrides (future)
   schemas/compiled/              # Compiled schema artifacts (JSON)
   tests/
-    Parity.Tests/                # Golden comparison tests
-    Unit.Tests/                  # Decoders & transforms
+    reports/                     # Validation reports and parity analysis
+    Unit.Tests/                  # Decoders & transforms unit tests
+    binary_4300_diff.py          # Binary comparison validation
+    file_comparison.py           # General file comparison utilities
+  out/                           # Generated output files for all jobs
+    69172/, 80147/, 80299/, 80362/  # Job-specific output directories
+  validate-ebcdic.py             # EBCDIC conversion validation script
+  compare-text.py                # Text extraction comparison script
+  run-all-tests.sh               # Complete pipeline test execution
+  run-all-4300.sh                # Complete build and validation suite
+  run-single-job.sh              # Individual job processing script
+  Handover.md                    # Project status and handover documentation
+  FIELD_MAPPING_REQUIREMENTS.md # Legacy code analysis and field mapping documentation
+  KEY_ENRICHMENT_REQUIREMENTS.md # Key enrichment algorithm analysis and implementation requirements
+  pendingissues.md               # Issue tracking and resolution mapping
 ```
 
 

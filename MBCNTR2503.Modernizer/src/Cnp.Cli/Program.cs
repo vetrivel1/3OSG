@@ -148,12 +148,49 @@ else if (args.Length > 0 && args[0] == "generate-ncpjax")
     ncpjaxGenerator.GenerateNcpjaxFile(job, ddControlPath, outDir);
     return;
 }
+else if (args.Length > 0 && args[0] == "enrich-keys")
+{
+    string? job = null; string? pFile = null; string? sFile = null; string? outDir = null;
+    for (int i = 1; i < args.Length; i++)
+    {
+        if (args[i] == "--job" && i + 1 < args.Length) job = args[++i];
+        else if (args[i] == "--p-file" && i + 1 < args.Length) pFile = args[++i];
+        else if (args[i] == "--s-file" && i + 1 < args.Length) sFile = args[++i];
+        else if (args[i] == "--out" && i + 1 < args.Length) outDir = args[++i];
+    }
+    if (job == null || pFile == null || sFile == null || outDir == null)
+    {
+        Console.Error.WriteLine("Missing required args: --job --p-file --s-file --out");
+        Environment.Exit(1);
+    }
+    
+    // Create output path following legacy naming convention
+    string outputPath = Path.Combine(outDir, $"{job}.dat.asc.11.1.p.keyed");
+    
+    // Initialize processor with legacy parameters (matching setmb2000.script line 59)
+    var keyEnrichment = new KeyEnrichmentProcessor(
+        r1Length: 1500,        // $OutLength 
+        r2Length: 1500,        // $OutLength
+        a1Offset: 4,           // Account offset in P records
+        a2Offset: 4,           // Account offset in S records  
+        accountLength: 7,      // Account field length
+        r2KeyOffset: 1080,     // Key write position
+        r2KeyLength: 7,        // Key number length
+        r2KeyCountLength: 3,   // Count number length
+        keyFirst: true         // Key before Count format
+    );
+    
+    keyEnrichment.ProcessFiles(pFile, sFile, outputPath);
+    Console.WriteLine($"Key enrichment completed: {outputPath}");
+    return;
+}
 else
 {
     Console.WriteLine("cnp build-schema --schema <dir> --out <dir>");
     Console.WriteLine("cnp run-step1 --job <id> --input <file> --out <dir> --schema <dir>");
     Console.WriteLine("cnp extract-text --job <id> --input <4300-file> --out <dir> --schema <dir>");
     Console.WriteLine("cnp ebcdic-to-ascii --job <id> --input <dat-file> --out <dir> --schema <dir>");
+    Console.WriteLine("cnp enrich-keys --job <id> --p-file <asc.11.1.p-file> --s-file <asc.11.1.s-file> --out <dir>");
     Console.WriteLine("cnp validate-suspect --job <id> --input <4300-txt-file> --out <dir>");
     Console.WriteLine("cnp merge-txt-new --job <id> --txt-input <4300-txt-file> --binary-input <4300-file> --out <dir>");
     Console.WriteLine("cnp generate-ncpjax --job <id> --ddcontrol <ddcontrol-txt-file> --out <dir>");
