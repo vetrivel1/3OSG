@@ -7684,3 +7684,1493 @@ Before we make any commit, I suggest going through those deletions and additions
 
 ---
 
+_**User (2025-09-24 23:56Z)**_
+
+proceed to commit and push all code exept build files 
+
+---
+
+_**Assistant**_
+
+```bash
+git config user.name
+```
+
+```
+Vetrivel Shanmugasundaram
+
+```
+
+---
+
+```bash
+git config user.email
+```
+
+```
+vetrivel_shanmugasundaram@trimble.com
+
+```
+
+---
+
+```bash
+find /Users/vshanmu/3OSG -name "bin" -o -name "obj" -type d
+```
+
+```
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/obj
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/bin
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/obj
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/bin
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/obj
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/bin
+
+```
+
+---
+
+
+
+---
+
+<think><details><summary>Thought Process</summary>**Preparing selective commit**</details></think>
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && git add -A
+```
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && git rm --cached -r MBCNTR2503.Modernizer/src/Cnp.Cli/bin MBCNTR2503.Modernizer/src/Cnp.Cli/obj MBCNTR2503.Modernizer/src/Cnp.Decoders/bin MBCNTR2503.Modernizer/src/Cnp.Decoders/obj MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj MBCNTR2503.Modernizer/src/Cnp.Schema/bin MBCNTR2503.Modernizer/src/Cnp.Schema/obj MBCNTR2503.Modernizer/tests/Unit.Tests/bin MBCNTR2503.Modernizer/tests/Unit.Tests/obj
+```
+
+```
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.deps.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.runtimeconfig.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.dgspec.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.props'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.targets'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfo.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfoInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GeneratedMSBuildEditorConfig.editorconfig'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GlobalUsings.g.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.assets.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.AssemblyReference.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.CoreCompileInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.FileListAbsolute.txt'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.Up2Date'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.genruntimeconfig.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.sourcelink.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/apphost'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/ref/Cnp.Cli.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/refint/Cnp.Cli.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.assets.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.nuget.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.deps.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.dgspec.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.props'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.targets'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfo.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfoInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GeneratedMSBuildEditorConfig.editorconfig'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GlobalUsings.g.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.assets.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.CoreCompileInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.FileListAbsolute.txt'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.sourcelink.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/ref/Cnp.Decoders.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/refint/Cnp.Decoders.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.assets.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.nuget.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.deps.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.dgspec.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.props'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.targets'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipe.C8A0D13C.Up2Date'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfo.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfoInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GeneratedMSBuildEditorConfig.editorconfig'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GlobalUsings.g.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.assets.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.AssemblyReference.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.CoreCompileInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.FileListAbsolute.txt'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.sourcelink.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/ref/Cnp.Pipeline.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/refint/Cnp.Pipeline.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.assets.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.nuget.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.deps.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.dgspec.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.props'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.targets'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfo.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfoInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GeneratedMSBuildEditorConfig.editorconfig'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GlobalUsings.g.cs'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.assets.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.CoreCompileInputs.cache'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.FileListAbsolute.txt'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.pdb'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.sourcelink.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/ref/Cnp.Schema.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/refint/Cnp.Schema.dll'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.assets.json'
+rm 'MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.nuget.cache'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/.msCoverageSourceRootsMapping_Unit.Tests'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.pdb'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CommunicationUtilities.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CoreUtilities.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CrossPlatEngine.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.PlatformAbstractions.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.Utilities.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.Common.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Newtonsoft.Json.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.deps.json'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.pdb'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.runtimeconfig.json'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/testhost.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.abstractions.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.assert.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.core.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.execution.dotnet.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.reporters.netcoreapp10.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.utility.netcoreapp10.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.visualstudio.testadapter.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfo.cs'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfoInputs.cache'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GeneratedMSBuildEditorConfig.editorconfig'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GlobalUsings.g.cs'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.assets.cache'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.AssemblyReference.cache'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.CoreCompileInputs.cache'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.FileListAbsolute.txt'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.Up2Date'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.genruntimeconfig.cache'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.pdb'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.sourcelink.json'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/ref/Unit.Tests.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/refint/Unit.Tests.dll'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.dgspec.json'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.props'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.targets'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.assets.json'
+rm 'MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.nuget.cache'
+
+```
+
+---
+
+<think><details><summary>Thought Process</summary>**Checking staged and unstaged changes**</details></think>
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && git status --short
+```
+
+```
+A  .specstory/.gitignore
+A  .specstory/history/2025-09-24_05-55Z-analyze-the-legacy-application.md
+A  .specstory/history/2025-09-24_16-10Z-start-the-handover-process.md
+D  "Legacy Application/ebcdic to ascii converter ibm037 converter mixed fields c#.txt"
+D  "Legacy Application/image.png"
+D  "Legacy Application/mbcntr2503-bre-v4.txt"
+D  MBCNTR2503.Modernizer/.vscode/tasks.json
+M  MBCNTR2503.Modernizer/Handover.md
+D  MBCNTR2503.Modernizer/Implementation_Plan.md
+D  MBCNTR2503.Modernizer/Legacy_Pipeline_Flow_Analysis.md
+D  MBCNTR2503.Modernizer/MBCNTR2503.Modernizer.sln
+D  MBCNTR2503.Modernizer/MBCNTR2503.Pipeline.sln
+D  MBCNTR2503.Modernizer/Pipeline_Test/Programs/2503supptable.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.length
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.new
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.suspect
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.dat
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.se1
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172e.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172p.asc.org
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_232415.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_233350.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060323.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060334.txt
+A  MBCNTR2503.Modernizer/config/base/mblps/colmn.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/dovy.subclient.fields
+A  MBCNTR2503.Modernizer/config/base/mblps/mb1s.extract.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mb2s.extract.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbf.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbn.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbu.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbv.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbw.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbx.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0140.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0277.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0310.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0346.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0628.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0733.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/p2750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/prop750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/recon750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/step1.overrides.json
+A  MBCNTR2503.Modernizer/config/base/mblps/tran750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/yelps750.dd
+M  MBCNTR2503.Modernizer/out/69172/69172.4300
+A  MBCNTR2503.Modernizer/out/80147/80147.4300
+A  MBCNTR2503.Modernizer/out/80147/80147.dat.rectype
+A  MBCNTR2503.Modernizer/out/80147/80147.dat.total
+A  MBCNTR2503.Modernizer/schemas/compiled/71c14b04b8b1fde1437b2c7661861c962f2a595f28896ca4570ea87e8b674a1f.schema.json
+M  MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.runtimeconfig.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.Up2Date
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.genruntimeconfig.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/apphost
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/ref/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/refint/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/ref/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/refint/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.nuget.cache
+M  MBCNTR2503.Modernizer/src/Cnp.Pipeline/Step1Orchestrator.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipe.C8A0D13C.Up2Date
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/ref/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/refint/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/ref/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/refint/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/.msCoverageSourceRootsMapping_Unit.Tests
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CommunicationUtilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CoreUtilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CrossPlatEngine.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.PlatformAbstractions.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.Utilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.Common.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Newtonsoft.Json.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.deps.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.runtimeconfig.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/testhost.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.abstractions.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.assert.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.core.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.execution.dotnet.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.reporters.netcoreapp10.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.utility.netcoreapp10.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.visualstudio.testadapter.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.assets.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.Up2Date
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.genruntimeconfig.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.sourcelink.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/ref/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/refint/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.assets.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.nuget.cache
+A  MBCNTR2503.Modernizer/tests/binary_4300_diff.py
+R  MBCNTR2503.Modernizer/Pipeline_Test/file_comparison.py -> MBCNTR2503.Modernizer/tests/file_comparison.py
+D  MBCNTR2503.Modernizer/tools/DataMapper_Reference.cs
+D  MBCNTR2503.Modernizer/tools/field_comparison.py
+D  MBCNTR2503.Modernizer/tools/payment_validation.py
+D  fix_json_packed_fields.py
+?? MBCNTR2503.Modernizer/src/Cnp.Cli/bin/
+?? MBCNTR2503.Modernizer/src/Cnp.Cli/obj/
+?? MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/
+?? MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/
+?? MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/
+?? MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/
+?? MBCNTR2503.Modernizer/src/Cnp.Schema/bin/
+?? MBCNTR2503.Modernizer/src/Cnp.Schema/obj/
+?? MBCNTR2503.Modernizer/tests/Unit.Tests/bin/
+?? MBCNTR2503.Modernizer/tests/Unit.Tests/obj/
+
+```
+
+---
+
+<think><details><summary>Thought Process</summary>**Cleaning untracked build artifacts**</details></think>
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && rm -rf MBCNTR2503.Modernizer/src/Cnp.Cli/bin MBCNTR2503.Modernizer/src/Cnp.Cli/obj MBCNTR2503.Modernizer/src/Cnp.Decoders/bin MBCNTR2503.Modernizer/src/Cnp.Decoders/obj MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj MBCNTR2503.Modernizer/src/Cnp.Schema/bin MBCNTR2503.Modernizer/src/Cnp.Schema/obj MBCNTR2503.Modernizer/tests/Unit.Tests/bin MBCNTR2503.Modernizer/tests/Unit.Tests/obj
+```
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && git status --short
+```
+
+```
+A  .specstory/.gitignore
+A  .specstory/history/2025-09-24_05-55Z-analyze-the-legacy-application.md
+A  .specstory/history/2025-09-24_16-10Z-start-the-handover-process.md
+D  "Legacy Application/ebcdic to ascii converter ibm037 converter mixed fields c#.txt"
+D  "Legacy Application/image.png"
+D  "Legacy Application/mbcntr2503-bre-v4.txt"
+D  MBCNTR2503.Modernizer/.vscode/tasks.json
+M  MBCNTR2503.Modernizer/Handover.md
+D  MBCNTR2503.Modernizer/Implementation_Plan.md
+D  MBCNTR2503.Modernizer/Legacy_Pipeline_Flow_Analysis.md
+D  MBCNTR2503.Modernizer/MBCNTR2503.Modernizer.sln
+D  MBCNTR2503.Modernizer/MBCNTR2503.Pipeline.sln
+D  MBCNTR2503.Modernizer/Pipeline_Test/Programs/2503supptable.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.length
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.new
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.suspect
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.dat
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.se1
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172e.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172p.asc.org
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_232415.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_233350.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060323.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060334.txt
+A  MBCNTR2503.Modernizer/config/base/mblps/colmn.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/dovy.subclient.fields
+A  MBCNTR2503.Modernizer/config/base/mblps/mb1s.extract.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mb2s.extract.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbf.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbn.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbu.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbv.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbw.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbx.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0140.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0277.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0310.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0346.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0628.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0733.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/p2750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/prop750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/recon750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/step1.overrides.json
+A  MBCNTR2503.Modernizer/config/base/mblps/tran750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/yelps750.dd
+M  MBCNTR2503.Modernizer/out/69172/69172.4300
+A  MBCNTR2503.Modernizer/out/80147/80147.4300
+A  MBCNTR2503.Modernizer/out/80147/80147.dat.rectype
+A  MBCNTR2503.Modernizer/out/80147/80147.dat.total
+A  MBCNTR2503.Modernizer/schemas/compiled/71c14b04b8b1fde1437b2c7661861c962f2a595f28896ca4570ea87e8b674a1f.schema.json
+M  MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.runtimeconfig.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.Up2Date
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.genruntimeconfig.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/apphost
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/ref/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/refint/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/ref/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/refint/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.nuget.cache
+M  MBCNTR2503.Modernizer/src/Cnp.Pipeline/Step1Orchestrator.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipe.C8A0D13C.Up2Date
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/ref/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/refint/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/ref/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/refint/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/.msCoverageSourceRootsMapping_Unit.Tests
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CommunicationUtilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CoreUtilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CrossPlatEngine.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.PlatformAbstractions.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.Utilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.Common.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Newtonsoft.Json.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.deps.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.runtimeconfig.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/testhost.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.abstractions.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.assert.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.core.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.execution.dotnet.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.reporters.netcoreapp10.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.utility.netcoreapp10.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.visualstudio.testadapter.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.assets.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.Up2Date
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.genruntimeconfig.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.sourcelink.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/ref/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/refint/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.assets.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.nuget.cache
+A  MBCNTR2503.Modernizer/tests/binary_4300_diff.py
+R  MBCNTR2503.Modernizer/Pipeline_Test/file_comparison.py -> MBCNTR2503.Modernizer/tests/file_comparison.py
+D  MBCNTR2503.Modernizer/tools/DataMapper_Reference.cs
+D  MBCNTR2503.Modernizer/tools/field_comparison.py
+D  MBCNTR2503.Modernizer/tools/payment_validation.py
+D  fix_json_packed_fields.py
+?? MBCNTR2503.Modernizer/src/Cnp.Cli/obj/
+?? MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/
+
+```
+
+---
+
+<think><details><summary>Thought Process</summary>**Cleaning up untracked obj directories**
+
+I'm focusing on fully removing leftover untracked obj directories, which seem to be auto-recreated by dotnet builds even after deletion. I'll carefully remove all obj folders again with `rm -rf` to ensure nothing remains. Meanwhile, I notice many file deletions from pipeline tests and legacy docs; since the user wants all code changes except build files committed, I'll include these deletions too, assuming they are intentional. Also, I'll include new binder files like `.specstory` while making sure no obj directories sneak into the commit.</details></think>
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && rm -rf MBCNTR2503.Modernizer/src/Cnp.Cli/obj MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj
+```
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && git status --short
+```
+
+```
+A  .specstory/.gitignore
+A  .specstory/history/2025-09-24_05-55Z-analyze-the-legacy-application.md
+A  .specstory/history/2025-09-24_16-10Z-start-the-handover-process.md
+D  "Legacy Application/ebcdic to ascii converter ibm037 converter mixed fields c#.txt"
+D  "Legacy Application/image.png"
+D  "Legacy Application/mbcntr2503-bre-v4.txt"
+D  MBCNTR2503.Modernizer/.vscode/tasks.json
+M  MBCNTR2503.Modernizer/Handover.md
+D  MBCNTR2503.Modernizer/Implementation_Plan.md
+D  MBCNTR2503.Modernizer/Legacy_Pipeline_Flow_Analysis.md
+D  MBCNTR2503.Modernizer/MBCNTR2503.Modernizer.sln
+D  MBCNTR2503.Modernizer/MBCNTR2503.Pipeline.sln
+D  MBCNTR2503.Modernizer/Pipeline_Test/Programs/2503supptable.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.length
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.new
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.suspect
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.dat
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.se1
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172e.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/Public/69172p.asc.org
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_232415.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_233350.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060323.txt
+D  MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060334.txt
+A  MBCNTR2503.Modernizer/config/base/mblps/colmn.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/dovy.subclient.fields
+A  MBCNTR2503.Modernizer/config/base/mblps/mb1s.extract.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mb2s.extract.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbf.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbn.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbu.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbv.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbw.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/mbx.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0140.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0277.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0310.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0346.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0628.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/option.0733.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/p2750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/prop750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/recon750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/step1.overrides.json
+A  MBCNTR2503.Modernizer/config/base/mblps/tran750.dd
+A  MBCNTR2503.Modernizer/config/base/mblps/yelps750.dd
+M  MBCNTR2503.Modernizer/out/69172/69172.4300
+A  MBCNTR2503.Modernizer/out/80147/80147.4300
+A  MBCNTR2503.Modernizer/out/80147/80147.dat.rectype
+A  MBCNTR2503.Modernizer/out/80147/80147.dat.total
+A  MBCNTR2503.Modernizer/schemas/compiled/71c14b04b8b1fde1437b2c7661861c962f2a595f28896ca4570ea87e8b674a1f.schema.json
+M  MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.runtimeconfig.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.Up2Date
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.genruntimeconfig.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/apphost
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/ref/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/refint/Cnp.Cli.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/ref/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/refint/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.nuget.cache
+M  MBCNTR2503.Modernizer/src/Cnp.Pipeline/Step1Orchestrator.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipe.C8A0D13C.Up2Date
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/ref/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/refint/Cnp.Pipeline.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.deps.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.assets.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.pdb
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.sourcelink.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/ref/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/refint/Cnp.Schema.dll
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.assets.json
+D  MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.nuget.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/.msCoverageSourceRootsMapping_Unit.Tests
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CommunicationUtilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CoreUtilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CrossPlatEngine.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.PlatformAbstractions.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.Utilities.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.Common.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Newtonsoft.Json.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.deps.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.runtimeconfig.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/testhost.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.abstractions.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.assert.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.core.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.execution.dotnet.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.reporters.netcoreapp10.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.utility.netcoreapp10.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.visualstudio.testadapter.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfo.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfoInputs.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GlobalUsings.g.cs
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.assets.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.AssemblyReference.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.CoreCompileInputs.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.FileListAbsolute.txt
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.Up2Date
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.genruntimeconfig.cache
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.pdb
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.sourcelink.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/ref/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/refint/Unit.Tests.dll
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.dgspec.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.props
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.targets
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.assets.json
+D  MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.nuget.cache
+A  MBCNTR2503.Modernizer/tests/binary_4300_diff.py
+R  MBCNTR2503.Modernizer/Pipeline_Test/file_comparison.py -> MBCNTR2503.Modernizer/tests/file_comparison.py
+D  MBCNTR2503.Modernizer/tools/DataMapper_Reference.cs
+D  MBCNTR2503.Modernizer/tools/field_comparison.py
+D  MBCNTR2503.Modernizer/tools/payment_validation.py
+D  fix_json_packed_fields.py
+
+```
+
+---
+
+<think><details><summary>Thought Process</summary>**Reviewing staged deletions and preparing commit**</details></think>
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && git commit -m "Modernizer parity updates"
+```
+
+```
+[master f267b9d] Modernizer parity updates
+ 273 files changed, 14079 insertions(+), 5790 deletions(-)
+ create mode 100644 .specstory/.gitignore
+ create mode 100644 .specstory/history/2025-09-24_05-55Z-analyze-the-legacy-application.md
+ create mode 100644 .specstory/history/2025-09-24_16-10Z-start-the-handover-process.md
+ delete mode 100644 Legacy Application/ebcdic to ascii converter ibm037 converter mixed fields c#.txt
+ delete mode 100644 Legacy Application/image.png
+ delete mode 100644 Legacy Application/mbcntr2503-bre-v4.txt
+ delete mode 100644 MBCNTR2503.Modernizer/.vscode/tasks.json
+ delete mode 100644 MBCNTR2503.Modernizer/Implementation_Plan.md
+ delete mode 100644 MBCNTR2503.Modernizer/Legacy_Pipeline_Flow_Analysis.md
+ delete mode 100644 MBCNTR2503.Modernizer/MBCNTR2503.Modernizer.sln
+ delete mode 100644 MBCNTR2503.Modernizer/MBCNTR2503.Pipeline.sln
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Programs/2503supptable.txt
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.length
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.new
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.4300.txt.suspect
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.dat
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172.se1
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172e.txt
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/Public/69172p.asc.org
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_232415.txt
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250923_233350.txt
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060323.txt
+ delete mode 100644 MBCNTR2503.Modernizer/Pipeline_Test/comparison_reports/69172_69172_4300_txt_comparison_20250924_060334.txt
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/colmn.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/dovy.subclient.fields
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mb1s.extract.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mb2s.extract.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mbf.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mbn.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mbu.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mbv.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mbw.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/mbx.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/option.0140.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/option.0277.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/option.0310.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/option.0346.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/option.0628.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/option.0733.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/p2750.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/prop750.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/recon750.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/step1.overrides.json
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/tran750.dd
+ create mode 100644 MBCNTR2503.Modernizer/config/base/mblps/yelps750.dd
+ create mode 100644 MBCNTR2503.Modernizer/out/80147/80147.4300
+ create mode 100644 MBCNTR2503.Modernizer/out/80147/80147.dat.rectype
+ create mode 100644 MBCNTR2503.Modernizer/out/80147/80147.dat.total
+ create mode 100644 MBCNTR2503.Modernizer/schemas/compiled/71c14b04b8b1fde1437b2c7661861c962f2a595f28896ca4570ea87e8b674a1f.schema.json
+ delete mode 100755 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.deps.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.runtimeconfig.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Decoders.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Pipeline.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Schema.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.dgspec.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.props
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Cnp.Cli.csproj.nuget.g.targets
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfo.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.AssemblyInfoInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GeneratedMSBuildEditorConfig.editorconfig
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.GlobalUsings.g.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.assets.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.AssemblyReference.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.CoreCompileInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.FileListAbsolute.txt
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.csproj.Up2Date
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.genruntimeconfig.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.sourcelink.json
+ delete mode 100755 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/apphost
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/ref/Cnp.Cli.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/refint/Cnp.Cli.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.assets.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Cli/obj/project.nuget.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.deps.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Debug/net8.0/Cnp.Decoders.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.dgspec.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.props
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Cnp.Decoders.csproj.nuget.g.targets
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfo.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.AssemblyInfoInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GeneratedMSBuildEditorConfig.editorconfig
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.GlobalUsings.g.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.assets.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.CoreCompileInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.csproj.FileListAbsolute.txt
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.sourcelink.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/ref/Cnp.Decoders.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/refint/Cnp.Decoders.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.assets.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/project.nuget.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Decoders.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.deps.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Pipeline.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Debug/net8.0/Cnp.Schema.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.dgspec.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.props
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Cnp.Pipeline.csproj.nuget.g.targets
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipe.C8A0D13C.Up2Date
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfo.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.AssemblyInfoInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GeneratedMSBuildEditorConfig.editorconfig
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.GlobalUsings.g.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.assets.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.AssemblyReference.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.CoreCompileInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.csproj.FileListAbsolute.txt
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/Cnp.Pipeline.sourcelink.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/ref/Cnp.Pipeline.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/Debug/net8.0/refint/Cnp.Pipeline.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.assets.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/project.nuget.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.deps.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.dgspec.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.props
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Cnp.Schema.csproj.nuget.g.targets
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfo.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfoInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GeneratedMSBuildEditorConfig.editorconfig
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GlobalUsings.g.cs
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.assets.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.CoreCompileInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.FileListAbsolute.txt
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.sourcelink.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/ref/Cnp.Schema.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/refint/Cnp.Schema.dll
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.assets.json
+ delete mode 100644 MBCNTR2503.Modernizer/src/Cnp.Schema/obj/project.nuget.cache
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/.msCoverageSourceRootsMapping_Unit.Tests
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.dll
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Decoders.pdb
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CommunicationUtilities.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CoreUtilities.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.CrossPlatEngine.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.PlatformAbstractions.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.TestPlatform.Utilities.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.Common.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Newtonsoft.Json.dll
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.deps.json
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.dll
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Unit.Tests.runtimeconfig.json
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/testhost.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.abstractions.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.assert.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.core.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.execution.dotnet.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.reporters.netcoreapp10.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.utility.netcoreapp10.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/xunit.runner.visualstudio.testadapter.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+ delete mode 100755 MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfo.cs
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.AssemblyInfoInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GeneratedMSBuildEditorConfig.editorconfig
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.GlobalUsings.g.cs
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.assets.cache
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.AssemblyReference.cache
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.CoreCompileInputs.cache
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.FileListAbsolute.txt
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.csproj.Up2Date
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.dll
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.genruntimeconfig.cache
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.pdb
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.sourcelink.json
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/ref/Unit.Tests.dll
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/refint/Unit.Tests.dll
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.dgspec.json
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.props
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Unit.Tests.csproj.nuget.g.targets
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.assets.json
+ delete mode 100644 MBCNTR2503.Modernizer/tests/Unit.Tests/obj/project.nuget.cache
+ create mode 100644 MBCNTR2503.Modernizer/tests/binary_4300_diff.py
+ rename MBCNTR2503.Modernizer/{Pipeline_Test => tests}/file_comparison.py (100%)
+ delete mode 100644 MBCNTR2503.Modernizer/tools/DataMapper_Reference.cs
+ delete mode 100644 MBCNTR2503.Modernizer/tools/field_comparison.py
+ delete mode 100644 MBCNTR2503.Modernizer/tools/payment_validation.py
+ delete mode 100644 fix_json_packed_fields.py
+
+```
+
+---
+
+```bash
+cd /Users/vshanmu/3OSG && git push
+```
+
+```
+To https://github.com/vetrivel1/3OSG.git
+   21c6099..f267b9d  master -> master
+
+```
+
+---
+
+Commit `Modernizer parity updates` is now on `origin/master`. I staged everything except the build artefacts, removed the cached binaries/obj folders, committed the source/config changes, and pushed. Let me know if you need anything else before we wrap.
+
+---
+
+_**User (2025-09-24 23:56Z)**_
+
+push to remote
+
+---
+
+_**Assistant**_
+
+<think><details><summary>Thought Process</summary>**Confirming code pushed**</details></think>
+
+---
+
+Already done: the latest commit is on `origin/master`.
+
+---
+

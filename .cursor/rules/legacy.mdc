@@ -1,0 +1,9 @@
+---
+description:legacy 
+globs:
+alwaysApply: true
+---
+legacy: Always review legacy code in /Users/vshanmu/3OSG/Legacy Application/Scripts before deciding next action.
+Present an overview of what you will do.
+
+Do not generate any code until I tell you to proceed!

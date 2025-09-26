@@ -1,0 +1,12 @@
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.deps.json
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Debug/net8.0/Cnp.Schema.pdb
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfoInputs.cache
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.AssemblyInfo.cs
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.csproj.CoreCompileInputs.cache
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.sourcelink.json
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/refint/Cnp.Schema.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/Cnp.Schema.pdb
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/obj/Debug/net8.0/ref/Cnp.Schema.dll
