@@ -1,0 +1,16 @@
+Total bytes: 666500
+Matches: 666500 (100.00%)
+Mismatches: 0 (0.00%)
+
+Top differing fields:
+
+Record type breakdown (records, diffs):
+  mba.dd: 1 records, 0 diffs
+  mbd.dd: 1 records, 0 diffs
+  mbp.dd: 24 records, 0 diffs
+  mb1s.extract.dd: 78 records, 0 diffs
+  mbv.dd: 24 records, 0 diffs
+  mbf.dd: 24 records, 0 diffs
+  mb2s.extract.dd: 3 records, 0 diffs
+
+Field offset samples (record_index, offset):

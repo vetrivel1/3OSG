@@ -1,0 +1,70 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Cnp.Cli/1.0.0": {
+        "dependencies": {
+          "Cnp.Pipeline": "1.0.0",
+          "Cnp.Schema": "1.0.0"
+        },
+        "runtime": {
+          "Cnp.Cli.dll": {}
+        }
+      },
+      "Cnp.Decoders/1.0.0": {
+        "runtime": {
+          "Cnp.Decoders.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Cnp.Pipeline/1.0.0": {
+        "dependencies": {
+          "Cnp.Decoders": "1.0.0",
+          "Cnp.Schema": "1.0.0"
+        },
+        "runtime": {
+          "Cnp.Pipeline.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Cnp.Schema/1.0.0": {
+        "runtime": {
+          "Cnp.Schema.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Cnp.Cli/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cnp.Decoders/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cnp.Pipeline/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cnp.Schema/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
