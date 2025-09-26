@@ -130,6 +130,24 @@ else if (args.Length > 0 && args[0] == "merge-txt-new")
     txtNewMerger.MergeTextWithBinary(job, txtInput, binaryInput, outDir);
     return;
 }
+else if (args.Length > 0 && args[0] == "generate-ncpjax")
+{
+    string? job = null; string? ddControlPath = null; string? outDir = null;
+    for (int i = 1; i < args.Length; i++)
+    {
+        if (args[i] == "--job" && i + 1 < args.Length) job = args[++i];
+        else if (args[i] == "--ddcontrol" && i + 1 < args.Length) ddControlPath = args[++i];
+        else if (args[i] == "--out" && i + 1 < args.Length) outDir = args[++i];
+    }
+    if (job == null || ddControlPath == null || outDir == null)
+    {
+        Console.Error.WriteLine("Missing required args: --job --ddcontrol --out");
+        Environment.Exit(1);
+    }
+    var ncpjaxGenerator = new NcpjaxGenerator();
+    ncpjaxGenerator.GenerateNcpjaxFile(job, ddControlPath, outDir);
+    return;
+}
 else
 {
     Console.WriteLine("cnp build-schema --schema <dir> --out <dir>");
@@ -138,6 +156,7 @@ else
     Console.WriteLine("cnp ebcdic-to-ascii --job <id> --input <dat-file> --out <dir> --schema <dir>");
     Console.WriteLine("cnp validate-suspect --job <id> --input <4300-txt-file> --out <dir>");
     Console.WriteLine("cnp merge-txt-new --job <id> --txt-input <4300-txt-file> --binary-input <4300-file> --out <dir>");
+    Console.WriteLine("cnp generate-ncpjax --job <id> --ddcontrol <ddcontrol-txt-file> --out <dir>");
 }
 
 

@@ -7,7 +7,7 @@ Updated: 2025‑09‑26 (Container Step 1 Complete - 100% Perfect Parity Achieve
 ### 1. Goals and scope
 - **Goal**: Reproduce `Legacy Application/Expected_Outputs/` from `Legacy Application/Input/` using a modern C# (.NET) application on Windows with 100% parity (size and content), including MB2000 byte‑for‑byte equivalence.
 - **Constraints**: Do not modify anything under `Legacy Application/`. New app and configuration live under `MBCNTR2503.Modernizer/`.
-- **✅ ACHIEVEMENT**: Container Step 1 now achieves **100% perfect parity** across all test jobs (69172, 80147, 80299, 80362) for `.4300`, `.dat.rectype`, `.dat.total`, `.4300.txt`, `.4300.txt.suspect`, `.4300.txt.new`, and `.4300.txt.length` files.
+- **✅ ACHIEVEMENT**: Container Step 1 now achieves **100% perfect parity** across all test jobs (69172, 80147, 80299, 80362) for `.4300`, `.dat.rectype`, `.dat.total`, `.4300.txt`, `.4300.txt.suspect`, `.4300.txt.new`, `.4300.txt.length`, and `.ncpjax` files.
 
 ---
 
@@ -79,7 +79,7 @@ Updated: 2025‑09‑26 (Container Step 1 Complete - 100% Perfect Parity Achieve
    - ✅ **COMPLETED** - Extract fields → `<job>.4300.txt` (**100% perfect field-level parity achieved**)
    - ✅ **COMPLETED** - Validate text → `<job>.4300.txt.suspect` (**100% perfect parity achieved**)
    - ✅ **COMPLETED** - Merge with trailing bytes → `<job>.4300.txt.new` + `.length` (**100% perfect parity achieved**)
-   - 🚧 **NEXT** - Derive keys → `<job>.ncpjax` (and `.cntrkey` if applicable)
+   - ✅ **COMPLETED** - Derive keys → `<job>.ncpjax` (and `.cntrkey` if applicable) (**100% perfect parity achieved**)
 2) MB2000 path (legacy `setmb2000`) 
    - EBCDIC→ASCII → `<job>.dat.asc`
    - Split by field → `.asc.11.1.[p|s|d]`
@@ -247,7 +247,7 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 ### 16. Milestones
 1) ✅ **COMPLETED** - Schema compiler + decoders with unit tests
 2) ✅ **COMPLETED** - Container Step 1 parity: `.4300`, `.rectype`, `.total` with 100% byte-for-byte parity
-3) ✅ **COMPLETED** - Container Step 1 text extraction: `.4300.txt` with **100% perfect field-level parity** across all jobs
+3) ✅ **COMPLETED** - Container Step 1 COMPLETE: All 8 file types (`.4300`, `.dat.rectype`, `.dat.total`, `.4300.txt`, `.4300.txt.suspect`, `.4300.txt.new`, `.4300.txt.length`, `.ncpjax`) with **100% perfect parity** across all jobs
 4) 📋 **PLANNED** - EBCDIC→ASCII and split/key enrich: `.dat.asc`, `.asc.11.1.[p|s|d]`, `.p.keyed`
 5) 📋 **PLANNED** - MB2000 converter parity: `p.asc` → `p.set` (most stringent)
 6) 📋 **PLANNED** - E‑bill split + grouping artifacts
@@ -277,6 +277,7 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 - **TextExtractor.cs**: Advanced IOMAP-based field extraction with 100% perfect parity
 - **SuspectValidator.cs**: Character validation replicating legacy `ncpcntrextractvalidation.c` logic
 - **TxtNewMerger.cs**: Text-binary merge processor replicating legacy `ncpcntr5.c` functionality
+- **NcpjaxGenerator.cs**: Key derivation processor replicating legacy `cntrvalue.c` functionality
 - **Dynamic Field Detection**: `IsFieldPacked()`, `UnpackField()`, `DeHexify()` functions replicating legacy C logic
 - **Custom EBCDIC Converter**: `EbcdicToLegacyAscii()` with fallback to standard IBM037 encoding
 - **Override Configuration**: JSON-based `step1.overrides.json` and customer-specific override files
@@ -290,6 +291,7 @@ cnp compare --expected "Legacy Application/Expected_Outputs/69172" --actual "MBC
 - **Suspect Validation Files (.4300.txt.suspect)**: 100% perfect parity with legacy character validation logic
 - **Text Merge Files (.4300.txt.new)**: 100% perfect parity with legacy text-binary merge logic
 - **Length Files (.4300.txt.length)**: 100% perfect parity with legacy line length calculation
+- **Key Derivation Files (.ncpjax)**: 100% perfect parity with legacy ddcontrol.txt parsing
 - **Total Transformation**: From 3,461 initial differences to 0 differences (100% success rate)
 - **Production Ready**: Robust error handling, comprehensive logging, maintainable architecture
 
