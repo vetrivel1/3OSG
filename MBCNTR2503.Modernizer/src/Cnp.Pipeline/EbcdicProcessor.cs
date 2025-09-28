@@ -14,15 +14,17 @@ namespace Cnp.Pipeline;
 public class EbcdicProcessor
 {
     private readonly CompiledSchema _schema;
+    private readonly bool _verbose;
     private string _currentJob = "";
     private int _pRecordCount = 0;
     private int _sRecordCount = 0;
     private int _dRecordCount = 0;
     private byte[] _processDate = new byte[6]; // Legacy ProcessDate storage
 
-    public EbcdicProcessor(CompiledSchema schema)
+    public EbcdicProcessor(CompiledSchema schema, bool verbose = false)
     {
         _schema = schema;
+        _verbose = verbose;
     }
 
     /// <summary>
@@ -37,9 +39,12 @@ public class EbcdicProcessor
         _dRecordCount = 0;
         Array.Fill(_processDate, (byte)0x20); // Initialize with ASCII spaces
 
-        Console.WriteLine($"[EBCDIC-PROCESSOR] Starting EBCDIC→ASCII conversion for job {jobId}");
-        Console.WriteLine($"[EBCDIC-PROCESSOR] Input: {inputDatFile}");
-        Console.WriteLine($"[EBCDIC-PROCESSOR] Output: {outputDir}");
+        if (_verbose)
+        {
+            Console.WriteLine($"[VERBOSE] Starting EBCDIC→ASCII conversion for job {jobId}");
+            Console.WriteLine($"[VERBOSE] Input: {inputDatFile}");
+            Console.WriteLine($"[VERBOSE] Output: {outputDir}");
+        }
 
         if (!File.Exists(inputDatFile))
         {
@@ -53,30 +58,42 @@ public class EbcdicProcessor
         var outputSFile = Path.Combine(outputDir, $"{jobId}.dat.asc.11.1.s");
         var outputDFile = Path.Combine(outputDir, $"{jobId}.dat.asc.11.1.d");
 
+        // Set up logging
+        var logFile = Path.Combine(outputDir, $"mb2000_{jobId}.log");
+        using var logWriter = new StreamWriter(logFile, append: false);
+        logWriter.WriteLine($"[LOG] Starting EBCDIC to ASCII conversion for job {jobId} at {DateTime.Now}");
+
+
         using var inputStream = File.OpenRead(inputDatFile);
         using var asciiWriter = new FileStream(outputAscFile, FileMode.Create, FileAccess.Write);
         using var pWriter = new FileStream(outputPFile, FileMode.Create, FileAccess.Write);
         using var sWriter = new FileStream(outputSFile, FileMode.Create, FileAccess.Write);
         using var dWriter = new FileStream(outputDFile, FileMode.Create, FileAccess.Write);
 
-        var inputBuffer = new byte[4000];  // Legacy input record length (InLength)
-        var outputBuffer = new byte[4100]; // Legacy output buffer size (OutLength)
+        // Use static 1500-byte record length for legacy processing
+        const int recordLen = 4000;
+        var inputBuffer = new byte[recordLen];  // Static input record length
+        var outputBuffer = new byte[recordLen]; // Static output buffer size
         int recordCount = 0;
         int clientNumber = -1;
         bool loanIsPacked = false;
 
-        while (inputStream.Read(inputBuffer, 0, 4000) == 4000)
+        var stopwatch = new System.Diagnostics.Stopwatch();
+        stopwatch.Start();
+
+        while (inputStream.Read(inputBuffer, 0, recordLen) == recordLen)
         {
             recordCount++;
             
-            // Extract record type from offset 11 (0-based)
+            // Extract record type from offset 11 (0-based) as per legacy mbcnvt0.c line 114
+            // Legacy: ebc2asc(&RecordType, InBuffer+11, 1, 0);
             var recordTypeBuffer = new byte[1];
             EbcdicAsciiConverter.Convert(inputBuffer.AsSpan(11), recordTypeBuffer, 1, EbcdicAsciiConverter.ConversionMode.Standard);
             char recordType = (char)recordTypeBuffer[0];
 
-            if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null && recordCount <= 10)
+            if (_verbose && recordCount <= 20) // Log first 20 records in verbose mode
             {
-                Console.WriteLine($"[EBCDIC-PROCESSOR] Record {recordCount}: Type='{recordType}'");
+                Console.WriteLine($"[VERBOSE] Record {recordCount}: Type='{recordType}'");
             }
 
             switch (recordType)
@@ -92,7 +109,8 @@ public class EbcdicProcessor
                     {
                         clientNumber = ExtractClientNumber(inputBuffer);
                         loanIsPacked = IsLoanFieldPacked(inputBuffer);
-                        Console.WriteLine($"[EBCDIC-PROCESSOR] Detected client: {clientNumber}, Loan packed: {loanIsPacked}");
+                        logWriter.WriteLine($"[LOG] Detected client: {clientNumber}, Loan packed: {loanIsPacked}");
+                        if (_verbose) Console.WriteLine($"[VERBOSE] Detected client: {clientNumber}, Loan packed: {loanIsPacked}");
                     }
                     
                     ProcessPRecord(inputBuffer, outputBuffer, asciiWriter, pWriter, recordCount);
@@ -111,7 +129,7 @@ public class EbcdicProcessor
 
                 case 'A':
                     // A records contain process date and count information
-                    ProcessARecord(inputBuffer);
+                    ProcessARecord(inputBuffer, logWriter);
                     break;
 
                 default:
@@ -122,11 +140,17 @@ public class EbcdicProcessor
                     break;
             }
 
-            if (recordCount % 1000 == 0)
+            if (recordCount % 100 == 0)
             {
-                Console.WriteLine($"[EBCDIC-PROCESSOR] Processed {recordCount} records");
+                logWriter.WriteLine($"[LOG] Processed {recordCount} records in {stopwatch.ElapsedMilliseconds}ms");
+                if (_verbose) Console.WriteLine($"[VERBOSE] Processed {recordCount} records...");
             }
         }
+
+        stopwatch.Stop();
+        logWriter.WriteLine($"[LOG] Completed EBCDIC to ASCII conversion for job {jobId} at {DateTime.Now}");
+        logWriter.WriteLine($"[LOG] Total time: {stopwatch.ElapsedMilliseconds}ms");
+        logWriter.WriteLine($"[LOG] Total records: {recordCount}, P: {_pRecordCount}, S: {_sRecordCount}, D: {_dRecordCount}");
 
         Console.WriteLine($"[EBCDIC-PROCESSOR] Completed processing:");
         Console.WriteLine($"[EBCDIC-PROCESSOR] Total records: {recordCount}");
@@ -144,7 +168,7 @@ public class EbcdicProcessor
         Array.Fill(outputBuffer, (byte)' ');
 
         // Full EBCDIC to ASCII conversion for D records
-        EbcdicAsciiConverter.Convert(inputBuffer, outputBuffer, 1500, EbcdicAsciiConverter.ConversionMode.Standard);
+        EbcdicAsciiConverter.Convert(inputBuffer, outputBuffer, 4000, EbcdicAsciiConverter.ConversionMode.Standard);
 
         // Write to both main ASCII file and D split file
         asciiWriter.Write(outputBuffer, 0, 1500);
@@ -157,6 +181,7 @@ public class EbcdicProcessor
     /// </summary>
     private void ProcessPRecord(byte[] inputBuffer, byte[] outputBuffer, FileStream asciiWriter, FileStream pWriter, int recordCount)
     {
+        // Use static 4000-byte record length for legacy processing, but write 1500 bytes
         // Initialize buffer with ASCII spaces like legacy memset(OutBuffer, ' ', OutLength)
         Array.Fill(outputBuffer, (byte)' ');
         
@@ -181,7 +206,7 @@ public class EbcdicProcessor
         // Convert each field according to its data type (legacy lines 141-150)
         foreach (var field in primaryFields)
         {
-            if (field.Offset < 0 || field.Offset + field.Length > 4000 || field.Offset + field.Length > 4100)
+            if (field.Offset < 0 || field.Offset + field.Length > 4000)
                 continue;
 
             var mode = GetConversionModeFromDataType(field.DataType);
@@ -198,14 +223,15 @@ public class EbcdicProcessor
                 Console.WriteLine();
             }
             
-            // Special handling for specific packed fields that should convert EBCDIC spaces to ASCII spaces
-            if (mode == EbcdicAsciiConverter.ConversionMode.Packed && ShouldConvertPackedSpaces(field.Name))
+            // Packed decimal fields should be copied raw, not converted
+            if (mode == EbcdicAsciiConverter.ConversionMode.Packed)
             {
-                // Convert EBCDIC spaces (0x40) to ASCII spaces (0x20) for specific packed fields
-                for (int i = 0; i < field.Length; i++)
+                // Copy packed decimal fields raw (no conversion) - they are already in correct binary format
+                Buffer.BlockCopy(inputBuffer, field.Offset, outputBuffer, field.Offset, field.Length);
+                
+                if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null && field.Name.Contains("annual-int"))
                 {
-                    var sourceByte = inputBuffer[field.Offset + i];
-                    outputBuffer[field.Offset + i] = sourceByte == 0x40 ? (byte)0x20 : sourceByte;
+                    Console.WriteLine($"[DEBUG] Copied packed field {field.Name} raw: {BitConverter.ToString(inputBuffer, field.Offset, field.Length)}");
                 }
             }
             else
@@ -308,9 +334,10 @@ public class EbcdicProcessor
         var recordCountBytes = System.Text.Encoding.ASCII.GetBytes(recordCountStr);
         Array.Copy(recordCountBytes, 0, outputBuffer, 1091, Math.Min(recordCountBytes.Length, 9));
 
-        // Write to both main ASCII file and P split file
-        asciiWriter.Write(outputBuffer, 0, 1500);
-        pWriter.Write(outputBuffer, 0, 1500);
+        // Write P-record and ASCII record using legacy 1500-byte length
+        const int ddRecLen = 1500;
+        asciiWriter.Write(outputBuffer, 0, ddRecLen);
+        pWriter.Write(outputBuffer, 0, ddRecLen);
     }
 
     /// <summary>
@@ -347,7 +374,7 @@ public class EbcdicProcessor
         // Convert each field according to its data type (legacy lines 264-273)
         foreach (var field in secondaryFields)
         {
-            if (field.Offset < 0 || field.Offset + field.Length > 4000 || field.Offset + field.Length > 1500)
+            if (field.Offset < 0 || field.Offset + field.Length > 4000)
                 continue;
 
             var mode = GetConversionModeFromDataType(field.DataType);
@@ -440,7 +467,7 @@ public class EbcdicProcessor
     /// Process A record to extract process date
     /// Replicates legacy mbcnvt0.c lines 318-319
     /// </summary>
-    private void ProcessARecord(byte[] inputBuffer)
+    private void ProcessARecord(byte[] inputBuffer, StreamWriter logWriter)
     {
         // Legacy: memcpy(ProcessDate, InBuffer+15, 2);
         Array.Copy(inputBuffer, 15, _processDate, 0, 2);
@@ -448,7 +475,7 @@ public class EbcdicProcessor
         // Legacy: ebc2asc(ProcessDate+2, InBuffer+17, 4, 0);
         EbcdicAsciiConverter.Convert(inputBuffer.AsSpan(17), _processDate.AsSpan(2), 4, EbcdicAsciiConverter.ConversionMode.Standard);
         
-        Console.WriteLine($"[EBCDIC-PROCESSOR] Process date extracted: {string.Join(" ", _processDate.Select(b => $"0x{b:X2}"))}");
+        logWriter.WriteLine($"[LOG] Process date extracted: {string.Join(" ", _processDate.Select(b => $"0x{b:X2}"))}");
     }
 
     /// <summary>

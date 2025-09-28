@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cnp.Schema")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1da8200292a8b134cf1c632daa32a495cc467c67")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d908a234091cd5a95b3422627554c8af8634dc9b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cnp.Schema")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cnp.Schema")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

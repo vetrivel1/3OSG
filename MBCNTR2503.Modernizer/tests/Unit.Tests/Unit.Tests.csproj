@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Cnp.Decoders\Cnp.Decoders.csproj" />
+    <ProjectReference Include="..\..\src\Cnp.Pipeline\Cnp.Pipeline.csproj" />
+    <ProjectReference Include="..\..\src\Cnp.Schema\Cnp.Schema.csproj" />
   </ItemGroup>
 </Project>
 

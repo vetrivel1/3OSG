@@ -3,7 +3,9 @@ description:legacy
 globs:
 alwaysApply: true
 ---
-legacy: Always review legacy code in /Users/vshanmu/3OSG/Legacy Application/Scripts before deciding next action.
-Present an overview of what you will do.
+legacy: Always start with understanding legacy code in /Users/vshanmu/3OSG/Legacy Application/Scripts before deciding next action.
+Do not make any assumption. Present an overview of what you will do.
 
 Do not generate any code until I tell you to proceed!
+
+NO HARDCODING. For configuration riles use override.json file. We need to code to work for multiple client and multiple job. 

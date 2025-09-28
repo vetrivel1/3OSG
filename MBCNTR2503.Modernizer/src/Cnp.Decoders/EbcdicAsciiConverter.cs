@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Cnp.Decoders;
 
@@ -8,6 +9,13 @@ namespace Cnp.Decoders;
 /// </summary>
 public static class EbcdicAsciiConverter
 {
+    static EbcdicAsciiConverter()
+    {
+        // Enable support for IBM code pages
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        _ebcdicCodec = Encoding.GetEncoding(37);
+    }
+    private static readonly Encoding _ebcdicCodec;
     /// <summary>
     /// EBCDIC to ASCII conversion table from legacy ebc2asc.c
     /// This table maps EBCDIC byte values (0-255) to ASCII byte values
@@ -69,8 +77,8 @@ public static class EbcdicAsciiConverter
         switch (mode)
         {
             case ConversionMode.Packed:
-                // ispacked == 1: Copy bytes without conversion (direct memcpy)
-                source.Slice(0, length).CopyTo(destination);
+                // COMP-3 packed decimal decoding into ASCII digits
+                ConvertPacked(source, destination, length);
                 break;
 
             case ConversionMode.ZonedDecimal:
@@ -92,10 +100,12 @@ public static class EbcdicAsciiConverter
     /// </summary>
     private static void ConvertStandard(ReadOnlySpan<byte> source, Span<byte> destination, int length)
     {
+        // Decode EBCDIC bytes to Unicode chars using IBM037
+        var chars = _ebcdicCodec.GetChars(source.Slice(0, length).ToArray());
+        // Encode Unicode chars to ASCII bytes
+        var ascii = Encoding.ASCII.GetBytes(chars);
         for (int i = 0; i < length; i++)
-        {
-            destination[i] = E2A_TABLE[source[i]];
-        }
+            destination[i] = ascii[i];
     }
 
     /// <summary>
@@ -174,5 +184,41 @@ public static class EbcdicAsciiConverter
             "PACKED DECIMAL" => ConversionMode.Packed,   // DataType 2+ → e2aControl = 1
             _ => ConversionMode.Standard                 // Default to standard conversion
         };
+    }
+    
+    /// <summary>
+    /// Decode COMP-3 packed decimal field into ASCII digits (no scale)
+    /// </summary>
+    private static string UnpackComp3(ReadOnlySpan<byte> data)
+    {
+        var sb = new System.Text.StringBuilder();
+        for (int i = 0; i < data.Length; i++)
+        {
+            int hi = (data[i] >> 4) & 0x0F;
+            sb.Append(hi);
+            if (i < data.Length - 1)
+            {
+                int lo = data[i] & 0x0F;
+                sb.Append(lo);
+            }
+        }
+        // Handle sign nibble in last half-byte if needed (positive assumed)
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Decode COMP-3 packed decimal field into ASCII digits
+    /// </summary>
+    private static void ConvertPacked(ReadOnlySpan<byte> source, Span<byte> destination, int length)
+    {
+        // Unpack to a digit string
+        var digits = UnpackComp3(source);
+        // Write ASCII digits into destination, pad/truncate
+        int copy = Math.Min(digits.Length, destination.Length);
+        for (int i = 0; i < copy; i++)
+            destination[i] = (byte)digits[i];
+        // Pad remaining with '0'
+        for (int i = copy; i < destination.Length; i++)
+            destination[i] = (byte)'0';
     }
 }

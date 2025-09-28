@@ -9,6 +9,10 @@
     <ProjectReference Include="..\Cnp.Schema\Cnp.Schema.csproj" />
     <ProjectReference Include="..\Cnp.Pipeline\Cnp.Pipeline.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NJsonSchema" Version="11.5.0" />
+    <PackageReference Include="NJsonSchema.CodeGeneration.CSharp" Version="11.5.0" />
+  </ItemGroup>
 </Project>
 
 

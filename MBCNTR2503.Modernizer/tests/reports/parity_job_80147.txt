@@ -1,0 +1,7 @@
+
+🚀 Running MB2000 conversion for job 80147...
+✅ Conversion successful.
+
+🔍 Starting comparison for job 80147...
+🔍 Found schema for 'mblps' in: 88f02f49240f0a0084aa1b6358740a32931b6c1e3012832d52432a3e60865a9d.schema.json
+❌ Record count mismatch! Expected: 24, Got: 1

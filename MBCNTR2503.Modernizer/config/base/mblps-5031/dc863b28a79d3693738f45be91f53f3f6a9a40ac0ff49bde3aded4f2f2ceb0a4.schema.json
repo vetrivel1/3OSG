@@ -1,0 +1,3909 @@
+{
+  "Sha": "dc863b28a79d3693738f45be91f53f3f6a9a40ac0ff49bde3aded4f2f2ceb0a4",
+  "SourceDir": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/config/base/mblps-5031",
+  "Container4000": {
+    "Name": "mblps",
+    "Length": 4000,
+    "Fields": [
+      {
+        "Name": "MB-CLIENT3",
+        "Offset": 0,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 4,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ACCOUNT",
+        "Offset": 10,
+        "Length": 7,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FORMATTED-ACCOUNT",
+        "Offset": 17,
+        "Length": 10,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 27,
+        "Length": 10,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SSN",
+        "Offset": 37,
+        "Length": 9,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SSN-TIN-CODE",
+        "Offset": 46,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-CO-SSN",
+        "Offset": 47,
+        "Length": 9,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-CO-SSN-TIN-CODE",
+        "Offset": 56,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FOREIGN-ADDRESS",
+        "Offset": 57,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-NAME",
+        "Offset": 58,
+        "Length": 60,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-LINE-2",
+        "Offset": 118,
+        "Length": 60,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-LINE-3",
+        "Offset": 178,
+        "Length": 60,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-LINE-4",
+        "Offset": 238,
+        "Length": 60,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-LINE-5",
+        "Offset": 298,
+        "Length": 60,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-LINE-6",
+        "Offset": 358,
+        "Length": 53,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-CITY",
+        "Offset": 411,
+        "Length": 51,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-STATE",
+        "Offset": 462,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ZIP-5",
+        "Offset": 464,
+        "Length": 5,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ZIP-4",
+        "Offset": 469,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ACS-CODE",
+        "Offset": 473,
+        "Length": 25,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PROPERTY-STREET",
+        "Offset": 498,
+        "Length": 50,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PROPERTY-CITY",
+        "Offset": 548,
+        "Length": 30,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PROPERTY-STATE",
+        "Offset": 578,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PROPERTY-ZIP-5",
+        "Offset": 580,
+        "Length": 5,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PROPERTY-ZIP-4",
+        "Offset": 585,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATE-CODE",
+        "Offset": 589,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 591,
+        "Length": 29,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TELE-NO",
+        "Offset": 620,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SEC-TELE-NO",
+        "Offset": 632,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-YY",
+        "Offset": 644,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-MM",
+        "Offset": 648,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-DD",
+        "Offset": 650,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 652,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-YY-R",
+        "Offset": 653,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-MM-R",
+        "Offset": 656,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-DD-R",
+        "Offset": 658,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 660,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-YY-R2",
+        "Offset": 662,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-MM-R2",
+        "Offset": 664,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STATEMENT-DD-R2",
+        "Offset": 666,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LOAN-DUE-YY",
+        "Offset": 668,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LOAN-DUE-MM",
+        "Offset": 672,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LOAN-DUE-DD",
+        "Offset": 674,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-COUPON-DUE-YY",
+        "Offset": 676,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-COUPON-DUE-MM",
+        "Offset": 680,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-COUPON-DUE-DD",
+        "Offset": 682,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-1ST-DUE-YY",
+        "Offset": 684,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-1ST-DUE-MM",
+        "Offset": 688,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-1ST-DUE-DD",
+        "Offset": 690,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BEG-HIST-YY",
+        "Offset": 692,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BEG-HIST-MM",
+        "Offset": 696,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BEG-HIST-DD",
+        "Offset": 698,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MATURITY-YY",
+        "Offset": 700,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MATURITY-MM",
+        "Offset": 704,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-IR-YY",
+        "Offset": 706,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-IR-MM",
+        "Offset": 710,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-IR-DD",
+        "Offset": 712,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-PI-CHG-YY",
+        "Offset": 714,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-PI-CHG-MM",
+        "Offset": 718,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-PI-CHG-DD",
+        "Offset": 720,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LOAN-YY",
+        "Offset": 722,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LOAN-MM",
+        "Offset": 726,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LOAN-DD",
+        "Offset": 728,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ASSUMP-YY",
+        "Offset": 730,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ASSUMP-MM",
+        "Offset": 734,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ASSUMP-DD",
+        "Offset": 736,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-GRACE-DAYS",
+        "Offset": 738,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAYMENT-FREQUENCY",
+        "Offset": 740,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ANNUAL-INTEREST",
+        "Offset": 741,
+        "Length": 4,
+        "DataType": "Packed Number",
+        "Scale": 5
+      },
+      {
+        "Name": "MB-2ND-INTEREST",
+        "Offset": 745,
+        "Length": 4,
+        "DataType": "Packed Number",
+        "Scale": 5
+      },
+      {
+        "Name": "MB-TYPE-LOAN",
+        "Offset": 749,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TYPE-LOAN-A",
+        "Offset": 751,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TYPE-LOAN-B",
+        "Offset": 752,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-2ND-LOAN-TYPE",
+        "Offset": 753,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-MODE",
+        "Offset": 755,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LOAN-TERM",
+        "Offset": 756,
+        "Length": 2,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BANKRUPT-CODE",
+        "Offset": 758,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FIRST-PRIN-BAL",
+        "Offset": 760,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-2ND-PRIN-BAL",
+        "Offset": 761,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ESCROW-BAL",
+        "Offset": 762,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ESCROW-ADVANCE-BAL",
+        "Offset": 763,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SUSPENSE-BAL",
+        "Offset": 764,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-RES-ESCROW",
+        "Offset": 765,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-REP-RES-BAL",
+        "Offset": 766,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ACCRUED-LATE-CHG",
+        "Offset": 767,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DEFERRED-INT",
+        "Offset": 768,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-NSF-BAL",
+        "Offset": 769,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-OTHER-FEES",
+        "Offset": 770,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-CORP-ADV",
+        "Offset": 771,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAYMENT-AMOUNT",
+        "Offset": 772,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FIRST-P-I",
+        "Offset": 773,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-2ND-P-I",
+        "Offset": 774,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ESCROW-PAYMENT",
+        "Offset": 775,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-COUNTY-TAX",
+        "Offset": 776,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-CITY-TAX",
+        "Offset": 777,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-HAZ-PREM",
+        "Offset": 778,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MIP",
+        "Offset": 779,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LIEN",
+        "Offset": 780,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-O-S-SPREAD",
+        "Offset": 781,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-A-H-PREM",
+        "Offset": 782,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LIFE-PREM",
+        "Offset": 783,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-REP-RES",
+        "Offset": 784,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MISC-AMT",
+        "Offset": 785,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-HUD-PART",
+        "Offset": 786,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BSC-AMT",
+        "Offset": 787,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-L-C-AMT",
+        "Offset": 788,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TOTAL-AMOUNT-DUE",
+        "Offset": 789,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DELQ-P-I",
+        "Offset": 790,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DELQ-ESC",
+        "Offset": 791,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DELQ-L-C",
+        "Offset": 792,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DELQ-INS",
+        "Offset": 793,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DELQ-OTHER",
+        "Offset": 794,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-INTEREST-DUE",
+        "Offset": 795,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PRIN-YTD",
+        "Offset": 796,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-INTEREST-YTD",
+        "Offset": 797,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TAXES-YTD",
+        "Offset": 798,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-HAZARD-YTD",
+        "Offset": 799,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MIP-YTD",
+        "Offset": 800,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LIEN-YTD",
+        "Offset": 801,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-L-C-YTD",
+        "Offset": 802,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LAST-YEAR-INT-PAID",
+        "Offset": 803,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LAST-YEAR-TAXES-PAID",
+        "Offset": 804,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MODIFICATION-STATUS",
+        "Offset": 805,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MODIFICATION-TYPE",
+        "Offset": 806,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MODIFICATION-STATUS-YY",
+        "Offset": 807,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MOD-STATUS-MMDD",
+        "Offset": 810,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MOD-STATUS-MM",
+        "Offset": 814,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MOD-STATUS-DD",
+        "Offset": 816,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MODIFICATION-PROGRAM",
+        "Offset": 818,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MODIFICATION-YY",
+        "Offset": 822,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MODIFICATION-MMDD",
+        "Offset": 825,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DEFERRED-BAL-IND",
+        "Offset": 829,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAYMENT-OPTION-IND",
+        "Offset": 830,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ORIG-LOAN-AMT",
+        "Offset": 831,
+        "Length": 5,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-NEG-AM-PB-CAP-VALUE",
+        "Offset": 836,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-INT-ONLY-EXP-YY",
+        "Offset": 837,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-INT-ONLY-EXP-MMDD",
+        "Offset": 840,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MONTHLY-BORR-ACCR-AMT",
+        "Offset": 844,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BORR-INCTV-ANNIV-YY",
+        "Offset": 845,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BORR-INCTV-ANNIV-MMDD",
+        "Offset": 848,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BORR-INC-ACCR-ANNV2DT",
+        "Offset": 852,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TRIAL-MOD-START-YY",
+        "Offset": 853,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TRIAL-MOD-START-MMDD",
+        "Offset": 856,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TRIAL-MOD-END-YY",
+        "Offset": 860,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TRIAL-MOD-END-MMDD",
+        "Offset": 863,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TRIAL-MOD-PAYMENT",
+        "Offset": 867,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MOD-REASON-CODE",
+        "Offset": 868,
+        "Length": 5,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MOD-EFF-YY",
+        "Offset": 873,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MOD-EFF-MMDD",
+        "Offset": 876,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-2-TO-1-INDICATOR",
+        "Offset": 880,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-OFF-SCHD-PEND-YY",
+        "Offset": 881,
+        "Length": 2,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-OFF-SCHD-PEND-MM",
+        "Offset": 883,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-OFF-SCHD-PEND-DD",
+        "Offset": 885,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-OFF-SCHD-PEND-IR",
+        "Offset": 887,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-OFF-SCHD-PEND-PI",
+        "Offset": 888,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FLEXFIELD1",
+        "Offset": 889,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FLEXFIELD2",
+        "Offset": 901,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FLEXFIELD3",
+        "Offset": 913,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 925,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POCKET-1",
+        "Offset": 929,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POCKET-2",
+        "Offset": 930,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POCKET-3",
+        "Offset": 931,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POCKET-4",
+        "Offset": 932,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POCKET-5",
+        "Offset": 933,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POCKET-6",
+        "Offset": 934,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POCKET-7",
+        "Offset": 935,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-CLIENT-FIELDS",
+        "Offset": 936,
+        "Length": 160,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 1096,
+        "Length": 148,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-1021-ACC-INT-DUE-CALC-AMT",
+        "Offset": 1244,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-1021-ACCELERATED-AMOUNT",
+        "Offset": 1245,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-ONLINE-INSERT",
+        "Offset": 1246,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-NEW-PAL-FLAG",
+        "Offset": 1247,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-NEW-PAL-FORM",
+        "Offset": 1248,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-XTRA-PMI-PAGE",
+        "Offset": 1254,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-PROD-CODE",
+        "Offset": 1255,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-FORM-NAME",
+        "Offset": 1259,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-MESS-ONE",
+        "Offset": 1265,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-MESS-TWO",
+        "Offset": 1266,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-MESS-THREE",
+        "Offset": 1267,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-INSERT1",
+        "Offset": 1268,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-INSERT2",
+        "Offset": 1269,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-INSERT3",
+        "Offset": 1270,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-INSERT4",
+        "Offset": 1271,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-2ND-PAGE",
+        "Offset": 1272,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-CHK-TYPE",
+        "Offset": 1278,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-NO-BILL-SW",
+        "Offset": 1281,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-NO-BILL2-SW",
+        "Offset": 1282,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-KILL-COUP",
+        "Offset": 1283,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-BANKRUPT",
+        "Offset": 1284,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-MARKETING",
+        "Offset": 1285,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-BANKRUPT-X",
+        "Offset": 1286,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-BNKRPT-ESC",
+        "Offset": 1287,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-BILL-ADDR-FOREIGN",
+        "Offset": 1288,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-PILOT-SW",
+        "Offset": 1289,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-PILOT-TOTAL-PAGES",
+        "Offset": 1290,
+        "Length": 1,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-PILOT-TOTAL-LINES",
+        "Offset": 1291,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-ESC-CODE",
+        "Offset": 1294,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-CHECK",
+        "Offset": 1295,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-ESC-FLAG",
+        "Offset": 1296,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-PMI-CODE",
+        "Offset": 1297,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "ESC-0133-S-KEY",
+        "Offset": 1300,
+        "Length": 6,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "ESC-0133-S-COUNT",
+        "Offset": 1306,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-PREV-POSTED",
+        "Offset": 1310,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-PAL-FLAG",
+        "Offset": 1311,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-GENERATED",
+        "Offset": 1312,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TI-REL-KEY",
+        "Offset": 1313,
+        "Length": 7,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TI-ESCROW-MTH",
+        "Offset": 1320,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TI-TYPE-LOAN",
+        "Offset": 1321,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TI-STATE",
+        "Offset": 1322,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TI-PRIN-BAL",
+        "Offset": 1323,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TI-PMI-CODE",
+        "Offset": 1324,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TI-MI-CODE",
+        "Offset": 1327,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-1099-AMOUNT-1",
+        "Offset": 1329,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-1098-INT",
+        "Offset": 1330,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-MESSG-SW",
+        "Offset": 1331,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0133-TEMP-SY-MESS-SW",
+        "Offset": 1332,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 1333,
+        "Length": 51,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-OPT-OUT-CODE",
+        "Offset": 1384,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-SPECIAL-MESSAGE-SW",
+        "Offset": 1385,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-POCKET-2",
+        "Offset": 1386,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-POCKET-3",
+        "Offset": 1387,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-POCKET-4",
+        "Offset": 1388,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-POCKET-5",
+        "Offset": 1389,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-POCKET-6",
+        "Offset": 1390,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-STATEMENT-SW",
+        "Offset": 1391,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-FORM-TYPE",
+        "Offset": 1392,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0140-PAYOPT-FLAG",
+        "Offset": 1398,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 1399,
+        "Length": 145,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-T-I-INSURANCE",
+        "Offset": 1544,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-EXPENSES-PAID",
+        "Offset": 1545,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-LATE-CHARGE",
+        "Offset": 1546,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-RETURN-CHECK-FEE",
+        "Offset": 1547,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-OTHER-FEES",
+        "Offset": 1548,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-TAX-CODE",
+        "Offset": 1549,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-PROP-CODE",
+        "Offset": 1550,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-ARM-CODE",
+        "Offset": 1551,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-TOT-BEG-BAL",
+        "Offset": 1552,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-END-BEG-BAL",
+        "Offset": 1553,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-INTEREST-DUE",
+        "Offset": 1554,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-RES-ESC-CODE",
+        "Offset": 1555,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-BILL-FORM-NAME",
+        "Offset": 1556,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-BILL-BACK-NAME",
+        "Offset": 1562,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-BILL-MESSAGES",
+        "Offset": 1568,
+        "Length": 15,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-TRANS-PAGE",
+        "Offset": 1583,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-PRIVACY-PAGE",
+        "Offset": 1584,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-MARKETING-PAGE",
+        "Offset": 1585,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-BILL-INSERTS",
+        "Offset": 1586,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-MARKETING-FORM-NAME",
+        "Offset": 1590,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-NUM-PAGES",
+        "Offset": 1596,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-BILL-WEIGHT",
+        "Offset": 1597,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-MESSAGE-BEGIN",
+        "Offset": 1598,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-SCRA-F",
+        "Offset": 1599,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-SCRA-DATE-3-MM",
+        "Offset": 1600,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-SCRA-DATE-3-DD",
+        "Offset": 1601,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-SCRA-DATE-3-YY",
+        "Offset": 1602,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-SCRA-DATE-4-MM",
+        "Offset": 1603,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-SCRA-DATE-4-DD",
+        "Offset": 1604,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-SCRA-DATE-4-YY",
+        "Offset": 1605,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-LAST-AMT",
+        "Offset": 1606,
+        "Length": 9,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-LAST-DATE",
+        "Offset": 1615,
+        "Length": 6,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-1098-PAGE",
+        "Offset": 1621,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-TI-IRS-PURPOSE-CODE",
+        "Offset": 1622,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-BILL-INSERT-6",
+        "Offset": 1623,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-BILL-INSERT-7",
+        "Offset": 1624,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0277-TYPE-OF-SAMPLE",
+        "Offset": 1625,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 1626,
+        "Length": 24,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PRIN-DELQ-BAL",
+        "Offset": 1650,
+        "Length": 13,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FORBEARANCE-AMT",
+        "Offset": 1663,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 1664,
+        "Length": 143,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SWITCH",
+        "Offset": 1807,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-TOTAL-DED-MI-0346",
+        "Offset": 1808,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPLE-LOAN-SW",
+        "Offset": 1809,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPLE-LOAN-TYPE",
+        "Offset": 1810,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPLE-FORM1",
+        "Offset": 1811,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPLE-FORM1B",
+        "Offset": 1817,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPLE-FORM2",
+        "Offset": 1823,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPLE-FORM3",
+        "Offset": 1829,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPLE-MESS-CODE",
+        "Offset": 1835,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-ADDL-PAGES",
+        "Offset": 1836,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-PRINT-TRANS-TOT",
+        "Offset": 1838,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-BANKRUPT",
+        "Offset": 1842,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-DELINQUENT",
+        "Offset": 1843,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-TYPELOAN",
+        "Offset": 1844,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-BK",
+        "Offset": 1845,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-DELQ",
+        "Offset": 1846,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-DRAFTER",
+        "Offset": 1847,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-FC",
+        "Offset": 1848,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-AUDIT",
+        "Offset": 1849,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-TI-HIST",
+        "Offset": 1850,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-TI-PMI",
+        "Offset": 1851,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SAMPL-TI-MIP",
+        "Offset": 1852,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 1853,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-SUPPRESSED-SW",
+        "Offset": 1854,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-BNKL-CLSD-REASON-CD",
+        "Offset": 1855,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-ACCESS-NBR",
+        "Offset": 1857,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0346-AUDIT",
+        "Offset": 1869,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FOR1-SALE-DATE-YR",
+        "Offset": 1870,
+        "Length": 2,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FOR1-SALE-DATE-MO",
+        "Offset": 1872,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FOR1-SALE-DATE-DA",
+        "Offset": 1873,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 1874,
+        "Length": 87,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-REC-NO",
+        "Offset": 1961,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-REC-NO-R",
+        "Offset": 1961,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-IMAGE-OUT",
+        "Offset": 1964,
+        "Length": 18,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FACE-IMAGE-OUT",
+        "Offset": 1982,
+        "Length": 18,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FACE-IMAGE-OUT-2",
+        "Offset": 2000,
+        "Length": 18,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ACCELERATED-AMOUNT",
+        "Offset": 2018,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ACCELERATED-REASON-CODE",
+        "Offset": 2019,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 2021,
+        "Length": 7,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-REC-NO-ORIGINAL",
+        "Offset": 2028,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-CORP-ADV-DATE",
+        "Offset": 2031,
+        "Length": 8,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DUP-ONCERT1",
+        "Offset": 2039,
+        "Length": 18,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DUP-ONCERT2",
+        "Offset": 2057,
+        "Length": 18,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DUP-ONCERT3",
+        "Offset": 2075,
+        "Length": 18,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DUP-ONCERT4",
+        "Offset": 2093,
+        "Length": 18,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 2111,
+        "Length": 5,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-POCKET-2",
+        "Offset": 2116,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-POCKET-3",
+        "Offset": 2117,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-POCKET-4",
+        "Offset": 2118,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-POCKET-5",
+        "Offset": 2119,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-POCKET-6",
+        "Offset": 2120,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-BILL-FORM",
+        "Offset": 2121,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-NEW-LOAN-FORM",
+        "Offset": 2127,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-NEW-LOAN-FORM2",
+        "Offset": 2133,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-1098-FORM",
+        "Offset": 2139,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-TOTAL-INSERTS",
+        "Offset": 2145,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-MESSAGE-CODES",
+        "Offset": 2146,
+        "Length": 10,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-ARM-LTR-SW",
+        "Offset": 2156,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-ZIP-CODE-SW",
+        "Offset": 2157,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-BILLING-SW",
+        "Offset": 2158,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-LETTER-TYPE",
+        "Offset": 2159,
+        "Length": 1,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-JIT-FEE",
+        "Offset": 2160,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-VI-SW",
+        "Offset": 2162,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-1099-AMOUNT-1",
+        "Offset": 2163,
+        "Length": 11,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-1099-AMOUNT-2",
+        "Offset": 2174,
+        "Length": 11,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-1099-AMOUNT-3",
+        "Offset": 2185,
+        "Length": 11,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-1098-SW",
+        "Offset": 2196,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-1099-SW",
+        "Offset": 2197,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-FHA-SW",
+        "Offset": 2198,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-VI-BILL-FORM",
+        "Offset": 2199,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-SPECIAL",
+        "Offset": 2205,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0547-FILLER",
+        "Offset": 2206,
+        "Length": 82,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 2288,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-TOTAL-DED-MI-0628",
+        "Offset": 2289,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0628-BK",
+        "Offset": 2290,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0628-OPTION-ARM",
+        "Offset": 2292,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0628-SAMPLE-VALUE",
+        "Offset": 2293,
+        "Length": 10,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0628-ATTY-SW",
+        "Offset": 2303,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 2304,
+        "Length": 139,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-0628-ADDITIONAL-PAGE",
+        "Offset": 2443,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-DEFERRED-INT",
+        "Offset": 2444,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-INST",
+        "Offset": 2445,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-PIN-NUMBER",
+        "Offset": 2446,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-FUND-CD",
+        "Offset": 2452,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-ESC-VAR",
+        "Offset": 2453,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-CD-2",
+        "Offset": 2454,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-BAL-2",
+        "Offset": 2455,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-CD-3",
+        "Offset": 2456,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-BAL-3",
+        "Offset": 2457,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-CD-4",
+        "Offset": 2458,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-BAL-4",
+        "Offset": 2459,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-CD-5",
+        "Offset": 2460,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-UNAP-BAL-5",
+        "Offset": 2461,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-ADDL-PAGES",
+        "Offset": 2462,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-BMSG",
+        "Offset": 2463,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-BMSG-LINES",
+        "Offset": 2465,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-BMSG-REQD",
+        "Offset": 2467,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-MAIL-CD",
+        "Offset": 2468,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-DART-UNIT",
+        "Offset": 2469,
+        "Length": 20,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-BUYER-ASST-AMT",
+        "Offset": 2489,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-5020-INV-CODE",
+        "Offset": 2490,
+        "Length": 3,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 2493,
+        "Length": 9,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FEES-CODE",
+        "Offset": 2502,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LAST-STMT-DATE",
+        "Offset": 2504,
+        "Length": 6,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 2510,
+        "Length": 152,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "CNP-COMPANY-NAME",
+        "Offset": 2662,
+        "Length": 30,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILL-METHOD",
+        "Offset": 2692,
+        "Length": 1,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SUPPRESSION-FLAG",
+        "Offset": 2693,
+        "Length": 3,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MSG1-CODE",
+        "Offset": 2696,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MSG2-CODE",
+        "Offset": 2698,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 2700,
+        "Length": 122,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BORR-EMAIL-ADDR",
+        "Offset": 2822,
+        "Length": 66,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BORR-DUE-DATE",
+        "Offset": 2888,
+        "Length": 10,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BORR-PMT-DUE",
+        "Offset": 2898,
+        "Length": 9,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BORR-PMT-DUEX",
+        "Offset": 2898,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-E-CONSENT",
+        "Offset": 2907,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DRAFT-IND",
+        "Offset": 2908,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SERVICER-FIELDS",
+        "Offset": 2909,
+        "Length": 150,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DIST-TYPE",
+        "Offset": 3059,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MAN",
+        "Offset": 3060,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-2ND-MAN",
+        "Offset": 3061,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ZONE",
+        "Offset": 3062,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-1ST-BASIS-CODE",
+        "Offset": 3063,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BANK",
+        "Offset": 3066,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-AGGR",
+        "Offset": 3069,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-2ND-BANK",
+        "Offset": 3072,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-2ND-CAT",
+        "Offset": 3075,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ZONE-1",
+        "Offset": 3078,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ZONE-2",
+        "Offset": 3080,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TYPE-ACQ",
+        "Offset": 3082,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-USER-BILLING-TABLE",
+        "Offset": 3083,
+        "Length": 20,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-1",
+        "Offset": 3103,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-2",
+        "Offset": 3104,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-3",
+        "Offset": 3105,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-4",
+        "Offset": 3106,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-5",
+        "Offset": 3107,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-6",
+        "Offset": 3108,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-7",
+        "Offset": 3109,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-8",
+        "Offset": 3110,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-9",
+        "Offset": 3111,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-10",
+        "Offset": 3112,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-11",
+        "Offset": 3113,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-12",
+        "Offset": 3114,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-13",
+        "Offset": 3115,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-14",
+        "Offset": 3116,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-15",
+        "Offset": 3117,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-16",
+        "Offset": 3118,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-17",
+        "Offset": 3119,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-18",
+        "Offset": 3120,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-19",
+        "Offset": 3121,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "UBT-POS-20",
+        "Offset": 3122,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STOP-BILL-FLAG",
+        "Offset": 3123,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BILLING-CYCLE",
+        "Offset": 3124,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAY-OPTION",
+        "Offset": 3127,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DONT-PROCESS",
+        "Offset": 3128,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PIF-STOP",
+        "Offset": 3129,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FORECLOSURE-STOP",
+        "Offset": 3130,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BAD-CK-STOP",
+        "Offset": 3131,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-NO-NOTICES",
+        "Offset": 3132,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DONT-ANALYZE",
+        "Offset": 3133,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-A-H-FLAG",
+        "Offset": 3134,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LIFE-FLAG",
+        "Offset": 3135,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DISB-STOP",
+        "Offset": 3136,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-PLAN-ID",
+        "Offset": 3137,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-INV",
+        "Offset": 3141,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PLS-CLT-ID",
+        "Offset": 3142,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAYMENT-OPTION-SWITCH",
+        "Offset": 3145,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAYMENT-OPT-4",
+        "Offset": 3146,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAYMENT-OPT-4-TOTDUE",
+        "Offset": 3147,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DIST-TYPE-1-IO-FLAG",
+        "Offset": 3148,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-INT-ONLY-PI",
+        "Offset": 3149,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-FULLY-AM-PI",
+        "Offset": 3150,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-INT-ONLY-TOT",
+        "Offset": 3151,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-FULLY-AM-TOT",
+        "Offset": 3152,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POST-PETITION-YY",
+        "Offset": 3153,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POST-PETITION-MMDD",
+        "Offset": 3156,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-POST-PETITION-AMOUNT",
+        "Offset": 3160,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-COUPON-TAPE-YY",
+        "Offset": 3161,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-COUPON-TAPE-MM",
+        "Offset": 3165,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-COUPON-TAPE-DD",
+        "Offset": 3167,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BANKRUPTCY-STATUS",
+        "Offset": 3169,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ARM-RATE-PI-NOT-AVAIL-IND",
+        "Offset": 3170,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-NO-CHANGE-SCHED-IND",
+        "Offset": 3171,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MTGR-LANG-PREF",
+        "Offset": 3172,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FOR1-STATUS-CD",
+        "Offset": 3174,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-BNK-DISCHARGE-IND",
+        "Offset": 3175,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-EBPP-IND",
+        "Offset": 3176,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-DELQ-DAYS",
+        "Offset": 3177,
+        "Length": 5,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3182,
+        "Length": 13,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PAYMENT-DUE-COUNTER",
+        "Offset": 3195,
+        "Length": 2,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-ESCROW-INTEREST-YTD",
+        "Offset": 3197,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PROPERTY-ADDRESS-2",
+        "Offset": 3198,
+        "Length": 35,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LATE-YYYY",
+        "Offset": 3233,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LATE-MM",
+        "Offset": 3237,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-LATE-DD",
+        "Offset": 3239,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "CNP-INVESTOR-CODE",
+        "Offset": 3241,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3244,
+        "Length": 98,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-MTG-CODE",
+        "Offset": 3342,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-TRAN-56-SW",
+        "Offset": 3343,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-ZERO-PB-CODE",
+        "Offset": 3344,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-LOAN-YY",
+        "Offset": 3345,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-LOAN-YY-R",
+        "Offset": 3345,
+        "Length": 4,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-LOAN-MM",
+        "Offset": 3349,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-LOAN-DD",
+        "Offset": 3351,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-ASSUMP-DATE",
+        "Offset": 3353,
+        "Length": 8,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-HAZARD-YTD",
+        "Offset": 3361,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-MIP-YTD",
+        "Offset": 3362,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-LIEN-YTD",
+        "Offset": 3363,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-ESC-MTH",
+        "Offset": 3364,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-TOT-PMT",
+        "Offset": 3365,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-1098-CODE",
+        "Offset": 3366,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-DETAIL-HISTORY",
+        "Offset": 3367,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-SSN-TIN-CODE",
+        "Offset": 3368,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-CO-SSN-TIN-CODE",
+        "Offset": 3369,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-REVISED-STMT-SW",
+        "Offset": 3370,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-PMI-CODE",
+        "Offset": 3371,
+        "Length": 3,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "TI-PMI-PRE-POST",
+        "Offset": 3374,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "TI-PMI-STATE",
+        "Offset": 3375,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-ESC-BAL-BEG",
+        "Offset": 3376,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-PRIN-BAL-BEG",
+        "Offset": 3377,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-1098-INT",
+        "Offset": 3378,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-PRIN-YTD",
+        "Offset": 3379,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-TAXES-YTD",
+        "Offset": 3380,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-LATE-CHG-PD",
+        "Offset": 3381,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-INT-ON-ESCROW",
+        "Offset": 3382,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-REIMBURSED-AMOUNT",
+        "Offset": 3383,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-TOTAL-DED-MI",
+        "Offset": 3384,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-AMT-DISB",
+        "Offset": 3385,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-ESC-DEP",
+        "Offset": 3386,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-H-FHA-NUMBER",
+        "Offset": 3387,
+        "Length": 14,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-H-AS-OF-YY",
+        "Offset": 3401,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-H-AS-OF-MM",
+        "Offset": 3405,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-H-AS-OF-DD",
+        "Offset": 3407,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-H-PAYOFF-AMOUNT",
+        "Offset": 3409,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-STMT-SAMPLE",
+        "Offset": 3410,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-SAMPLE-REASON",
+        "Offset": 3411,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-SAMPLE-LOAN-SW",
+        "Offset": 3412,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-KEY",
+        "Offset": 3413,
+        "Length": 9,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TI-COUNT",
+        "Offset": 3422,
+        "Length": 5,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FLEXFIELD4",
+        "Offset": 3427,
+        "Length": 25,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FLEXFIELD5",
+        "Offset": 3452,
+        "Length": 40,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-FLEXFIELD6",
+        "Offset": 3492,
+        "Length": 50,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3542,
+        "Length": 65,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-REMITTANCE-IMB-CODE",
+        "Offset": 3607,
+        "Length": 65,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-REMITTANCE-ZIP-CODE",
+        "Offset": 3672,
+        "Length": 11,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3683,
+        "Length": 7,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PRODUCT-CODE",
+        "Offset": 3690,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-VIEW-PRODUCT-CODE",
+        "Offset": 3694,
+        "Length": 4,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3698,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-STMT-SELECTED-AS-SAMPLE",
+        "Offset": 3710,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SAMPLE-REASON",
+        "Offset": 3711,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "CNP-FILLER",
+        "Offset": 3712,
+        "Length": 26,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SAMPLE-MESSAGE-CODE",
+        "Offset": 3738,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "IS-BILL-133",
+        "Offset": 3739,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "IS-ESCROW-PAGE-133",
+        "Offset": 3740,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "IS-PMI-PAGE-133",
+        "Offset": 3741,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "IS-PAL-PAGE-133",
+        "Offset": 3742,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "IS-MARKETING-PAGE-133",
+        "Offset": 3743,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "IS-GET-ENVELOPE-133",
+        "Offset": 3744,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "GETS-INSERT-133",
+        "Offset": 3745,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "SAMPLES-BK-133",
+        "Offset": 3746,
+        "Length": 2,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "SAMPLES-TYPE-133",
+        "Offset": 3748,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "SAMPLES-CUSH-133",
+        "Offset": 3749,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "SAMPLES-SPRD-133",
+        "Offset": 3750,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "SAMPLES-PI-133",
+        "Offset": 3752,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "SAMPLES-FREQ-133",
+        "Offset": 3753,
+        "Length": 2,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "SAMPLES-ESCROWED-133",
+        "Offset": 3755,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3756,
+        "Length": 12,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TRAN-KEY",
+        "Offset": 3768,
+        "Length": 7,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-TRAN-COUNT",
+        "Offset": 3775,
+        "Length": 3,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "CONTAINER-KEY",
+        "Offset": 3778,
+        "Length": 9,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3787,
+        "Length": 11,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-SEQ",
+        "Offset": 3798,
+        "Length": 8,
+        "DataType": "Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-INSERT-CODE",
+        "Offset": 3806,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-MESSAGE-CODE",
+        "Offset": 3807,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-JOB",
+        "Offset": 3808,
+        "Length": 7,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PLANET-CODE",
+        "Offset": 3815,
+        "Length": 7,
+        "DataType": "Packed Number",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PLANET-AMOUNT",
+        "Offset": 3822,
+        "Length": 1,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "MB-PLANET-DATE",
+        "Offset": 3823,
+        "Length": 6,
+        "DataType": "Text",
+        "Scale": 0
+      },
+      {
+        "Name": "FILLER",
+        "Offset": 3829,
+        "Length": 8,
+        "DataType": "Text",
+        "Scale": 0
+      }
+    ]
+  },
+  "IoMap": {
+    "MB-FLEXFIELD1": "FlexField1",
+    "MB-BILL-LINE-4": "Address4",
+    "MB-BILL-LINE-5": "Address5",
+    "MB-ZIP-5": "Zip5",
+    "MB-BILL-LINE-2": "Address2",
+    "MB-ACCOUNT": "Account",
+    "MB-JOB": "JobNumber",
+    "\u002201\u0022": "FileNumber",
+    "MB-FLEXFIELD2": "FlexField2",
+    "MB-BILL-LINE-3": "Address3",
+    "EbpPaymentAmount": "EbpPaymentAmount",
+    "MB-POCKET-6": "Pocket6ActiveBit",
+    "MB-POCKET-3": "Pocket3ActiveBit",
+    "MB-COUPON-DUE-YY": "PaymentDueDate",
+    "\u00220\u0022": "HouseholdingMax",
+    "\u0022OrTrackId\u0022": "OriginalTrackingId",
+    "MB-FLEXFIELD3": "FlexField3",
+    "MB-CLIENT3": "CustomerBase",
+    "MB-TOTAL-AMOUNT-DUE": "PaymentAmount",
+    "CONTAINER-KEY": "SecondaryKey",
+    "Email": "EbpEmailAddress",
+    "MB-BILL-NAME": "Address1",
+    "\u0022Y\u0022": "PrintDelivery",
+    "MB-FLEXFIELD4": "FlexField4",
+    "MB-BILL-CITY": "City",
+    "MB-PRODUCT-CODE": "ProductNumber",
+    "\u0022N\u0022": "RerunRestart",
+    "\u0022TrackId\u0022": "TrackingId",
+    "MB-VIEW-PRODUCT-CODE": "OnlineViewProductNumber",
+    "MB-POCKET-4": "Pocket4ActiveBit",
+    "MB-POCKET-2": "Pocket2ActiveBit",
+    "EbpPaymentDueDate": "EbpPaymentDueDate",
+    "\u002BMB-STATEMENT-MM\u002B\u0022/\u0022\u002BMB-STATEMENT-DD\u002B\u0022/\u0022\u002BMB-STATEMENT-YY": "StatementDate",
+    "MB-POCKET-7": "Pocket7ActiveBit",
+    "MB-POCKET-5": "Pocket5ActiveBit",
+    "\u0022English\u0022": "Language",
+    "MB-ZIP-4": "Zip4",
+    "\u0022 \u0022": "EditRejectMessage",
+    "\u0022A\u0022": "OrderType",
+    "MB-BILL-STATE": "State"
+  }
+}

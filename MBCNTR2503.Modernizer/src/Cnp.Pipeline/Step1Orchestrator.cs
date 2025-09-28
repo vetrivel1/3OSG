@@ -11,7 +11,7 @@ public sealed class Step1Orchestrator
 private readonly Dictionary<string, DdOverride> _overrides;
 private readonly Step1DebugOptions _debug;
 private readonly byte[] _lastPrimaryLoan = new byte[7];
-private bool _hasLastPrimaryLoan;
+// Removed unused field _hasLastPrimaryLoan
 private string _clientNumber = "";
 public Step1Orchestrator(CompiledSchema schema)
 {
@@ -176,9 +176,9 @@ catch (Exception ex)
 						try
 						{
 							Buffer.BlockCopy(buffer, 4, _lastPrimaryLoan, 0, 7);
-							_hasLastPrimaryLoan = true;
+							// unused field removed
 						}
-						catch { _hasLastPrimaryLoan = false; }
+						catch { /* _hasLastPrimaryLoan removed */ }
 				}
 				else if (matched.Type.Equals("SECONDARY", StringComparison.OrdinalIgnoreCase))
 				{
@@ -385,14 +385,29 @@ if (f.Name.Equals("LOAN-NO", StringComparison.OrdinalIgnoreCase)
 
 	private List<DdField> GetDdFields(string ddName)
 	{
-		if (_ddCache.TryGetValue(ddName, out var cached)) return cached;
-		var path = Path.Combine(_schema.SourceDir, ddName);
-		var list = new List<DdField>();
-		if (!File.Exists(path))
+		// Check for generated JSON schema first
+		var schemaPath = Path.Combine(_schema.SourceDir, "..", "config", "schemas", "source", ddName.Replace(".dd", ".schema.json"));
+		if (File.Exists(schemaPath))
 		{
-			_ddCache[ddName] = list;
-			return list;
+			var text = File.ReadAllText(schemaPath);
+			var json = JsonSerializer.Deserialize<JsonElement>(text);
+			if (json.TryGetProperty("properties", out var props))
+			{
+				// Flatten properties into DdField entries
+				var schemaFields = new List<DdField>();
+				foreach (var prop in props.EnumerateObject())
+				{
+					// TODO: derive offset/length from auxiliary mapping
+					schemaFields.Add(new DdField(prop.Name, 0, 0, "", 0, ""));
+				}
+				return schemaFields;
+			}
 		}
+		// Fallback to legacy DD text file
+		var path = Path.Combine(_schema.SourceDir, ddName);
+		var legacyFields = new List<DdField>();
+		
+		if (!File.Exists(path)) return legacyFields;
 		foreach (var raw in File.ReadAllLines(path))
 		{
 			var line = raw.Trim();
@@ -404,10 +419,10 @@ if (f.Name.Equals("LOAN-NO", StringComparison.OrdinalIgnoreCase)
 			if (!int.TryParse(parts[2], out var len)) continue;
 			var dt = parts[3];
 			var scale = 0; if (parts.Length >= 5) int.TryParse(parts[4], out scale);
-			list.Add(new DdField(name, off, len, dt, scale, dt));
+			legacyFields.Add(new DdField(name, off, len, dt, scale, dt));
 		}
-		_ddCache[ddName] = list;
-		return list;
+		_ddCache[ddName] = legacyFields;
+		return legacyFields;
 	}
 
 	private static List<DdEntry> LoadDdList(string ddControlPath)

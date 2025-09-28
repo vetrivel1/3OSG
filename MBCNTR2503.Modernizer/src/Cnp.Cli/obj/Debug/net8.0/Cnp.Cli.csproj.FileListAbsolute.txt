@@ -21,3 +21,14 @@
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.pdb
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/Cnp.Cli.genruntimeconfig.cache
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/obj/Debug/net8.0/ref/Cnp.Cli.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Fluid.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Namotion.Reflection.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/NJsonSchema.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/NJsonSchema.Annotations.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/NJsonSchema.CodeGeneration.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/NJsonSchema.CodeGeneration.CSharp.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Parlot.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/TimeZoneConverter.dll

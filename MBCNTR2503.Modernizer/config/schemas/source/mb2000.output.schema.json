@@ -1,0 +1,1901 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MB2000 Output Record",
+  "type": "object",
+  "properties": {
+    "MB-REC": {
+      "type": "object",
+      "properties": {
+        "MB-CLIENT-ID-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-CLIENT": {
+              "type": "object",
+              "properties": {
+                "MB-CLIENT3": {
+                  "type": "number"
+                },
+                "FILLER": {
+                  "type": "string"
+                }
+              }
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-ACCOUNT-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-ACCOUNT": {
+              "type": "number"
+            },
+            "MB-OTHER-ACCOUNT": {
+              "type": "object",
+              "properties": {
+                "MB-FORMATTED-ACCOUNT": {
+                  "type": "number"
+                },
+                "FILLER": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-SSN": {
+              "type": "number"
+            },
+            "MB-SSN-TIN-CODE": {
+              "type": "string"
+            },
+            "MB-CO-SSN": {
+              "type": "number"
+            },
+            "MB-CO-SSN-TIN-CODE": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-NAME-ADDRESS": {
+          "type": "object",
+          "properties": {
+            "MB-FOREIGN-ADDRESS": {
+              "type": "string"
+            },
+            "MB-BILL-NAME": {
+              "type": "string"
+            },
+            "MB-BILL-LINE-2": {
+              "type": "string"
+            },
+            "MB-BILL-LINE-3": {
+              "type": "string"
+            },
+            "MB-BILL-LINE-4": {
+              "type": "string"
+            },
+            "MB-BILL-LINE-5": {
+              "type": "string"
+            },
+            "MB-BILL-LINE-6": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "object",
+              "properties": {
+                "MB-BILL-CITY": {
+                  "type": "string"
+                },
+                "MB-BILL-STATE": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-BILL-ZIP-CODE": {
+              "type": "object",
+              "properties": {
+                "MB-ZIP-5": {
+                  "type": "string"
+                },
+                "MB-ZIP-4": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-ACS-CODE": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-PROPERTY-ADDRESS": {
+          "type": "object",
+          "properties": {
+            "MB-PROPERTY-STREET": {
+              "type": "string"
+            },
+            "MB-PROPERTY-CITY": {
+              "type": "string"
+            },
+            "MB-PROPERTY-STATE": {
+              "type": "string"
+            },
+            "MB-PROPERTY-ZIP-5": {
+              "type": "string"
+            },
+            "MB-PROPERTY-ZIP-4": {
+              "type": "string"
+            },
+            "MB-STATE-CODE": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-BILL-DATA": {
+          "type": "object",
+          "properties": {
+            "MB-TELEPHONE": {
+              "type": "object",
+              "properties": {
+                "MB-TELE-NO": {
+                  "type": "string"
+                },
+                "MB-SEC-TELE-NO": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-DATES": {
+              "type": "object",
+              "properties": {
+                "MB-STATEMENT-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-STATEMENT-YY": {
+                      "type": "string"
+                    },
+                    "MB-STATEMENT-MM": {
+                      "type": "string"
+                    },
+                    "MB-STATEMENT-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-STATEMENT-DATE-R": {
+                  "type": "object",
+                  "properties": {
+                    "FILLER": {
+                      "type": "string"
+                    },
+                    "MB-STATEMENT-YY-R": {
+                      "type": "number"
+                    },
+                    "MB-STATEMENT-MM-R": {
+                      "type": "number"
+                    },
+                    "MB-STATEMENT-DD-R": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "MB-LOAN-DUE-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-LOAN-DUE-YY": {
+                      "type": "string"
+                    },
+                    "MB-LOAN-DUE-MM": {
+                      "type": "string"
+                    },
+                    "MB-LOAN-DUE-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-COUPON-DUE-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-COUPON-DUE-YY": {
+                      "type": "string"
+                    },
+                    "MB-COUPON-DUE-MM": {
+                      "type": "string"
+                    },
+                    "MB-COUPON-DUE-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-1ST-DUE-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-1ST-DUE-YY": {
+                      "type": "string"
+                    },
+                    "MB-1ST-DUE-MM": {
+                      "type": "string"
+                    },
+                    "MB-1ST-DUE-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-BEG-HIST-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-BEG-HIST-YY": {
+                      "type": "string"
+                    },
+                    "MB-BEG-HIST-MM": {
+                      "type": "string"
+                    },
+                    "MB-BEG-HIST-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-MATURITY-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-MATURITY-YY": {
+                      "type": "string"
+                    },
+                    "MB-MATURITY-MM": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-ARM-IR-CHG-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-ARM-IR-YY": {
+                      "type": "string"
+                    },
+                    "MB-ARM-IR-MM": {
+                      "type": "string"
+                    },
+                    "MB-ARM-IR-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-ARM-PI-CHG-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-ARM-PI-CHG-YY": {
+                      "type": "string"
+                    },
+                    "MB-ARM-PI-CHG-MM": {
+                      "type": "string"
+                    },
+                    "MB-ARM-PI-CHG-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-LOAN-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-LOAN-YY": {
+                      "type": "string"
+                    },
+                    "MB-LOAN-MM": {
+                      "type": "string"
+                    },
+                    "MB-LOAN-DD": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-ASSUMP-DATE": {
+                  "type": "object",
+                  "properties": {
+                    "MB-ASSUMP-YY": {
+                      "type": "string"
+                    },
+                    "MB-ASSUMP-MM": {
+                      "type": "string"
+                    },
+                    "MB-ASSUMP-DD": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "MB-LOAN-DATA": {
+              "type": "object",
+              "properties": {
+                "MB-GRACE-DAYS": {
+                  "type": "number"
+                },
+                "MB-PAYMENT-FREQUENCY": {
+                  "type": "string"
+                },
+                "MB-ANNUAL-INTEREST": {
+                  "type": "number"
+                },
+                "MB-2ND-INTEREST": {
+                  "type": "number"
+                },
+                "MB-TYPE-LOAN": {
+                  "type": "string"
+                },
+                "FILLER": {
+                  "type": "object",
+                  "properties": {
+                    "MB-TYPE-LOAN-A": {
+                      "type": "string"
+                    },
+                    "MB-TYPE-LOAN-B": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-2ND-LOAN-TYPE": {
+                  "type": "string"
+                },
+                "MB-BILL-MODE": {
+                  "type": "string"
+                },
+                "MB-LOAN-TERM": {
+                  "type": "number"
+                },
+                "MB-BANKRUPT-CODE": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-DOLLAR-BALS": {
+              "type": "object",
+              "properties": {
+                "MB-FIRST-PRIN-BAL": {
+                  "type": "number"
+                },
+                "MB-2ND-PRIN-BAL": {
+                  "type": "number"
+                },
+                "MB-ESCROW-BAL": {
+                  "type": "number"
+                },
+                "MB-ESCROW-ADVANCE-BAL": {
+                  "type": "number"
+                },
+                "MB-SUSPENSE-BAL": {
+                  "type": "number"
+                },
+                "MB-RES-ESCROW": {
+                  "type": "number"
+                },
+                "MB-REP-RES-BAL": {
+                  "type": "number"
+                },
+                "MB-ACCRUED-LATE-CHG": {
+                  "type": "number"
+                },
+                "MB-DEFERRED-INT": {
+                  "type": "number"
+                },
+                "MB-NSF-BAL": {
+                  "type": "number"
+                },
+                "MB-OTHER-FEES": {
+                  "type": "number"
+                },
+                "MB-CORP-ADV": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-CURRENT-PAYMENT": {
+              "type": "object",
+              "properties": {
+                "MB-PAYMENT-AMOUNT": {
+                  "type": "number"
+                },
+                "MB-FIRST-P-I": {
+                  "type": "number"
+                },
+                "MB-2ND-P-I": {
+                  "type": "number"
+                },
+                "MB-ESCROW-PAYMENT": {
+                  "type": "number"
+                },
+                "MB-COUNTY-TAX": {
+                  "type": "number"
+                },
+                "MB-CITY-TAX": {
+                  "type": "number"
+                },
+                "MB-HAZ-PREM": {
+                  "type": "number"
+                },
+                "MB-MIP": {
+                  "type": "number"
+                },
+                "MB-LIEN": {
+                  "type": "number"
+                },
+                "MB-O-S-SPREAD": {
+                  "type": "number"
+                },
+                "MB-A-H-PREM": {
+                  "type": "number"
+                },
+                "MB-LIFE-PREM": {
+                  "type": "number"
+                },
+                "MB-REP-RES": {
+                  "type": "number"
+                },
+                "MB-MISC-AMT": {
+                  "type": "number"
+                },
+                "MB-HUD-PART": {
+                  "type": "number"
+                },
+                "MB-BSC-AMT": {
+                  "type": "number"
+                },
+                "MB-L-C-AMT": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-TOTAL-DUE": {
+              "type": "object",
+              "properties": {
+                "MB-TOTAL-AMOUNT-DUE": {
+                  "type": "number"
+                },
+                "MB-DELQ-P-I": {
+                  "type": "number"
+                },
+                "MB-DELQ-ESC": {
+                  "type": "number"
+                },
+                "MB-DELQ-L-C": {
+                  "type": "number"
+                },
+                "MB-DELQ-INS": {
+                  "type": "number"
+                },
+                "MB-DELQ-OTHER": {
+                  "type": "number"
+                },
+                "MB-INTEREST-DUE": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-YTD-FIELDS": {
+              "type": "object",
+              "properties": {
+                "MB-PRIN-YTD": {
+                  "type": "number"
+                },
+                "MB-INTEREST-YTD": {
+                  "type": "number"
+                },
+                "MB-TAXES-YTD": {
+                  "type": "number"
+                },
+                "MB-HAZARD-YTD": {
+                  "type": "number"
+                },
+                "MB-MIP-YTD": {
+                  "type": "number"
+                },
+                "MB-LIEN-YTD": {
+                  "type": "number"
+                },
+                "MB-L-C-YTD": {
+                  "type": "number"
+                },
+                "MB-LAST-YEAR-INT-PAID": {
+                  "type": "number"
+                },
+                "MB-LAST-YEAR-TAXES-PAID": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "MB-HMP-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-MODIFICATION-STATUS": {
+              "type": "string"
+            },
+            "MB-MODIFICATION-TYPE": {
+              "type": "string"
+            },
+            "MB-MODIFICATION-STATUS-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-MODIFICATION-STATUS-YY": {
+                  "type": "number"
+                },
+                "MB-MOD-STATUS-MMDD": {
+                  "type": "number"
+                },
+                "FILLER": {
+                  "type": "object",
+                  "properties": {
+                    "MB-MOD-STATUS-MM": {
+                      "type": "number"
+                    },
+                    "MB-MOD-STATUS-DD": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "MB-MODIFICATION-PROGRAM": {
+              "type": "string"
+            },
+            "MB-MODIFICATION-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-MODIFICATION-YY": {
+                  "type": "number"
+                },
+                "MB-MODIFICATION-MMDD": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-DEFERRED-BAL-IND": {
+              "type": "string"
+            },
+            "MB-PAYMENT-OPTION-IND": {
+              "type": "string"
+            },
+            "MB-ORIG-LOAN-AMT": {
+              "type": "number"
+            },
+            "MB-NEG-AM-PB-CAP-VALUE": {
+              "type": "number"
+            },
+            "MB-INT-ONLY-EXP-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-INT-ONLY-EXP-YY": {
+                  "type": "number"
+                },
+                "MB-INT-ONLY-EXP-MMDD": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-MONTHLY-BORR-ACCR-AMT": {
+              "type": "number"
+            },
+            "MB-BORR-INCTV-ANNIV-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-BORR-INCTV-ANNIV-YY": {
+                  "type": "number"
+                },
+                "MB-BORR-INCTV-ANNIV-MMDD": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-BORR-INC-ACCR-ANNV2DT": {
+              "type": "number"
+            },
+            "MB-TRIAL-MOD-START-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-TRIAL-MOD-START-YY": {
+                  "type": "number"
+                },
+                "MB-TRIAL-MOD-START-MMDD": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-TRIAL-MOD-END-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-TRIAL-MOD-END-YY": {
+                  "type": "number"
+                },
+                "MB-TRIAL-MOD-END-MMDD": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-TRIAL-MOD-PAYMENT": {
+              "type": "number"
+            },
+            "MB-MOD-REASON-CODE": {
+              "type": "string"
+            },
+            "MB-MOD-EFF-YY": {
+              "type": "number"
+            },
+            "MB-MOD-EFF-MMDD": {
+              "type": "number"
+            },
+            "MB-2-TO-1-INDICATOR": {
+              "type": "string"
+            },
+            "MB-OFF-SCHD-PEND-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-OFF-SCHD-PEND-YY": {
+                  "type": "number"
+                },
+                "MB-OFF-SCHD-PEND-MM": {
+                  "type": "number"
+                },
+                "MB-OFF-SCHD-PEND-DD": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-OFF-SCHD-PEND-IR": {
+              "type": "number"
+            },
+            "MB-OFF-SCHD-PEND-PI": {
+              "type": "number"
+            }
+          }
+        },
+        "MB-FLEXFIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-FLEXFIELD1": {
+              "type": "string"
+            },
+            "MB-FLEXFIELD2": {
+              "type": "string"
+            },
+            "MB-FLEXFIELD3": {
+              "type": "string"
+            }
+          }
+        },
+        "FILLER": {
+          "type": "string"
+        },
+        "MB-POCKET-CODES": {
+          "type": "object",
+          "properties": {
+            "MB-POCKET-1": {
+              "type": "string"
+            },
+            "MB-POCKET-2": {
+              "type": "string"
+            },
+            "MB-POCKET-3": {
+              "type": "string"
+            },
+            "MB-POCKET-4": {
+              "type": "string"
+            },
+            "MB-POCKET-5": {
+              "type": "string"
+            },
+            "MB-POCKET-6": {
+              "type": "string"
+            },
+            "MB-POCKET-7": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-CLIENT-FIELDS": {
+          "type": "string"
+        },
+        "MB-0133-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-0133-ONLINE-INSERT": {
+              "type": "string"
+            },
+            "MB-0133-NEW-PAL-FLAG": {
+              "type": "string"
+            },
+            "MB-0133-NEW-PAL-FORM": {
+              "type": "string"
+            },
+            "MB-0133-XTRA-PMI-PAGE": {
+              "type": "string"
+            },
+            "MB-0133-PROD-CODE": {
+              "type": "string"
+            },
+            "MB-0133-FORM-NAME": {
+              "type": "string"
+            },
+            "MB-0133-MESS-ONE": {
+              "type": "string"
+            },
+            "MB-0133-MESS-TWO": {
+              "type": "string"
+            },
+            "MB-0133-MESS-THREE": {
+              "type": "string"
+            },
+            "MB-0133-INSERTS": {
+              "type": "object",
+              "properties": {
+                "MB-0133-INSERT1": {
+                  "type": "number"
+                },
+                "MB-0133-INSERT2": {
+                  "type": "number"
+                },
+                "MB-0133-INSERT3": {
+                  "type": "number"
+                },
+                "MB-0133-INSERT4": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-0133-2ND-PAGE": {
+              "type": "string"
+            },
+            "MB-0133-CHK-TYPE": {
+              "type": "string"
+            },
+            "MB-0133-NO-BILL-SW": {
+              "type": "string"
+            },
+            "MB-0133-NO-BILL2-SW": {
+              "type": "string"
+            },
+            "MB-0133-KILL-COUP": {
+              "type": "string"
+            },
+            "MB-0133-BANKRUPT": {
+              "type": "string"
+            },
+            "MB-0133-MARKETING": {
+              "type": "string"
+            },
+            "MB-0133-BANKRUPT-X": {
+              "type": "string"
+            },
+            "MB-0133-BNKRPT-ESC": {
+              "type": "string"
+            },
+            "MB-0133-BILL-ADDR-FOREIGN": {
+              "type": "string"
+            },
+            "MB-0133-PILOT-SW": {
+              "type": "string"
+            },
+            "MB-0133-PILOT-TOTAL-PAGES": {
+              "type": "number"
+            },
+            "MB-0133-PILOT-TOTAL-LINES": {
+              "type": "number"
+            },
+            "MB-0133-ESC-CODE": {
+              "type": "string"
+            },
+            "MB-0133-CHECK": {
+              "type": "string"
+            },
+            "MB-0133-ESC-FLAG": {
+              "type": "string"
+            },
+            "MB-0133-PMI-CODE": {
+              "type": "string"
+            },
+            "ESC-0133-S-KEY": {
+              "type": "number"
+            },
+            "ESC-0133-S-COUNT": {
+              "type": "number"
+            },
+            "MB-0133-PREV-POSTED": {
+              "type": "number"
+            },
+            "MB-0133-PAL-FLAG": {
+              "type": "string"
+            },
+            "MB-0133-GENERATED": {
+              "type": "string"
+            },
+            "MB-0133-YE": {
+              "type": "object",
+              "properties": {
+                "MB-0133-TI-REL-KEY": {
+                  "type": "number"
+                },
+                "MB-0133-TI-ESCROW-MTH": {
+                  "type": "number"
+                },
+                "MB-0133-TI-TYPE-LOAN": {
+                  "type": "string"
+                },
+                "MB-0133-TI-STATE": {
+                  "type": "number"
+                },
+                "MB-0133-TI-PRIN-BAL": {
+                  "type": "number"
+                },
+                "MB-0133-TI-PMI-CODE": {
+                  "type": "string"
+                },
+                "MB-0133-TI-MI-CODE": {
+                  "type": "string"
+                },
+                "MB-0133-1099-AMOUNT-1": {
+                  "type": "number"
+                },
+                "MB-0133-1098-INT": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-0133-MESSG-SW": {
+              "type": "string"
+            },
+            "MB-0133-TEMP-SY-MESS-SW": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-0140-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-0140-OPT-OUT-CODE": {
+              "type": "string"
+            },
+            "MB-0140-SPECIAL-MESSAGE-SW": {
+              "type": "string"
+            },
+            "MB-0140-POCKET-2": {
+              "type": "string"
+            },
+            "MB-0140-POCKET-3": {
+              "type": "string"
+            },
+            "MB-0140-POCKET-4": {
+              "type": "string"
+            },
+            "MB-0140-POCKET-5": {
+              "type": "string"
+            },
+            "MB-0140-POCKET-6": {
+              "type": "string"
+            },
+            "MB-0140-STATEMENT-SW": {
+              "type": "string"
+            },
+            "MB-0140-FORM-TYPE": {
+              "type": "string"
+            },
+            "MB-0140-PAYOPT-FLAG": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-0277-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-0277-T-I-INSURANCE": {
+              "type": "number"
+            },
+            "MB-0277-EXPENSES-PAID": {
+              "type": "number"
+            },
+            "MB-0277-LATE-CHARGE": {
+              "type": "number"
+            },
+            "MB-0277-RETURN-CHECK-FEE": {
+              "type": "number"
+            },
+            "MB-0277-OTHER-FEES": {
+              "type": "number"
+            },
+            "MB-0277-TAX-CODE": {
+              "type": "string"
+            },
+            "MB-0277-PROP-CODE": {
+              "type": "string"
+            },
+            "MB-0277-ARM-CODE": {
+              "type": "string"
+            },
+            "MB-0277-TOT-BEG-BAL": {
+              "type": "number"
+            },
+            "MB-0277-END-BEG-BAL": {
+              "type": "number"
+            },
+            "MB-0277-INTEREST-DUE": {
+              "type": "number"
+            },
+            "MB-0277-RES-ESC-CODE": {
+              "type": "string"
+            },
+            "MB-0277-BILL-FORM-NAME": {
+              "type": "string"
+            },
+            "MB-0277-BILL-BACK-NAME": {
+              "type": "string"
+            },
+            "MB-0277-BILL-MESSAGES": {
+              "type": "string"
+            },
+            "MB-0277-BILL-PAGES": {
+              "type": "object",
+              "properties": {
+                "MB-0277-TRANS-PAGE": {
+                  "type": "string"
+                },
+                "MB-0277-PRIVACY-PAGE": {
+                  "type": "string"
+                },
+                "MB-0277-MARKETING-PAGE": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-0277-BILL-INSERTS": {
+              "type": "string"
+            },
+            "MB-0277-MARKETING-FORM-NAME": {
+              "type": "string"
+            },
+            "MB-0277-NUM-PAGES": {
+              "type": "number"
+            },
+            "MB-0277-BILL-WEIGHT": {
+              "type": "string"
+            },
+            "MB-0277-MESSAGE-BEGIN": {
+              "type": "number"
+            },
+            "MB-0277-SCRA-F": {
+              "type": "string"
+            },
+            "MB-0277-SCRA-DATE-3": {
+              "type": "object",
+              "properties": {
+                "MB-0277-SCRA-DATE-3-MM": {
+                  "type": "number"
+                },
+                "MB-0277-SCRA-DATE-3-DD": {
+                  "type": "number"
+                },
+                "MB-0277-SCRA-DATE-3-YY": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-0277-SCRA-DATE-4": {
+              "type": "object",
+              "properties": {
+                "MB-0277-SCRA-DATE-4-MM": {
+                  "type": "number"
+                },
+                "MB-0277-SCRA-DATE-4-DD": {
+                  "type": "number"
+                },
+                "MB-0277-SCRA-DATE-4-YY": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-0277-LAST-AMT": {
+              "type": "number"
+            },
+            "MB-0277-LAST-DATE": {
+              "type": "number"
+            },
+            "MB-0277-1098-PAGE": {
+              "type": "string"
+            },
+            "MB-0277-TI-IRS-PURPOSE-CODE": {
+              "type": "string"
+            },
+            "MB-0277-BILL-INSERT-6": {
+              "type": "string"
+            },
+            "MB-0277-BILL-INSERT-7": {
+              "type": "string"
+            },
+            "MB-0277-TYPE-OF-SAMPLE": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-0589-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-PRIN-DELQ-BAL": {
+              "type": "string"
+            },
+            "MB-FORBEARANCE-AMT": {
+              "type": "number"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-0346-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-0346-SWITCH": {
+              "type": "string"
+            },
+            "MB-TI-TOTAL-DED-MI-0346": {
+              "type": "number"
+            },
+            "MB-0346-SAMPLE-LOAN-SW": {
+              "type": "string"
+            },
+            "MB-0346-SAMPLE-LOAN-TYPE": {
+              "type": "string"
+            },
+            "MB-0346-SAMPLE-FORM1": {
+              "type": "string"
+            },
+            "MB-0346-SAMPLE-FORM1B": {
+              "type": "string"
+            },
+            "MB-0346-SAMPLE-FORM2": {
+              "type": "string"
+            },
+            "MB-0346-SAMPLE-FORM3": {
+              "type": "string"
+            },
+            "MB-0346-SAMPLE-MESS-CODE": {
+              "type": "string"
+            },
+            "MB-0346-ADDL-PAGES": {
+              "type": "number"
+            },
+            "MB-0346-PRINT-TRANS-TOT": {
+              "type": "number"
+            },
+            "MB-0346-BANKRUPT": {
+              "type": "string"
+            },
+            "MB-0346-DELINQUENT": {
+              "type": "string"
+            },
+            "MB-0346-SAMPLE-GROUP": {
+              "type": "object",
+              "properties": {
+                "MB-0346-SAMPL-TYPELOAN": {
+                  "type": "string"
+                },
+                "MB-0346-SAMPL-BK": {
+                  "type": "string"
+                },
+                "MB-0346-SAMPL-DELQ": {
+                  "type": "string"
+                },
+                "MB-0346-SAMPL-DRAFTER": {
+                  "type": "string"
+                },
+                "MB-0346-SAMPL-FC": {
+                  "type": "string"
+                },
+                "MB-0346-SAMPL-AUDIT": {
+                  "type": "string"
+                },
+                "FILLER": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-0346-SUPPRESSED-SW": {
+              "type": "string"
+            },
+            "MB-0346-BNKL-CLSD-REASON-CD": {
+              "type": "string"
+            },
+            "MB-0346-ACCESS-NBR": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-0547-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-0547-INSERT-CODES": {
+              "type": "object",
+              "properties": {
+                "MB-0547-POCKET-2": {
+                  "type": "string"
+                },
+                "MB-0547-POCKET-3": {
+                  "type": "string"
+                },
+                "MB-0547-POCKET-4": {
+                  "type": "string"
+                },
+                "MB-0547-POCKET-5": {
+                  "type": "string"
+                },
+                "MB-0547-POCKET-6": {
+                  "type": "string"
+                }
+              }
+            },
+            "FILLER": {
+              "type": "object",
+              "properties": {
+                "MB-0547-BILL-FORM": {
+                  "type": "string"
+                },
+                "MB-0547-NEW-LOAN-FORM": {
+                  "type": "string"
+                },
+                "MB-0547-NEW-LOAN-FORM2": {
+                  "type": "string"
+                },
+                "MB-0547-1098-FORM": {
+                  "type": "string"
+                },
+                "MB-0547-TOTAL-INSERTS": {
+                  "type": "number"
+                },
+                "MB-0547-MESSAGE-CODES": {
+                  "type": "string"
+                },
+                "MB-0547-ARM-LTR-SW": {
+                  "type": "string"
+                },
+                "MB-0547-ZIP-CODE-SW": {
+                  "type": "string"
+                },
+                "MB-0547-BILLING-SW": {
+                  "type": "string"
+                },
+                "MB-0547-LETTER-TYPE": {
+                  "type": "number"
+                },
+                "MB-0547-JIT-FEE": {
+                  "type": "string"
+                },
+                "MB-0547-VI-SW": {
+                  "type": "string"
+                },
+                "MB-0547-1099-AMOUNT-1": {
+                  "type": "number"
+                },
+                "MB-0547-1099-AMOUNT-2": {
+                  "type": "number"
+                },
+                "MB-0547-1099-AMOUNT-3": {
+                  "type": "number"
+                },
+                "MB-0547-YE-SW": {
+                  "type": "object",
+                  "properties": {
+                    "MB-0547-1098-SW": {
+                      "type": "string"
+                    },
+                    "MB-0547-1099-SW": {
+                      "type": "string"
+                    },
+                    "MB-0547-FHA-SW": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MB-0547-VI-BILL-FORM": {
+                  "type": "string"
+                },
+                "MB-0547-SPECIAL": {
+                  "type": "string"
+                },
+                "MB-0547-FILLER": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "MB-0628-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-0628-BK": {
+              "type": "string"
+            },
+            "MB-0628-OPTION-ARM": {
+              "type": "string"
+            },
+            "MB-0628-ATTY-SW": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-5020-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-5020-DEFERRED-INT": {
+              "type": "number"
+            },
+            "MB-5020-INST": {
+              "type": "number"
+            },
+            "MB-5020-PIN-NUMBER": {
+              "type": "string"
+            },
+            "MB-5020-UNAP-FUND-CD": {
+              "type": "string"
+            },
+            "MB-5020-ESC-VAR": {
+              "type": "number"
+            },
+            "MB-5020-UNAP-CD-2": {
+              "type": "string"
+            },
+            "MB-5020-UNAP-BAL-2": {
+              "type": "number"
+            },
+            "MB-5020-UNAP-CD-3": {
+              "type": "string"
+            },
+            "MB-5020-UNAP-BAL-3": {
+              "type": "number"
+            },
+            "MB-5020-UNAP-CD-4": {
+              "type": "string"
+            },
+            "MB-5020-UNAP-BAL-4": {
+              "type": "number"
+            },
+            "MB-5020-UNAP-CD-5": {
+              "type": "string"
+            },
+            "MB-5020-UNAP-BAL-5": {
+              "type": "number"
+            },
+            "MB-5020-ADDL-PAGES": {
+              "type": "number"
+            },
+            "MB-5020-BMSG-DATA": {
+              "type": "object",
+              "properties": {
+                "MB-5020-BMSG": {
+                  "type": "string"
+                },
+                "MB-5020-BMSG-LINES": {
+                  "type": "number"
+                },
+                "MB-5020-BMSG-REQD": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-5020-MAIL-CD": {
+              "type": "string"
+            },
+            "MB-5020-DART-UNIT": {
+              "type": "string"
+            },
+            "MB-5020-BUYER-ASST-AMT": {
+              "type": "number"
+            },
+            "MB-5020-INV-CODE": {
+              "type": "number"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-0502-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-FEES-CODE": {
+              "type": "number"
+            },
+            "MB-LAST-STMT-DATE": {
+              "type": "number"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-MBFIVAR2-FIELDS": {
+          "type": "object",
+          "properties": {
+            "CNP-COMPANY-NAME": {
+              "type": "string"
+            },
+            "MB-BILL-METHOD": {
+              "type": "number"
+            },
+            "MB-SUPPRESSION-FLAG": {
+              "type": "number"
+            },
+            "MB-MESSAGE-CODES": {
+              "type": "object",
+              "properties": {
+                "MB-MSG1-CODE": {
+                  "type": "string"
+                },
+                "MB-MSG2-CODE": {
+                  "type": "string"
+                }
+              }
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-EBPP-SW": {
+          "type": "string"
+        },
+        "MB-SERVICER-FIELDS": {
+          "type": "string"
+        },
+        "MB-ALLTEL-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-DIST-TYPE": {
+              "type": "string"
+            },
+            "MB-MAN": {
+              "type": "string"
+            },
+            "MB-2ND-MAN": {
+              "type": "string"
+            },
+            "MB-ZONE": {
+              "type": "string"
+            },
+            "MB-1ST-BASIS-CODE": {
+              "type": "string"
+            },
+            "MB-BANK": {
+              "type": "string"
+            },
+            "MB-AGGR": {
+              "type": "string"
+            },
+            "MB-2ND-BANK": {
+              "type": "string"
+            },
+            "MB-2ND-CAT": {
+              "type": "string"
+            },
+            "MB-ZONE-4": {
+              "type": "object",
+              "properties": {
+                "MB-ZONE-1": {
+                  "type": "string"
+                },
+                "MB-ZONE-2": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-TYPE-ACQ": {
+              "type": "string"
+            },
+            "MB-USER-BILLING-TABLE": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            },
+            "MB-STOP-BILL-FLAG": {
+              "type": "string"
+            },
+            "MB-BILLING-CYCLE": {
+              "type": "string"
+            },
+            "MB-PAY-OPTION": {
+              "type": "string"
+            },
+            "MB-DONT-PROCESS": {
+              "type": "string"
+            },
+            "MB-PIF-STOP": {
+              "type": "string"
+            },
+            "MB-FORECLOSURE-STOP": {
+              "type": "string"
+            },
+            "MB-BAD-CK-STOP": {
+              "type": "string"
+            },
+            "MB-NO-NOTICES": {
+              "type": "string"
+            },
+            "MB-DONT-ANALYZE": {
+              "type": "string"
+            },
+            "MB-A-H-FLAG": {
+              "type": "string"
+            },
+            "MB-LIFE-FLAG": {
+              "type": "string"
+            },
+            "MB-DISB-STOP": {
+              "type": "string"
+            },
+            "MB-ARM-PLAN-ID": {
+              "type": "string"
+            },
+            "MB-INV": {
+              "type": "string"
+            },
+            "MB-PLS-CLT-ID": {
+              "type": "string"
+            },
+            "MB-FIDELITY-OPTION-ARM-FIELDS": {
+              "type": "object",
+              "properties": {
+                "MB-PAYMENT-OPTION-SWITCH": {
+                  "type": "string"
+                },
+                "MB-PAYMENT-OPT-4": {
+                  "type": "number"
+                },
+                "MB-PAYMENT-OPT-4-TOTDUE": {
+                  "type": "number"
+                },
+                "MB-DIST-TYPE-1-IO-FLAG": {
+                  "type": "string"
+                },
+                "MB-ARM-INT-ONLY-PI": {
+                  "type": "number"
+                },
+                "MB-ARM-FULLY-AM-PI": {
+                  "type": "number"
+                },
+                "MB-ARM-INT-ONLY-TOT": {
+                  "type": "number"
+                },
+                "MB-ARM-FULLY-AM-TOT": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-POST-PETITION-YY": {
+              "type": "number"
+            },
+            "MB-POST-PETITION-MMDD": {
+              "type": "number"
+            },
+            "MB-POST-PETITION-AMOUNT": {
+              "type": "number"
+            },
+            "MB-COUPON-TAPE-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-COUPON-TAPE-YY": {
+                  "type": "string"
+                },
+                "MB-COUPON-TAPE-MM": {
+                  "type": "string"
+                },
+                "MB-COUPON-TAPE-DD": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-BANKRUPTCY-STATUS": {
+              "type": "string"
+            },
+            "MB-ARM-RATE-PI-NOT-AVAIL-IND": {
+              "type": "string"
+            },
+            "MB-NO-CHANGE-SCHED-IND": {
+              "type": "string"
+            },
+            "MB-MTGR-LANG-PREF": {
+              "type": "string"
+            },
+            "MB-FOR1-STATUS-CD": {
+              "type": "string"
+            },
+            "MB-BNK-DISCHARGE-IND": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-FISERV-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-PAYMENT-DUE-COUNTER": {
+              "type": "number"
+            },
+            "MB-ESCROW-INTEREST-YTD": {
+              "type": "number"
+            },
+            "MB-PROPERTY-ADDRESS-2": {
+              "type": "string"
+            },
+            "MB-LATE-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-LATE-YYYY": {
+                  "type": "string"
+                },
+                "MB-LATE-MM": {
+                  "type": "string"
+                },
+                "MB-LATE-DD": {
+                  "type": "string"
+                }
+              }
+            },
+            "CNP-INVESTOR-CODE": {
+              "type": "number"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-TI-DATA": {
+          "type": "object",
+          "properties": {
+            "MB-TI-MTG-CODE": {
+              "type": "string"
+            },
+            "MB-TI-TRAN-56-SW": {
+              "type": "string"
+            },
+            "MB-TI-ZERO-PB-CODE": {
+              "type": "string"
+            },
+            "MB-TI-LOAN-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-TI-LOAN-YY": {
+                  "type": "string"
+                },
+                "MB-TI-LOAN-MM": {
+                  "type": "string"
+                },
+                "MB-TI-LOAN-DD": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-TI-ASSUMP-DATE": {
+              "type": "string"
+            },
+            "MB-TI-HAZARD-YTD": {
+              "type": "number"
+            },
+            "MB-TI-MIP-YTD": {
+              "type": "number"
+            },
+            "MB-TI-LIEN-YTD": {
+              "type": "number"
+            },
+            "MB-TI-ESC-MTH": {
+              "type": "number"
+            },
+            "MB-TI-TOT-PMT": {
+              "type": "number"
+            },
+            "MB-TI-1098-CODE": {
+              "type": "string"
+            },
+            "MB-TI-DETAIL-HISTORY": {
+              "type": "string"
+            },
+            "MB-TI-SSN-TIN-CODE": {
+              "type": "string"
+            },
+            "MB-TI-CO-SSN-TIN-CODE": {
+              "type": "string"
+            },
+            "MB-TI-REVISED-STMT-SW": {
+              "type": "string"
+            },
+            "MB-TI-PMI-CODE": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "object",
+              "properties": {
+                "TI-PMI-PRE-POST": {
+                  "type": "string"
+                },
+                "TI-PMI-STATE": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-TI-DOLLAR-BALS": {
+              "type": "object",
+              "properties": {
+                "MB-TI-ESC-BAL-BEG": {
+                  "type": "number"
+                },
+                "MB-TI-PRIN-BAL-BEG": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-TI-YTD-FLDS": {
+              "type": "object",
+              "properties": {
+                "MB-TI-1098-INT": {
+                  "type": "number"
+                },
+                "MB-TI-PRIN-YTD": {
+                  "type": "number"
+                },
+                "MB-TI-TAXES-YTD": {
+                  "type": "number"
+                },
+                "MB-TI-LATE-CHG-PD": {
+                  "type": "number"
+                },
+                "MB-TI-INT-ON-ESCROW": {
+                  "type": "number"
+                },
+                "MB-TI-REIMBURSED-AMOUNT": {
+                  "type": "number"
+                },
+                "MB-TI-TOTAL-DED-MI": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-TI-MISC-FLDS": {
+              "type": "object",
+              "properties": {
+                "MB-TI-AMT-DISB": {
+                  "type": "number"
+                },
+                "MB-TI-ESC-DEP": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-TI-H-FHA-NUMBER": {
+              "type": "string"
+            },
+            "MB-TI-H-AS-OF-DATE": {
+              "type": "object",
+              "properties": {
+                "MB-TI-H-AS-OF-YY": {
+                  "type": "string"
+                },
+                "MB-TI-H-AS-OF-MM": {
+                  "type": "string"
+                },
+                "MB-TI-H-AS-OF-DD": {
+                  "type": "string"
+                }
+              }
+            },
+            "MB-TI-H-PAYOFF-AMOUNT": {
+              "type": "number"
+            },
+            "MB-TI-STMT-SAMPLE": {
+              "type": "string"
+            },
+            "MB-TI-SAMPLE-REASONX": {
+              "type": "object",
+              "properties": {
+                "MB-TI-SAMPLE-REASON": {
+                  "type": "number"
+                }
+              }
+            },
+            "MB-TI-SAMPLE-LOAN-SW": {
+              "type": "string"
+            },
+            "MB-TI-KEY": {
+              "type": "number"
+            },
+            "MB-TI-COUNT": {
+              "type": "number"
+            }
+          }
+        },
+        "MB-ADDITIONAL-INFO": {
+          "type": "object",
+          "properties": {
+            "MB-FLEXFIELDS-CONT": {
+              "type": "object",
+              "properties": {
+                "MB-FLEXFIELD4": {
+                  "type": "string"
+                },
+                "MB-FLEXFIELD5": {
+                  "type": "string"
+                },
+                "MB-FLEXFIELD6": {
+                  "type": "string"
+                }
+              }
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-REMITTANCE-IMB-CODE": {
+          "type": "string"
+        },
+        "MB-REMITTANCE-ZIP-CODE": {
+          "type": "string"
+        },
+        "MB-SPLIT-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-PRODUCT-CODE": {
+              "type": "string"
+            },
+            "MB-VIEW-PRODUCT-CODE": {
+              "type": "string"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-SAMPLE-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-STMT-SELECTED-AS-SAMPLE": {
+              "type": "string"
+            },
+            "MB-SAMPLE-REASONX": {
+              "type": "object",
+              "properties": {
+                "MB-SAMPLE-REASON": {
+                  "type": "number"
+                }
+              }
+            },
+            "CNP-FILLER": {
+              "type": "string"
+            },
+            "MB-SAMPLE-MESSAGE-CODE": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-0133-SAMPLE-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-0133-SAMPLES-INFO": {
+              "type": "object",
+              "properties": {
+                "MB-0133-BILL-SAMPLES": {
+                  "type": "object",
+                  "properties": {
+                    "IS-BILL-133": {
+                      "type": "string"
+                    },
+                    "IS-ESCROW-PAGE-133": {
+                      "type": "string"
+                    },
+                    "IS-PMI-PAGE-133": {
+                      "type": "string"
+                    },
+                    "IS-PAL-PAGE-133": {
+                      "type": "string"
+                    },
+                    "IS-MARKETING-PAGE-133": {
+                      "type": "string"
+                    },
+                    "IS-GET-ENVELOPE-133": {
+                      "type": "string"
+                    },
+                    "GETS-INSERT-133": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "MB-0133-ESCR-SAMPLES": {
+                  "type": "object",
+                  "properties": {
+                    "SAMPLES-BK-133": {
+                      "type": "string"
+                    },
+                    "SAMPLES-TYPE-133": {
+                      "type": "string"
+                    },
+                    "SAMPLES-CUSH-133": {
+                      "type": "number"
+                    },
+                    "SAMPLES-SPRD-133": {
+                      "type": "number"
+                    },
+                    "SAMPLES-PI-133": {
+                      "type": "string"
+                    },
+                    "SAMPLES-FREQ-133": {
+                      "type": "number"
+                    },
+                    "SAMPLES-ESCROWED-133": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-SECONDARY-KEYS": {
+          "type": "object",
+          "properties": {
+            "MB-TRAN-KEY": {
+              "type": "number"
+            },
+            "MB-TRAN-COUNT": {
+              "type": "number"
+            },
+            "CONTAINER-KEY": {
+              "type": "number"
+            },
+            "FILLER": {
+              "type": "string"
+            }
+          }
+        },
+        "MB-PROCESS-CONTROL-FIELDS": {
+          "type": "object",
+          "properties": {
+            "MB-SEQ": {
+              "type": "number"
+            },
+            "MB-INSERT-CODE": {
+              "type": "string"
+            },
+            "MB-MESSAGE-CODE": {
+              "type": "string"
+            },
+            "MB-JOB": {
+              "type": "string"
+            },
+            "MB-PLANET-CODE": {
+              "type": "number"
+            },
+            "MB-PLANET-AMOUNT": {
+              "type": "number"
+            },
+            "MB-PLANET-DATE": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

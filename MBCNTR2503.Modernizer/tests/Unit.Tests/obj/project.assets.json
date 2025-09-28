@@ -415,6 +415,30 @@
         "runtime": {
           "bin/placeholder/Cnp.Decoders.dll": {}
         }
+      },
+      "Cnp.Pipeline/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Cnp.Decoders": "1.0.0",
+          "Cnp.Schema": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Cnp.Pipeline.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Cnp.Pipeline.dll": {}
+        }
+      },
+      "Cnp.Schema/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Cnp.Schema.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Cnp.Schema.dll": {}
+        }
       }
     }
   },
@@ -871,11 +895,23 @@
       "type": "project",
       "path": "../../src/Cnp.Decoders/Cnp.Decoders.csproj",
       "msbuildProject": "../../src/Cnp.Decoders/Cnp.Decoders.csproj"
+    },
+    "Cnp.Pipeline/1.0.0": {
+      "type": "project",
+      "path": "../../src/Cnp.Pipeline/Cnp.Pipeline.csproj",
+      "msbuildProject": "../../src/Cnp.Pipeline/Cnp.Pipeline.csproj"
+    },
+    "Cnp.Schema/1.0.0": {
+      "type": "project",
+      "path": "../../src/Cnp.Schema/Cnp.Schema.csproj",
+      "msbuildProject": "../../src/Cnp.Schema/Cnp.Schema.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Cnp.Decoders >= 1.0.0",
+      "Cnp.Pipeline >= 1.0.0",
+      "Cnp.Schema >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.11.1",
       "xunit >= 2.9.2",
       "xunit.runner.visualstudio >= 2.8.2"
@@ -908,6 +944,12 @@
           "projectReferences": {
             "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/Cnp.Decoders.csproj": {
               "projectPath": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/Cnp.Decoders.csproj"
+            },
+            "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj": {
+              "projectPath": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj"
+            },
+            "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/Cnp.Schema.csproj": {
+              "projectPath": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/Cnp.Schema.csproj"
             }
           }
         }

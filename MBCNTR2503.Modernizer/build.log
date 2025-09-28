@@ -1,0 +1,39 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Cnp.Schema -> /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/bin/Release/net8.0/Cnp.Schema.dll
+  Cnp.Decoders -> /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/bin/Release/net8.0/Cnp.Decoders.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(43,32): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(88,145): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(88,195): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(132,139): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(138,37): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(162,46): warning CA2014: Potential stack overflow. Move the stackalloc out of the loop. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2014) [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+  Cnp.Pipeline -> /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/bin/Release/net8.0/Cnp.Pipeline.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(259,26): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(259,52): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(293,27): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(293,53): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(293,76): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(333,24): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(333,47): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+  Cnp.Cli -> /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Release/net8.0/Cnp.Cli.dll
+
+Build succeeded.
+
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(43,32): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(88,145): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(88,195): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(132,139): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(138,37): warning CS8602: Dereference of a possibly null reference. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/MB2000FieldMapper.cs(162,46): warning CA2014: Potential stack overflow. Move the stackalloc out of the loop. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2014) [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(259,26): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(259,52): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(293,27): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(293,53): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(293,76): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(333,24): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Program.cs(333,47): warning CS8600: Converting null literal or possible null value to non-nullable type. [/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/Cnp.Cli.csproj]
+    13 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.16

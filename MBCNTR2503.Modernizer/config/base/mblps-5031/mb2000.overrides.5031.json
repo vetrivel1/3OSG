@@ -1,0 +1,4412 @@
+{
+  "overrides": [
+    {
+      "source": "MB-CLIENT3",
+      "target": "MB-CLIENT3",
+      "sourceOffset": 0,
+      "sourceLength": 3,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 4,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ACCOUNT",
+      "target": "MB-ACCOUNT",
+      "sourceOffset": 10,
+      "sourceLength": 7,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-FORMATTED-ACCOUNT",
+      "target": "MB-FORMATTED-ACCOUNT",
+      "sourceOffset": 17,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 27,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-SSN",
+      "target": "MB-SSN",
+      "sourceOffset": 37,
+      "sourceLength": 5,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-SSN-TIN-CODE",
+      "target": "MB-SSN-TIN-CODE",
+      "sourceOffset": 42,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-CO-SSN",
+      "target": "MB-CO-SSN",
+      "sourceOffset": 43,
+      "sourceLength": 5,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-CO-SSN-TIN-CODE",
+      "target": "MB-CO-SSN-TIN-CODE",
+      "sourceOffset": 48,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FOREIGN-ADDRESS",
+      "target": "MB-FOREIGN-ADDRESS",
+      "sourceOffset": 49,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-NAME",
+      "target": "MB-BILL-NAME",
+      "sourceOffset": 50,
+      "sourceLength": 60,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-LINE-2",
+      "target": "MB-BILL-LINE-2",
+      "sourceOffset": 110,
+      "sourceLength": 60,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-LINE-3",
+      "target": "MB-BILL-LINE-3",
+      "sourceOffset": 170,
+      "sourceLength": 60,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-LINE-4",
+      "target": "MB-BILL-LINE-4",
+      "sourceOffset": 230,
+      "sourceLength": 60,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-LINE-5",
+      "target": "MB-BILL-LINE-5",
+      "sourceOffset": 290,
+      "sourceLength": 60,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-LINE-6",
+      "target": "MB-BILL-LINE-6",
+      "sourceOffset": 350,
+      "sourceLength": 53,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-CITY",
+      "target": "MB-BILL-CITY",
+      "sourceOffset": 350,
+      "sourceLength": 51,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-STATE",
+      "target": "MB-BILL-STATE",
+      "sourceOffset": 401,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ZIP-5",
+      "target": "MB-ZIP-5",
+      "sourceOffset": 403,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ZIP-4",
+      "target": "MB-ZIP-4",
+      "sourceOffset": 408,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ACS-CODE",
+      "target": "MB-ACS-CODE",
+      "sourceOffset": 412,
+      "sourceLength": 25,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PROPERTY-STREET",
+      "target": "MB-PROPERTY-STREET",
+      "sourceOffset": 437,
+      "sourceLength": 50,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PROPERTY-CITY",
+      "target": "MB-PROPERTY-CITY",
+      "sourceOffset": 487,
+      "sourceLength": 30,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PROPERTY-STATE",
+      "target": "MB-PROPERTY-STATE",
+      "sourceOffset": 517,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PROPERTY-ZIP-5",
+      "target": "MB-PROPERTY-ZIP-5",
+      "sourceOffset": 519,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PROPERTY-ZIP-4",
+      "target": "MB-PROPERTY-ZIP-4",
+      "sourceOffset": 524,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATE-CODE",
+      "target": "MB-STATE-CODE",
+      "sourceOffset": 528,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 591,
+      "sourceLength": 29,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TELE-NO",
+      "target": "MB-TELE-NO",
+      "sourceOffset": 559,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-SEC-TELE-NO",
+      "target": "MB-SEC-TELE-NO",
+      "sourceOffset": 571,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATEMENT-YY",
+      "target": "MB-STATEMENT-YY",
+      "sourceOffset": 583,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATEMENT-MM",
+      "target": "MB-STATEMENT-MM",
+      "sourceOffset": 587,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATEMENT-DD",
+      "target": "MB-STATEMENT-DD",
+      "sourceOffset": 589,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 652,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATEMENT-YY-R",
+      "target": "MB-STATEMENT-YY-R",
+      "sourceOffset": 584,
+      "sourceLength": 3,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-STATEMENT-MM-R",
+      "target": "MB-STATEMENT-MM-R",
+      "sourceOffset": 587,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-STATEMENT-DD-R",
+      "target": "MB-STATEMENT-DD-R",
+      "sourceOffset": 589,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 660,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATEMENT-YY-R2",
+      "target": "MB-STATEMENT-YY-R2",
+      "sourceOffset": 662,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATEMENT-MM-R2",
+      "target": "MB-STATEMENT-MM-R2",
+      "sourceOffset": 664,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STATEMENT-DD-R2",
+      "target": "MB-STATEMENT-DD-R2",
+      "sourceOffset": 666,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LOAN-DUE-YY",
+      "target": "MB-LOAN-DUE-YY",
+      "sourceOffset": 591,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LOAN-DUE-MM",
+      "target": "MB-LOAN-DUE-MM",
+      "sourceOffset": 595,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LOAN-DUE-DD",
+      "target": "MB-LOAN-DUE-DD",
+      "sourceOffset": 597,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-COUPON-DUE-YY",
+      "target": "MB-COUPON-DUE-YY",
+      "sourceOffset": 599,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-COUPON-DUE-MM",
+      "target": "MB-COUPON-DUE-MM",
+      "sourceOffset": 603,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-COUPON-DUE-DD",
+      "target": "MB-COUPON-DUE-DD",
+      "sourceOffset": 605,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-1ST-DUE-YY",
+      "target": "MB-1ST-DUE-YY",
+      "sourceOffset": 607,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-1ST-DUE-MM",
+      "target": "MB-1ST-DUE-MM",
+      "sourceOffset": 611,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-1ST-DUE-DD",
+      "target": "MB-1ST-DUE-DD",
+      "sourceOffset": 613,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BEG-HIST-YY",
+      "target": "MB-BEG-HIST-YY",
+      "sourceOffset": 615,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BEG-HIST-MM",
+      "target": "MB-BEG-HIST-MM",
+      "sourceOffset": 619,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BEG-HIST-DD",
+      "target": "MB-BEG-HIST-DD",
+      "sourceOffset": 621,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MATURITY-YY",
+      "target": "MB-MATURITY-YY",
+      "sourceOffset": 623,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MATURITY-MM",
+      "target": "MB-MATURITY-MM",
+      "sourceOffset": 627,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-IR-YY",
+      "target": "MB-ARM-IR-YY",
+      "sourceOffset": 629,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-IR-MM",
+      "target": "MB-ARM-IR-MM",
+      "sourceOffset": 633,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-IR-DD",
+      "target": "MB-ARM-IR-DD",
+      "sourceOffset": 635,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-PI-CHG-YY",
+      "target": "MB-ARM-PI-CHG-YY",
+      "sourceOffset": 637,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-PI-CHG-MM",
+      "target": "MB-ARM-PI-CHG-MM",
+      "sourceOffset": 641,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-PI-CHG-DD",
+      "target": "MB-ARM-PI-CHG-DD",
+      "sourceOffset": 643,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LOAN-YY",
+      "target": "MB-LOAN-YY",
+      "sourceOffset": 645,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LOAN-MM",
+      "target": "MB-LOAN-MM",
+      "sourceOffset": 649,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LOAN-DD",
+      "target": "MB-LOAN-DD",
+      "sourceOffset": 651,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ASSUMP-YY",
+      "target": "MB-ASSUMP-YY",
+      "sourceOffset": 653,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ASSUMP-MM",
+      "target": "MB-ASSUMP-MM",
+      "sourceOffset": 657,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ASSUMP-DD",
+      "target": "MB-ASSUMP-DD",
+      "sourceOffset": 659,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-GRACE-DAYS",
+      "target": "MB-GRACE-DAYS",
+      "sourceOffset": 661,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-PAYMENT-FREQUENCY",
+      "target": "MB-PAYMENT-FREQUENCY",
+      "sourceOffset": 663,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ANNUAL-INTEREST",
+      "target": "MB-ANNUAL-INTEREST",
+      "sourceOffset": 664,
+      "sourceLength": 4,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-2ND-INTEREST",
+      "target": "MB-2ND-INTEREST",
+      "sourceOffset": 668,
+      "sourceLength": 4,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TYPE-LOAN",
+      "target": "MB-TYPE-LOAN",
+      "sourceOffset": 672,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TYPE-LOAN-A",
+      "target": "MB-TYPE-LOAN-A",
+      "sourceOffset": 672,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TYPE-LOAN-B",
+      "target": "MB-TYPE-LOAN-B",
+      "sourceOffset": 673,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-2ND-LOAN-TYPE",
+      "target": "MB-2ND-LOAN-TYPE",
+      "sourceOffset": 674,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-MODE",
+      "target": "MB-BILL-MODE",
+      "sourceOffset": 676,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LOAN-TERM",
+      "target": "MB-LOAN-TERM",
+      "sourceOffset": 677,
+      "sourceLength": 2,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-BANKRUPT-CODE",
+      "target": "MB-BANKRUPT-CODE",
+      "sourceOffset": 679,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FIRST-PRIN-BAL",
+      "target": "MB-FIRST-PRIN-BAL",
+      "sourceOffset": 681,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-2ND-PRIN-BAL",
+      "target": "MB-2ND-PRIN-BAL",
+      "sourceOffset": 688,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ESCROW-BAL",
+      "target": "MB-ESCROW-BAL",
+      "sourceOffset": 693,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ESCROW-ADVANCE-BAL",
+      "target": "MB-ESCROW-ADVANCE-BAL",
+      "sourceOffset": 699,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-SUSPENSE-BAL",
+      "target": "MB-SUSPENSE-BAL",
+      "sourceOffset": 705,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-RES-ESCROW",
+      "target": "MB-RES-ESCROW",
+      "sourceOffset": 712,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-REP-RES-BAL",
+      "target": "MB-REP-RES-BAL",
+      "sourceOffset": 718,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ACCRUED-LATE-CHG",
+      "target": "MB-ACCRUED-LATE-CHG",
+      "sourceOffset": 724,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DEFERRED-INT",
+      "target": "MB-DEFERRED-INT",
+      "sourceOffset": 729,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-NSF-BAL",
+      "target": "MB-NSF-BAL",
+      "sourceOffset": 735,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-OTHER-FEES",
+      "target": "MB-OTHER-FEES",
+      "sourceOffset": 739,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-CORP-ADV",
+      "target": "MB-CORP-ADV",
+      "sourceOffset": 744,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PAYMENT-AMOUNT",
+      "target": "MB-PAYMENT-AMOUNT",
+      "sourceOffset": 749,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FIRST-P-I",
+      "target": "MB-FIRST-P-I",
+      "sourceOffset": 755,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-2ND-P-I",
+      "target": "MB-2ND-P-I",
+      "sourceOffset": 761,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ESCROW-PAYMENT",
+      "target": "MB-ESCROW-PAYMENT",
+      "sourceOffset": 765,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-COUNTY-TAX",
+      "target": "MB-COUNTY-TAX",
+      "sourceOffset": 770,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-CITY-TAX",
+      "target": "MB-CITY-TAX",
+      "sourceOffset": 775,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-HAZ-PREM",
+      "target": "MB-HAZ-PREM",
+      "sourceOffset": 780,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MIP",
+      "target": "MB-MIP",
+      "sourceOffset": 785,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LIEN",
+      "target": "MB-LIEN",
+      "sourceOffset": 790,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-O-S-SPREAD",
+      "target": "MB-O-S-SPREAD",
+      "sourceOffset": 795,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-A-H-PREM",
+      "target": "MB-A-H-PREM",
+      "sourceOffset": 800,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LIFE-PREM",
+      "target": "MB-LIFE-PREM",
+      "sourceOffset": 804,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-REP-RES",
+      "target": "MB-REP-RES",
+      "sourceOffset": 808,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MISC-AMT",
+      "target": "MB-MISC-AMT",
+      "sourceOffset": 813,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-HUD-PART",
+      "target": "MB-HUD-PART",
+      "sourceOffset": 818,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BSC-AMT",
+      "target": "MB-BSC-AMT",
+      "sourceOffset": 823,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-L-C-AMT",
+      "target": "MB-L-C-AMT",
+      "sourceOffset": 827,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TOTAL-AMOUNT-DUE",
+      "target": "MB-TOTAL-AMOUNT-DUE",
+      "sourceOffset": 832,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DELQ-P-I",
+      "target": "MB-DELQ-P-I",
+      "sourceOffset": 839,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DELQ-ESC",
+      "target": "MB-DELQ-ESC",
+      "sourceOffset": 846,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DELQ-L-C",
+      "target": "MB-DELQ-L-C",
+      "sourceOffset": 853,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DELQ-INS",
+      "target": "MB-DELQ-INS",
+      "sourceOffset": 858,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DELQ-OTHER",
+      "target": "MB-DELQ-OTHER",
+      "sourceOffset": 863,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-INTEREST-DUE",
+      "target": "MB-INTEREST-DUE",
+      "sourceOffset": 869,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PRIN-YTD",
+      "target": "MB-PRIN-YTD",
+      "sourceOffset": 873,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-INTEREST-YTD",
+      "target": "MB-INTEREST-YTD",
+      "sourceOffset": 880,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TAXES-YTD",
+      "target": "MB-TAXES-YTD",
+      "sourceOffset": 887,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-HAZARD-YTD",
+      "target": "MB-HAZARD-YTD",
+      "sourceOffset": 893,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MIP-YTD",
+      "target": "MB-MIP-YTD",
+      "sourceOffset": 898,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LIEN-YTD",
+      "target": "MB-LIEN-YTD",
+      "sourceOffset": 903,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-L-C-YTD",
+      "target": "MB-L-C-YTD",
+      "sourceOffset": 908,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LAST-YEAR-INT-PAID",
+      "target": "MB-LAST-YEAR-INT-PAID",
+      "sourceOffset": 913,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LAST-YEAR-TAXES-PAID",
+      "target": "MB-LAST-YEAR-TAXES-PAID",
+      "sourceOffset": 918,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MODIFICATION-STATUS",
+      "target": "MB-MODIFICATION-STATUS",
+      "sourceOffset": 923,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MODIFICATION-TYPE",
+      "target": "MB-MODIFICATION-TYPE",
+      "sourceOffset": 925,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MODIFICATION-STATUS-YY",
+      "target": "MB-MODIFICATION-STATUS-YY",
+      "sourceOffset": 926,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MOD-STATUS-MMDD",
+      "target": "MB-MOD-STATUS-MMDD",
+      "sourceOffset": 928,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MOD-STATUS-MM",
+      "target": "MB-MOD-STATUS-MM",
+      "sourceOffset": 928,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MOD-STATUS-DD",
+      "target": "MB-MOD-STATUS-DD",
+      "sourceOffset": 930,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MODIFICATION-PROGRAM",
+      "target": "MB-MODIFICATION-PROGRAM",
+      "sourceOffset": 932,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MODIFICATION-YY",
+      "target": "MB-MODIFICATION-YY",
+      "sourceOffset": 936,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MODIFICATION-MMDD",
+      "target": "MB-MODIFICATION-MMDD",
+      "sourceOffset": 938,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-DEFERRED-BAL-IND",
+      "target": "MB-DEFERRED-BAL-IND",
+      "sourceOffset": 942,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PAYMENT-OPTION-IND",
+      "target": "MB-PAYMENT-OPTION-IND",
+      "sourceOffset": 943,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ORIG-LOAN-AMT",
+      "target": "MB-ORIG-LOAN-AMT",
+      "sourceOffset": 944,
+      "sourceLength": 5,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-NEG-AM-PB-CAP-VALUE",
+      "target": "MB-NEG-AM-PB-CAP-VALUE",
+      "sourceOffset": 949,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-INT-ONLY-EXP-YY",
+      "target": "MB-INT-ONLY-EXP-YY",
+      "sourceOffset": 956,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-INT-ONLY-EXP-MMDD",
+      "target": "MB-INT-ONLY-EXP-MMDD",
+      "sourceOffset": 958,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MONTHLY-BORR-ACCR-AMT",
+      "target": "MB-MONTHLY-BORR-ACCR-AMT",
+      "sourceOffset": 962,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BORR-INCTV-ANNIV-YY",
+      "target": "MB-BORR-INCTV-ANNIV-YY",
+      "sourceOffset": 966,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-BORR-INCTV-ANNIV-MMDD",
+      "target": "MB-BORR-INCTV-ANNIV-MMDD",
+      "sourceOffset": 968,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-BORR-INC-ACCR-ANNV2DT",
+      "target": "MB-BORR-INC-ACCR-ANNV2DT",
+      "sourceOffset": 972,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TRIAL-MOD-START-YY",
+      "target": "MB-TRIAL-MOD-START-YY",
+      "sourceOffset": 976,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TRIAL-MOD-START-MMDD",
+      "target": "MB-TRIAL-MOD-START-MMDD",
+      "sourceOffset": 978,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TRIAL-MOD-END-YY",
+      "target": "MB-TRIAL-MOD-END-YY",
+      "sourceOffset": 982,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TRIAL-MOD-END-MMDD",
+      "target": "MB-TRIAL-MOD-END-MMDD",
+      "sourceOffset": 984,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TRIAL-MOD-PAYMENT",
+      "target": "MB-TRIAL-MOD-PAYMENT",
+      "sourceOffset": 988,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MOD-REASON-CODE",
+      "target": "MB-MOD-REASON-CODE",
+      "sourceOffset": 994,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MOD-EFF-YY",
+      "target": "MB-MOD-EFF-YY",
+      "sourceOffset": 999,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MOD-EFF-MMDD",
+      "target": "MB-MOD-EFF-MMDD",
+      "sourceOffset": 1001,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-2-TO-1-INDICATOR",
+      "target": "MB-2-TO-1-INDICATOR",
+      "sourceOffset": 1005,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-OFF-SCHD-PEND-YY",
+      "target": "MB-OFF-SCHD-PEND-YY",
+      "sourceOffset": 1006,
+      "sourceLength": 2,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-OFF-SCHD-PEND-MM",
+      "target": "MB-OFF-SCHD-PEND-MM",
+      "sourceOffset": 1008,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-OFF-SCHD-PEND-DD",
+      "target": "MB-OFF-SCHD-PEND-DD",
+      "sourceOffset": 1010,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-OFF-SCHD-PEND-IR",
+      "target": "MB-OFF-SCHD-PEND-IR",
+      "sourceOffset": 1012,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-OFF-SCHD-PEND-PI",
+      "target": "MB-OFF-SCHD-PEND-PI",
+      "sourceOffset": 1016,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FLEXFIELD1",
+      "target": "MB-FLEXFIELD1",
+      "sourceOffset": 1023,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FLEXFIELD2",
+      "target": "MB-FLEXFIELD2",
+      "sourceOffset": 1035,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FLEXFIELD3",
+      "target": "MB-FLEXFIELD3",
+      "sourceOffset": 1047,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 925,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-POCKET-1",
+      "target": "MB-POCKET-1",
+      "sourceOffset": 1063,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-POCKET-2",
+      "target": "MB-POCKET-2",
+      "sourceOffset": 1064,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-POCKET-3",
+      "target": "MB-POCKET-3",
+      "sourceOffset": 1065,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-POCKET-4",
+      "target": "MB-POCKET-4",
+      "sourceOffset": 1066,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-POCKET-5",
+      "target": "MB-POCKET-5",
+      "sourceOffset": 1067,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-POCKET-6",
+      "target": "MB-POCKET-6",
+      "sourceOffset": 1068,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-POCKET-7",
+      "target": "MB-POCKET-7",
+      "sourceOffset": 1069,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-CLIENT-FIELDS",
+      "target": "MB-CLIENT-FIELDS",
+      "sourceOffset": 1070,
+      "sourceLength": 160,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 1096,
+      "sourceLength": 148,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-1021-ACC-INT-DUE-CALC-AMT",
+      "target": "MB-1021-ACC-INT-DUE-CALC-AMT",
+      "sourceOffset": 1244,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-1021-ACCELERATED-AMOUNT",
+      "target": "MB-1021-ACCELERATED-AMOUNT",
+      "sourceOffset": 1245,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-ONLINE-INSERT",
+      "target": "MB-0133-ONLINE-INSERT",
+      "sourceOffset": 1070,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-NEW-PAL-FLAG",
+      "target": "MB-0133-NEW-PAL-FLAG",
+      "sourceOffset": 1071,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-NEW-PAL-FORM",
+      "target": "MB-0133-NEW-PAL-FORM",
+      "sourceOffset": 1072,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-XTRA-PMI-PAGE",
+      "target": "MB-0133-XTRA-PMI-PAGE",
+      "sourceOffset": 1078,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-PROD-CODE",
+      "target": "MB-0133-PROD-CODE",
+      "sourceOffset": 1079,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-FORM-NAME",
+      "target": "MB-0133-FORM-NAME",
+      "sourceOffset": 1083,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-MESS-ONE",
+      "target": "MB-0133-MESS-ONE",
+      "sourceOffset": 1089,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-MESS-TWO",
+      "target": "MB-0133-MESS-TWO",
+      "sourceOffset": 1090,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-MESS-THREE",
+      "target": "MB-0133-MESS-THREE",
+      "sourceOffset": 1091,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-INSERT1",
+      "target": "MB-0133-INSERT1",
+      "sourceOffset": 1092,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-INSERT2",
+      "target": "MB-0133-INSERT2",
+      "sourceOffset": 1093,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-INSERT3",
+      "target": "MB-0133-INSERT3",
+      "sourceOffset": 1094,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-INSERT4",
+      "target": "MB-0133-INSERT4",
+      "sourceOffset": 1095,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-2ND-PAGE",
+      "target": "MB-0133-2ND-PAGE",
+      "sourceOffset": 1096,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-CHK-TYPE",
+      "target": "MB-0133-CHK-TYPE",
+      "sourceOffset": 1102,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-NO-BILL-SW",
+      "target": "MB-0133-NO-BILL-SW",
+      "sourceOffset": 1105,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-NO-BILL2-SW",
+      "target": "MB-0133-NO-BILL2-SW",
+      "sourceOffset": 1106,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-KILL-COUP",
+      "target": "MB-0133-KILL-COUP",
+      "sourceOffset": 1107,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-BANKRUPT",
+      "target": "MB-0133-BANKRUPT",
+      "sourceOffset": 1108,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-MARKETING",
+      "target": "MB-0133-MARKETING",
+      "sourceOffset": 1109,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-BANKRUPT-X",
+      "target": "MB-0133-BANKRUPT-X",
+      "sourceOffset": 1110,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-BNKRPT-ESC",
+      "target": "MB-0133-BNKRPT-ESC",
+      "sourceOffset": 1111,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-BILL-ADDR-FOREIGN",
+      "target": "MB-0133-BILL-ADDR-FOREIGN",
+      "sourceOffset": 1112,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-PILOT-SW",
+      "target": "MB-0133-PILOT-SW",
+      "sourceOffset": 1113,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-PILOT-TOTAL-PAGES",
+      "target": "MB-0133-PILOT-TOTAL-PAGES",
+      "sourceOffset": 1114,
+      "sourceLength": 1,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0133-PILOT-TOTAL-LINES",
+      "target": "MB-0133-PILOT-TOTAL-LINES",
+      "sourceOffset": 1115,
+      "sourceLength": 3,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0133-ESC-CODE",
+      "target": "MB-0133-ESC-CODE",
+      "sourceOffset": 1118,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-CHECK",
+      "target": "MB-0133-CHECK",
+      "sourceOffset": 1119,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-ESC-FLAG",
+      "target": "MB-0133-ESC-FLAG",
+      "sourceOffset": 1120,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-PMI-CODE",
+      "target": "MB-0133-PMI-CODE",
+      "sourceOffset": 1121,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "ESC-0133-S-KEY",
+      "target": "ESC-0133-S-KEY",
+      "sourceOffset": 1124,
+      "sourceLength": 6,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "ESC-0133-S-COUNT",
+      "target": "ESC-0133-S-COUNT",
+      "sourceOffset": 1130,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0133-PREV-POSTED",
+      "target": "MB-0133-PREV-POSTED",
+      "sourceOffset": 1134,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-PAL-FLAG",
+      "target": "MB-0133-PAL-FLAG",
+      "sourceOffset": 1139,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-GENERATED",
+      "target": "MB-0133-GENERATED",
+      "sourceOffset": 1140,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-TI-REL-KEY",
+      "target": "MB-0133-TI-REL-KEY",
+      "sourceOffset": 1141,
+      "sourceLength": 7,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0133-TI-ESCROW-MTH",
+      "target": "MB-0133-TI-ESCROW-MTH",
+      "sourceOffset": 1148,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-TI-TYPE-LOAN",
+      "target": "MB-0133-TI-TYPE-LOAN",
+      "sourceOffset": 1152,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-TI-STATE",
+      "target": "MB-0133-TI-STATE",
+      "sourceOffset": 1154,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-TI-PRIN-BAL",
+      "target": "MB-0133-TI-PRIN-BAL",
+      "sourceOffset": 1156,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-TI-PMI-CODE",
+      "target": "MB-0133-TI-PMI-CODE",
+      "sourceOffset": 1162,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-TI-MI-CODE",
+      "target": "MB-0133-TI-MI-CODE",
+      "sourceOffset": 1165,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-1099-AMOUNT-1",
+      "target": "MB-0133-1099-AMOUNT-1",
+      "sourceOffset": 1167,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-1098-INT",
+      "target": "MB-0133-1098-INT",
+      "sourceOffset": 1172,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-MESSG-SW",
+      "target": "MB-0133-MESSG-SW",
+      "sourceOffset": 1177,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0133-TEMP-SY-MESS-SW",
+      "target": "MB-0133-TEMP-SY-MESS-SW",
+      "sourceOffset": 1178,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 1333,
+      "sourceLength": 51,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-OPT-OUT-CODE",
+      "target": "MB-0140-OPT-OUT-CODE",
+      "sourceOffset": 1070,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-SPECIAL-MESSAGE-SW",
+      "target": "MB-0140-SPECIAL-MESSAGE-SW",
+      "sourceOffset": 1071,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-POCKET-2",
+      "target": "MB-0140-POCKET-2",
+      "sourceOffset": 1072,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-POCKET-3",
+      "target": "MB-0140-POCKET-3",
+      "sourceOffset": 1073,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-POCKET-4",
+      "target": "MB-0140-POCKET-4",
+      "sourceOffset": 1074,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-POCKET-5",
+      "target": "MB-0140-POCKET-5",
+      "sourceOffset": 1075,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-POCKET-6",
+      "target": "MB-0140-POCKET-6",
+      "sourceOffset": 1076,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-STATEMENT-SW",
+      "target": "MB-0140-STATEMENT-SW",
+      "sourceOffset": 1077,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-FORM-TYPE",
+      "target": "MB-0140-FORM-TYPE",
+      "sourceOffset": 1078,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0140-PAYOPT-FLAG",
+      "target": "MB-0140-PAYOPT-FLAG",
+      "sourceOffset": 1084,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 1399,
+      "sourceLength": 145,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-T-I-INSURANCE",
+      "target": "MB-0277-T-I-INSURANCE",
+      "sourceOffset": 1070,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-EXPENSES-PAID",
+      "target": "MB-0277-EXPENSES-PAID",
+      "sourceOffset": 1076,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-LATE-CHARGE",
+      "target": "MB-0277-LATE-CHARGE",
+      "sourceOffset": 1082,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-RETURN-CHECK-FEE",
+      "target": "MB-0277-RETURN-CHECK-FEE",
+      "sourceOffset": 1088,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-OTHER-FEES",
+      "target": "MB-0277-OTHER-FEES",
+      "sourceOffset": 1094,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-TAX-CODE",
+      "target": "MB-0277-TAX-CODE",
+      "sourceOffset": 1100,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-PROP-CODE",
+      "target": "MB-0277-PROP-CODE",
+      "sourceOffset": 1101,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-ARM-CODE",
+      "target": "MB-0277-ARM-CODE",
+      "sourceOffset": 1102,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-TOT-BEG-BAL",
+      "target": "MB-0277-TOT-BEG-BAL",
+      "sourceOffset": 1103,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-END-BEG-BAL",
+      "target": "MB-0277-END-BEG-BAL",
+      "sourceOffset": 1109,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-INTEREST-DUE",
+      "target": "MB-0277-INTEREST-DUE",
+      "sourceOffset": 1115,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-RES-ESC-CODE",
+      "target": "MB-0277-RES-ESC-CODE",
+      "sourceOffset": 1121,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-BILL-FORM-NAME",
+      "target": "MB-0277-BILL-FORM-NAME",
+      "sourceOffset": 1122,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-BILL-BACK-NAME",
+      "target": "MB-0277-BILL-BACK-NAME",
+      "sourceOffset": 1128,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-BILL-MESSAGES",
+      "target": "MB-0277-BILL-MESSAGES",
+      "sourceOffset": 1134,
+      "sourceLength": 15,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-TRANS-PAGE",
+      "target": "MB-0277-TRANS-PAGE",
+      "sourceOffset": 1149,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-PRIVACY-PAGE",
+      "target": "MB-0277-PRIVACY-PAGE",
+      "sourceOffset": 1150,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-MARKETING-PAGE",
+      "target": "MB-0277-MARKETING-PAGE",
+      "sourceOffset": 1151,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-BILL-INSERTS",
+      "target": "MB-0277-BILL-INSERTS",
+      "sourceOffset": 1152,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-MARKETING-FORM-NAME",
+      "target": "MB-0277-MARKETING-FORM-NAME",
+      "sourceOffset": 1156,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-NUM-PAGES",
+      "target": "MB-0277-NUM-PAGES",
+      "sourceOffset": 1162,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-BILL-WEIGHT",
+      "target": "MB-0277-BILL-WEIGHT",
+      "sourceOffset": 1163,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-MESSAGE-BEGIN",
+      "target": "MB-0277-MESSAGE-BEGIN",
+      "sourceOffset": 1164,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-SCRA-F",
+      "target": "MB-0277-SCRA-F",
+      "sourceOffset": 1167,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-SCRA-DATE-3-MM",
+      "target": "MB-0277-SCRA-DATE-3-MM",
+      "sourceOffset": 1168,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-SCRA-DATE-3-DD",
+      "target": "MB-0277-SCRA-DATE-3-DD",
+      "sourceOffset": 1170,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-SCRA-DATE-3-YY",
+      "target": "MB-0277-SCRA-DATE-3-YY",
+      "sourceOffset": 1172,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-SCRA-DATE-4-MM",
+      "target": "MB-0277-SCRA-DATE-4-MM",
+      "sourceOffset": 1174,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-SCRA-DATE-4-DD",
+      "target": "MB-0277-SCRA-DATE-4-DD",
+      "sourceOffset": 1176,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-SCRA-DATE-4-YY",
+      "target": "MB-0277-SCRA-DATE-4-YY",
+      "sourceOffset": 1178,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-LAST-AMT",
+      "target": "MB-0277-LAST-AMT",
+      "sourceOffset": 1184,
+      "sourceLength": 11,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0277-LAST-DATE",
+      "target": "MB-0277-LAST-DATE",
+      "sourceOffset": 1195,
+      "sourceLength": 6,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0277-1098-PAGE",
+      "target": "MB-0277-1098-PAGE",
+      "sourceOffset": 1201,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-TI-IRS-PURPOSE-CODE",
+      "target": "MB-0277-TI-IRS-PURPOSE-CODE",
+      "sourceOffset": 1202,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-BILL-INSERT-6",
+      "target": "MB-0277-BILL-INSERT-6",
+      "sourceOffset": 1203,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-BILL-INSERT-7",
+      "target": "MB-0277-BILL-INSERT-7",
+      "sourceOffset": 1204,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0277-TYPE-OF-SAMPLE",
+      "target": "MB-0277-TYPE-OF-SAMPLE",
+      "sourceOffset": 1205,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 1626,
+      "sourceLength": 24,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PRIN-DELQ-BAL",
+      "target": "MB-PRIN-DELQ-BAL",
+      "sourceOffset": 1070,
+      "sourceLength": 13,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FORBEARANCE-AMT",
+      "target": "MB-FORBEARANCE-AMT",
+      "sourceOffset": 1083,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 1664,
+      "sourceLength": 143,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SWITCH",
+      "target": "MB-0346-SWITCH",
+      "sourceOffset": 1070,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-TOTAL-DED-MI-0346",
+      "target": "MB-TI-TOTAL-DED-MI-0346",
+      "sourceOffset": 1071,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPLE-LOAN-SW",
+      "target": "MB-0346-SAMPLE-LOAN-SW",
+      "sourceOffset": 1076,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPLE-LOAN-TYPE",
+      "target": "MB-0346-SAMPLE-LOAN-TYPE",
+      "sourceOffset": 1077,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPLE-FORM1",
+      "target": "MB-0346-SAMPLE-FORM1",
+      "sourceOffset": 1078,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPLE-FORM1B",
+      "target": "MB-0346-SAMPLE-FORM1B",
+      "sourceOffset": 1084,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPLE-FORM2",
+      "target": "MB-0346-SAMPLE-FORM2",
+      "sourceOffset": 1090,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPLE-FORM3",
+      "target": "MB-0346-SAMPLE-FORM3",
+      "sourceOffset": 1096,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPLE-MESS-CODE",
+      "target": "MB-0346-SAMPLE-MESS-CODE",
+      "sourceOffset": 1102,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-ADDL-PAGES",
+      "target": "MB-0346-ADDL-PAGES",
+      "sourceOffset": 1103,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0346-PRINT-TRANS-TOT",
+      "target": "MB-0346-PRINT-TRANS-TOT",
+      "sourceOffset": 1105,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0346-BANKRUPT",
+      "target": "MB-0346-BANKRUPT",
+      "sourceOffset": 1109,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-DELINQUENT",
+      "target": "MB-0346-DELINQUENT",
+      "sourceOffset": 1110,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-TYPELOAN",
+      "target": "MB-0346-SAMPL-TYPELOAN",
+      "sourceOffset": 1111,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-BK",
+      "target": "MB-0346-SAMPL-BK",
+      "sourceOffset": 1112,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-DELQ",
+      "target": "MB-0346-SAMPL-DELQ",
+      "sourceOffset": 1113,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-DRAFTER",
+      "target": "MB-0346-SAMPL-DRAFTER",
+      "sourceOffset": 1114,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-FC",
+      "target": "MB-0346-SAMPL-FC",
+      "sourceOffset": 1115,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-AUDIT",
+      "target": "MB-0346-SAMPL-AUDIT",
+      "sourceOffset": 1116,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-TI-HIST",
+      "target": "MB-0346-SAMPL-TI-HIST",
+      "sourceOffset": 1850,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-TI-PMI",
+      "target": "MB-0346-SAMPL-TI-PMI",
+      "sourceOffset": 1851,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SAMPL-TI-MIP",
+      "target": "MB-0346-SAMPL-TI-MIP",
+      "sourceOffset": 1852,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 1853,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-SUPPRESSED-SW",
+      "target": "MB-0346-SUPPRESSED-SW",
+      "sourceOffset": 1121,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-BNKL-CLSD-REASON-CD",
+      "target": "MB-0346-BNKL-CLSD-REASON-CD",
+      "sourceOffset": 1122,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-ACCESS-NBR",
+      "target": "MB-0346-ACCESS-NBR",
+      "sourceOffset": 1124,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0346-AUDIT",
+      "target": "MB-0346-AUDIT",
+      "sourceOffset": 1869,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FOR1-SALE-DATE-YR",
+      "target": "MB-FOR1-SALE-DATE-YR",
+      "sourceOffset": 1870,
+      "sourceLength": 2,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-FOR1-SALE-DATE-MO",
+      "target": "MB-FOR1-SALE-DATE-MO",
+      "sourceOffset": 1872,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FOR1-SALE-DATE-DA",
+      "target": "MB-FOR1-SALE-DATE-DA",
+      "sourceOffset": 1873,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 1874,
+      "sourceLength": 87,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-REC-NO",
+      "target": "MB-REC-NO",
+      "sourceOffset": 1961,
+      "sourceLength": 3,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-REC-NO-R",
+      "target": "MB-REC-NO-R",
+      "sourceOffset": 1961,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-IMAGE-OUT",
+      "target": "MB-IMAGE-OUT",
+      "sourceOffset": 1964,
+      "sourceLength": 18,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FACE-IMAGE-OUT",
+      "target": "MB-FACE-IMAGE-OUT",
+      "sourceOffset": 1982,
+      "sourceLength": 18,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FACE-IMAGE-OUT-2",
+      "target": "MB-FACE-IMAGE-OUT-2",
+      "sourceOffset": 2000,
+      "sourceLength": 18,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ACCELERATED-AMOUNT",
+      "target": "MB-ACCELERATED-AMOUNT",
+      "sourceOffset": 2018,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ACCELERATED-REASON-CODE",
+      "target": "MB-ACCELERATED-REASON-CODE",
+      "sourceOffset": 2019,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 2021,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-REC-NO-ORIGINAL",
+      "target": "MB-REC-NO-ORIGINAL",
+      "sourceOffset": 2028,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-CORP-ADV-DATE",
+      "target": "MB-CORP-ADV-DATE",
+      "sourceOffset": 2031,
+      "sourceLength": 8,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DUP-ONCERT1",
+      "target": "MB-DUP-ONCERT1",
+      "sourceOffset": 2039,
+      "sourceLength": 18,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DUP-ONCERT2",
+      "target": "MB-DUP-ONCERT2",
+      "sourceOffset": 2057,
+      "sourceLength": 18,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DUP-ONCERT3",
+      "target": "MB-DUP-ONCERT3",
+      "sourceOffset": 2075,
+      "sourceLength": 18,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DUP-ONCERT4",
+      "target": "MB-DUP-ONCERT4",
+      "sourceOffset": 2093,
+      "sourceLength": 18,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 2111,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-POCKET-2",
+      "target": "MB-0547-POCKET-2",
+      "sourceOffset": 1070,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-POCKET-3",
+      "target": "MB-0547-POCKET-3",
+      "sourceOffset": 1071,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-POCKET-4",
+      "target": "MB-0547-POCKET-4",
+      "sourceOffset": 1072,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-POCKET-5",
+      "target": "MB-0547-POCKET-5",
+      "sourceOffset": 1073,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-POCKET-6",
+      "target": "MB-0547-POCKET-6",
+      "sourceOffset": 1074,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-BILL-FORM",
+      "target": "MB-0547-BILL-FORM",
+      "sourceOffset": 1075,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-NEW-LOAN-FORM",
+      "target": "MB-0547-NEW-LOAN-FORM",
+      "sourceOffset": 1081,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-NEW-LOAN-FORM2",
+      "target": "MB-0547-NEW-LOAN-FORM2",
+      "sourceOffset": 1087,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-1098-FORM",
+      "target": "MB-0547-1098-FORM",
+      "sourceOffset": 1093,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-TOTAL-INSERTS",
+      "target": "MB-0547-TOTAL-INSERTS",
+      "sourceOffset": 1099,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-MESSAGE-CODES",
+      "target": "MB-0547-MESSAGE-CODES",
+      "sourceOffset": 1100,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-ARM-LTR-SW",
+      "target": "MB-0547-ARM-LTR-SW",
+      "sourceOffset": 1110,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-ZIP-CODE-SW",
+      "target": "MB-0547-ZIP-CODE-SW",
+      "sourceOffset": 1111,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-BILLING-SW",
+      "target": "MB-0547-BILLING-SW",
+      "sourceOffset": 1112,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-LETTER-TYPE",
+      "target": "MB-0547-LETTER-TYPE",
+      "sourceOffset": 1113,
+      "sourceLength": 1,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0547-JIT-FEE",
+      "target": "MB-0547-JIT-FEE",
+      "sourceOffset": 1114,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-VI-SW",
+      "target": "MB-0547-VI-SW",
+      "sourceOffset": 1116,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-1099-AMOUNT-1",
+      "target": "MB-0547-1099-AMOUNT-1",
+      "sourceOffset": 1117,
+      "sourceLength": 7,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0547-1099-AMOUNT-2",
+      "target": "MB-0547-1099-AMOUNT-2",
+      "sourceOffset": 1124,
+      "sourceLength": 7,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0547-1099-AMOUNT-3",
+      "target": "MB-0547-1099-AMOUNT-3",
+      "sourceOffset": 1131,
+      "sourceLength": 7,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-0547-1098-SW",
+      "target": "MB-0547-1098-SW",
+      "sourceOffset": 1138,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-1099-SW",
+      "target": "MB-0547-1099-SW",
+      "sourceOffset": 1139,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-FHA-SW",
+      "target": "MB-0547-FHA-SW",
+      "sourceOffset": 1140,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-VI-BILL-FORM",
+      "target": "MB-0547-VI-BILL-FORM",
+      "sourceOffset": 1141,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-SPECIAL",
+      "target": "MB-0547-SPECIAL",
+      "sourceOffset": 1147,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0547-FILLER",
+      "target": "MB-0547-FILLER",
+      "sourceOffset": 1148,
+      "sourceLength": 82,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 2288,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-TOTAL-DED-MI-0628",
+      "target": "MB-TI-TOTAL-DED-MI-0628",
+      "sourceOffset": 2289,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0628-BK",
+      "target": "MB-0628-BK",
+      "sourceOffset": 1070,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0628-OPTION-ARM",
+      "target": "MB-0628-OPTION-ARM",
+      "sourceOffset": 1072,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0628-SAMPLE-VALUE",
+      "target": "MB-0628-SAMPLE-VALUE",
+      "sourceOffset": 2293,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0628-ATTY-SW",
+      "target": "MB-0628-ATTY-SW",
+      "sourceOffset": 2303,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 2304,
+      "sourceLength": 139,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-0628-ADDITIONAL-PAGE",
+      "target": "MB-0628-ADDITIONAL-PAGE",
+      "sourceOffset": 2443,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-DEFERRED-INT",
+      "target": "MB-5020-DEFERRED-INT",
+      "sourceOffset": 1070,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-INST",
+      "target": "MB-5020-INST",
+      "sourceOffset": 1075,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-PIN-NUMBER",
+      "target": "MB-5020-PIN-NUMBER",
+      "sourceOffset": 1078,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-FUND-CD",
+      "target": "MB-5020-UNAP-FUND-CD",
+      "sourceOffset": 1084,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-ESC-VAR",
+      "target": "MB-5020-ESC-VAR",
+      "sourceOffset": 1085,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-CD-2",
+      "target": "MB-5020-UNAP-CD-2",
+      "sourceOffset": 1091,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-BAL-2",
+      "target": "MB-5020-UNAP-BAL-2",
+      "sourceOffset": 1092,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-CD-3",
+      "target": "MB-5020-UNAP-CD-3",
+      "sourceOffset": 1097,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-BAL-3",
+      "target": "MB-5020-UNAP-BAL-3",
+      "sourceOffset": 1098,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-CD-4",
+      "target": "MB-5020-UNAP-CD-4",
+      "sourceOffset": 1103,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-BAL-4",
+      "target": "MB-5020-UNAP-BAL-4",
+      "sourceOffset": 1104,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-CD-5",
+      "target": "MB-5020-UNAP-CD-5",
+      "sourceOffset": 1109,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-UNAP-BAL-5",
+      "target": "MB-5020-UNAP-BAL-5",
+      "sourceOffset": 1110,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-ADDL-PAGES",
+      "target": "MB-5020-ADDL-PAGES",
+      "sourceOffset": 1115,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-BMSG",
+      "target": "MB-5020-BMSG",
+      "sourceOffset": 1186,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-BMSG-LINES",
+      "target": "MB-5020-BMSG-LINES",
+      "sourceOffset": 1188,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-5020-BMSG-REQD",
+      "target": "MB-5020-BMSG-REQD",
+      "sourceOffset": 1190,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-MAIL-CD",
+      "target": "MB-5020-MAIL-CD",
+      "sourceOffset": 1191,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-DART-UNIT",
+      "target": "MB-5020-DART-UNIT",
+      "sourceOffset": 1192,
+      "sourceLength": 20,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-BUYER-ASST-AMT",
+      "target": "MB-5020-BUYER-ASST-AMT",
+      "sourceOffset": 1212,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-5020-INV-CODE",
+      "target": "MB-5020-INV-CODE",
+      "sourceOffset": 1218,
+      "sourceLength": 3,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 2493,
+      "sourceLength": 9,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FEES-CODE",
+      "target": "MB-FEES-CODE",
+      "sourceOffset": 1070,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-LAST-STMT-DATE",
+      "target": "MB-LAST-STMT-DATE",
+      "sourceOffset": 1072,
+      "sourceLength": 6,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 2510,
+      "sourceLength": 152,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "CNP-COMPANY-NAME",
+      "target": "CNP-COMPANY-NAME",
+      "sourceOffset": 1070,
+      "sourceLength": 30,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILL-METHOD",
+      "target": "MB-BILL-METHOD",
+      "sourceOffset": 1100,
+      "sourceLength": 1,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-SUPPRESSION-FLAG",
+      "target": "MB-SUPPRESSION-FLAG",
+      "sourceOffset": 1101,
+      "sourceLength": 3,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-MSG1-CODE",
+      "target": "MB-MSG1-CODE",
+      "sourceOffset": 1104,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MSG2-CODE",
+      "target": "MB-MSG2-CODE",
+      "sourceOffset": 1106,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 2700,
+      "sourceLength": 122,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BORR-EMAIL-ADDR",
+      "target": "MB-BORR-EMAIL-ADDR",
+      "sourceOffset": 2822,
+      "sourceLength": 66,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BORR-DUE-DATE",
+      "target": "MB-BORR-DUE-DATE",
+      "sourceOffset": 2888,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BORR-PMT-DUE",
+      "target": "MB-BORR-PMT-DUE",
+      "sourceOffset": 2898,
+      "sourceLength": 9,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-BORR-PMT-DUEX",
+      "target": "MB-BORR-PMT-DUEX",
+      "sourceOffset": 2898,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-E-CONSENT",
+      "target": "MB-E-CONSENT",
+      "sourceOffset": 2907,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DRAFT-IND",
+      "target": "MB-DRAFT-IND",
+      "sourceOffset": 2908,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-SERVICER-FIELDS",
+      "target": "MB-SERVICER-FIELDS",
+      "sourceOffset": 1320,
+      "sourceLength": 150,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DIST-TYPE",
+      "target": "MB-DIST-TYPE",
+      "sourceOffset": 1320,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MAN",
+      "target": "MB-MAN",
+      "sourceOffset": 1321,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-2ND-MAN",
+      "target": "MB-2ND-MAN",
+      "sourceOffset": 1322,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ZONE",
+      "target": "MB-ZONE",
+      "sourceOffset": 1323,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-1ST-BASIS-CODE",
+      "target": "MB-1ST-BASIS-CODE",
+      "sourceOffset": 1325,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BANK",
+      "target": "MB-BANK",
+      "sourceOffset": 1328,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-AGGR",
+      "target": "MB-AGGR",
+      "sourceOffset": 1331,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-2ND-BANK",
+      "target": "MB-2ND-BANK",
+      "sourceOffset": 1334,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-2ND-CAT",
+      "target": "MB-2ND-CAT",
+      "sourceOffset": 1337,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ZONE-1",
+      "target": "MB-ZONE-1",
+      "sourceOffset": 1340,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ZONE-2",
+      "target": "MB-ZONE-2",
+      "sourceOffset": 1342,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TYPE-ACQ",
+      "target": "MB-TYPE-ACQ",
+      "sourceOffset": 1344,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-USER-BILLING-TABLE",
+      "target": "MB-USER-BILLING-TABLE",
+      "sourceOffset": 1345,
+      "sourceLength": 20,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-1",
+      "target": "UBT-POS-1",
+      "sourceOffset": 1345,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-2",
+      "target": "UBT-POS-2",
+      "sourceOffset": 1346,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-3",
+      "target": "UBT-POS-3",
+      "sourceOffset": 1347,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-4",
+      "target": "UBT-POS-4",
+      "sourceOffset": 1348,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-5",
+      "target": "UBT-POS-5",
+      "sourceOffset": 1349,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-6",
+      "target": "UBT-POS-6",
+      "sourceOffset": 1350,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-7",
+      "target": "UBT-POS-7",
+      "sourceOffset": 1351,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-8",
+      "target": "UBT-POS-8",
+      "sourceOffset": 1352,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-9",
+      "target": "UBT-POS-9",
+      "sourceOffset": 1353,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-10",
+      "target": "UBT-POS-10",
+      "sourceOffset": 1354,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-11",
+      "target": "UBT-POS-11",
+      "sourceOffset": 1355,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-12",
+      "target": "UBT-POS-12",
+      "sourceOffset": 1356,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-13",
+      "target": "UBT-POS-13",
+      "sourceOffset": 1357,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-14",
+      "target": "UBT-POS-14",
+      "sourceOffset": 1358,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-15",
+      "target": "UBT-POS-15",
+      "sourceOffset": 1359,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-16",
+      "target": "UBT-POS-16",
+      "sourceOffset": 1360,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-17",
+      "target": "UBT-POS-17",
+      "sourceOffset": 1361,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-18",
+      "target": "UBT-POS-18",
+      "sourceOffset": 1362,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-19",
+      "target": "UBT-POS-19",
+      "sourceOffset": 1363,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "UBT-POS-20",
+      "target": "UBT-POS-20",
+      "sourceOffset": 1364,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STOP-BILL-FLAG",
+      "target": "MB-STOP-BILL-FLAG",
+      "sourceOffset": 1365,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BILLING-CYCLE",
+      "target": "MB-BILLING-CYCLE",
+      "sourceOffset": 1366,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PAY-OPTION",
+      "target": "MB-PAY-OPTION",
+      "sourceOffset": 1369,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DONT-PROCESS",
+      "target": "MB-DONT-PROCESS",
+      "sourceOffset": 1370,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PIF-STOP",
+      "target": "MB-PIF-STOP",
+      "sourceOffset": 1371,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FORECLOSURE-STOP",
+      "target": "MB-FORECLOSURE-STOP",
+      "sourceOffset": 1372,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BAD-CK-STOP",
+      "target": "MB-BAD-CK-STOP",
+      "sourceOffset": 1373,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-NO-NOTICES",
+      "target": "MB-NO-NOTICES",
+      "sourceOffset": 1374,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DONT-ANALYZE",
+      "target": "MB-DONT-ANALYZE",
+      "sourceOffset": 1375,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-A-H-FLAG",
+      "target": "MB-A-H-FLAG",
+      "sourceOffset": 1376,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LIFE-FLAG",
+      "target": "MB-LIFE-FLAG",
+      "sourceOffset": 1377,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DISB-STOP",
+      "target": "MB-DISB-STOP",
+      "sourceOffset": 1378,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-PLAN-ID",
+      "target": "MB-ARM-PLAN-ID",
+      "sourceOffset": 1379,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-INV",
+      "target": "MB-INV",
+      "sourceOffset": 1383,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PLS-CLT-ID",
+      "target": "MB-PLS-CLT-ID",
+      "sourceOffset": 1384,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PAYMENT-OPTION-SWITCH",
+      "target": "MB-PAYMENT-OPTION-SWITCH",
+      "sourceOffset": 1387,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PAYMENT-OPT-4",
+      "target": "MB-PAYMENT-OPT-4",
+      "sourceOffset": 1388,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PAYMENT-OPT-4-TOTDUE",
+      "target": "MB-PAYMENT-OPT-4-TOTDUE",
+      "sourceOffset": 1394,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DIST-TYPE-1-IO-FLAG",
+      "target": "MB-DIST-TYPE-1-IO-FLAG",
+      "sourceOffset": 1400,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-INT-ONLY-PI",
+      "target": "MB-ARM-INT-ONLY-PI",
+      "sourceOffset": 1401,
+      "sourceLength": 6,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-ARM-FULLY-AM-PI",
+      "target": "MB-ARM-FULLY-AM-PI",
+      "sourceOffset": 1407,
+      "sourceLength": 6,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-ARM-INT-ONLY-TOT",
+      "target": "MB-ARM-INT-ONLY-TOT",
+      "sourceOffset": 1413,
+      "sourceLength": 6,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-ARM-FULLY-AM-TOT",
+      "target": "MB-ARM-FULLY-AM-TOT",
+      "sourceOffset": 1419,
+      "sourceLength": 6,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-POST-PETITION-YY",
+      "target": "MB-POST-PETITION-YY",
+      "sourceOffset": 1425,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-POST-PETITION-MMDD",
+      "target": "MB-POST-PETITION-MMDD",
+      "sourceOffset": 1427,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-POST-PETITION-AMOUNT",
+      "target": "MB-POST-PETITION-AMOUNT",
+      "sourceOffset": 1431,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-COUPON-TAPE-YY",
+      "target": "MB-COUPON-TAPE-YY",
+      "sourceOffset": 1437,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-COUPON-TAPE-MM",
+      "target": "MB-COUPON-TAPE-MM",
+      "sourceOffset": 1441,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-COUPON-TAPE-DD",
+      "target": "MB-COUPON-TAPE-DD",
+      "sourceOffset": 1443,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BANKRUPTCY-STATUS",
+      "target": "MB-BANKRUPTCY-STATUS",
+      "sourceOffset": 1445,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-ARM-RATE-PI-NOT-AVAIL-IND",
+      "target": "MB-ARM-RATE-PI-NOT-AVAIL-IND",
+      "sourceOffset": 1446,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-NO-CHANGE-SCHED-IND",
+      "target": "MB-NO-CHANGE-SCHED-IND",
+      "sourceOffset": 1447,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MTGR-LANG-PREF",
+      "target": "MB-MTGR-LANG-PREF",
+      "sourceOffset": 1448,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FOR1-STATUS-CD",
+      "target": "MB-FOR1-STATUS-CD",
+      "sourceOffset": 1450,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-BNK-DISCHARGE-IND",
+      "target": "MB-BNK-DISCHARGE-IND",
+      "sourceOffset": 1451,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-EBPP-IND",
+      "target": "MB-EBPP-IND",
+      "sourceOffset": 3176,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-DELQ-DAYS",
+      "target": "MB-DELQ-DAYS",
+      "sourceOffset": 3177,
+      "sourceLength": 5,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3182,
+      "sourceLength": 13,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PAYMENT-DUE-COUNTER",
+      "target": "MB-PAYMENT-DUE-COUNTER",
+      "sourceOffset": 1320,
+      "sourceLength": 2,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-ESCROW-INTEREST-YTD",
+      "target": "MB-ESCROW-INTEREST-YTD",
+      "sourceOffset": 1322,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PROPERTY-ADDRESS-2",
+      "target": "MB-PROPERTY-ADDRESS-2",
+      "sourceOffset": 1326,
+      "sourceLength": 35,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LATE-YYYY",
+      "target": "MB-LATE-YYYY",
+      "sourceOffset": 1361,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LATE-MM",
+      "target": "MB-LATE-MM",
+      "sourceOffset": 1365,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-LATE-DD",
+      "target": "MB-LATE-DD",
+      "sourceOffset": 1367,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "CNP-INVESTOR-CODE",
+      "target": "CNP-INVESTOR-CODE",
+      "sourceOffset": 1369,
+      "sourceLength": 3,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3244,
+      "sourceLength": 98,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-MTG-CODE",
+      "target": "MB-TI-MTG-CODE",
+      "sourceOffset": 1470,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-TRAN-56-SW",
+      "target": "MB-TI-TRAN-56-SW",
+      "sourceOffset": 1471,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-ZERO-PB-CODE",
+      "target": "MB-TI-ZERO-PB-CODE",
+      "sourceOffset": 1472,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-LOAN-YY",
+      "target": "MB-TI-LOAN-YY",
+      "sourceOffset": 1473,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-LOAN-YY-R",
+      "target": "MB-TI-LOAN-YY-R",
+      "sourceOffset": 3345,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TI-LOAN-MM",
+      "target": "MB-TI-LOAN-MM",
+      "sourceOffset": 1477,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-LOAN-DD",
+      "target": "MB-TI-LOAN-DD",
+      "sourceOffset": 1479,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-ASSUMP-DATE",
+      "target": "MB-TI-ASSUMP-DATE",
+      "sourceOffset": 1481,
+      "sourceLength": 8,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-HAZARD-YTD",
+      "target": "MB-TI-HAZARD-YTD",
+      "sourceOffset": 1489,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-MIP-YTD",
+      "target": "MB-TI-MIP-YTD",
+      "sourceOffset": 1494,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-LIEN-YTD",
+      "target": "MB-TI-LIEN-YTD",
+      "sourceOffset": 1499,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-ESC-MTH",
+      "target": "MB-TI-ESC-MTH",
+      "sourceOffset": 1504,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-TOT-PMT",
+      "target": "MB-TI-TOT-PMT",
+      "sourceOffset": 1509,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-1098-CODE",
+      "target": "MB-TI-1098-CODE",
+      "sourceOffset": 1514,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-DETAIL-HISTORY",
+      "target": "MB-TI-DETAIL-HISTORY",
+      "sourceOffset": 1515,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-SSN-TIN-CODE",
+      "target": "MB-TI-SSN-TIN-CODE",
+      "sourceOffset": 1516,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-CO-SSN-TIN-CODE",
+      "target": "MB-TI-CO-SSN-TIN-CODE",
+      "sourceOffset": 1517,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-REVISED-STMT-SW",
+      "target": "MB-TI-REVISED-STMT-SW",
+      "sourceOffset": 1518,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-PMI-CODE",
+      "target": "MB-TI-PMI-CODE",
+      "sourceOffset": 1519,
+      "sourceLength": 3,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "TI-PMI-PRE-POST",
+      "target": "TI-PMI-PRE-POST",
+      "sourceOffset": 1519,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "TI-PMI-STATE",
+      "target": "TI-PMI-STATE",
+      "sourceOffset": 1520,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-ESC-BAL-BEG",
+      "target": "MB-TI-ESC-BAL-BEG",
+      "sourceOffset": 1522,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-PRIN-BAL-BEG",
+      "target": "MB-TI-PRIN-BAL-BEG",
+      "sourceOffset": 1527,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-1098-INT",
+      "target": "MB-TI-1098-INT",
+      "sourceOffset": 1533,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-PRIN-YTD",
+      "target": "MB-TI-PRIN-YTD",
+      "sourceOffset": 1539,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-TAXES-YTD",
+      "target": "MB-TI-TAXES-YTD",
+      "sourceOffset": 1545,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-LATE-CHG-PD",
+      "target": "MB-TI-LATE-CHG-PD",
+      "sourceOffset": 1550,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-INT-ON-ESCROW",
+      "target": "MB-TI-INT-ON-ESCROW",
+      "sourceOffset": 1559,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-REIMBURSED-AMOUNT",
+      "target": "MB-TI-REIMBURSED-AMOUNT",
+      "sourceOffset": 1563,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-TOTAL-DED-MI",
+      "target": "MB-TI-TOTAL-DED-MI",
+      "sourceOffset": 1568,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-AMT-DISB",
+      "target": "MB-TI-AMT-DISB",
+      "sourceOffset": 1573,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-ESC-DEP",
+      "target": "MB-TI-ESC-DEP",
+      "sourceOffset": 1578,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-H-FHA-NUMBER",
+      "target": "MB-TI-H-FHA-NUMBER",
+      "sourceOffset": 1583,
+      "sourceLength": 14,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-H-AS-OF-YY",
+      "target": "MB-TI-H-AS-OF-YY",
+      "sourceOffset": 1597,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-H-AS-OF-MM",
+      "target": "MB-TI-H-AS-OF-MM",
+      "sourceOffset": 1601,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-H-AS-OF-DD",
+      "target": "MB-TI-H-AS-OF-DD",
+      "sourceOffset": 1603,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-H-PAYOFF-AMOUNT",
+      "target": "MB-TI-H-PAYOFF-AMOUNT",
+      "sourceOffset": 1605,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-STMT-SAMPLE",
+      "target": "MB-TI-STMT-SAMPLE",
+      "sourceOffset": 1610,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-SAMPLE-REASON",
+      "target": "MB-TI-SAMPLE-REASON",
+      "sourceOffset": 1611,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-SAMPLE-LOAN-SW",
+      "target": "MB-TI-SAMPLE-LOAN-SW",
+      "sourceOffset": 1613,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TI-KEY",
+      "target": "MB-TI-KEY",
+      "sourceOffset": 1614,
+      "sourceLength": 5,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TI-COUNT",
+      "target": "MB-TI-COUNT",
+      "sourceOffset": 1619,
+      "sourceLength": 3,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-FLEXFIELD4",
+      "target": "MB-FLEXFIELD4",
+      "sourceOffset": 1622,
+      "sourceLength": 25,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FLEXFIELD5",
+      "target": "MB-FLEXFIELD5",
+      "sourceOffset": 1647,
+      "sourceLength": 40,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-FLEXFIELD6",
+      "target": "MB-FLEXFIELD6",
+      "sourceOffset": 1687,
+      "sourceLength": 50,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3542,
+      "sourceLength": 65,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-REMITTANCE-IMB-CODE",
+      "target": "MB-REMITTANCE-IMB-CODE",
+      "sourceOffset": 1802,
+      "sourceLength": 65,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-REMITTANCE-ZIP-CODE",
+      "target": "MB-REMITTANCE-ZIP-CODE",
+      "sourceOffset": 1867,
+      "sourceLength": 11,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3683,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PRODUCT-CODE",
+      "target": "MB-PRODUCT-CODE",
+      "sourceOffset": 1885,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-VIEW-PRODUCT-CODE",
+      "target": "MB-VIEW-PRODUCT-CODE",
+      "sourceOffset": 1889,
+      "sourceLength": 4,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3698,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-STMT-SELECTED-AS-SAMPLE",
+      "target": "MB-STMT-SELECTED-AS-SAMPLE",
+      "sourceOffset": 1905,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-SAMPLE-REASON",
+      "target": "MB-SAMPLE-REASON",
+      "sourceOffset": 1906,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "CNP-FILLER",
+      "target": "CNP-FILLER",
+      "sourceOffset": 1908,
+      "sourceLength": 26,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-SAMPLE-MESSAGE-CODE",
+      "target": "MB-SAMPLE-MESSAGE-CODE",
+      "sourceOffset": 1934,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "IS-BILL-133",
+      "target": "IS-BILL-133",
+      "sourceOffset": 1905,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "IS-ESCROW-PAGE-133",
+      "target": "IS-ESCROW-PAGE-133",
+      "sourceOffset": 1906,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "IS-PMI-PAGE-133",
+      "target": "IS-PMI-PAGE-133",
+      "sourceOffset": 1907,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "IS-PAL-PAGE-133",
+      "target": "IS-PAL-PAGE-133",
+      "sourceOffset": 1908,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "IS-MARKETING-PAGE-133",
+      "target": "IS-MARKETING-PAGE-133",
+      "sourceOffset": 1909,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "IS-GET-ENVELOPE-133",
+      "target": "IS-GET-ENVELOPE-133",
+      "sourceOffset": 1910,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "GETS-INSERT-133",
+      "target": "GETS-INSERT-133",
+      "sourceOffset": 1911,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "SAMPLES-BK-133",
+      "target": "SAMPLES-BK-133",
+      "sourceOffset": 1912,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "SAMPLES-TYPE-133",
+      "target": "SAMPLES-TYPE-133",
+      "sourceOffset": 1914,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "SAMPLES-CUSH-133",
+      "target": "SAMPLES-CUSH-133",
+      "sourceOffset": 1915,
+      "sourceLength": 2,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "SAMPLES-SPRD-133",
+      "target": "SAMPLES-SPRD-133",
+      "sourceOffset": 1917,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "SAMPLES-PI-133",
+      "target": "SAMPLES-PI-133",
+      "sourceOffset": 1919,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "SAMPLES-FREQ-133",
+      "target": "SAMPLES-FREQ-133",
+      "sourceOffset": 1920,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "SAMPLES-ESCROWED-133",
+      "target": "SAMPLES-ESCROWED-133",
+      "sourceOffset": 1922,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3756,
+      "sourceLength": 12,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-TRAN-KEY",
+      "target": "MB-TRAN-KEY",
+      "sourceOffset": 1935,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-TRAN-COUNT",
+      "target": "MB-TRAN-COUNT",
+      "sourceOffset": 1939,
+      "sourceLength": 2,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "CONTAINER-KEY",
+      "target": "CONTAINER-KEY",
+      "sourceOffset": 1941,
+      "sourceLength": 9,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3787,
+      "sourceLength": 11,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-SEQ",
+      "target": "MB-SEQ",
+      "sourceOffset": 1961,
+      "sourceLength": 4,
+      "mode": "zonedDecimal",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-INSERT-CODE",
+      "target": "MB-INSERT-CODE",
+      "sourceOffset": 1965,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-MESSAGE-CODE",
+      "target": "MB-MESSAGE-CODE",
+      "sourceOffset": 1966,
+      "sourceLength": 1,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-JOB",
+      "target": "MB-JOB",
+      "sourceOffset": 1967,
+      "sourceLength": 7,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PLANET-CODE",
+      "target": "MB-PLANET-CODE",
+      "sourceOffset": 1974,
+      "sourceLength": 7,
+      "mode": "packed",
+      "trimOutput": false
+    },
+    {
+      "source": "MB-PLANET-AMOUNT",
+      "target": "MB-PLANET-AMOUNT",
+      "sourceOffset": 1981,
+      "sourceLength": 5,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "MB-PLANET-DATE",
+      "target": "MB-PLANET-DATE",
+      "sourceOffset": 1986,
+      "sourceLength": 6,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
+      "source": "FILLER",
+      "target": "FILLER",
+      "sourceOffset": 3829,
+      "sourceLength": 8,
+      "mode": "copyTrim",
+      "trimOutput": true
+    }
+  ]
+}

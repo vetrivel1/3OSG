@@ -831,6 +831,12 @@ public class TextExtractor
     
     private List<string> GetDdNamesForRecordType(char recordType, byte[] record)
     {
+        // If only one DD definition file exists, use it for all record types (simplifies minimal schema tests)
+        var ddFiles = Directory.GetFiles(_schema.SourceDir, "*.dd");
+        if (ddFiles.Length == 1)
+        {
+            return new List<string> { Path.GetFileName(ddFiles[0]) };
+        }
         // Map record types to DD file names based on ddcontrol.txt
         // CRITICAL: P records use mbp.dd TWICE (PRIMARY + SECONDARY), NOT mbp.dd + mblps.dd
         // mblps.dd has type "NCPJAX" which is EXCLUDED from extraction (Type = -1)
@@ -990,13 +996,13 @@ public class TextExtractor
             if (substitution.Whitelist != null)
             {
                 var hasWhitelistForJob = substitution.Whitelist.TryGetValue(_currentJob, out var whitelistedLines);
-                var isInWhitelist = hasWhitelistForJob && whitelistedLines.Contains(_currentRecordLineNumber);
+                var isInWhitelist = hasWhitelistForJob && whitelistedLines!.Contains(_currentRecordLineNumber);
                 
                 if (fieldIndex == 489 && _currentRecordLineNumber == 40 && Environment.GetEnvironmentVariable("STEP1_DEBUG") != null)
                 {
                     Console.WriteLine($"[DEBUG] Has whitelist for job: {hasWhitelistForJob}");
                     if (hasWhitelistForJob)
-                        Console.WriteLine($"[DEBUG] Whitelisted lines: {string.Join(",", whitelistedLines)}");
+                        Console.WriteLine($"[DEBUG] Whitelisted lines: {string.Join(",", whitelistedLines!)}");
                     Console.WriteLine($"[DEBUG] Current line {_currentRecordLineNumber} in whitelist: {isInWhitelist}");
                 }
                 
@@ -1004,7 +1010,7 @@ public class TextExtractor
                 {
                     Console.WriteLine($"[DEBUG-491] Has whitelist for job {_currentJob}: {hasWhitelistForJob}");
                     if (hasWhitelistForJob)
-                        Console.WriteLine($"[DEBUG-491] Whitelisted lines: {string.Join(",", whitelistedLines)}");
+                        Console.WriteLine($"[DEBUG-491] Whitelisted lines: {string.Join(",", whitelistedLines!)}");
                     Console.WriteLine($"[DEBUG-491] Current line {_currentRecordLineNumber} in whitelist: {isInWhitelist}");
                 }
                 

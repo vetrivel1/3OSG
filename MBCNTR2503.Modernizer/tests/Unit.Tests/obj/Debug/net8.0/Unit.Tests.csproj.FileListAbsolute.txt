@@ -99,3 +99,7 @@
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.pdb
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/Unit.Tests.genruntimeconfig.cache
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/obj/Debug/net8.0/ref/Unit.Tests.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Pipeline.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Schema.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Pipeline.pdb
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/tests/Unit.Tests/bin/Debug/net8.0/Cnp.Schema.pdb

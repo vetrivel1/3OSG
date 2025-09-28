@@ -1,0 +1,15 @@
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/bin/Debug/net8.0/Comp3Test
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/bin/Debug/net8.0/Comp3Test.deps.json
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/bin/Debug/net8.0/Comp3Test.runtimeconfig.json
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/bin/Debug/net8.0/Comp3Test.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/bin/Debug/net8.0/Comp3Test.pdb
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.AssemblyInfoInputs.cache
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.AssemblyInfo.cs
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.csproj.CoreCompileInputs.cache
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.sourcelink.json
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/refint/Comp3Test.dll
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.pdb
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/Comp3Test.genruntimeconfig.cache
+/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/scripts/Comp3Test/obj/Debug/net8.0/ref/Comp3Test.dll

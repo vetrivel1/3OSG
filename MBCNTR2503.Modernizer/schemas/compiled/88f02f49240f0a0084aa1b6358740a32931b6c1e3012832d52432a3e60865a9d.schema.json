@@ -196,21 +196,21 @@
       },
       {
         "Name": "MB-STATEMENT-YY",
-        "Offset": 583,
+        "Offset": 653,
         "Length": 4,
         "DataType": "Text",
         "Scale": 0
       },
       {
         "Name": "MB-STATEMENT-MM",
-        "Offset": 587,
+        "Offset": 582,
         "Length": 2,
         "DataType": "Text",
         "Scale": 0
       },
       {
         "Name": "MB-STATEMENT-DD",
-        "Offset": 589,
+        "Offset": 582,
         "Length": 2,
         "DataType": "Text",
         "Scale": 0
@@ -238,21 +238,21 @@
       },
       {
         "Name": "MB-LOAN-DUE-YY",
-        "Offset": 591,
+        "Offset": 653,
         "Length": 4,
         "DataType": "Text",
         "Scale": 0
       },
       {
         "Name": "MB-LOAN-DUE-MM",
-        "Offset": 595,
+        "Offset": 582,
         "Length": 2,
         "DataType": "Text",
         "Scale": 0
       },
       {
         "Name": "MB-LOAN-DUE-DD",
-        "Offset": 597,
+        "Offset": 582,
         "Length": 2,
         "DataType": "Text",
         "Scale": 0
@@ -266,7 +266,7 @@
       },
       {
         "Name": "MB-COUPON-DUE-YY",
-        "Offset": 599,
+        "Offset": 653,
         "Length": 4,
         "DataType": "Text",
         "Scale": 0
@@ -3980,34 +3980,34 @@
     "Email": "EbpEmailAddress",
     "MB-ZIP-4": "Zip4",
     "MB-VIEW-PRODUCT-CODE": "OnlineViewProductNumber",
-    "\u0022Y\u0022": "PrintDelivery",
+    "\"Y\"": "PrintDelivery",
     "MB-BILL-CITY": "City",
     "MB-TOTAL-AMOUNT-DUE": "PaymentAmount",
     "MB-BILL-LINE-2": "Address2",
     "MB-POCKET-7": "Pocket7ActiveBit",
-    "\u0022 \u0022": "EditRejectMessage",
-    "\u00220\u0022": "HouseholdingMax",
+    "\" \"": "EditRejectMessage",
+    "\"0\"": "HouseholdingMax",
     "MB-BILL-STATE": "State",
     "MB-BILL-NAME": "Address1",
     "CONTAINER-KEY": "SecondaryKey",
     "EbpPaymentAmount": "EbpPaymentAmount",
     "MB-POCKET-5": "Pocket5ActiveBit",
     "EbpPaymentDueDate": "EbpPaymentDueDate",
-    "\u0022OrTrackId\u0022": "OriginalTrackingId",
-    "\u0022N\u0022": "RerunRestart",
+    "\"OrTrackId\"": "OriginalTrackingId",
+    "\"N\"": "RerunRestart",
     "MB-BILL-LINE-5": "Address5",
     "MB-COUPON-DUE-YY": "PaymentDueDate",
-    "\u002201\u0022": "FileNumber",
+    "\"01\"": "FileNumber",
     "MB-POCKET-4": "Pocket4ActiveBit",
-    "\u0022TrackId\u0022": "TrackingId",
+    "\"TrackId\"": "TrackingId",
     "MB-CLIENT3": "CustomerBase",
     "MB-BILL-LINE-3": "Address3",
     "MB-POCKET-3": "Pocket3ActiveBit",
     "MB-FLEXFIELD1": "FlexField1",
-    "\u0022English\u0022": "Language",
+    "\"English\"": "Language",
     "MB-POCKET-6": "Pocket6ActiveBit",
-    "\u0022A\u0022": "OrderType",
-    "\u002BMB-STATEMENT-MM\u002B\u0022/\u0022\u002BMB-STATEMENT-DD\u002B\u0022/\u0022\u002BMB-STATEMENT-YY": "StatementDate",
+    "\"A\"": "OrderType",
+    "+MB-STATEMENT-MM+\"/\"+MB-STATEMENT-DD+\"/\"+MB-STATEMENT-YY": "StatementDate",
     "MB-ACCOUNT": "Account",
     "MB-ZIP-5": "Zip5"
   }
