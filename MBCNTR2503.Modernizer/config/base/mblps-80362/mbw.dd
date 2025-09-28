@@ -1,0 +1,94 @@
+mbw-client-no, 0, 4, Text, 0
+mbw-loan, 4, 7, Packed Number, 0
+mbw-rec-code, 11, 1, Text, 0
+mbw-rec-no, 12, 3, Text, 0
+mbw-net-disb, 15, 6, Packed Number, 2
+mbw-payee, 21, 10, Text, 0
+mbw-ctl-fld, 31, 6, Packed Number, 0
+mbw-total-recd, 37, 6, Packed Number, 2
+mbw-prin-pd, 43, 6, Packed Number, 2
+mbw-int-pd, 49, 5, Packed Number, 2
+mbw-escrow-pd, 54, 5, Packed Number, 2
+mbw-fee-pd, 59, 5, Packed Number, 2
+mbw-a-h-pd, 69, 5, Packed Number, 2
+mbw-life-pd, 74, 5, Packed Number, 2
+mbw-suspense-amt, 79, 5, Packed Number, 2
+mbw-res-esc-pd, 84, 6, Packed Number, 2
+mbw-rep-res, 99, 5, Packed Number, 2
+mbw-hud-part, 107, 4, Packed Number, 2
+mbw-misc-pd, 111, 6, Packed Number, 2
+mbw-fee-code, 122, 1, Text, 0
+MBW-PROC-DATE, 123, 6, Text, 0
+mbw-pp-thru-dt-yy, 129, 2, Packed Number, 0
+mbw-pp-thru-dt-mm, 131, 2, Text, 0
+mbw-pp-thru-dt-dd, 133, 2, Text, 0
+mbw-pp-from-dt-yy, 135, 2, Packed Number, 0
+mbw-pp-from-dt-mm, 137, 2, Text, 0
+mbw-pp-from-dt-dd, 139, 2, Text, 0
+mbw-rec-corp-adv-reason-code, 193, 4, Text, 0
+mbw-rec-corp-adv-reason-code-desc, 197, 16, Text, 0
+mbw-fee-tran-code, 263, 3, Text, 0
+mbw-fee-date, 266, 6, Text, 0
+mbw-fee-amt, 272, 5, Packed Number, 2
+mbw-fee-code, 277, 1, Text, 0
+mbw-fee-tran-code, 278, 3, Text, 0
+mbw-fee-date, 281, 6, Text, 0
+mbw-fee-amt, 287, 5, Packed Number, 2
+mbw-fee-code, 292, 1, Text, 0
+mbw-fee-tran-code, 293, 3, Text, 0
+mbw-fee-date, 296, 6, Text, 0
+mbw-fee-amt, 302, 5, Packed Number, 2
+mbw-fee-code, 307, 1, Text, 0
+mbw-fee-tran-code, 308, 3, Text, 0
+mbw-fee-date, 311, 6, Text, 0
+mbw-fee-amt, 317, 5, Packed Number, 2
+mbw-fee-code, 322, 1, Text, 0
+mbw-fee-tran-code, 323, 3, Text, 0
+mbw-fee-date, 326, 6, Text, 0
+mbw-fee-amt, 332, 5, Packed Number, 2
+mbw-fee-code, 337, 1, Text, 0
+mbw-fee-tran-code, 338, 3, Text, 0
+mbw-fee-date, 341, 6, Text, 0
+mbw-fee-amt, 347, 5, Packed Number, 2
+mbw-fee-code, 352, 1, Text, 0
+mbw-fee-tran-code, 353, 3, Text, 0
+mbw-fee-date, 356, 6, Text, 0
+mbw-fee-amt, 362, 5, Packed Number, 2
+mbw-fee-code, 367, 1, Text, 0
+mbw-fee-tran-code, 368, 3, Text, 0
+mbw-fee-date, 371, 6, Text, 0
+mbw-fee-amt, 377, 5, Packed Number, 2
+mbw-fee-code, 382, 1, Text, 0
+mbw-fee-tran-code, 383, 3, Text, 0
+mbw-fee-date, 386, 6, Text, 0
+mbw-fee-amt, 392, 5, Packed Number, 2
+mbw-fee-code, 397, 1, Text, 0
+mbw-fee-tran-code, 398, 3, Text, 0
+mbw-fee-date, 401, 6, Text, 0
+mbw-fee-amt, 407, 5, Packed Number, 2
+mbw-fee-code, 412, 1, Text, 0
+mbw-fee-tran-code, 413, 3, Text, 0
+mbw-fee-date, 416, 6, Text, 0
+mbw-fee-amt, 422, 5, Packed Number, 2
+mbw-fee-code, 427, 1, Text, 0
+mbw-fee-tran-code, 428, 3, Text, 0
+mbw-fee-date, 431, 6, Text, 0
+mbw-fee-amt, 437, 5, Packed Number, 2
+mbw-fee-code, 442, 1, Text, 0
+mbw-fee-tran-code, 443, 3, Text, 0
+mbw-fee-date, 446, 6, Text, 0
+mbw-fee-amt, 452, 5, Packed Number, 2
+mbw-fee-code, 457, 1, Text, 0
+mbw-fee-tran-code, 458, 3, Text, 0
+mbw-fee-date, 461, 6, Text, 0
+mbw-fee-amt, 467, 5, Packed Number, 2
+mbw-fee-code, 472, 1, Text, 0
+mbw-fee-tran-code, 473, 3, Text, 0
+mbw-fee-date, 476, 6, Text, 0
+mbw-fee-amt, 482, 5, Packed Number, 2
+mbw-fee-code, 487, 1, Text, 0
+mbw-2to1-ind, 1000, 1, Text, 0
+mbw-susp-act-cd, 1001, 4, Text, 0
+mbw-disb-proc-yr, 1005, 2, Packed Number, 0
+mbw-disb-proc-mo, 1007, 2, Text, 0
+mbw-disb-proc-da, 1009, 2, Text, 0

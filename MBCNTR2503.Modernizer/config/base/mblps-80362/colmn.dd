@@ -1,0 +1,16 @@
+MB-CLIENT-NO, 0, 4, Text, 0
+MB-LOAN-NO, 4, 10, Text, 0
+MB-REC-CODE, 14, 2, Text, 0
+VALUE, 16, 15, Text, 0
+VALUE, 31, 15, Text, 0
+VALUE, 46, 15, Text, 0
+VALUE, 61, 15, Text, 0
+VALUE, 76, 15, Text, 0
+VALUE, 91, 15, Text, 0
+VALUE, 106, 15, Text, 0
+VALUE, 121, 15, Text, 0
+VALUE, 136, 15, Text, 0
+VALUE, 151, 15, Text, 0
+VALUE, 166, 15, Text, 0
+VALUE, 181, 15, Text, 0
+VALUE, 196, 15, Text, 0

@@ -1,0 +1,7 @@
+WS-P2-TYPE, 0, 1, Text, 0
+WS-P2-ACCOUNT, 1, 7, Packed Number, 0
+WS-IRS-PB-BEG-RPT-SW, 8, 1, Text, 0
+WS-IRS-PROP-ADDR-OR-DESC-SW, 9, 1, Text, 0
+WS-IRS-PROP-ADDR-OR-DESC, 10, 39, Text, 0
+WS-IRS-PROP-ADDR-OR-DESC2, 49, 39, Text, 0
+WS-CITY, 88, 3, Packed Number, 0

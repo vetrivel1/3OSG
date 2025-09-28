@@ -1,0 +1,23 @@
+{
+  "overrides": [
+    // TODO: Add mapping entries for each MB2000 target field in the form:
+    // {
+    //   "source": "<MB1500-FIELD>",
+    //   "target": "<MB2000-FIELD>",
+    //   "sourceOffset": <offset>,
+    //   "sourceLength": <length>,
+    //   "mode": "copyTrim",
+    //   "trimOutput": true
+    // },
+    
+    // Example placeholder:
+    // {
+    //   "source": "MB1100-EXAMPLE",
+    //   "target": "MB-EXAMPLE",
+    //   "sourceOffset": 0,
+    //   "sourceLength": 10,
+    //   "mode": "copyTrim",
+    //   "trimOutput": true
+    // }
+  ]
+}

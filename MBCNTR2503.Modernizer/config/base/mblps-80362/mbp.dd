@@ -1,0 +1,448 @@
+mb-client-no, 0, 4, Text, 0
+mb-loan, 4, 7, Mixed, 0
+mb-rec-code, 11, 1, Text, 0
+mb-rec-no, 12, 3, Number, 0
+mb-name-add-1, 15, 30, Text, 0
+mb-name-add-2, 45, 30, Text, 0
+mb-name-add-3, 75, 30, Text, 0
+mb-name-add-4, 105, 30, Text, 0
+mb-name-add-5, 135, 30, Text, 0
+mb-city, 165, 21, Text, 0
+mb-state, 186, 2, Text, 0
+mb-zip, 188, 5, Text, 0
+mb-dash, 193, 1, Text, 0
+mb-zip-4, 194, 4, Text, 0
+mb-prop-no, 198, 6, Text, 0
+mb-prop-dir, 204, 2, Text, 0
+mb-prop-name, 206, 20, Text, 0
+mb-prop-line-2, 226, 33, Text, 0
+mb-prop-zip, 249, 10, Text, 0
+mb-tele-no, 259, 6, Packed Number, 0
+mb-sec-tele-no, 265, 6, Packed Number, 0
+mb-ss-no, 271, 5, Packed Number, 0
+mb-co-ss-no, 276, 5, Packed Number, 0
+mb-due-yy, 281, 2, Packed Number, 0
+mb-due-mm, 283, 2, Number, 0
+mb-due-dd, 285, 2, Number, 0
+coupon-req-yy, 287, 2, Packed Number, 0
+coupon-req-mm, 289, 2, Number, 0
+coupon-req-dd, 291, 2, Number, 0
+beg-hist-yy, 293, 2, Packed Number, 0
+beg-hist-mm, 295, 2, Number, 0
+beg-hist-dd, 297, 2, Number, 0
+mb-coupon-yy, 299, 2, Packed Number, 0
+mb-coupon-mm, 301, 2, Number, 0
+mb-coupon-dd, 303, 2, Number, 0
+mb-last-anal-yy, 305, 2, Packed Number, 0
+mb-last-anal-mm, 307, 2, Number, 0
+mb-last-anal-dd, 309, 2, Number, 0
+mb-1st-ir-chg-yy, 311, 2, Packed Number, 0
+mb-1st-ir-chg-mm, 313, 2, Number, 0
+mb-1st-pi-chg-yy, 315, 2, Packed Number, 0
+mb-1st-pi-chg-mm, 317, 2, Number, 0
+mb-loan-mat-yy, 319, 2, Packed Number, 0
+mb-loan-mat-mm, 321, 2, Number, 0
+mb-tot-pymt, 323, 6, Packed Number, 2
+mb-first-p-i, 329, 6, Packed Number, 2
+mb-esc-mth, 335, 5, Packed Number, 2
+mb-county-tax, 340, 5, Packed Number, 2
+mb-city-tax, 345, 5, Packed Number, 2
+mb-haz-prem, 350, 5, Packed Number, 2
+mb-mip, 355, 5, Packed Number, 2
+mb-lien, 360, 5, Packed Number, 2
+mb-o-s-spread, 365, 5, Packed Number, 2
+mb-a-h-prem, 370, 4, Packed Number, 2
+mb-life-prem, 374, 4, Packed Number, 2
+mb-rep-res, 378, 5, Packed Number, 2
+mb-misc-amt, 383, 5, Packed Number, 2
+mb-hud-part, 388, 5, Packed Number, 2
+mb-bsc-amt, 393, 4, Packed Number, 2
+mb-l-c-amt, 397, 5, Packed Number, 2
+mb-first-prin-bal, 402, 7, Packed Number, 2
+mb-escrow-bal, 409, 6, Packed Number, 2
+mb-esc-adv-bal, 415, 6, Packed Number, 2
+mb-suspense-bal, 421, 7, Packed Number, 2
+mb-res-escrow, 428, 6, Packed Number, 2
+mb-rep-res-bal, 434, 6, Packed Number, 2
+mb-accrued-late-chg, 440, 5, Packed Number, 2
+mb-deferred-int, 445, 6, Packed Number, 2
+mb-nsf-bal, 451, 4, Packed Number, 2
+mb-other-fees, 455, 5, Packed Number, 2
+mb-prin-ytd, 460, 7, Packed Number, 2
+mb-interest-ytd, 467, 7, Packed Number, 2
+mb-taxes-ytd, 474, 6, Packed Number, 2
+mb-hazard-ytd, 480, 5, Packed Number, 2
+mb-mip-ytd, 485, 5, Packed Number, 2
+mb-lien-ytd, 490, 5, Packed Number, 2
+mb-l-c-ytd, 495, 5, Packed Number, 2
+mb-prin-pd, 500, 7, Packed Number, 2
+mb-int-pd, 507, 7, Packed Number, 2
+mb-escrow-pd, 514, 6, Packed Number, 2
+mb-l-c-pd, 520, 5, Packed Number, 2
+mb-bsc-pd, 525, 4, Packed Number, 2
+mb-a-h-pd, 529, 4, Packed Number, 2
+mb-life-pd, 533, 4, Packed Number, 2
+mb-suspense-amt, 537, 7, Packed Number, 2
+mb-total-recd, 544, 7, Packed Number, 2
+mb-total-due, 551, 7, Packed Number, 2
+mb-int-paid, 558, 5, Packed Number, 2
+mb-taxes-paid, 563, 5, Packed Number, 2
+mb-revised-stmt-sw, 568, 1, Text, 0
+mb-hi-type, 569, 1, Text, 0
+mb-lo-type, 570, 1, Text, 0
+mb-bank, 571, 3, Text, 0
+mb-aggr, 574, 3, Text, 0
+mb-1st-basis-code, 577, 3, Text, 0
+mb-dist-type, 580, 1, Text, 0
+mb-grace-days, 581, 2, Packed Number, 0
+mb-pmt-period, 583, 2, Packed Number, 0
+mb-annual-int, 585, 4, Packed Number, 5
+mb-bill-mode, 589, 1, Text, 0
+mb-zone, 590, 4, Text, 0
+mb-man, 594, 1, Text, 0
+mb-type-acq, 595, 1, Text, 0
+mb-state-code, 596, 2, Number, 0
+mb-loan-term, 598, 2, Packed Number, 0
+mb-bankrupt-code, 600, 2, Text, 0
+mb-user-billing-table, 602, 20, Text, 0
+UBT-POS1, 602, 1, Text, 0
+UBT-POS2, 603, 1, Text, 0
+UBT-POS3, 604, 1, Text, 0
+UBT-POS4, 605, 1, Text, 0
+UBT-POS5, 606, 1, Text, 0
+UBT-POS6, 607, 1, Text, 0
+UBT-POS7, 608, 1, Text, 0
+UBT-POS8, 609, 1, Text, 0
+UBT-POS9, 610, 1, Text, 0
+UBT-POS10, 611, 1, Text, 0
+UBT-POS11, 612, 1, Text, 0
+UBT-POS12, 613, 1, Text, 0
+UBT-POS13, 614, 1, Text, 0
+UBT-POS14, 615, 1, Text, 0
+UBT-POS15, 616, 1, Text, 0
+UBT-POS16, 617, 1, Text, 0
+UBT-POS17, 618, 1, Text, 0
+UBT-POS18, 619, 1, Text, 0
+UBT-POS19, 620, 1, Text, 0
+UBT-POS20, 621, 1, Text, 0
+mb-stop-bill-flag, 622, 1, Text, 0
+mb-billing-cycle, 623, 3, Text, 0
+mb-pay-option, 626, 1, Text, 0
+mb-delq-p-i, 627, 7, Packed Number, 2
+mb-delq-esc, 634, 7, Packed Number, 2
+mb-delq-l-c, 641, 5, Packed Number, 2
+mb-delq-ins, 646, 5, Packed Number, 2
+mb-delq-other, 651, 6, Packed Number, 2
+mb-3-pos-field, 657, 3, Text, 0
+mb-int-due, 660, 4, Packed Number, 2
+mb-360-365-factor, 664, 1, Number, 0
+mb-int-calc-opt, 665, 1, Text, 0
+mb-prev-paid-thru-yy, 666, 2, Packed Number, 0
+mb-prev-paid-thru-mm, 668, 2, Number, 0
+mb-prev-paid-thru-dd, 670, 2, Number, 0
+mb-1st-due-yy, 672, 2, Packed Number, 0
+mb-1st-due-mm, 674, 2, Number, 0
+mb-1st-due-dd, 676, 2, Number, 0
+mb-2nd-inv, 678, 3, Text, 0
+mb-2nd-cat, 681, 3, Text, 0
+mb-2nd-basis-code, 684, 3, Text, 0
+mb-2nd-man, 687, 1, Text, 0
+2nd-hi-type, 688, 1, Text, 0
+2nd-lo-type, 689, 1, Text, 0
+mb-2nd-annual-ser-fee, 690, 5, Packed Number, 8
+mb-2nd-prin-bal, 695, 5, Packed Number, 2
+mb-2nd-p-i, 700, 4, Packed Number, 2
+mb-2nd-annual-int, 704, 4, Packed Number, 7
+mb-bill-addr-foreign, 708, 1, Text, 0
+mb-dont-process, 709, 1, Text, 0
+mb-pif-stop, 710, 1, Text, 0
+mb-foreclosure-stop, 711, 1, Text, 0
+mb-bad-ck-stop, 712, 1, Text, 0
+mb-no-notices, 713, 1, Text, 0
+mb-dont-analyze, 714, 1, Text, 0
+mb-a-h-flag, 715, 1, Text, 0
+mb-life-flag, 716, 1, Text, 0
+mb-disb-stop, 717, 1, Text, 0
+mb-arm-plan-id, 718, 4, Text, 0
+mb-arm-ir-yy, 722, 2, Packed Number, 0
+mb-arm-ir-mm, 724, 2, Number, 0
+mb-arm-ir-da, 726, 2, Number, 0
+mb-arm-pi-chg-yy, 728, 2, Packed Number, 0
+mb-arm-pi-chg-mm, 730, 2, Number, 0
+mb-arm-pi-chg-dd, 732, 2, Number, 0
+mb-modification-program, 734, 4, Text, 0
+2ND-DELQ-P-I, 749, 7, Packed Number, 2
+OPT-OUT-SOLICIT-STOP, 756, 1, Text, 0
+mb-modification-type, 757, 1, Text, 0
+TPV-DRAFT-VAL-IND, 758, 1, Text, 0
+TPV-DRAFT-STATUS-CD, 759, 1, Text, 0
+mb-payment-option-switch, 760, 1, Text, 0
+mb-payment-opt-4, 761, 6, Packed Number, 2
+mb-payment-opt-4-totdue, 767, 6, Packed Number, 2
+mb-dist-type-1-int-only-flag, 773, 1, Text, 0
+mb-corp-adv-bal, 774, 5, Packed Number, 2
+mb-pls-cli-id, 779, 3, Text, 0
+MTGR-LANG-PREF, 782, 2, Text, 0
+mb-modification-status-yy, 784, 2, Packed Number, 0
+mb-modification-status-mmdd, 786, 4, Number, 0
+AEGIS-FIRST-PAYMENT-YR, 790, 2, Packed Number, 0
+AEGIS-FIRST-PAYMENT-NO, 792, 2, Text, 0
+AEGIS-FIRST-PAYMENT-DA, 794, 2, Text, 0
+AEGIS-EVENT-CODE, 796, 1, Text, 0
+mb-deferred-balance-indicator, 805, 1, Text, 0
+mb-post-petition-yy, 821, 2, Packed Number, 0
+mb-post-petition-mmdd, 823, 4, Number, 0
+mb-post-petition-amount, 827, 6, Packed Number, 2
+mb-modification-status, 833, 2, Text, 0
+mb-modification-yy, 835, 2, Packed Number, 0
+mb-modification-mmdd, 837, 4, Number, 0
+mb-payment-option-indicator, 841, 1, Text, 0
+mb-original-loan-amount, 842, 5, Packed Number, 0
+mb-neg-am-pb-cap-value, 847, 7, Packed Number, 2
+mb-interest-only-expiration-yy, 854, 2, Packed Number, 0
+mb-interest-only-expiration-mmdd, 856, 4, Number, 0
+mb-monthly-borrower-accrual-amt, 860, 4, Packed Number, 2
+mb-borrower-incentive-anniversary-yy, 864, 2, Packed Number, 0
+mb-borrower-incentive-anniversary-mmdd, 866, 4, Number, 0
+mb-borrower-incentive-amount-accrued-anniversary-to-date, 870, 4, Packed Number, 2
+mb-trial-modification-start-yy, 874, 2, Packed Number, 0
+mb-trial-modification-start-mmdd, 876, 4, Number, 0
+mb-trial-modification-end-yy, 880, 2, Packed Number, 0
+mb-trial-modification-end-mmdd, 882, 4, Number, 0
+mb-trial-modification-payment, 886, 6, Packed Number, 2
+POS893-FOR-1, 892, 1, Text, 0
+mb-interest-only-pi, 893, 6, Packed Number, 2
+mb-fully-am-pi, 899, 6, Packed Number, 2
+mb-interest-only-totdue, 905, 6, Packed Number, 2
+mb-fully-am-totdue, 911, 6, Packed Number, 2
+mb-int-due, 917, 6, Packed Number, 2
+mb-scra-f, 923, 1, Text, 0
+mb-scra-date-3, 924, 6, Text, 0
+mb-scra-date-4, 930, 6, Text, 0
+mb-scra-billing-interest, 936, 4, Packed Number, 5
+mb-140i, 940, 7, Text, 0
+mb-140j, 947, 4, Packed Number, 0
+mb-140k, 951, 49, Text, 0
+mb-hamp-incentive-code, 1000, 1, Text, 0
+mb-modification-reason-code, 1558, 5, Text, 0
+mb-modification-effective-yy, 1563, 2, Packed Number, 0
+mb-modification-effective-mmdd, 1565, 4, Text, 0
+mb-2-to-1-indicator, 1569, 1, Text, 0
+BIA-PD-LIFE, 1570, 4, Packed Number, 2
+mb-off-schd-pend-date-1-yy, 1574, 2, Packed Number, 0
+mb-off-schd-pend-date-1-mmdd, 1576, 4, Text, 0
+mb-off-schd-pend-ir-1, 1580, 4, Packed Number, 5
+mb-off-schd-pend-pi-1, 1584, 7, Packed Number, 2
+mb-off-schd-pend-date-2-yy, 1591, 2, Packed Number, 0
+mb-off-schd-pend-date-2-mmdd, 1593, 4, Text, 0
+mb-off-schd-pend-ir-2, 1597, 4, Packed Number, 5
+mb-off-schd-pend-pi-2, 1601, 7, Packed Number, 2
+mb-off-schd-pend-date-3-yy, 1608, 2, Packed Number, 0
+mb-off-schd-pend-date-3-mmdd, 1610, 4, Text, 0
+mb-off-schd-pend-ir-3, 1614, 4, Packed Number, 5
+mb-off-schd-pend-pi-3, 1618, 7, Packed Number, 2
+mb-prin-reduct-amt, 1625, 5, Packed Number, 2
+mb-prin-fb-amt, 1630, 5, Packed Number, 2
+mb-master-poc-name, 1635, 20, Text, 0
+mb-master-poc-phone, 1655, 12, Text, 0
+mb-master-poc-ext, 1667, 4, Text, 0
+mb-bankruptcy-poc-name, 1671, 20, Text, 0
+mb-bankruptcy-poc-phone, 1691, 12, Text, 0
+mb-bankruptcy-poc-ext, 1703, 4, Text, 0
+mb-foreclosure-poc-name, 1707, 20, Text, 0
+mb-foreclosure-poc-phone, 1727, 12, Text, 0
+mb-foreclosure-poc-ext, 1739, 4, Text, 0
+mb-loss-mitigation-poc-name, 1743, 20, Text, 0
+mb-loss-mitigation-poc-phone, 1763, 12, Text, 0
+mb-loss-mitigation-poc-ext, 1775, 4, Text, 0
+mb-mgmt-office-poc-name, 1779, 20, Text, 0
+mb-mgmt-office-poc-phone, 1799, 12, Text, 0
+mb-mgmt-office-poc-ext, 1811, 4, Text, 0
+mb-service-relief-poc-name, 1815, 20, Text, 0
+mb-service-relief-poc-phone, 1835, 12, Text, 0
+mb-service-relief-poc-ext, 1847, 4, Text, 0
+mb-user-defined-poc-name, 1851, 20, Text, 0
+mb-user-defined-poc-phone, 1871, 12, Text, 0
+mb-user-defined-poc-ext, 1883, 4, Text, 0
+mb-mil-svc-status, 1887, 1, Text, 0
+mb-prot-begin-due-yy, 1888, 2, Packed Number, 0
+mb-prot-begin-due-mm, 1890, 2, Text, 0
+mb-prot-begin-due-dd, 1892, 2, Text, 0
+mb-prot-end-due-yy, 1894, 2, Packed Number, 0
+mb-prot-end-due-mm, 1896, 2, Text, 0
+mb-prot-end-due-dd, 1898, 2, Text, 0
+MS-RATE, 1900, 4, Packed Number, 5
+CURR-1ST-PRIN-DUE-AMT, 1904, 6, Packed Number, 2
+CURR-2ND-PRIN-DUE-AMT, 1910, 6, Packed Number, 2
+CURR-1ST-INT-DUE-AMT, 1916, 6, Packed Number, 2
+CURR-2ND-INT-DUE-AMT, 1922, 6, Packed Number, 2
+CURR-PAYMENT-OPT-4-PRIN-DUE-AMT, 1928, 6, Packed Number, 2
+CURR-PAYMENT-OPT-4-INT-DUE-AMT, 1934, 6, Packed Number, 2
+CURR-FULLY-AM-PRIN-DUE-AMT, 1940, 6, Packed Number, 2
+CURR-FULLY-AM-INT-DUE-AMT, 1946, 6, Packed Number, 2
+PREPAY-PEN-INDIC, 1952, 1, Text, 0
+PPP-HDR-CODE, 1953, 3, Text, 0
+PPP-PAYOFF-EXPIRE-YR, 1956, 2, Packed Number, 0
+PPP-PAYOFF-EXPIRE-MO, 1958, 2, Number, 0
+PPP-PAYOFF-EXPIRE-DA, 1960, 2, Number, 0
+2ND-PREPAY-PEN-INDIC, 1962, 1, Text, 0
+PPP-PAYOFF-CURTAILMENT-YR, 1963, 2, Packed Number, 0
+PPP-PAYOFF-CURTAILMENT-MO, 1965, 2, Number, 0
+PPP-PAYOFF-CURTAILMENT-DA, 1967, 2, Number, 0
+DRAFT-INDICATOR, 1969, 1, Text, 0
+BILL-DUE-DATE-YR, 1970, 2, Packed Number, 0
+BILL-DUE-DATE-MO, 1972, 2, Number, 0
+BILL-DUE-DATE-DA, 1974, 2, Number, 0
+LATE-CHG-ASSESS-DATE-YR, 1976, 2, Packed Number, 0
+LATE-CHG-ASSESS-DATE-MO, 1978, 2, Number, 0
+LATE-CHG-ASSESS-DATE-DA, 1980, 2, Number, 0
+DAYS-DELQ-NO, 1982, 3, Packed Number, 0
+PAYMENTS-DUE-NO, 1985, 3, Number, 0
+BNK1-DEBTOR-SUSP-BAL, 1988, 6, Packed Number, 2
+BNK1-TRUST-SUSP-BAL, 1994, 6, Packed Number, 2
+BNK1-POST-1-SUSP-BAL, 2000, 6, Packed Number, 2
+BNK1-POST-2-SUSP-BAL, 2006, 6, Packed Number, 2
+BNK1-POST-PET-SUSP-BAL, 2012, 6, Packed Number, 2
+PRE-PET-PLAN-DUE-DATE-YR, 2018, 2, Packed Number, 0
+PRE-PET-PLAN-DUE-DATE-MO, 2020, 2, Number, 0
+PRE-PET-PLAN-DUE-DATE-DA, 2022, 2, Number, 0
+PRE-PET-PLAN-PMT-AMT, 2024, 6, Packed Number, 2
+PRE-PET-CLAIM-AMT, 2030, 6, Packed Number, 2
+PRE-PET-CONFIRMED-DATE-YR, 2036, 2, Packed Number, 0
+PRE-PET-CONFIRMED-DATE-MO, 2038, 2, Number, 0
+PRE-PET-CONFIRMED-DATE-DA, 2040, 2, Number, 0
+POST1-PLAN-DUE-DATE-YR, 2042, 2, Packed Number, 0
+POST1-PLAN-DUE-DATE-MO, 2044, 2, Number, 0
+POST1-PLAN-DUE-DATE-DA, 2046, 2, Number, 0
+POST1-PLAN-PMT-AMT, 2048, 6, Packed Number, 2
+POST2-PLAN-DUE-DATE-YR, 2054, 2, Packed Number, 0
+POST2-PLAN-DUE-DATE-MO, 2056, 2, Number, 0
+POST2-PLAN-DUE-DATE-DA, 2058, 2, Number, 0
+POST2-PLAN-PMT-AMT, 2060, 6, Packed Number, 2
+LOSS-MIT-IND-CD, 2066, 1, Text, 0
+LOSS-MIT-STATUS-CD, 2067, 1, Text, 0
+MASTER-LOSS-MIT-STATUS-CODE, 2068, 1, Text, 0
+LOSS-MIT-APPRVD-DENIED-DATE-YR, 2069, 2, Packed Number, 0
+LOSS-MIT-APPRVD-DENIED-DATE-MO, 2071, 2, Number, 0
+LOSS-MIT-APPRVD-DENIED-DATE-DA, 2073, 2, Number, 0
+STEP-FLAG-CD, 2075, 1, Text, 0
+LOSS-MIT-TEMPLATE-CD, 2076, 7, Text, 0
+LOSS-MIT-TYPE, 2083, 5, Text, 0
+FOR1-STATUS-CD, 2088, 1, Text, 0
+FOR1-TEMPLATE-ID-CD, 2089, 7, Text, 0
+FIRST-LEGAL-DATE-YR, 2096, 2, Packed Number, 0
+FIRST-LEGAL-DATE-MO, 2098, 2, Number, 0
+FIRST-LEGAL-DATE-DA, 2100, 2, Number, 0
+FOR1-SALE-DATE-YR, 2102, 2, Packed Number, 0
+FOR1-SALE-DATE-MO, 2104, 2, Number, 0
+FOR1-SALE-DATE-DA, 2106, 2, Number, 0
+REPAY-PLAN-TYPE, 2108, 2, Text, 0
+REPAY-PLAN-STATUS-CD, 2110, 1, Text, 0
+REPAY-PLAN-STATUS-CD-DATE-YR, 2111, 2, Packed Number, 0
+REPAY-PLAN-STATUS-CD-DATE-MO, 2113, 2, Number, 0
+REPAY-PLAN-STATUS-CD-DATE-DA, 2115, 2, Number, 0
+REPAY-PLAN-START-DATE-YR, 2117, 2, Packed Number, 0
+REPAY-PLAN-START-DATE-MO, 2119, 2, Number, 0
+REPAY-PLAN-START-DATE-DA, 2121, 2, Number, 0
+REPAY-PLAN-END-DATE-YR, 2123, 2, Packed Number, 0
+REPAY-PLAN-END-DATE-MO, 2125, 2, Number, 0
+REPAY-PLAN-END-DATE-DA, 2127, 2, Number, 0
+REPAY-PLAN-NXT-DUE-DATE-YR, 2129, 2, Packed Number, 0
+REPAY-PLAN-NXT-DUE-DATE-MO, 2131, 2, Number, 0
+REPAY-PLAN-NXT-DUE-DATE-DA, 2133, 2, Number, 0
+REPAY-PLAN-NXT-DUE-AMT, 2135, 6, Packed Number, 2
+PAYMENTS-INSIDE-PLAN-CODE, 2141, 1, Text, 0
+BANKRUPTCY-STATUS, 2142, 1, Text, 0
+PRIN-BAL-LT-PI-IND, 2143, 1, Text, 0
+ARM-RATE-PI-NOT-AVAIL-IND, 2144, 1, Text, 0
+POST-PET-DLQ-DAYS, 2145, 3, Packed Number, 0
+BNK-DISCHARGE-IND, 2148, 1, Text, 0
+BNK-DISCHARGE-YR, 2149, 2, Packed Number, 0
+BNK-DISCHARGE-MO, 2151, 2, Text, 0
+BNK-DISCHARGE-DA, 2153, 2, Text, 0
+PRE-PET-TOTAL-CLAIM-AMT, 2161, 6, Packed Number, 2
+PRE-PET-PAID-TO-DATE, 2167, 6, Packed Number, 2
+PRE-PET-REMAINING-BAL, 2173, 6, Packed Number, 2
+NO-CHANGE-SCHED-IND, 2179, 1, Text, 0
+BIWK-DUE-YR, 2180, 2, Packed Number, 0
+BIWK-DUE-MO, 2182, 2, Text, 0
+BIWK-DUE-DA, 2184, 2, Text, 0
+BIWK-TOT-PAYMT-AMT, 2186, 6, Packed Number, 2
+BIWK-PRIN-DUE-AMT, 2192, 6, Packed Number, 2
+BIWK-INT-DUE-AMT, 2198, 6, Packed Number, 2
+BIWK-ESCROW-MTH, 2204, 5, Packed Number, 2
+BIWK-A-H-PREM, 2209, 4, Packed Number, 2
+BIWK-LIFE-PREM, 2213, 4, Packed Number, 2
+BIWK-REP-RES, 2217, 5, Packed Number, 2
+BIWK-HUD-PART, 2222, 5, Packed Number, 2
+BIWK-L-C-AMT, 2227, 5, Packed Number, 2
+BIWK-MISC-AMT, 2232, 5, Packed Number, 2
+BIWK-DUE-YR, 2237, 2, Packed Number, 0
+BIWK-DUE-MO, 2239, 2, Text, 0
+BIWK-DUE-DA, 2241, 2, Text, 0
+BIWK-TOT-PAYMT-AMT, 2243, 6, Packed Number, 2
+BIWK-PRIN-DUE-AMT, 2249, 6, Packed Number, 2
+BIWK-INT-DUE-AMT, 2255, 6, Packed Number, 2
+BIWK-ESCROW-MTH, 2261, 5, Packed Number, 2
+BIWK-A-H-PREM, 2266, 4, Packed Number, 2
+BIWK-LIFE-PREM, 2270, 4, Packed Number, 2
+BIWK-REP-RES, 2274, 5, Packed Number, 2
+BIWK-HUD-PART, 2279, 5, Packed Number, 2
+BIWK-L-C-AMT, 2284, 5, Packed Number, 2
+BIWK-MISC-AMT, 2289, 5, Packed Number, 2
+MAT-DATE-LT-BILL-DUE-DATE, 2294, 1, Text, 0
+BILL-DUE-DATE-MISC-CODE, 2295, 1, Text, 0
+BORR-EMAIL-ADDRESS, 2296, 66, Text, 0
+CFPB-NEXT-DRAFT-DATE-YR, 2362, 2, Packed Number, 0
+CFPB-NEXT-DRAFT-DATE-MO, 2364, 2, Text, 0
+CFPB-NEXT-DRAFT-DATE-DA, 2366, 2, Text, 0
+CFPB-NEXT-DRAFT-AMT, 2368, 6, Packed Number, 2
+TPV-DRAFT-ACCT-BAL, 2374, 5, Packed Number, 2
+TPV-DRAFT-BAL-YR, 2379, 2, Packed Number, 0
+TPV-DRAFT-BAL-MO, 2381, 2, Text, 0
+TPV-DRAFT-BAL-DA, 2383, 2, Text, 0
+TPV-DRAFT-LAST-WDRL-YR, 2385, 2, Packed Number, 0
+TPV-DRAFT-LAST-WDRL-MO, 2387, 2, Text, 0
+TPV-DRAFT-LAST-WDRL-DA, 2389, 2, Text, 0
+TPV-DRAFT-NEXT-WDRL-YR, 2391, 2, Packed Number, 0
+TPV-DRAFT-NEXT-WDRL-MO, 2393, 2, Text, 0
+TPV-DRAFT-NEXT-WDRL-DA, 2395, 2, Text, 0
+TPV-DRAFT-LAST-REC-SER-FEE, 2397, 3, Packed Number, 2
+CFPB-PREV-POSTED, 2400, 5, Packed Number, 2
+CFPB-PREV-POSTED-ESCROW, 2405, 6, Packed Number, 2
+EBPP-CODE, 2411, 2, Text, 0
+CFPB-ACQ-DATE-YR, 2413, 2, Packed Number, 0
+CFPB-ACQ-DATE-MO, 2415, 2, Text, 0
+CFPB-ACQ-DATE-DA, 2417, 2, Text, 0
+NEXT-IR-CHG-DATE-YR, 2419, 2, Packed Number, 0
+NEXT-IR-CHG-DATE-MO, 2421, 2, Text, 0
+NEXT-IR-CHG-DATE-DA, 2423, 2, Text, 0
+BILL-DUE-DATE-IR, 2425, 4, Packed Number, 7
+EFF-NEXT-IR-CHG-DATE-YR, 2429, 2, Packed Number, 0
+EFF-NEXT-IR-CHG-DATE-MO, 2431, 2, Text, 0
+EFF-NEXT-IR-CHG-DATE-DA, 2433, 2, Text, 0
+EFF-OFF-SCHD-PEND-DATE-1-YR, 2435, 2, Packed Number, 0
+EFF-OFF-SCHD-PEND-DATE-1-MO, 2437, 2, Text, 0
+EFF-OFF-SCHD-PEND-DATE-1-DA, 2439, 2, Text, 0
+NU-PROP-UNIT-NO, 2441, 12, Text, 0
+E-CONSENT-CODE, 2453, 1, Text, 0
+CEASE-DESIST-STOP, 2454, 1, Text, 0
+CO-BORR-EMAIL-ADDRESS, 2455, 66, Text, 0
+CHARGE-OFF-BALANCE, 2521, 6, Packed Number, 2
+CHARGE-OFF-YR, 2527, 2, Packed Number, 0
+CHARGE-OFF-MO, 2529, 2, Text, 0
+CHARGE-OFF-DA, 2531, 2, Text, 0
+CHARGE-OFF-DA, 2531, 2, Text, 0
+LITIGATION-STATUS-CD, 2533, 2, Text, 0
+ACCEL-YR, 2535, 2, Packed Number, 0
+ACCEL-MO, 2537, 2, Text, 0
+ACCEL-DA, 2539, 2, Text, 0
+ACCEL-AMOUNT, 2541, 6, Packed Number, 2
+ACCEL-REASON-CD, 2547, 2, Text, 0
+ACCEL-INTERST-DUE, 2549, 6, Packed Number, 2
+PLAN-TYPE, 2555, 1, Text, 0
+PLAN-IND, 2556, 1, Text, 0
+OPT-INS-LINE-1, 2557, 24, Text, 0
+OPT-INS-PHONE, 2581, 10, Text, 0
+... (truncated)
+

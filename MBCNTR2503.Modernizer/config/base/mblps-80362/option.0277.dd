@@ -1,0 +1,14 @@
+mb-0277-t-i-insurance, 1070, 6, Packed Number, 2
+mb-0277-expenses-paid, 1076, 6, Packed Number, 2
+mb-0277-late-charge, 1082, 6, Packed Number, 2
+mb-0277-return-check-fee, 1088, 6, Packed Number, 2
+mb-0277-other-fees, 1094, 6, Packed Number, 2
+mb-0277-res-esc-code, 1121, 1, Text, 0
+mb-0277-tax-code, 1100, 1, Text, 0
+mb-0277-prop-code, 1101, 1, Text, 0
+mb-0277-arm-code, 1102, 1, Text, 0
+mb-0277-tot-beg-bal, 1103, 6, Packed Number, 2
+mb-0277-end-beg-bal, 1109, Packed Number, 2
+mb-0277-privacy-page, 1150, 1, Text, 0
+MbUBT15n16, 1359, 2, Text, 0
+MbUBT17, 1361, 1, Text, 0

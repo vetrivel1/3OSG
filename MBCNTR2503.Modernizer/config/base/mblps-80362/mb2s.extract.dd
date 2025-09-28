@@ -1,0 +1,74 @@
+mb-client-no, 0, 4, Number, 0
+mb-loan-no, 4, 7, Mixed, 0
+mb-rec-code, 11, 1, Text, 0
+mb-rec-no, 12, 3, Number, 0
+mb-net-disb, 15, 6, Packed Number, 2
+mb-payee, 21, 10, Text, 0
+mb-ctl-fld, 31, 6, Packed Number, 0, LZF
+mb-disb-desc, 37, 101, Text, 0
+mb-fee-tran-code, 263, 3, Text, 0
+mb-fee-date, 266, 6, Text, 0
+mb-fee-amt, 272, 5, Packed Number, 2
+mb-fee-code, 277, 1, Text, 0
+mb-fee-tran-code, 278, 3, Text, 0
+mb-fee-date, 281, 6, Text, 0
+mb-fee-amt, 287, 5, Packed Number, 2
+mb-fee-code, 292, 1, Text, 0
+mb-fee-tran-code, 293, 3, Text, 0
+mb-fee-date, 296, 6, Text, 0
+mb-fee-amt, 302, 5, Packed Number, 2
+mb-fee-code, 307, 1, Text, 0
+mb-fee-tran-code, 308, 3, Text, 0
+mb-fee-date, 311, 6, Text, 0
+mb-fee-amt, 317, 5, Packed Number, 2
+mb-fee-code, 322, 1, Text, 0
+mb-fee-tran-code, 323, 3, Text, 0
+mb-fee-date, 326, 6, Text, 0
+mb-fee-amt, 332, 5, Packed Number, 2
+mb-fee-code, 337, 1, Text, 0
+mb-fee-tran-code, 338, 3, Text, 0
+mb-fee-date, 341, 6, Text, 0
+mb-fee-amt, 347, 5, Packed Number, 2
+mb-fee-code, 352, 1, Text, 0
+mb-fee-tran-code, 353, 3, Text, 0
+mb-fee-date, 356, 6, Text, 0
+mb-fee-amt, 362, 5, Packed Number, 2
+mb-fee-code, 367, 1, Text, 0
+mb-fee-tran-code, 368, 3, Text, 0
+mb-fee-date, 371, 6, Text, 0
+mb-fee-amt, 377, 5, Packed Number, 2
+mb-fee-code, 382, 1, Text, 0
+mb-fee-tran-code, 383, 3, Text, 0
+mb-fee-date, 386, 6, Text, 0
+mb-fee-amt, 392, 5, Packed Number, 2
+mb-fee-code, 397, 1, Text, 0
+mb-fee-tran-code, 398, 3, Text, 0
+mb-fee-date, 401, 6, Text, 0
+mb-fee-amt, 407, 5, Packed Number, 2
+mb-fee-code, 412, 1, Text, 0
+mb-fee-tran-code, 413, 3, Text, 0
+mb-fee-date, 416, 6, Text, 0
+mb-fee-amt, 422, 5, Packed Number, 2
+mb-fee-code, 427, 1, Text, 0
+mb-fee-tran-code, 428, 3, Text, 0
+mb-fee-date, 431, 6, Text, 0
+mb-fee-amt, 437, 5, Packed Number, 2
+mb-fee-code, 442, 1, Text, 0
+mb-fee-tran-code, 443, 3, Text, 0
+mb-fee-date, 446, 6, Text, 0
+mb-fee-amt, 452, 5, Packed Number, 2
+mb-fee-code, 457, 1, Text, 0
+mb-fee-tran-code, 458, 3, Text, 0
+mb-fee-date, 461, 6, Text, 0
+mb-fee-amt, 467, 5, Packed Number, 2
+mb-fee-code, 472, 1, Text, 0
+mb-fee-tran-code, 473, 3, Text, 0
+mb-fee-date, 476, 6, Text, 0
+mb-fee-amt, 482, 5, Packed Number, 2
+mb-fee-code, 487, 1, Text, 0
+mb-eor, 488, 512, Text, 0
+mb-2to1-ind, 1000, 1, Text, 0
+mb-susp-act-cd, 1001, 4, Text, 0
+mbs2-disb-proc-date-yr, 1005, 2, Packed Number, 0
+mbs2-disb-proc-date-mo, 1007, 2, Text, 0
+mbs2-disb-proc-date-da, 1009, 2, Text, 0

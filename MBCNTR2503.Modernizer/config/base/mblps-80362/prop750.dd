@@ -1,0 +1,7 @@
+P-TYPE, 0, 1, Text, 0
+P-ACCOUNT, 1, 7, Packed Number, 0
+P-PROP-ADDR, 8, 33, Text, 0
+P-CITY, 41, 21, Text, 0
+P-STATE, 62, 2, Text, 0
+P-ZIP5, 74, 5, Text, 0
+P-ZIP4, 79, 4, Text, 0

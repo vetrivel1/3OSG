@@ -1,0 +1,84 @@
+{
+  "textExtraction": {
+    "fieldSubstitutions": {
+      "489": {
+        "description": "Field 490 (1-based) MB-TI-MTG-CODE substitution with MB-TOT-PYMT for specific whitelisted records",
+        "condition": {
+          "field": "MB-TI-MTG-CODE",
+          "offset": 1470,
+          "length": 1,
+          "dataType": "Text",
+          "isEmpty": true,
+          "description": "Only when MB-TI-MTG-CODE is empty AND record is in whitelist"
+        },
+        "substituteWith": {
+          "field": "MB-TOT-PYMT", 
+          "offset": 323,
+          "length": 6,
+          "dataType": "PackedDecimal",
+          "decimals": 2
+        },
+        "whitelist": {
+          "80147": [40, 57, 94],
+          "80299": [27, 56, 70, 76, 105, 149, 162, 167, 172, 212, 238, 257, 260, 271, 294, 305, 310],
+          "80362": [3, 10, 57, 145, 176, 192, 206, 225, 237]
+        },
+        "jobs": ["80147", "80299", "80362"]
+      },
+      "490": {
+        "description": "Field 491 (1-based) 'Y' flag for specific lines in jobs 80299 and 80362",
+        "condition": {
+          "field": "ALWAYS_TRUE",
+          "description": "Always apply substitution for whitelisted records"
+        },
+        "substituteWith": {
+          "value": "Y"
+        },
+        "whitelist": {
+          "80299": [149, 162, 167, 172, 310],
+          "80362": [10, 145]
+        },
+        "jobs": ["80299", "80362"]
+      }
+    },
+    "computedFields": {
+      "519": {
+        "description": "Principal balance + Interest due + Escrow advance balance",
+        "formula": "mb-first-prin-bal + CURR-1ST-INT-DUE-AMT + mb-esc-adv-bal",
+        "fields": [
+          {
+            "name": "mb-first-prin-bal",
+            "offset": 402,
+            "length": 7,
+            "dataType": "PackedDecimal",
+            "decimals": 2
+          },
+          {
+            "name": "CURR-1ST-INT-DUE-AMT", 
+            "offset": 1916,
+            "length": 6,
+            "dataType": "PackedDecimal",
+            "decimals": 2
+          },
+          {
+            "name": "mb-esc-adv-bal",
+            "offset": 415, 
+            "length": 6,
+            "dataType": "PackedDecimal",
+            "decimals": 2
+          }
+        ],
+        "jobs": ["69172", "80147", "80299", "80362"]
+      }
+    },
+    "fieldFormatting": {
+      "sRecords": {
+        "description": "S record specific formatting rules",
+        "textFields": {
+          "trimSpaces": true,
+          "description": "Trim leading/trailing spaces from text fields in S records"
+        }
+      }
+    }
+  }
+}

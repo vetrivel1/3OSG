@@ -1,0 +1,42 @@
+CLIENT-NO, 0, 3, Text, 0
+CLIENT-SUFFIX, 3, 1, Text, 0
+LOAN-NO, 4, 7, Text, 0
+REC-CODE, 11, 1, Text, 0
+REC-NUMBER, 12, 3, Number, 0
+FEE-BAL, 15, 5, Packed Number, 2
+FEE-BAL, 20, 5, Packed Number, 2
+FEE-BAL, 25, 5, Packed Number, 2
+FEE-BAL, 30, 5, Packed Number, 2
+FEE-BAL, 35, 5, Packed Number, 2
+FEE-BAL, 40, 5, Packed Number, 2
+FEE-BAL, 45, 5, Packed Number, 2
+FEE-BAL, 50, 5, Packed Number, 2
+FEE-BAL, 55, 5, Packed Number, 2
+FEE-BAL, 60, 5, Packed Number, 2
+FEE-BAL, 65, 5, Packed Number, 2
+FEE-BAL, 70, 5, Packed Number, 2
+FEE-BAL, 75, 5, Packed Number, 2
+FEE-BAL, 80, 5, Packed Number, 2
+FEE-BAL, 85, 5, Packed Number, 2
+FEE-BAL, 90, 5, Packed Number, 2
+FEE-BAL, 95, 5, Packed Number, 2
+FEE-BAL, 100, 5, Packed Number, 2
+FEE-BAL, 105, 5, Packed Number, 2
+FEE-BAL, 110, 5, Packed Number, 2
+FEE-BAL, 115, 5, Packed Number, 2
+FEE-BAL, 120, 5, Packed Number, 2
+FEE-BAL, 125, 5, Packed Number, 2
+FEE-BAL, 130, 5, Packed Number, 2
+FEE-BAL, 135, 5, Packed Number, 2
+FEE-BAL, 140, 5, Packed Number, 2
+FEE-BAL, 145, 5, Packed Number, 2
+FEE-BAL, 150, 5, Packed Number, 2
+FEE-BAL, 155, 5, Packed Number, 2
+FEE-BAL, 160, 5, Packed Number, 2
+FEE-BAL, 165, 5, Packed Number, 2
+FEE-BAL, 170, 5, Packed Number, 2
+FEE-BAL, 175, 5, Packed Number, 2
+FEE-BAL, 180, 5, Packed Number, 2
+FEE-BAL, 185, 5, Packed Number, 2
+FEE-BAL, 190, 5, Packed Number, 2
+TOTAL-FEE-BAL, 195, 6, Packed Number, 2

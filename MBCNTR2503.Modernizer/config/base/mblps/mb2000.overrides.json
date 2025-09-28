@@ -99,7 +99,7 @@
     {
       "source": "MB-BILL-LINE-5",
       "target": "MB-BILL-LINE-5",
-      "sourceOffset": 298,
+      "sourceOffset": 135,
       "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
@@ -107,7 +107,7 @@
     {
       "source": "MB-BILL-LINE-6",
       "target": "MB-BILL-LINE-6",
-      "sourceOffset": 358,
+      "sourceOffset": 155,
       "sourceLength": 53,
       "mode": "copyTrim",
       "trimOutput": true
@@ -115,7 +115,7 @@
     {
       "source": "MB-BILL-CITY",
       "target": "MB-BILL-CITY",
-      "sourceOffset": 411,
+      "sourceOffset": 165,
       "sourceLength": 51,
       "mode": "copyTrim",
       "trimOutput": true
@@ -123,7 +123,7 @@
     {
       "source": "MB-BILL-STATE",
       "target": "MB-BILL-STATE",
-      "sourceOffset": 462,
+      "sourceOffset": 186,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -131,7 +131,7 @@
     {
       "source": "MB-ZIP-5",
       "target": "MB-ZIP-5",
-      "sourceOffset": 464,
+      "sourceOffset": 188,
       "sourceLength": 5,
       "mode": "copyTrim",
       "trimOutput": true
@@ -139,7 +139,7 @@
     {
       "source": "MB-ZIP-4",
       "target": "MB-ZIP-4",
-      "sourceOffset": 469,
+      "sourceOffset": 194,
       "sourceLength": 4,
       "mode": "copyTrim",
       "trimOutput": true
@@ -155,7 +155,7 @@
     {
       "source": "MB-PROPERTY-STREET",
       "target": "MB-PROPERTY-STREET",
-      "sourceOffset": 498,
+      "sourceOffset": 198,
       "sourceLength": 50,
       "mode": "copyTrim",
       "trimOutput": true
@@ -163,7 +163,7 @@
     {
       "source": "MB-PROPERTY-CITY",
       "target": "MB-PROPERTY-CITY",
-      "sourceOffset": 548,
+      "sourceOffset": 226,
       "sourceLength": 30,
       "mode": "copyTrim",
       "trimOutput": true
@@ -171,7 +171,7 @@
     {
       "source": "MB-PROPERTY-STATE",
       "target": "MB-PROPERTY-STATE",
-      "sourceOffset": 578,
+      "sourceOffset": 246,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -179,7 +179,7 @@
     {
       "source": "MB-PROPERTY-ZIP-5",
       "target": "MB-PROPERTY-ZIP-5",
-      "sourceOffset": 580,
+      "sourceOffset": 249,
       "sourceLength": 5,
       "mode": "copyTrim",
       "trimOutput": true
@@ -187,7 +187,7 @@
     {
       "source": "MB-PROPERTY-ZIP-4",
       "target": "MB-PROPERTY-ZIP-4",
-      "sourceOffset": 585,
+      "sourceOffset": 255,
       "sourceLength": 4,
       "mode": "copyTrim",
       "trimOutput": true
@@ -203,7 +203,7 @@
     {
       "source": "MB-TELE-NO",
       "target": "MB-TELE-NO",
-      "sourceOffset": 620,
+      "sourceOffset": 1080,
       "sourceLength": 12,
       "mode": "copyTrim",
       "trimOutput": true
@@ -211,7 +211,7 @@
     {
       "source": "MB-SEC-TELE-NO",
       "target": "MB-SEC-TELE-NO",
-      "sourceOffset": 632,
+      "sourceOffset": 1080,
       "sourceLength": 12,
       "mode": "copyTrim",
       "trimOutput": true
@@ -691,127 +691,127 @@
     {
       "source": "MB-2ND-P-I",
       "target": "MB-2ND-P-I",
-      "sourceOffset": 766,
-      "sourceLength": 1,
+      "sourceOffset": 700,
+      "sourceLength": 4,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-ESCROW-PAYMENT",
       "target": "MB-ESCROW-PAYMENT",
-      "sourceOffset": 767,
-      "sourceLength": 1,
+      "sourceOffset": 335,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-COUNTY-TAX",
       "target": "MB-COUNTY-TAX",
-      "sourceOffset": 768,
-      "sourceLength": 1,
+      "sourceOffset": 340,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-CITY-TAX",
       "target": "MB-CITY-TAX",
-      "sourceOffset": 769,
-      "sourceLength": 1,
+      "sourceOffset": 345,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-HAZ-PREM",
       "target": "MB-HAZ-PREM",
-      "sourceOffset": 770,
-      "sourceLength": 1,
+      "sourceOffset": 350,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-MIP",
       "target": "MB-MIP",
-      "sourceOffset": 771,
-      "sourceLength": 1,
+      "sourceOffset": 355,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-LIEN",
       "target": "MB-LIEN",
-      "sourceOffset": 772,
-      "sourceLength": 1,
+      "sourceOffset": 360,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-O-S-SPREAD",
       "target": "MB-O-S-SPREAD",
-      "sourceOffset": 773,
-      "sourceLength": 1,
+      "sourceOffset": 365,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-A-H-PREM",
       "target": "MB-A-H-PREM",
-      "sourceOffset": 774,
-      "sourceLength": 1,
+      "sourceOffset": 370,
+      "sourceLength": 4,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-LIFE-PREM",
       "target": "MB-LIFE-PREM",
-      "sourceOffset": 775,
-      "sourceLength": 1,
+      "sourceOffset": 374,
+      "sourceLength": 4,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-REP-RES",
       "target": "MB-REP-RES",
-      "sourceOffset": 776,
-      "sourceLength": 1,
+      "sourceOffset": 378,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-MISC-AMT",
       "target": "MB-MISC-AMT",
-      "sourceOffset": 777,
-      "sourceLength": 1,
+      "sourceOffset": 383,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-HUD-PART",
       "target": "MB-HUD-PART",
-      "sourceOffset": 778,
-      "sourceLength": 1,
+      "sourceOffset": 388,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-BSC-AMT",
       "target": "MB-BSC-AMT",
-      "sourceOffset": 779,
-      "sourceLength": 1,
+      "sourceOffset": 393,
+      "sourceLength": 4,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-L-C-AMT",
       "target": "MB-L-C-AMT",
-      "sourceOffset": 780,
-      "sourceLength": 1,
+      "sourceOffset": 397,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-TOTAL-AMOUNT-DUE",
       "target": "MB-TOTAL-AMOUNT-DUE",
-      "sourceOffset": 658,
+      "sourceOffset": 551,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
@@ -819,7 +819,7 @@
     {
       "source": "MB-DELQ-P-I",
       "target": "MB-DELQ-P-I",
-      "sourceOffset": 696,
+      "sourceOffset": 627,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
@@ -827,7 +827,7 @@
     {
       "source": "MB-DELQ-ESC",
       "target": "MB-DELQ-ESC",
-      "sourceOffset": 703,
+      "sourceOffset": 634,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
@@ -835,39 +835,39 @@
     {
       "source": "MB-DELQ-L-C",
       "target": "MB-DELQ-L-C",
-      "sourceOffset": 784,
-      "sourceLength": 1,
+      "sourceOffset": 641,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-DELQ-INS",
       "target": "MB-DELQ-INS",
-      "sourceOffset": 785,
-      "sourceLength": 1,
+      "sourceOffset": 646,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-DELQ-OTHER",
       "target": "MB-DELQ-OTHER",
-      "sourceOffset": 786,
-      "sourceLength": 1,
+      "sourceOffset": 651,
+      "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-INTEREST-DUE",
       "target": "MB-INTEREST-DUE",
-      "sourceOffset": 787,
-      "sourceLength": 1,
+      "sourceOffset": 917,
+      "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-PRIN-YTD",
       "target": "MB-PRIN-YTD",
-      "sourceOffset": 529,
+      "sourceOffset": 460,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
@@ -875,48 +875,48 @@
     {
       "source": "MB-INTEREST-YTD",
       "target": "MB-INTEREST-YTD",
-      "sourceOffset": 789,
-      "sourceLength": 1,
+      "sourceOffset": 467,
+      "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-TAXES-YTD",
       "target": "MB-TAXES-YTD",
-      "sourceOffset": 790,
-      "sourceLength": 1,
+      "sourceOffset": 474,
+      "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-HAZARD-YTD",
       "target": "MB-HAZARD-YTD",
-      "sourceOffset": 791,
-      "sourceLength": 1,
+      "sourceOffset": 480,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-MIP-YTD",
       "target": "MB-MIP-YTD",
-      "sourceOffset": 792,
-      "sourceLength": 1,
+      "sourceOffset": 485,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-LIEN-YTD",
       "target": "MB-LIEN-YTD",
-      "sourceOffset": 793,
-      "sourceLength": 1,
+      "sourceOffset": 490,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
     {
       "source": "MB-L-C-YTD",
       "target": "MB-L-C-YTD",
-      "sourceOffset": 794,
-      "sourceLength": 1,
+      "sourceOffset": 495,
+      "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
     },
