@@ -11,55 +11,241 @@ This project modernizes the legacy MBCNTR2503 COBOL system to .NET, converting E
   - ✅ Field metadata loading path resolved
 - **Remaining**: ~1150 field differences across all records
 
-Setup
-- Requires .NET 8 SDK (Windows)
-- Config files at config/base/mblps (mirrors legacy mblps)
+## Prerequisites
+- .NET 8 SDK (Windows/macOS/Linux)
+- Python 3.x for parity checking scripts
+- Config files at `config/base/mblps` (mirrors legacy mblps structure)
 
-Build schema
-- Run: dotnet run --project src/Cnp.Cli -- build-schema --schema "config/base/mblps" --out "schemas/compiled"
-- Output: schemas/compiled/<sha>.schema.json
+## Quick Start
 
-Projects
-- src/Cnp.Schema: schema compiler and models
-- src/Cnp.Decoders: packed/zoned/binary/EBCDIC decoding
-- src/Cnp.Pipeline: orchestrator and stages (stubbed)
-- src/Cnp.Cli: CLI entrypoint
+### 1. Build the Schema
+```bash
+dotnet run --project src/Cnp.Cli -- build-schema --schema "config/base/mblps" --out "schemas/compiled"
+```
+**Output:** `schemas/compiled/<sha>.schema.json` - Compiled schema for pipeline consumption
 
-Parity tests
-- tests/Parity.Tests: harness to compare outputs with legacy Expected_Outputs
+### 2. Run the Pipeline
+```bash
+dotnet "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll" run-pipeline --job 69172 --schema "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/config/base/mblps" --verbose
+```
 
-## End-to-End Workflow
-- 1. Generate JSON schema from the COBOL copybook:
-  ```bash
-  python3 scripts/copybook_to_schema.py \
-    -i "Legacy Application/Scripts/MBCNTR2503/mblps/mblps.dd.cbl" \
-    -o "config/schemas/source/mb2000.output.schema.json" \
-    -t "MB2000 Output Record"
-  ```
-- 2. Bootstrap overrides JSON from the compiled DD layout:
-  ```bash
-  dotnet run --project src/Cnp.Cli -- bootstrap-overrides-from-compiled \
-    --schema config/base/mblps \
-    --out config/base/mblps/mb2000.overrides.json
-  ```
-- 3. Build the compiled schema for pipeline consumption:
-  ```bash
-  dotnet run --project src/Cnp.Cli -- build-schema \
-    --schema config/base/mblps \
-    --out schemas/compiled
-  ```
-- 4. Run the full conversion pipeline with overrides:
-  ```bash
-  dotnet run --project src/Cnp.Cli -- mb2000-convert \
-    --job <JOB> \
-    --input "Legacy Application/Expected_Outputs/<JOB>/<JOB>.dat.asc.11.1.p.keyed" \
-    --out out/<JOB> \
-    --schema config/base/mblps
-  ```
-- 5. Verify parity against legacy outputs:
-  ```bash
-  python3 debug-parity.py <JOB>
-  ```
+### 3. Check Parity
+```bash
+python3 debug-parity.py 69172
+```
+
+## Pipeline Architecture
+
+### Core Components
+- **src/Cnp.Schema**: Schema compiler and models for DD file processing
+- **src/Cnp.Decoders**: Packed/zoned/binary/EBCDIC decoding utilities
+- **src/Cnp.Pipeline**: Pipeline orchestrator and processing stages
+  - `EbcdicProcessor.cs`: EBCDIC to ASCII conversion, record type processing
+  - `MB2000FieldMapper.cs`: Field mapping with override support
+- **src/Cnp.Cli**: CLI entrypoint and command handlers
+
+### Data Flow
+1. **Input**: Legacy EBCDIC files (`.dat.asc.11.1.p.keyed`)
+2. **Processing**: EBCDIC→ASCII conversion, field mapping, packed decimal handling
+3. **Output**: MB2000 format files (`.set`) with 2000-byte records
+4. **Validation**: Parity checking against expected legacy outputs
+
+## Configuration Files
+
+### Schema Definition (`mblps.dd`)
+```
+Field-Name, Offset, Length, Type, DecimalPlaces
+MB-PAYMENT-AMOUNT, 749, 6, Packed Number, 2
+MB-FIRST-P-I, 755, 6, Packed Number, 2
+```
+
+### Field Overrides (`mb2000.overrides.json`)
+```json
+{
+  "source": "MB-PAYMENT-AMOUNT",
+  "target": "MB-PAYMENT-AMOUNT", 
+  "sourceOffset": 323,
+  "sourceLength": 6,
+  "mode": "packed",
+  "trimOutput": false
+}
+```
+
+### Field Metadata (`FieldDefinitions_Generated.json`)
+```json
+{
+  "recordLayouts": {
+    "MB_PAYMENT_AMOUNT": {
+      "startPosition": 749,
+      "length": 6,
+      "type": 1,
+      "decimalPlaces": 2,
+      "description": "Packed Number field"
+    }
+  }
+}
+```
+
+## Detailed Usage Guide
+
+### Running the Pipeline
+
+#### Step 1: Build Schema
+```bash
+# Compile DD files into JSON schema
+dotnet run --project src/Cnp.Cli -- build-schema --schema "config/base/mblps" --out "schemas/compiled"
+```
+
+#### Step 2: Execute Pipeline
+```bash
+# Run modernization pipeline for a specific job
+dotnet "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll" run-pipeline \
+  --job 69172 \
+  --schema "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/config/base/mblps" \
+  --verbose
+```
+
+**Input Files Expected:**
+- `Legacy Application/Expected_Outputs/69172/69172.dat.asc.11.1.p.keyed`
+
+**Output Files Generated:**
+- `out/69172/69172p.set` (2000-byte MB2000 records)
+- `out/69172/mb2000_69172.log` (processing log)
+
+### Parity Checking
+
+#### Basic Parity Check
+```bash
+python3 debug-parity.py 69172
+```
+
+#### Understanding Parity Output
+```
+--- Summary ---
+Found 1150 total field differences across all records.
+
+Common Error Patterns:
+- LENGTH_MISMATCH: Field length discrepancies
+- ZERO_VARIATIONS: Zero value encoding issues  
+- QUESTION_MARKS: Character encoding problems
+- PACKED_DECIMAL_CONVERSION: Packed decimal format issues
+```
+
+#### Advanced Parity Analysis
+```bash
+# Generate detailed field-by-field comparison
+python3 debug-parity.py 69172 > parity_detailed.log
+
+# Analyze specific error patterns
+python3 advanced_pattern_analyzer.py
+```
+
+### JSON Schema Parsing
+
+#### Schema Structure
+The compiled schema (`schemas/compiled/<sha>.schema.json`) contains:
+
+```json
+{
+  "title": "MB2000 Output Record",
+  "type": "object", 
+  "properties": {
+    "MB-PAYMENT-AMOUNT": {
+      "type": "string",
+      "maxLength": 11,
+      "description": "Payment amount field",
+      "x-offset": 749,
+      "x-length": 6,
+      "x-scale": 2,
+      "x-type": "PackedDecimal"
+    }
+  }
+}
+```
+
+#### Field Metadata Loading
+The `MB2000FieldMapper.cs` loads field definitions from `FieldDefinitions_Generated.json`:
+
+```csharp
+private static Dictionary<string, FieldMetadata> LoadFieldMetadata()
+{
+    // Tries multiple paths to find FieldDefinitions_Generated.json
+    var possiblePaths = new[]
+    {
+        "/Users/vshanmu/3OSG/FieldDefinitions_Generated.json",
+        Path.Combine(currentDir, "..", "..", "FieldDefinitions_Generated.json"),
+        Path.Combine(currentDir, "FieldDefinitions_Generated.json")
+    };
+}
+```
+
+#### Override Processing
+Field overrides in `mb2000.overrides.json` support multiple modes:
+
+- **`packed`**: Packed decimal (COMP-3) conversion
+- **`copyTrim`**: Direct copy with trimming
+- **`zonedDecimal`**: Zoned decimal conversion
+- **`ebcdic_spaces`**: Fill with EBCDIC spaces (0x40)
+
+### Complete End-to-End Workflow
+
+#### 1. Initial Setup
+```bash
+# Generate field definitions from DD file
+python3 regenerate_field_definitions.py
+
+# Bootstrap overrides from compiled schema
+dotnet run --project src/Cnp.Cli -- bootstrap-overrides-from-compiled \
+  --schema config/base/mblps \
+  --out config/base/mblps/mb2000.overrides.json
+```
+
+#### 2. Schema Compilation
+```bash
+# Build compiled schema for pipeline
+dotnet run --project src/Cnp.Cli -- build-schema \
+  --schema config/base/mblps \
+  --out schemas/compiled
+```
+
+#### 3. Pipeline Execution
+```bash
+# Process specific job
+dotnet "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Cli/bin/Debug/net8.0/Cnp.Cli.dll" run-pipeline \
+  --job 69172 \
+  --schema "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/config/base/mblps" \
+  --verbose
+```
+
+#### 4. Validation & Debugging
+```bash
+# Check parity
+python3 debug-parity.py 69172
+
+# Analyze patterns (if errors found)
+python3 advanced_pattern_analyzer.py
+python3 zero_variations_analyzer.py
+```
+
+## Troubleshooting
+
+### Common Issues
+
+#### Pipeline Fails with "FieldDefinitions_Generated.json not found"
+```bash
+# Regenerate field definitions
+python3 regenerate_field_definitions.py
+```
+
+#### Parity Check Shows High Error Count
+1. Check field offsets in `mb2000.overrides.json`
+2. Verify packed decimal field definitions
+3. Analyze error patterns with debugging scripts
+
+#### Packed Decimal Conversion Issues
+- Ensure `sourceOffset` and `sourceLength` match DD file
+- Verify `decimalPlaces` in `FieldDefinitions_Generated.json`
+- Check for EBCDIC vs ASCII source data
 
 ---
 
