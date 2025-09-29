@@ -1,8 +1,8 @@
-[LOG] Starting EBCDIC to ASCII conversion for job 80362 at 28/09/2025 10:23:48 PM
+[LOG] Starting EBCDIC to ASCII conversion for job 80362 at 29/09/2025 1:30:27 PM
 [LOG] Process date extracted: 0x12 0x5F 0x30 0x38 0x32 0x36
 [LOG] Detected client: 503, Loan packed: True
-[LOG] Processed 100 records in 259ms
-[LOG] Processed 200 records in 501ms
-[LOG] Completed EBCDIC to ASCII conversion for job 80362 at 28/09/2025 10:23:49 PM
-[LOG] Total time: 630ms
+[LOG] Processed 100 records in 28ms
+[LOG] Processed 200 records in 48ms
+[LOG] Completed EBCDIC to ASCII conversion for job 80362 at 29/09/2025 1:30:27 PM
+[LOG] Total time: 59ms
 [LOG] Total records: 254, P: 42, S: 125, D: 1

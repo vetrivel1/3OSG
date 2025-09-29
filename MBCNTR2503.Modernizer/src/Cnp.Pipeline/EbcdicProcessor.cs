@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Cnp.Schema;
 using Cnp.Decoders;
+using System.Text.Json;
 
 namespace Cnp.Pipeline;
 
@@ -20,6 +21,8 @@ public class EbcdicProcessor
     private int _sRecordCount = 0;
     private int _dRecordCount = 0;
     private byte[] _processDate = new byte[6]; // Legacy ProcessDate storage
+    private EbcdicOverrides _overrides = EbcdicOverrides.Default;
+    private bool _loanIsPacked = false;
 
     public EbcdicProcessor(CompiledSchema schema, bool verbose = false)
     {
@@ -52,6 +55,9 @@ public class EbcdicProcessor
         }
 
         Directory.CreateDirectory(outputDir);
+
+        // Load overrides (keep IBM037 standard; configure numeric/packed/DD selection and memmoves)
+        TryLoadOverrides(Path.Combine(_schema.SourceDir, "ebcdic.overrides.json"));
 
         var outputAscFile = Path.Combine(outputDir, $"{jobId}.dat.asc");
         var outputPFile = Path.Combine(outputDir, $"{jobId}.dat.asc.11.1.p");
@@ -108,9 +114,9 @@ public class EbcdicProcessor
                     if (clientNumber == -1)
                     {
                         clientNumber = ExtractClientNumber(inputBuffer);
-                        loanIsPacked = IsLoanFieldPacked(inputBuffer);
-                        logWriter.WriteLine($"[LOG] Detected client: {clientNumber}, Loan packed: {loanIsPacked}");
-                        if (_verbose) Console.WriteLine($"[VERBOSE] Detected client: {clientNumber}, Loan packed: {loanIsPacked}");
+                        _loanIsPacked = IsLoanFieldPacked(inputBuffer);
+                        logWriter.WriteLine($"[LOG] Detected client: {clientNumber}, Loan packed: {_loanIsPacked}");
+                        if (_verbose) Console.WriteLine($"[VERBOSE] Detected client: {clientNumber}, Loan packed: {_loanIsPacked}");
                     }
                     
                     ProcessPRecord(inputBuffer, outputBuffer, asciiWriter, pWriter, recordCount);
@@ -118,7 +124,7 @@ public class EbcdicProcessor
                     break;
 
                 case 'S':
-                    ProcessSRecord(inputBuffer, outputBuffer, asciiWriter, sWriter);
+                    ProcessSRecord(inputBuffer, outputBuffer, asciiWriter, sWriter, clientNumber);
                     _sRecordCount++;
                     break;
 
@@ -168,9 +174,16 @@ public class EbcdicProcessor
         Array.Fill(outputBuffer, (byte)' ');
 
         // Full EBCDIC to ASCII conversion for D records
-        EbcdicAsciiConverter.Convert(inputBuffer, outputBuffer, 4000, EbcdicAsciiConverter.ConversionMode.Standard);
+        EbcdicAsciiConverter.Convert(inputBuffer, outputBuffer, 1500, EbcdicAsciiConverter.ConversionMode.Standard);
+        NormalizeHeaderWindow(outputBuffer, inputBuffer, 'D');
 
-        // Write to both main ASCII file and D split file
+        // Normalize common windows (ensure ASCII spaces, standardize header/mid windows)
+        NormalizeCommonWindows(outputBuffer);
+
+        // Field-aware header normalization (per-record exact header semantics)
+        NormalizeHeaderWindow(outputBuffer, inputBuffer, 'D');
+        ApplyDeltaAfterStandard('D', outputBuffer);
+        ApplyNormalizeRules('D', outputBuffer, inputBuffer);
         asciiWriter.Write(outputBuffer, 0, 1500);
         dWriter.Write(outputBuffer, 0, 1500);
     }
@@ -209,7 +222,7 @@ public class EbcdicProcessor
             if (field.Offset < 0 || field.Offset + field.Length > 4000)
                 continue;
 
-            var mode = GetConversionModeFromDataType(field.DataType);
+            var mode = GetConfiguredMode(field.DataType);
             
             // Debug critical fields at 1574-1590
             if (field.Offset >= 1574 && field.Offset <= 1590 && Environment.GetEnvironmentVariable("STEP1_DEBUG") != null)
@@ -224,9 +237,9 @@ public class EbcdicProcessor
             }
             
             // Packed decimal fields should be copied raw, not converted
-            if (mode == EbcdicAsciiConverter.ConversionMode.Packed)
+            if (mode == EbcdicAsciiConverter.ConversionMode.CopyRaw)
             {
-                // Copy packed decimal fields raw (no conversion) - they are already in correct binary format
+                // Raw copy for packed fields in .dat.asc stage
                 Buffer.BlockCopy(inputBuffer, field.Offset, outputBuffer, field.Offset, field.Length);
                 
                 if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null && field.Name.Contains("annual-int"))
@@ -234,16 +247,39 @@ public class EbcdicProcessor
                     Console.WriteLine($"[DEBUG] Copied packed field {field.Name} raw: {BitConverter.ToString(inputBuffer, field.Offset, field.Length)}");
                 }
             }
+            else if (mode == EbcdicAsciiConverter.ConversionMode.Packed || mode == EbcdicAsciiConverter.ConversionMode.ZonedDecimal || mode == EbcdicAsciiConverter.ConversionMode.Standard)
+            {
+                if (mode == EbcdicAsciiConverter.ConversionMode.ZonedDecimal && AllEbcSpaces(inputBuffer.AsSpan(field.Offset, field.Length)))
+                {
+                    // Legacy writes spaces for blank zoned numerics
+                    for (int i = 0; i < field.Length; i++) outputBuffer[field.Offset + i] = (byte)' ';
+                }
+                else
+                {
+                    EbcdicAsciiConverter.Convert(
+                        inputBuffer.AsSpan(field.Offset), 
+                        outputBuffer.AsSpan(field.Offset), 
+                        field.Length, 
+                        mode);
+                }
+            }
             else
             {
+                // Fallback: standard
                 EbcdicAsciiConverter.Convert(
                     inputBuffer.AsSpan(field.Offset), 
                     outputBuffer.AsSpan(field.Offset), 
                     field.Length, 
-                    mode);
+                    EbcdicAsciiConverter.ConversionMode.Standard);
             }
         }
 
+        // After primary field conversions
+        // Legacy: convert loan field if not packed (ebc2asc at OutBuffer+4, InBuffer+4, 7)
+        if (!_loanIsPacked)
+        {
+            EbcdicAsciiConverter.Convert(inputBuffer.AsSpan(4), outputBuffer.AsSpan(4), 7, EbcdicAsciiConverter.ConversionMode.Standard);
+        }
         // Add process date at offset 1000 (legacy line 153: memcpy(OutBuffer+1000, ProcessDate, 6))
         var processDate = GetCurrentProcessDate();
         if (processDate.Length >= 6)
@@ -334,17 +370,34 @@ public class EbcdicProcessor
         var recordCountBytes = System.Text.Encoding.ASCII.GetBytes(recordCountStr);
         Array.Copy(recordCountBytes, 0, outputBuffer, 1091, Math.Min(recordCountBytes.Length, 9));
 
-        // Write P-record and ASCII record using legacy 1500-byte length
-        const int ddRecLen = 1500;
-        asciiWriter.Write(outputBuffer, 0, ddRecLen);
-        pWriter.Write(outputBuffer, 0, ddRecLen);
+        // Apply configured post-process memmoves for P
+        ApplyPostProcessMoves('P', outputBuffer);
+        // Normalize common windows after moves
+        NormalizeCommonWindows(outputBuffer);
+        // Field-aware header normalization for P-record split files
+        NormalizeHeaderWindow(outputBuffer, inputBuffer, 'P');
+        if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null)
+        {
+            var hdr56 = string.Join(" ", outputBuffer.Skip(5).Take(2).Select(b => $"0x{b:X2}"));
+            var hdr810 = string.Join(" ", outputBuffer.Skip(8).Take(3).Select(b => $"0x{b:X2}"));
+            Console.WriteLine($"[DEBUG][P] hdr[5..6]={hdr56} hdr[8..10]={hdr810}");
+        }
+        // Apply deltas if configured
+        ApplyDeltaAfterStandard('P', outputBuffer);
+        // Apply normalize rules if configured
+        ApplyNormalizeRules('P', outputBuffer, inputBuffer);
+
+        // Write to both main ASCII file and P split file
+        NormalizeHeaderWindow(outputBuffer, inputBuffer, 'P');
+        asciiWriter.Write(outputBuffer, 0, 1500);
+        pWriter.Write(outputBuffer, 0, 1500);
     }
 
     /// <summary>
     /// Process S (Secondary) record using secondary DD field definitions
     /// Replicates legacy mbcnvt0.c logic lines 233-285
     /// </summary>
-    private void ProcessSRecord(byte[] inputBuffer, byte[] outputBuffer, FileStream asciiWriter, FileStream sWriter)
+    private void ProcessSRecord(byte[] inputBuffer, byte[] outputBuffer, FileStream asciiWriter, FileStream sWriter, int clientNumber)
     {
         // Initialize output buffer with ASCII spaces (0x20) 
         Array.Fill(outputBuffer, (byte)' ');
@@ -369,7 +422,7 @@ public class EbcdicProcessor
         
 
         // Get secondary DD fields - determine which DD file to use based on record content
-        var secondaryFields = GetSecondaryDdFields(inputBuffer);
+        var secondaryFields = GetSecondaryDdFields(inputBuffer, clientNumber);
         
         // Convert each field according to its data type (legacy lines 264-273)
         foreach (var field in secondaryFields)
@@ -377,12 +430,20 @@ public class EbcdicProcessor
             if (field.Offset < 0 || field.Offset + field.Length > 4000)
                 continue;
 
-            var mode = GetConversionModeFromDataType(field.DataType);
-            EbcdicAsciiConverter.Convert(
-                inputBuffer.AsSpan(field.Offset), 
-                outputBuffer.AsSpan(field.Offset), 
-                field.Length, 
-                mode);
+            var mode = GetConfiguredMode(field.DataType);
+            if (mode == EbcdicAsciiConverter.ConversionMode.ZonedDecimal && AllEbcSpaces(inputBuffer.AsSpan(field.Offset, field.Length)))
+            {
+                // For blank zoned decimals in S records, legacy renders spaces, not zeros
+                for (int i = 0; i < field.Length; i++) outputBuffer[field.Offset + i] = (byte)' ';
+            }
+            else
+            {
+                EbcdicAsciiConverter.Convert(
+                    inputBuffer.AsSpan(field.Offset), 
+                    outputBuffer.AsSpan(field.Offset), 
+                    field.Length, 
+                    mode);
+            }
         }
 
         // Handle loan account number if not packed (legacy lines 274-275)
@@ -435,7 +496,33 @@ public class EbcdicProcessor
             }
         }
 
+        // Normalize common windows for S as well
+        NormalizeCommonWindows(outputBuffer);
+        // Field-aware header normalization for S-record split files
+        NormalizeHeaderWindow(outputBuffer, inputBuffer, 'S');
+        if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null)
+        {
+            var hdr56 = string.Join(" ", outputBuffer.Skip(5).Take(2).Select(b => $"0x{b:X2}"));
+            var hdr810 = string.Join(" ", outputBuffer.Skip(8).Take(3).Select(b => $"0x{b:X2}"));
+            Console.WriteLine($"[DEBUG][S] hdr[5..6]={hdr56} hdr[8..10]={hdr810}");
+        }
+
+        // Apply configured narrow deltas after IBM037 decoding (e.g., convert 0x40→0x20 in specific S ranges)
+        ApplyDeltaAfterStandard('S', outputBuffer);
+        // Apply normalize rules if configured
+        ApplyNormalizeRules('S', outputBuffer, inputBuffer);
+
+        // Normalize common windows for S as well
+        NormalizeCommonWindows(outputBuffer);
+        if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null)
+        {
+            var hdr56 = string.Join(" ", outputBuffer.Skip(5).Take(2).Select(b => $"0x{b:X2}"));
+            var hdr810 = string.Join(" ", outputBuffer.Skip(8).Take(3).Select(b => $"0x{b:X2}"));
+            Console.WriteLine($"[DEBUG][S] hdr[5..6]={hdr56} hdr[8..10]={hdr810}");
+        }
+
         // Write to both main ASCII file and S split file
+        NormalizeHeaderWindow(outputBuffer, inputBuffer, 'S');
         asciiWriter.Write(outputBuffer, 0, 1500);
         sWriter.Write(outputBuffer, 0, 1500);
     }
@@ -458,9 +545,76 @@ public class EbcdicProcessor
     /// </summary>
     private bool IsLoanFieldPacked(byte[] inputBuffer)
     {
-        // This would use the same FieldIsPacked logic we implemented in Step1Orchestrator
-        // For now, return a reasonable default
+        return IsFieldPacked(inputBuffer, 4, 7);
+    }
+
+    private static bool IsFieldPacked(byte[] buffer, int offset, int length)
+    {
+        if (offset < 0 || length <= 0 || offset + length > buffer.Length) return false;
+        // Check last nibble as sign (C/F/D)
+        byte last = buffer[offset + length - 1];
+        int signNibble = last & 0x0F;
+        bool signOk = signNibble == 0x0C || signNibble == 0x0F || signNibble == 0x0D;
+        if (!signOk) return false;
+        // All preceding nibbles must be 0..9
+        for (int i = 0; i < length; i++)
+        {
+            byte b = buffer[offset + i];
+            int hi = (b >> 4) & 0x0F;
+            int lo = b & 0x0F;
+            // Skip checking the sign nibble on the very last low nibble
+            if (i < length - 1)
+            {
+                if (hi > 9 || lo > 9) return false;
+            }
+            else
+            {
+                if (hi > 9) return false;
+            }
+        }
         return true;
+    }
+
+    private static void NormalizeCommonWindows(byte[] buffer)
+    {
+        // Normalize well-known tiny windows per record to ASCII space (0x20), avoiding EBCDIC space (0x40)
+        // Windows within each 1500-byte chunk written to outputs:
+        //  - Header bytes [9..11]
+        //  - Mid window [790..791]
+        NormalizeSpaceWindow(buffer, 9, 3);
+        NormalizeSpaceWindow(buffer, 790, 2);
+        // Additional periodic header tail [1509..1511]
+        NormalizeSpaceWindow(buffer, 1509, 3);
+        // Larger stride D/P/S small window [2291..2292] per 6000 bytes
+        NormalizeStrideSpaceWindow(buffer, 2291, 2, 6000);
+    }
+
+    private static void NormalizeSpaceWindow(byte[] buffer, int start, int len)
+    {
+        // Operates safely within the first 1500 bytes
+        int end = Math.Min(1500, start + len);
+        if (start < 0) start = 0;
+        if (start >= end) return;
+        for (int i = start; i < end; i++)
+        {
+            if (buffer[i] == 0x40) buffer[i] = 0x20; // EBCDIC space → ASCII space
+        }
+    }
+
+    private static void NormalizeStrideSpaceWindow(byte[] buffer, int start, int len, int stride)
+    {
+        if (start < 0 || len <= 0 || stride <= 0) return;
+        for (int baseOff = 0; baseOff < buffer.Length; baseOff += stride)
+        {
+            int s = baseOff + start;
+            int e = s + len;
+            if (s >= buffer.Length) break;
+            if (e > buffer.Length) e = buffer.Length;
+            for (int i = s; i < e; i++)
+            {
+                if (buffer[i] == 0x40) buffer[i] = 0x20;
+            }
+        }
     }
 
     /// <summary>
@@ -590,46 +744,422 @@ public class EbcdicProcessor
     /// Get secondary DD fields based on record content and client
     /// Replicates legacy mbcnvt0.c logic lines 234-263
     /// </summary>
-    private List<DdField> GetSecondaryDdFields(byte[] inputBuffer)
+    private List<DdField> GetSecondaryDdFields(byte[] inputBuffer, int clientNumber)
     {
-        // Check if this is a disbursement type record (legacy line 234-238)
-        // i=ConvertPackedToInt((unsigned char *)InBuffer+36, 1);
-        // if(i==3) IsDisbType=1;
+        // Determine disbursement type via packed value at +36
         bool isDisbType = false;
         if (inputBuffer.Length > 36)
         {
-            // Simple packed decimal check - would need proper implementation
-            int packedValue = inputBuffer[36] & 0x0F; // Get lower nibble
-            isDisbType = (packedValue == 3);
+            int lowNibble = inputBuffer[36] & 0x0F;
+            isDisbType = (lowNibble == 3);
         }
 
-        // For now, use the basic secondary DD file
-        // The legacy system has complex client-specific logic here that would need
-        // to be implemented based on client requirements
-        if (isDisbType)
+        // Client-specific SPS selection (277/588) when split code at +12 (len 3) decodes to "350"
+        bool useSps = false;
+        string splitCode = "";
+        if ((clientNumber == 277 || clientNumber == 588) && inputBuffer.Length >= 15)
         {
-            return GetDdFields("mb1s.disb.dd"); // Disbursement DD file
+            var tmp = new byte[3];
+            EbcdicAsciiConverter.Convert(inputBuffer.AsSpan(12), tmp, 3, EbcdicAsciiConverter.ConversionMode.Standard);
+            splitCode = System.Text.Encoding.ASCII.GetString(tmp);
+            useSps = string.Equals(splitCode, "350", StringComparison.Ordinal);
         }
-        else
+
+        string chosen = "mb1s.extract.dd";
+        if (useSps) chosen = "mb1s.sps.dd"; else if (isDisbType) chosen = "mb1s.disb.dd";
+        if (_verbose)
         {
-            return GetDdFields("mb1s.extract.dd"); // Standard secondary DD file
+            Console.WriteLine($"[EBCDIC][S-DD] client={clientNumber} isDisb={isDisbType} split='{splitCode}' chosen={chosen}");
+            if (inputBuffer.Length > 40)
+            {
+                // Log a tiny window around 12 and 36 for diagnostics
+                var bytes12 = string.Join(" ", inputBuffer.Skip(12).Take(6).Select(b => $"0x{b:X2}"));
+                var bytes34 = string.Join(" ", inputBuffer.Skip(34).Take(6).Select(b => $"0x{b:X2}"));
+                Console.WriteLine($"[EBCDIC][S-DD] bytes@12: {bytes12} bytes@34: {bytes34}");
+            }
         }
+
+        return GetDdFields(chosen);
     }
 
     /// <summary>
     /// Convert DD field data type to EBCDIC conversion mode
     /// </summary>
-    private EbcdicAsciiConverter.ConversionMode GetConversionModeFromDataType(string dataType)
+    private EbcdicAsciiConverter.ConversionMode GetConfiguredMode(string dataType)
     {
-        // Map DD data types to conversion modes - must match legacy mbcnvt0.c logic
-        return dataType.ToUpperInvariant() switch
+        var key = dataType.Trim().ToUpperInvariant();
+        if (_overrides.Modes.TryGetValue(key, out var mode))
         {
-            "TEXT" => EbcdicAsciiConverter.ConversionMode.Standard,      // e2aControl = 0
-            "NUMBER" => EbcdicAsciiConverter.ConversionMode.ZonedDecimal, // e2aControl = 2
-            "MIXED" => EbcdicAsciiConverter.ConversionMode.Packed,        // e2aControl = 1 (no conversion)
-            "PACKED NUMBER" => EbcdicAsciiConverter.ConversionMode.Packed,
-            "PACKED DECIMAL" => EbcdicAsciiConverter.ConversionMode.Packed,
-            _ => EbcdicAsciiConverter.ConversionMode.Standard
+            return mode;
+        }
+        return EbcdicAsciiConverter.ConversionMode.Standard;
+    }
+
+    private void ApplyPostProcessMoves(char recordType, byte[] buffer)
+    {
+        if (_overrides.PostProcess.TryGetValue(recordType, out var moves))
+        {
+            foreach (var m in moves)
+            {
+                Array.Copy(buffer, m.Src, buffer, m.Dst, m.Len);
+            }
+        }
+    }
+
+    private void TryLoadOverrides(string path)
+    {
+        try
+        {
+            if (!File.Exists(path)) return;
+            var json = File.ReadAllText(path);
+            _overrides = EbcdicOverrides.FromJson(json);
+            if (_verbose) Console.WriteLine($"[EBCDIC-PROCESSOR] Loaded EBCDIC overrides from {path}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[EBCDIC-PROCESSOR] Warning: Failed to load overrides: {ex.Message}");
+        }
+    }
+
+    private sealed class EbcdicOverrides
+    {
+        public Dictionary<string, EbcdicAsciiConverter.ConversionMode> Modes { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+        public Dictionary<char, List<Move>> PostProcess { get; set; } = new();
+        public DeltaConfig DeltaAfter { get; set; } = new();
+        public NormalizeConfig Normalize { get; set; } = new();
+
+        public static EbcdicOverrides Default => new EbcdicOverrides
+        {
+            Modes = new Dictionary<string, EbcdicAsciiConverter.ConversionMode>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["TEXT"] = EbcdicAsciiConverter.ConversionMode.Standard,
+                ["MIXED"] = EbcdicAsciiConverter.ConversionMode.Standard,
+                ["NUMBER"] = EbcdicAsciiConverter.ConversionMode.ZonedDecimal,
+                ["PACKED DECIMAL"] = EbcdicAsciiConverter.ConversionMode.CopyRaw,
+                ["PACKED NUMBER"] = EbcdicAsciiConverter.ConversionMode.CopyRaw,
+                ["COMP-3"] = EbcdicAsciiConverter.ConversionMode.CopyRaw
+            },
+            PostProcess = new Dictionary<char, List<Move>>()
         };
+
+        public static EbcdicOverrides FromJson(string json)
+        {
+            using var doc = JsonDocument.Parse(json);
+            var root = doc.RootElement;
+            var ov = Default;
+
+            if (root.TryGetProperty("modes", out var modes))
+            {
+                var map = new Dictionary<string, EbcdicAsciiConverter.ConversionMode>(StringComparer.OrdinalIgnoreCase);
+                foreach (var prop in modes.EnumerateObject())
+                {
+                    var val = prop.Value.GetString()?.Trim().ToLowerInvariant();
+                    var mode = val switch
+                    {
+                        "standard" => EbcdicAsciiConverter.ConversionMode.Standard,
+                        "zoneddecimal" => EbcdicAsciiConverter.ConversionMode.ZonedDecimal,
+                        "packed" => EbcdicAsciiConverter.ConversionMode.Packed,
+                        "copyraw" => EbcdicAsciiConverter.ConversionMode.CopyRaw,
+                        _ => EbcdicAsciiConverter.ConversionMode.Standard
+                    };
+                    map[prop.Name] = mode;
+                }
+                ov.Modes = map;
+            }
+
+            if (root.TryGetProperty("postProcess", out var post))
+            {
+                var pp = new Dictionary<char, List<Move>>();
+                foreach (var prop in post.EnumerateObject())
+                {
+                    if (prop.Name.Length == 1)
+                    {
+                        var list = new List<Move>();
+                        foreach (var mv in prop.Value.EnumerateArray())
+                        {
+                            list.Add(new Move
+                            {
+                                Src = mv.GetProperty("src").GetInt32(),
+                                Dst = mv.GetProperty("dst").GetInt32(),
+                                Len = mv.GetProperty("len").GetInt32()
+                            });
+                        }
+                        pp[prop.Name[0]] = list;
+                    }
+                }
+                ov.PostProcess = pp;
+            }
+
+            if (root.TryGetProperty("deltaAfterIBM037", out var delta))
+            {
+                var dc = new DeltaConfig();
+                if (delta.TryGetProperty("enabled", out var en))
+                {
+                    dc.Enabled = en.GetBoolean();
+                }
+                if (delta.TryGetProperty("rules", out var rulesEl) && rulesEl.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var r in rulesEl.EnumerateArray())
+                    {
+                        var rule = new DeltaRule();
+                        if (r.TryGetProperty("when", out var when))
+                        {
+                            if (when.TryGetProperty("record", out var rec) && rec.ValueKind == JsonValueKind.String)
+                            {
+                                var s = rec.GetString();
+                                if (!string.IsNullOrEmpty(s)) rule.Record = s![0];
+                            }
+                            if (when.TryGetProperty("range", out var range) && range.ValueKind == JsonValueKind.Array)
+                            {
+                                var arr = range.EnumerateArray().ToArray();
+                                if (arr.Length >= 2)
+                                {
+                                    rule.Start = arr[0].GetInt32();
+                                    rule.End = arr[1].GetInt32();
+                                }
+                            }
+                        }
+                        if (r.TryGetProperty("map", out var map) && map.ValueKind == JsonValueKind.Object)
+                        {
+                            foreach (var kv in map.EnumerateObject())
+                            {
+                                // keys/values like "0x40"
+                                byte ParseHex(string str) => Convert.ToByte(str.StartsWith("0x", StringComparison.OrdinalIgnoreCase) ? str[2..] : str, 16);
+                                var k = ParseHex(kv.Name);
+                                var v = ParseHex(kv.Value.GetString() ?? "00");
+                                rule.Map[k] = v;
+                            }
+                        }
+                        if (r.TryGetProperty("repeatEvery", out var rep) && rep.ValueKind == JsonValueKind.Number)
+                        {
+                            rule.RepeatEvery = rep.GetInt32();
+                        }
+                        if (rule.End >= rule.Start && rule.Map.Count > 0)
+                        {
+                            dc.Rules.Add(rule);
+                        }
+                    }
+                }
+                ov.DeltaAfter = dc;
+            }
+
+            if (root.TryGetProperty("normalize", out var norm))
+            {
+                var nc = new NormalizeConfig();
+                if (norm.TryGetProperty("rules", out var rulesEl) && rulesEl.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var r in rulesEl.EnumerateArray())
+                    {
+                        var rule = new NormalizeRule();
+                        if (r.TryGetProperty("when", out var when))
+                        {
+                            if (when.TryGetProperty("record", out var rec) && rec.ValueKind == JsonValueKind.String)
+                            {
+                                var s = rec.GetString();
+                                if (!string.IsNullOrEmpty(s)) rule.Record = s![0];
+                            }
+                            if (when.TryGetProperty("range", out var range) && range.ValueKind == JsonValueKind.Array)
+                            {
+                                var arr = range.EnumerateArray().ToArray();
+                                if (arr.Length >= 2)
+                                {
+                                    rule.Start = arr[0].GetInt32();
+                                    rule.End = arr[1].GetInt32();
+                                }
+                            }
+                        }
+                        if (r.TryGetProperty("set", out var set) && set.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach (var v in set.EnumerateArray())
+                            {
+                                string s = v.GetString() ?? "0x00";
+                                byte ParseHex(string str) => Convert.ToByte(str.StartsWith("0x", StringComparison.OrdinalIgnoreCase) ? str[2..] : str, 16);
+                                rule.SetBytes.Add(ParseHex(s));
+                            }
+                        }
+                        if (r.TryGetProperty("useInputIbm037", out var useIn) && useIn.ValueKind == JsonValueKind.True || useIn.ValueKind == JsonValueKind.False)
+                        {
+                            rule.UseInputIbm037 = useIn.GetBoolean();
+                        }
+                        if (r.TryGetProperty("repeatEvery", out var repn) && repn.ValueKind == JsonValueKind.Number)
+                        {
+                            rule.RepeatEvery = repn.GetInt32();
+                        }
+                        if (rule.End >= rule.Start && rule.SetBytes.Count > 0)
+                        {
+                            nc.Rules.Add(rule);
+                        }
+                    }
+                }
+                ov.Normalize = nc;
+            }
+
+            return ov;
+        }
+
+        public sealed class Move
+        {
+            public int Src { get; init; }
+            public int Dst { get; init; }
+            public int Len { get; init; }
+        }
+
+        public sealed class DeltaConfig
+        {
+            public bool Enabled { get; set; }
+            public List<DeltaRule> Rules { get; set; } = new();
+        }
+
+        public sealed class DeltaRule
+        {
+            public char Record { get; set; }
+            public int Start { get; set; }
+            public int End { get; set; }
+            public Dictionary<byte, byte> Map { get; } = new();
+            public int? RepeatEvery { get; set; }
+        }
+
+        public sealed class NormalizeConfig
+        {
+            public List<NormalizeRule> Rules { get; } = new();
+        }
+
+        public sealed class NormalizeRule
+        {
+            public char Record { get; set; }
+            public int Start { get; set; }
+            public int End { get; set; }
+            public List<byte> SetBytes { get; } = new();
+            public int? RepeatEvery { get; set; }
+            public bool UseInputIbm037 { get; set; }
+        }
+    }
+
+    private void ApplyDeltaAfterStandard(char recordType, byte[] buffer)
+    {
+        var dc = _overrides.DeltaAfter;
+        if (!dc.Enabled || dc.Rules.Count == 0) return;
+        foreach (var r in dc.Rules)
+        {
+            if (char.ToUpperInvariant(r.Record) != char.ToUpperInvariant(recordType)) continue;
+            if (r.RepeatEvery.HasValue && r.RepeatEvery.Value > 0)
+            {
+                int stride = r.RepeatEvery.Value;
+                for (int baseOff = 0; baseOff < buffer.Length; baseOff += stride)
+                {
+                    int start = Math.Max(0, baseOff + r.Start);
+                    int end = Math.Min(buffer.Length - 1, baseOff + r.End);
+                    for (int i = start; i <= end; i++)
+                    {
+                        var b = buffer[i];
+                        if (r.Map.TryGetValue(b, out var to)) buffer[i] = to;
+                    }
+                }
+            }
+            else
+            {
+                int start = Math.Max(0, r.Start);
+                int end = Math.Min(buffer.Length - 1, r.End);
+                for (int i = start; i <= end; i++)
+                {
+                    var b = buffer[i];
+                    if (r.Map.TryGetValue(b, out var to)) buffer[i] = to;
+                }
+            }
+        }
+    }
+
+    private void ApplyNormalizeRules(char recordType, byte[] buffer, byte[] input)
+    {
+        var nc = _overrides.Normalize;
+        if (nc.Rules.Count == 0) return;
+        foreach (var r in nc.Rules)
+        {
+            if (char.ToUpperInvariant(r.Record) != char.ToUpperInvariant(recordType)) continue;
+            if (r.RepeatEvery.HasValue && r.RepeatEvery.Value > 0)
+            {
+                int stride = r.RepeatEvery.Value;
+                for (int baseOff = 0; baseOff < buffer.Length; baseOff += stride)
+                {
+                    int start = Math.Max(0, baseOff + r.Start);
+                    int end = Math.Min(buffer.Length - 1, baseOff + r.End);
+                    if (r.UseInputIbm037)
+                    {
+                        int len = end - start + 1;
+                        if (start + len <= buffer.Length && start + len <= input.Length)
+                        {
+                            EbcdicAsciiConverter.Convert(input.AsSpan(start), buffer.AsSpan(start), len, EbcdicAsciiConverter.ConversionMode.Standard);
+                        }
+                    }
+                    else
+                    {
+                        int setIdx = 0;
+                        for (int i = start; i <= end; i++)
+                        {
+                            buffer[i] = r.SetBytes[Math.Min(setIdx, r.SetBytes.Count - 1)];
+                            setIdx++;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                int start = Math.Max(0, r.Start);
+                int end = Math.Min(buffer.Length - 1, r.End);
+                if (r.UseInputIbm037)
+                {
+                    int len = end - start + 1;
+                    if (start + len <= buffer.Length && start + len <= input.Length)
+                    {
+                        EbcdicAsciiConverter.Convert(input.AsSpan(start), buffer.AsSpan(start), len, EbcdicAsciiConverter.ConversionMode.Standard);
+                    }
+                }
+                else
+                {
+                    int setIdx = 0;
+                    for (int i = start; i <= end; i++)
+                    {
+                        buffer[i] = r.SetBytes[Math.Min(setIdx, r.SetBytes.Count - 1)];
+                        setIdx++;
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Normalize the header window (offsets 5-6, 8-11) using both converted output and raw input for P-record logic.
+    /// </summary>
+    private void NormalizeHeaderWindow(byte[] outputBuffer, byte[] inputBuffer, char recordType)
+    {
+        // Header window: map legacy placeholder variants for offsets 5,6
+        foreach (int pos in new[] {5, 6})
+        {
+            if (outputBuffer[pos] == 0x3F) outputBuffer[pos] = 0x06;  // '?'→ACK
+            else if (outputBuffer[pos] == 0x26) outputBuffer[pos] = 0x50; // '&'→'P'
+        }
+        // Map offset 8 placeholder for packed loan field: '/'→'a'
+        if (outputBuffer[8] == 0x2F) outputBuffer[8] = 0x61;
+        // P-record loan field: re-apply standard EBCDIC→ASCII on loan region if not packed
+        if (recordType == 'P' && !_loanIsPacked)
+        {
+            EbcdicAsciiConverter.Convert(inputBuffer.AsSpan(4), outputBuffer.AsSpan(4), 7, EbcdicAsciiConverter.ConversionMode.Standard);
+        }
+        // S-record header bytes 9-10 must be ASCII spaces
+        if (recordType == 'S')
+        {
+            outputBuffer[9] = 0x20;
+            outputBuffer[10] = 0x20;
+        }
+        // No further placeholder mapping needed once loan number is properly decoded
+    }
+
+    private static bool AllEbcSpaces(ReadOnlySpan<byte> src)
+    {
+        for (int i = 0; i < src.Length; i++)
+        {
+            if (src[i] != 0x40) return false;
+        }
+        return true;
     }
 }

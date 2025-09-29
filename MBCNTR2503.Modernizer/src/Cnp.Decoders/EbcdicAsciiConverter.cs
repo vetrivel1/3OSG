@@ -50,6 +50,11 @@ public static class EbcdicAsciiConverter
         Standard = 0,
         
         /// <summary>
+        /// Copy bytes without any conversion (raw). Useful for COMP-3 in .dat.asc stage.
+        /// </summary>
+        CopyRaw = 3,
+        
+        /// <summary>
         /// Copy bytes without conversion (ispacked = 1) 
         /// </summary>
         Packed = 1,
@@ -76,6 +81,14 @@ public static class EbcdicAsciiConverter
 
         switch (mode)
         {
+            case ConversionMode.CopyRaw:
+                // Byte-for-byte copy (no character set conversion). Used for raw packed fields in .dat.asc.
+                for (int i = 0; i < length; i++)
+                {
+                    destination[i] = source[i];
+                }
+                break;
+
             case ConversionMode.Packed:
                 // COMP-3 packed decimal decoding into ASCII digits
                 ConvertPacked(source, destination, length);

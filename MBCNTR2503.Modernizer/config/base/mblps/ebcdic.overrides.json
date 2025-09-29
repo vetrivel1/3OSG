@@ -1,0 +1,41 @@
+{
+  "modes": {
+    "TEXT": "standard",
+    "MIXED": "standard",
+    "NUMBER": "zonedDecimal",
+    "PACKED DECIMAL": "copyRaw",
+    "PACKED NUMBER": "copyRaw",
+    "COMP-3": "copyRaw"
+  },
+  "loanPackedDetection": {
+    "method": "fieldIsPacked",
+    "accountOffset": 4,
+    "accountLength": 7
+  },
+  "secondaryDdSelection": [
+    { "when": { "client": [277, 588], "splitCodeAt": 12, "splitCodeLen": 3, "equals": "350", "decode": "IBM037" }, "useDd": "mb1s.sps.dd" },
+    { "when": { "disbTypePackedAt": 36, "equals": 3 }, "useDd": "mb1s.disb.dd" },
+    { "useDd": "mb1s.extract.dd" }
+  ],
+  "postProcess": {
+    "P": [
+      { "op": "memmove", "src": 1558, "dst": 1006, "len": 12 },
+      { "op": "memmove", "src": 1574, "dst": 940,  "len": 17 }
+    ]
+  },
+  "deltaAfterIBM037": {
+    "enabled": true,
+    "rules": [
+      { "when": { "record": "S", "range": [1017, 1036] }, "map": { "0x40": "0x20" } },
+      { "when": { "record": "D", "range": [790, 791] }, "map": { "0x40": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": "P", "range": [790, 791] }, "map": { "0x40": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": "S", "range": [790, 791] }, "map": { "0x40": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": "D", "range": [2291, 2292] }, "map": { "0x40": "0x20" }, "repeatEvery": 6000 },
+      { "when": { "record": "P", "range": [2291, 2292] }, "map": { "0x40": "0x20" }, "repeatEvery": 6000 },
+      { "when": { "record": "S", "range": [2291, 2292] }, "map": { "0x40": "0x20" }, "repeatEvery": 6000 }
+    ]
+  },
+  "normalize": { "rules": [] }
+}
+
+
