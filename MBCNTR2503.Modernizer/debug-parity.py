@@ -23,7 +23,7 @@ def find_schema_file(schema_dir: Path, schema_name: str = "mblps"):
             try:
                 data = json.load(f)
                 if data.get("Container4000", {}).get("Name", "").lower() == schema_name.lower():
-                    print(f"🔍 Found schema for '{schema_name}' in: {filename.name}")
+                    print(f"[INFO] Found schema for '{schema_name}' in: {filename.name}")
                     return filename
             except json.JSONDecodeError:
                 continue
@@ -113,19 +113,139 @@ def decode_packed_decimal(data: bytes, scale: int = 0):
     else:
         return f"{sign}{digits}"
 
+def calculate_file_similarity(file1: Path, file2: Path):
+    """Calculate percentage similarity between two files based on size and content."""
+    if not file1.exists() or not file2.exists():
+        return {"size_match": 0.0, "content_match": 0.0, "size_diff": 0, "content_diff": 0}
+    
+    # Size comparison
+    size1 = file1.stat().st_size
+    size2 = file2.stat().st_size
+    size_diff = abs(size1 - size2)
+    size_match = (1.0 - (size_diff / max(size1, size2))) * 100 if max(size1, size2) > 0 else 100.0
+    
+    # Content comparison (byte-by-byte)
+    with open(file1, 'rb') as f1, open(file2, 'rb') as f2:
+        content1 = f1.read()
+        content2 = f2.read()
+    
+    min_len = min(len(content1), len(content2))
+    max_len = max(len(content1), len(content2))
+    
+    if max_len == 0:
+        content_match = 100.0
+        content_diff = 0
+    else:
+        # Count matching bytes
+        matching_bytes = 0
+        for i in range(min_len):
+            if content1[i] == content2[i]:
+                matching_bytes += 1
+        
+        content_diff = max_len - matching_bytes
+        content_match = (matching_bytes / max_len) * 100
+    
+    return {
+        "size_match": size_match,
+        "content_match": content_match,
+        "size_diff": size_diff,
+        "content_diff": content_diff,
+        "size1": size1,
+        "size2": size2
+    }
+
+def compare_all_files(job_id: str):
+    """Compare all generated files against expected outputs and generate a summary table."""
+    print(f"\n[REPORT] Generating file comparison report for job {job_id}...")
+    
+    # Define all file pairs to compare
+    file_pairs = [
+        (f"{job_id}.4300", f"{job_id}.4300"),
+        (f"{job_id}.4300.txt", f"{job_id}.4300.txt"),
+        (f"{job_id}.4300.txt.length", f"{job_id}.4300.txt.length"),
+        (f"{job_id}.4300.txt.new", f"{job_id}.4300.txt.new"),
+        (f"{job_id}.4300.txt.suspect", f"{job_id}.4300.txt.suspect"),
+        (f"{job_id}.dat.asc", f"{job_id}.dat.asc"),
+        (f"{job_id}.dat.asc.11.1.d", f"{job_id}.dat.asc.11.1.d"),
+        (f"{job_id}.dat.asc.11.1.p", f"{job_id}.dat.asc.11.1.p"),
+        (f"{job_id}.dat.asc.11.1.p.keyed", f"{job_id}.dat.asc.11.1.p.keyed"),
+        (f"{job_id}.dat.asc.11.1.s", f"{job_id}.dat.asc.11.1.s"),
+        (f"{job_id}.dat.rectype", f"{job_id}.dat.rectype"),
+        (f"{job_id}.dat.total", f"{job_id}.dat.total"),
+        (f"{job_id}.ncpjax", f"{job_id}.ncpjax"),
+        (f"{job_id}p.set", f"{job_id}p.set"),
+    ]
+    
+    results = []
+    
+    for expected_name, actual_name in file_pairs:
+        expected_file = LEGACY_DIR / "Expected_Outputs" / job_id / expected_name
+        actual_file = OUTPUT_DIR / job_id / actual_name
+        
+        similarity = calculate_file_similarity(expected_file, actual_file)
+        results.append({
+            "filename": expected_name,
+            "expected_exists": expected_file.exists(),
+            "actual_exists": actual_file.exists(),
+            **similarity
+        })
+    
+    # Print summary table
+    print(f"\n{'='*120}")
+    print(f"FILE COMPARISON SUMMARY FOR JOB {job_id}")
+    print(f"{'='*120}")
+    print(f"{'Filename':<30} {'Status':<12} {'Size Match %':<12} {'Content Match %':<15} {'Size Diff':<12} {'Content Diff':<15}")
+    print(f"{'-'*120}")
+    
+    total_size_match = 0
+    total_content_match = 0
+    valid_files = 0
+    
+    for result in results:
+        status = "[OK] BOTH" if result["expected_exists"] and result["actual_exists"] else \
+                "[MISSING]" if not result["expected_exists"] or not result["actual_exists"] else "[PARTIAL]"
+        
+        size_match = result["size_match"]
+        content_match = result["content_match"]
+        size_diff = result["size_diff"]
+        content_diff = result["content_diff"]
+        
+        print(f"{result['filename']:<30} {status:<12} {size_match:>10.2f}% {content_match:>13.2f}% {size_diff:>10} {content_diff:>13}")
+        
+        if result["expected_exists"] and result["actual_exists"]:
+            total_size_match += size_match
+            total_content_match += content_match
+            valid_files += 1
+    
+    print(f"{'-'*120}")
+    
+    if valid_files > 0:
+        avg_size_match = total_size_match / valid_files
+        avg_content_match = total_content_match / valid_files
+        print(f"{'AVERAGE':<30} {'':<12} {avg_size_match:>10.2f}% {avg_content_match:>13.2f}% {'':<12} {'':<15}")
+    
+    print(f"{'='*120}")
+    print(f"Summary: {valid_files} files compared successfully")
+    print(f"Average Size Match: {avg_size_match:.2f}%")
+    print(f"Average Content Match: {avg_content_match:.2f}%")
+    print(f"{'='*120}\n")
+
 def compare_jobs(job_id: str):
     """Compares the generated .set file against the legacy baseline."""
-    print(f"\n🔍 Starting comparison for job {job_id}...")
+    print(f"\n[COMPARE] Starting comparison for job {job_id}...")
+
+    # First, generate the file comparison table
+    compare_all_files(job_id)
 
     # Define file paths
     expected_file = LEGACY_DIR / "Expected_Outputs" / job_id / f"{job_id}p.set"
     actual_file = OUTPUT_DIR / job_id / f"{job_id}p.set"
 
     if not expected_file.exists():
-        print(f"❌ ERROR: Expected file not found: {expected_file}")
+        print(f"[ERROR] Expected file not found: {expected_file}")
         return
     if not actual_file.exists():
-        print(f"❌ ERROR: Actual file not found: {actual_file}")
+        print(f"[ERROR] Actual file not found: {actual_file}")
         return
 
     # Load schema
@@ -135,19 +255,19 @@ def compare_jobs(job_id: str):
         with open(schema_path, 'r') as f:
             schema = json.load(f)
     except (FileNotFoundError, ValueError) as e:
-        print(f"❌ ERROR: {e}")
+        print(f"[ERROR] {e}")
         return
 
     # For .set file comparison, MB2000 records are 2000 bytes (as per setmb2000.cbl line 29)
     record_size = 2000
-    print(f"🔍 Using record size (MB2000 record length): {record_size}")
+    print(f"[INFO] Using record size (MB2000 record length): {record_size}")
     # Read records with correct record size
     expected_records = list(read_records(expected_file, record_size))
     actual_records = list(read_records(actual_file, record_size))
 
     if len(expected_records) != len(actual_records):
-        print(f"❌ Record count mismatch! Expected: {len(expected_records)}, Got: {len(actual_records)}")
-        print(f"🔍 Continuing comparison with available records (min: {min(len(expected_records), len(actual_records))})...")
+        print(f"[WARN] Record count mismatch! Expected: {len(expected_records)}, Got: {len(actual_records)}")
+        print(f"[INFO] Continuing comparison with available records (min: {min(len(expected_records), len(actual_records))})...")
         # Continue with the minimum count available
 
     total_diffs = 0
@@ -172,7 +292,7 @@ def compare_jobs(job_id: str):
                 total_diffs += 1
     
     if total_diffs == 0:
-        print("\n🎉🎉🎉 PERFECT PARITY! All records and fields match. 🎉🎉🎉")
+        print("\n[SUCCESS] PERFECT PARITY! All records and fields match.")
     else:
         print(f"\n--- Summary ---")
         print(f"Found {total_diffs} total field differences across all records.")

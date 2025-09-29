@@ -59,8 +59,8 @@ def parse_dd_file(dd_path):
 def regenerate_field_definitions():
     """Regenerate FieldDefinitions_Generated.json with correct decimal places"""
     
-    dd_path = Path('/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/config/base/mblps/mblps.dd')
-    output_path = Path('/Users/vshanmu/3OSG/FieldDefinitions_Generated.json')
+    dd_path = Path('config/base/mblps/mblps.dd')
+    output_path = Path('FieldDefinitions_Generated.json')
     
     if not dd_path.exists():
         print(f"❌ DD file not found: {dd_path}")
