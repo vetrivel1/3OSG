@@ -86,6 +86,7 @@ public class PipelineOrchestrator
         Console.WriteLine("  Step 2: EBCDIC to ASCII conversion...");
         var ebcdicProcessor = new EbcdicProcessor(_schema, _verbose);
         ebcdicProcessor.ProcessDatToAsc(jobId, inputDat, outDir);
+        var datAscFile = Path.Combine(outDir, $"{jobId}.dat.asc");
         Console.WriteLine("  Step 2: Done.");
 
         // Step 3: Key Enrichment
@@ -114,20 +115,34 @@ public class PipelineOrchestrator
         var mapper = new MB2000FieldMapper(_schema, overridePath);
         var outputFile = Path.Combine(outDir, $"{jobId}p.set");
 
-        using (var inStream = File.OpenRead(keyedPFile))
+        // *** FIX: Use original EBCDIC .dat file (4000-byte pure EBCDIC records) ***
+        // This allows all 566 overrides to be mapped with correct EBCDIC→ASCII conversion
+        using (var inStream = File.OpenRead(inputDat))
         using (var outStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
         {
-            // P-records are always 1500 bytes, regardless of Container4000 length
-            const int pRecordLen = 1500;
-            // Debug input buffer length
-            Console.WriteLine($"[PIPELINE][DBG] Reading keyedPFile with recordLen={pRecordLen}");
-            var buffer = new byte[pRecordLen];
+            // Read pure EBCDIC 4000-byte records from input .dat file
+            const int container4000Len = 4000;
+            Console.WriteLine($"[PIPELINE][DBG] Reading input .dat with recordLen={container4000Len} (filtering P-records only)");
+            var buffer = new byte[container4000Len];
             int bytesRead;
-            while ((bytesRead = inStream.Read(buffer, 0, pRecordLen)) == pRecordLen)
+            int totalRecords = 0;
+            int pRecordsProcessed = 0;
+            
+            while ((bytesRead = inStream.Read(buffer, 0, container4000Len)) == container4000Len)
             {
-                var mapped = mapper.Map(buffer);
-                outStream.Write(mapped, 0, mapped.Length);
+                totalRecords++;
+                
+                // Filter to P-records only: Check byte 11 for record type
+                // In pure EBCDIC .dat file, byte 11 contains EBCDIC 'P' (0xD7) for P-records
+                if (buffer[11] == 0xD7)  // EBCDIC 'P'
+                {
+                    pRecordsProcessed++;
+                    var mapped = mapper.Map(buffer);
+                    outStream.Write(mapped, 0, mapped.Length);
+                }
             }
+            
+            Console.WriteLine($"[PIPELINE] MB2000: Processed {pRecordsProcessed} P-records out of {totalRecords} total records");
         }
         Console.WriteLine("  Step 4: Done.");
 

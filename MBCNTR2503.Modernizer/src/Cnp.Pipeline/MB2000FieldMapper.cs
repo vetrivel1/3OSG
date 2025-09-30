@@ -329,61 +329,35 @@ namespace Cnp.Pipeline
                     }
                     else
                     {
-                        // Multi-byte text: check if source is already ASCII or needs EBCDIC conversion
+                        // Multi-byte text: Source is pure EBCDIC from .dat file - always convert
                         string text;
-                        
-                        // Check if source data is already ASCII (most bytes in printable ASCII range)
-                        // Special handling for date fields with binary/null data
-                        bool isAlreadyAscii = true;
-                        bool isEmptyDateField = true;
-                        
-                        for (int i = 0; i < Math.Min(srcLen, 10); i++)
-                        {
-                            byte b = sourceSpan[i];
-                            if (b != 0x20 && (b < 0x20 || b > 0x7E))  // Not space and not printable ASCII
-                            {
-                                isAlreadyAscii = false;
-                            }
-                            if (b != 0x00 && b != 0x20)  // Not null or space
-                            {
-                                isEmptyDateField = false;
-                            }
-                        }
-                        
-                        // DEBUG: Show ASCII detection results for problematic fields
-                        if (ov.Target.Contains("CLIENT3") || ov.Target.Contains("FORMATTED-ACCOUNT") || ov.Target.Contains("BILL-NAME"))
-                        {
-                            var hexBytes = string.Join(" ", sourceSpan.Slice(0, Math.Min(srcLen, 10)).ToArray().Select(b => $"{b:02X}"));
-                            Console.WriteLine($"[ASCII_DEBUG] {ov.Target}: bytes={hexBytes}, isAlreadyAscii={isAlreadyAscii}");
-                        }
+                        Console.WriteLine($"[MB2000][DBG] Converting EBCDIC to ASCII for '{ov.Target}': srcOff={srcOff}, srcLen={srcLen}");
+                        Span<byte> textBuf = stackalloc byte[srcLen];
+                        EbcdicAsciiConverter.Convert(sourceSpan, textBuf, srcLen, EbcdicAsciiConverter.ConversionMode.Standard);
+                        text = System.Text.Encoding.Latin1.GetString(textBuf.ToArray());
                         
                         // Check if this is a date field that needs binary conversion
                         bool isDateField = ov.Target.ToUpper().Contains("DATE") || 
                                          ov.Target.EndsWith("-YY") || 
                                          ov.Target.EndsWith("-MM") || 
                                          ov.Target.EndsWith("-DD");
-                        
-                        if (isDateField && !isAlreadyAscii)
+                        if (isDateField)
                         {
-                            // Binary date field - convert binary values to ASCII date strings
-                            Console.WriteLine($"[MB2000][DBG] Converting binary date field '{ov.Target}'");
-                            text = ConvertBinaryDateField(sourceSpan.Slice(0, srcLen), ov.Target);
-                        }
-                        else if (isAlreadyAscii)
-                        {
-                            // Source is already ASCII - copy directly
-                            Console.WriteLine($"[MB2000][DBG] Source is already ASCII for '{ov.Target}' - copying directly");
-                            text = System.Text.Encoding.ASCII.GetString(sourceSpan.Slice(0, srcLen).ToArray());
-                        }
-                        else
-                        {
-                            // Source is EBCDIC - convert to ASCII
-                            Console.WriteLine($"[MB2000][DBG] Converting EBCDIC to ASCII for '{ov.Target}'");
-                            Span<byte> textBuf = stackalloc byte[srcLen];
-                            EbcdicAsciiConverter.Convert(sourceSpan, textBuf, srcLen, EbcdicAsciiConverter.ConversionMode.Standard);
-                            // Decode EBCDIC bytes using Latin1 to preserve extended characters
-                            var rawText = System.Text.Encoding.Latin1.GetString(textBuf.ToArray());
-                            text = rawText;
+                            // Check if date field is all zeros/spaces
+                            bool isEmpty = true;
+                            for (int i = 0; i < srcLen; i++)
+                            {
+                                if (sourceSpan[i] != 0x00 && sourceSpan[i] != 0x40)  // Not null or EBCDIC space
+                                {
+                                    isEmpty = false;
+                                    break;
+                                }
+                            }
+                            if (isEmpty)
+                            {
+                                // Empty date field - fill with spaces
+                                text = new string(' ', srcLen);
+                            }
                         }
                         
                         // Replace control characters (below 0x20) with spaces, preserve extended (>0x7F)
@@ -409,43 +383,11 @@ namespace Cnp.Pipeline
                 }
                 else
                 {
-                    // Default: check if source is ASCII or needs EBCDIC conversion
-                    Console.WriteLine($"[MB2000][DBG] Default conversion for field '{ov.Target}': srcOff={srcOff}, srcLen={srcLen}");
-                    
-                    // Check if source data is already ASCII (most bytes in printable ASCII range)
-                    bool isAlreadyAscii = true;
-                    for (int i = 0; i < Math.Min(srcLen, 10); i++)
-                    {
-                        byte b = sourceSpan[i];
-                        if (b != 0x20 && (b < 0x20 || b > 0x7E))  // Not space and not printable ASCII
-                        {
-                            isAlreadyAscii = false;
-                            break;
-                        }
-                    }
-                    
-                    // DEBUG: Show ASCII detection results for problematic fields
-                    if (ov.Target.Contains("CLIENT3") || ov.Target.Contains("FORMATTED-ACCOUNT") || ov.Target.Contains("BILL-NAME"))
-                    {
-                        var hexBytes = string.Join(" ", sourceSpan.Slice(0, Math.Min(srcLen, 10)).ToArray().Select(b => $"{b:02X}"));
-                        Console.WriteLine($"[ASCII_DEBUG] {ov.Target}: bytes={hexBytes}, isAlreadyAscii={isAlreadyAscii}");
-                    }
-                    
-                    string text;
-                    if (isAlreadyAscii)
-                    {
-                        // Source is already ASCII - copy directly
-                        Console.WriteLine($"[MB2000][DBG] Source is already ASCII for '{ov.Target}' - copying directly");
-                        text = System.Text.Encoding.ASCII.GetString(sourceSpan.Slice(0, srcLen).ToArray());
-                    }
-                    else
-                    {
-                        // Source is EBCDIC - convert to ASCII
-                        Console.WriteLine($"[MB2000][DBG] Converting EBCDIC to ASCII for '{ov.Target}'");
-                        byte[] tempBuf = new byte[srcLen];
-                        EbcdicAsciiConverter.Convert(sourceSpan, tempBuf, srcLen, EbcdicAsciiConverter.ConversionMode.Standard);
-                        text = System.Text.Encoding.ASCII.GetString(tempBuf);
-                    }
+                    // Default: Source is pure EBCDIC from .dat file - always convert
+                    Console.WriteLine($"[MB2000][DBG] Default conversion (EBCDIC→ASCII) for field '{ov.Target}': srcOff={srcOff}, srcLen={srcLen}");
+                    byte[] tempBuf = new byte[srcLen];
+                    EbcdicAsciiConverter.Convert(sourceSpan, tempBuf, srcLen, EbcdicAsciiConverter.ConversionMode.Standard);
+                    string text = System.Text.Encoding.ASCII.GetString(tempBuf);
                     
                     // Replace control characters with spaces
                     text = new string(text.Select(c => c < ' ' ? ' ' : c).ToArray());
