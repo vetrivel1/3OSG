@@ -112,7 +112,7 @@ public class PipelineOrchestrator
         Console.WriteLine(File.Exists(clientOverrideFile)
             ? $"[PIPELINE] Using client-specific overrides: {clientOverrideFile}"
             : $"[PIPELINE] Using base overrides: {overridePath}");
-        var mapper = new MB2000FieldMapper(_schema, overridePath);
+        var mapper = new MB2000FieldMapper(_schema, overridePath, jobId);
         var outputFile = Path.Combine(outDir, $"{jobId}p.set");
 
         // MB2000 reads from 1500-byte .p.keyed files (not 4000-byte .dat!)

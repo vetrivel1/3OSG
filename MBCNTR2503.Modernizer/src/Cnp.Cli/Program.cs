@@ -212,7 +212,7 @@ else if (args.Length > 0 && args[0] == "mb2000-convert")
     }
     var overridePath = Path.Combine(schemaDir, "mb2000.overrides.json");
     var compSchema = SchemaCompiler.Compile(schemaDir);
-    var mapper = new MB2000FieldMapper(compSchema, overridePath);
+    var mapper = new MB2000FieldMapper(compSchema, overridePath, job);
     // Process keyed input as 1500-byte records and write 2000-byte .set records
     const int keyedLen = 1500;
     Directory.CreateDirectory(outDir);
