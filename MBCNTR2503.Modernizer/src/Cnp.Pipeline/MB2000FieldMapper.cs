@@ -329,36 +329,9 @@ namespace Cnp.Pipeline
                     }
                     else
                     {
-                        // Multi-byte text: Source is pure EBCDIC from .dat file - always convert
-                        string text;
-                        Console.WriteLine($"[MB2000][DBG] Converting EBCDIC to ASCII for '{ov.Target}': srcOff={srcOff}, srcLen={srcLen}");
-                        Span<byte> textBuf = stackalloc byte[srcLen];
-                        EbcdicAsciiConverter.Convert(sourceSpan, textBuf, srcLen, EbcdicAsciiConverter.ConversionMode.Standard);
-                        text = System.Text.Encoding.Latin1.GetString(textBuf.ToArray());
-                        
-                        // Check if this is a date field that needs binary conversion
-                        bool isDateField = ov.Target.ToUpper().Contains("DATE") || 
-                                         ov.Target.EndsWith("-YY") || 
-                                         ov.Target.EndsWith("-MM") || 
-                                         ov.Target.EndsWith("-DD");
-                        if (isDateField)
-                        {
-                            // Check if date field is all zeros/spaces
-                            bool isEmpty = true;
-                            for (int i = 0; i < srcLen; i++)
-                            {
-                                if (sourceSpan[i] != 0x00 && sourceSpan[i] != 0x40)  // Not null or EBCDIC space
-                                {
-                                    isEmpty = false;
-                                    break;
-                                }
-                            }
-                            if (isEmpty)
-                            {
-                                // Empty date field - fill with spaces
-                                text = new string(' ', srcLen);
-                            }
-                        }
+                        // Multi-byte text: .p.keyed files are ALREADY ASCII - don't re-convert!
+                        string text = System.Text.Encoding.ASCII.GetString(sourceSpan.Slice(0, srcLen).ToArray());
+                        Console.WriteLine($"[MB2000][DBG] Text '{ov.Target}': srcOff={srcOff}, srcLen={srcLen} (from ASCII .p.keyed)");
                         
                         // Replace control characters (below 0x20) with spaces, preserve extended (>0x7F)
                         text = new string(text.Select(c => c < ' ' ? ' ' : c).ToArray());
@@ -383,11 +356,9 @@ namespace Cnp.Pipeline
                 }
                 else
                 {
-                    // Default: Source is pure EBCDIC from .dat file - always convert
-                    Console.WriteLine($"[MB2000][DBG] Default conversion (EBCDIC→ASCII) for field '{ov.Target}': srcOff={srcOff}, srcLen={srcLen}");
-                    byte[] tempBuf = new byte[srcLen];
-                    EbcdicAsciiConverter.Convert(sourceSpan, tempBuf, srcLen, EbcdicAsciiConverter.ConversionMode.Standard);
-                    string text = System.Text.Encoding.ASCII.GetString(tempBuf);
+                    // Default: .p.keyed files are ALREADY ASCII - don't re-convert!
+                    Console.WriteLine($"[MB2000][DBG] Default field '{ov.Target}': srcOff={srcOff}, srcLen={srcLen} (from ASCII .p.keyed)");
+                    string text = System.Text.Encoding.ASCII.GetString(sourceSpan.Slice(0, srcLen).ToArray());
                     
                     // Replace control characters with spaces
                     text = new string(text.Select(c => c < ' ' ? ' ' : c).ToArray());
