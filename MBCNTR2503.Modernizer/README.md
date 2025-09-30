@@ -263,6 +263,19 @@ file name              69172    80147    80299    80362
 
 *To regenerate the stage summary, run: `python generate_stage_report.py`*
 
+### Editor Shortcuts (VS Code & Cursor)
+
+- Full end-to-end pipeline (recommended):
+  - Task: "Run FULL pipeline (ALL or one job) - mblps"
+    - Prompts for Job ID (leave blank to run ALL). Cleans `out/`, compiles schema, then runs the full pipeline.
+  - Task: "FULL pipeline + Compare (ALL or one job) - mblps"
+    - Chains full pipeline and then runs the batch comparator to verify parity.
+
+- Terminal helper (Windows bash):
+  - Full pipeline for ALL or one job:
+    - `bash scripts/run_pipeline_mblps.sh` (ALL jobs)
+    - `bash scripts/run_pipeline_mblps.sh 80147` (single job)
+
 
 ## Prerequisites
 - .NET 8 SDK (Windows/macOS/Linux)

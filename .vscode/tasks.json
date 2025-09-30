@@ -1,0 +1,127 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build .NET solution (relative)",
+			"type": "shell",
+			"command": "dotnet build 3OSG.sln -v minimal",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Compile schema",
+			"type": "shell",
+			"command": "dotnet run --project MBCNTR2503.Modernizer/src/Cnp.Cli -- build-schema --schema MBCNTR2503.Modernizer/config/base/mblps --out MBCNTR2503.Modernizer/schemas/compiled",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Run EBCDIC->ASCII for 80362 (schema=mblps)",
+			"type": "shell",
+			"command": "dotnet run --project MBCNTR2503.Modernizer/src/Cnp.Cli -- ebcdic-to-ascii --job 80362 --input MBCNTR2503.Modernizer/Input/80362.dat --out MBCNTR2503.Modernizer/out/80362 --schema MBCNTR2503.Modernizer/config/base/mblps --verbose",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+
+		{
+			"label": "Run batch_comparison.py (defaults)",
+			"type": "shell",
+			"command": "python batch_comparison.py",
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Re-run batch_comparison.py (final)",
+			"type": "shell",
+			"command": "python batch_comparison.py",
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Merge txt.new 69172",
+			"type": "shell",
+			"command": "dotnet run --project MBCNTR2503.Modernizer/src/Cnp.Cli -- merge-txt-new --job 69172 --txt-input MBCNTR2503.Modernizer/out/69172/69172.4300.txt --binary-input MBCNTR2503.Modernizer/out/69172/69172.4300 --out MBCNTR2503.Modernizer/out/69172",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Merge txt.new 80147",
+			"type": "shell",
+			"command": "dotnet run --project MBCNTR2503.Modernizer/src/Cnp.Cli -- merge-txt-new --job 80147 --txt-input MBCNTR2503.Modernizer/out/80147/80147.4300.txt --binary-input MBCNTR2503.Modernizer/out/80147/80147.4300 --out MBCNTR2503.Modernizer/out/80147",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Merge txt.new 80299",
+			"type": "shell",
+			"command": "dotnet run --project MBCNTR2503.Modernizer/src/Cnp.Cli -- merge-txt-new --job 80299 --txt-input MBCNTR2503.Modernizer/out/80299/80299.4300.txt --binary-input MBCNTR2503.Modernizer/out/80299/80299.4300 --out MBCNTR2503.Modernizer/out/80299",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Merge txt.new 80362",
+			"type": "shell",
+			"command": "dotnet run --project MBCNTR2503.Modernizer/src/Cnp.Cli -- merge-txt-new --job 80362 --txt-input MBCNTR2503.Modernizer/out/80362/80362.4300.txt --binary-input MBCNTR2503.Modernizer/out/80362/80362.4300 --out MBCNTR2503.Modernizer/out/80362",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Quick diff 80362 .dat.asc",
+			"type": "shell",
+			"command": "python MBCNTR2503.Modernizer/tests/file_comparison.py \"Legacy Application/Expected_Outputs/80362/80362.dat.asc\" \"MBCNTR2503.Modernizer/out/80362/80362.dat.asc\" --first-diff --context 0",
+			"problemMatcher": [],
+			"group": "build"
+		},
+
+		{
+			"label": "Run FULL pipeline (ALL or one job) - mblps",
+			"type": "shell",
+			"command": "bash scripts/run_pipeline_mblps.sh ${input:jobId}",
+			"problemMatcher": [],
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"clear": true
+			}
+		},
+		{
+			"label": "FULL pipeline + Compare (ALL or one job) - mblps",
+			"type": "shell",
+			"command": "echo Full pipeline + compare complete.",
+			"dependsOn": [
+				"Run FULL pipeline (ALL or one job) - mblps",
+				"Run batch_comparison.py (defaults)"
+			],
+			"dependsOrder": "sequence",
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"clear": true
+			}
+		}
+	],
+	"inputs": [
+		{
+			"id": "jobId",
+			"type": "promptString",
+			"description": "Job ID to run (e.g., 80362). Leave blank to run ALL jobs.",
+			"default": ""
+		}
+	]
+}
