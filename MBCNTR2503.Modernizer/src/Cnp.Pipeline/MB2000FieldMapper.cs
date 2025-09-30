@@ -18,6 +18,7 @@ namespace Cnp.Pipeline
         public string Mode { get; set; } = string.Empty;
         public bool TrimOutput { get; set; } = false;
         public int? ImpliedDecimalPlaces { get; set; } = null;
+        public string? Value { get; set; } = null;
     }
 
     public class MB2000Overrides
@@ -270,6 +271,42 @@ namespace Cnp.Pipeline
                     appliedCount++;
                     Console.WriteLine($"[MB2000][VAL] ASCII to packed '{ov.Target}': converted");
                 }
+                else if (ov.Mode.Equals("constant", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Write a constant value to the field
+                    string constantValue = ov.Value ?? "";
+                    byte[] constantBytes;
+                    
+                    // Handle special values
+                    if (constantValue == "SPACES")
+                    {
+                        constantBytes = Enumerable.Repeat((byte)0x20, destLen).ToArray();
+                    }
+                    else if (constantValue == "EBCDIC_SPACES")
+                    {
+                        constantBytes = Enumerable.Repeat((byte)0x40, destLen).ToArray();
+                    }
+                    else if (constantValue == "NULLS")
+                    {
+                        constantBytes = Enumerable.Repeat((byte)0x00, destLen).ToArray();
+                    }
+                    else
+                    {
+                        constantBytes = System.Text.Encoding.ASCII.GetBytes(constantValue);
+                    }
+                    
+                    int copyLen = Math.Min(constantBytes.Length, destLen);
+                    constantBytes.AsSpan(0, copyLen).CopyTo(destinationSpan);
+                    
+                    // Pad with spaces if needed
+                    if (copyLen < destLen)
+                    {
+                        destinationSpan.Slice(copyLen).Fill((byte)' ');
+                    }
+                    
+                    appliedCount++;
+                    Console.WriteLine($"[MB2000][VAL] Constant '{ov.Target}': set to constant value");
+                }
                 else if (ov.Mode.Equals("packed", StringComparison.OrdinalIgnoreCase) && hasMeta)
                 {
                     Console.WriteLine($"[MB2000][DBG] Packed conversion for field '{ov.Target}': srcOff={srcOff}, srcLen={srcLen}, scale={meta.DecimalPlaces}");
@@ -374,7 +411,464 @@ namespace Cnp.Pipeline
                 }
             }
             Console.WriteLine($"[MB2000] Applied {appliedCount} overrides successfully");
+            
+            // Apply BUILD-CNP-MBILL-RECORD transformations
+            ApplyBuildCnpMbillRecordLogic(keyed, outputBuffer);
+            
+            // Apply date conversions (CONVERT-PYMMDD logic from COBOL)
+            ApplyDateConversions(keyed, outputBuffer);
+            
+            // Apply client-specific business logic
+            ApplyClientSpecificLogic(keyed, outputBuffer);
+            
             return outputBuffer;
+        }
+        
+        /// <summary>
+        /// Apply BUILD-CNP-MBILL-RECORD logic from setmb2000.cbl (lines 231-429)
+        /// Handles conditional field mappings and transformations
+        /// </summary>
+        private void ApplyBuildCnpMbillRecordLogic(byte[] keyed, byte[] outputBuffer)
+        {
+            Console.WriteLine($"[MB2000][CNP_LOGIC] Applying BUILD-CNP-MBILL-RECORD transformations");
+            
+            try
+            {
+                // 1. TELEPHONE NUMBER FORMATTING (lines 263-264)
+                // MB1100-TELE-NO (packed 6 bytes at offset 259) → MB-TELE-NO (12 bytes)
+                if (_mb2000Layout.TryGetValue("MB-TELE-NO", out var mbTeleNo))
+                {
+                    int teleOffset = 259;
+                    if (teleOffset + 6 <= keyed.Length)
+                    {
+                        var teleBytes = keyed.AsSpan(teleOffset, 6);
+                        if (PackedDecimal.TryDecode(teleBytes, 0, out decimal teleDecimal))
+                        {
+                            long teleNumber = (long)teleDecimal;
+                            // Format as 10-digit number WITHOUT dashes (legacy format)
+                            string formatted = teleNumber.ToString("D10");
+                            var teleOutBytes = System.Text.Encoding.ASCII.GetBytes(formatted.PadRight(mbTeleNo.Length, ' '));
+                            Array.Copy(teleOutBytes, 0, outputBuffer, mbTeleNo.Offset, Math.Min(teleOutBytes.Length, mbTeleNo.Length));
+                            Console.WriteLine($"[MB2000][CNP_LOGIC] MB-TELE-NO: {formatted}");
+                        }
+                    }
+                }
+                
+                // MB1100-SEC-TELE-NO (packed 6 bytes at offset 265) → MB-SEC-TELE-NO (12 bytes)
+                if (_mb2000Layout.TryGetValue("MB-SEC-TELE-NO", out var mbSecTeleNo))
+                {
+                    int secTeleOffset = 265;
+                    if (secTeleOffset + 6 <= keyed.Length)
+                    {
+                        var secTeleBytes = keyed.AsSpan(secTeleOffset, 6);
+                        if (PackedDecimal.TryDecode(secTeleBytes, 0, out decimal secTeleDecimal))
+                        {
+                            long secTeleNumber = (long)secTeleDecimal;
+                            // Format as 10-digit number WITHOUT dashes (legacy format)
+                            string formatted = secTeleNumber.ToString("D10");
+                            var secTeleOutBytes = System.Text.Encoding.ASCII.GetBytes(formatted.PadRight(mbSecTeleNo.Length, ' '));
+                            Array.Copy(secTeleOutBytes, 0, outputBuffer, mbSecTeleNo.Offset, Math.Min(secTeleOutBytes.Length, mbSecTeleNo.Length));
+                            Console.WriteLine($"[MB2000][CNP_LOGIC] MB-SEC-TELE-NO: {formatted}");
+                        }
+                    }
+                }
+                
+                // 2. GRACE DAYS (lines 317-320)
+                // IF MB1100-GRACE-DAYS NUMERIC → copy, ELSE → 15
+                if (_mb2000Layout.TryGetValue("MB-GRACE-DAYS", out var mbGraceDays))
+                {
+                    int graceDaysOffset = 581;
+                    if (graceDaysOffset + 2 <= keyed.Length)
+                    {
+                        var graceDaysBytes = keyed.AsSpan(graceDaysOffset, 2);
+                        int graceDays = 15; // Default
+                        
+                        if (PackedDecimal.TryDecode(graceDaysBytes, 0, out decimal graceDaysDecimal))
+                        {
+                            graceDays = (int)graceDaysDecimal;
+                            if (graceDays < 0 || graceDays > 99)
+                            {
+                                graceDays = 15; // Invalid, use default
+                            }
+                        }
+                        
+                        string graceDaysStr = graceDays.ToString("D2");
+                        var graceDaysOutBytes = System.Text.Encoding.ASCII.GetBytes(graceDaysStr);
+                        Array.Copy(graceDaysOutBytes, 0, outputBuffer, mbGraceDays.Offset, Math.Min(graceDaysOutBytes.Length, mbGraceDays.Length));
+                        Console.WriteLine($"[MB2000][CNP_LOGIC] MB-GRACE-DAYS: {graceDays}");
+                    }
+                }
+                
+                // 3. PAYMENT FREQUENCY (lines 332-347)
+                // Convert PMT-PERIOD (12,26,6,3,1) → letter code (M,B,S,Q,A)
+                if (_mb2000Layout.TryGetValue("MB-PAYMENT-FREQUENCY", out var mbPayFreq))
+                {
+                    int pmtPeriodOffset = 583;
+                    if (pmtPeriodOffset + 2 <= keyed.Length)
+                    {
+                        var pmtPeriodBytes = keyed.AsSpan(pmtPeriodOffset, 2);
+                        char frequency = 'M'; // Default
+                        
+                        if (PackedDecimal.TryDecode(pmtPeriodBytes, 0, out decimal pmtPeriodDecimal))
+                        {
+                            int pmtPeriod = (int)pmtPeriodDecimal;
+                            frequency = pmtPeriod switch
+                            {
+                                12 => 'M',  // Monthly
+                                26 => 'B',  // Biweekly
+                                6 => 'S',   // Semi-annually
+                                3 => 'Q',   // Quarterly
+                                1 => 'A',   // Annually
+                                _ => 'M'    // Default to monthly
+                            };
+                        }
+                        
+                        outputBuffer[mbPayFreq.Offset] = (byte)frequency;
+                        Console.WriteLine($"[MB2000][CNP_LOGIC] MB-PAYMENT-FREQUENCY: {frequency}");
+                    }
+                }
+                
+                // 4. PROPERTY ZIP PARSING (lines 259-261)
+                // MB1100-PROP-ZIP (10 bytes) → MB-PROPERTY-ZIP-5 (5 bytes) + MB-PROPERTY-ZIP-4 (4 bytes)
+                if (_mb2000Layout.TryGetValue("MB-PROPERTY-ZIP-5", out var mbPropZip5) &&
+                    _mb2000Layout.TryGetValue("MB-PROPERTY-ZIP-4", out var mbPropZip4))
+                {
+                    int propZipOffset = 249;
+                    if (propZipOffset + 10 <= keyed.Length)
+                    {
+                        string propZip = System.Text.Encoding.ASCII.GetString(keyed, propZipOffset, 10);
+                        // Format: "12345-6789" or "12345 6789" or "123456789 "
+                        string zip5 = propZip.Substring(0, 5);
+                        string zip4 = propZip.Length > 6 ? propZip.Substring(6, 4) : "    ";
+                        
+                        var zip5Bytes = System.Text.Encoding.ASCII.GetBytes(zip5);
+                        var zip4Bytes = System.Text.Encoding.ASCII.GetBytes(zip4);
+                        
+                        Array.Copy(zip5Bytes, 0, outputBuffer, mbPropZip5.Offset, Math.Min(zip5Bytes.Length, mbPropZip5.Length));
+                        Array.Copy(zip4Bytes, 0, outputBuffer, mbPropZip4.Offset, Math.Min(zip4Bytes.Length, mbPropZip4.Length));
+                        Console.WriteLine($"[MB2000][CNP_LOGIC] MB-PROPERTY-ZIP: {zip5}-{zip4}");
+                    }
+                }
+                
+                // 5. PLANET-DATE (line 271)
+                // MB1100-DUE-DATE (6 bytes packed) → MB-PLANET-DATE (6 bytes)
+                if (_mb2000Layout.TryGetValue("MB-PLANET-DATE", out var mbPlanetDate))
+                {
+                    int dueDateOffset = 281;
+                    if (dueDateOffset + 6 <= keyed.Length)
+                    {
+                        // Copy the 6-byte packed date as-is
+                        Array.Copy(keyed, dueDateOffset, outputBuffer, mbPlanetDate.Offset, Math.Min(6, mbPlanetDate.Length));
+                        Console.WriteLine($"[MB2000][CNP_LOGIC] MB-PLANET-DATE: copied from DUE-DATE");
+                    }
+                }
+                
+                // 6. PLANET-AMOUNT (line 366-367)
+                // MB1100-TOT-PYMT → MB-PLANET-AMOUNT (same as MB-PAYMENT-AMOUNT)
+                if (_mb2000Layout.TryGetValue("MB-PAYMENT-AMOUNT", out var mbPaymentAmt) &&
+                    _mb2000Layout.TryGetValue("MB-PLANET-AMOUNT", out var mbPlanetAmt))
+                {
+                    // Copy MB-PAYMENT-AMOUNT to MB-PLANET-AMOUNT
+                    Array.Copy(outputBuffer, mbPaymentAmt.Offset, outputBuffer, mbPlanetAmt.Offset, 
+                              Math.Min(mbPaymentAmt.Length, mbPlanetAmt.Length));
+                    Console.WriteLine($"[MB2000][CNP_LOGIC] MB-PLANET-AMOUNT: copied from MB-PAYMENT-AMOUNT");
+                }
+                
+                // 7. MB-FORMATTED-ACCOUNT: Generate from MB-ACCOUNT (packed → ASCII formatted)
+                if (_mb2000Layout.TryGetValue("MB-ACCOUNT", out var mbAccount) &&
+                    _mb2000Layout.TryGetValue("MB-FORMATTED-ACCOUNT", out var mbFormattedAccount))
+                {
+                    // Read packed MB-ACCOUNT and convert to formatted ASCII string
+                    var accountBytes = outputBuffer.AsSpan(mbAccount.Offset, mbAccount.Length);
+                    if (PackedDecimal.TryDecode(accountBytes, 0, out decimal accountValue))
+                    {
+                        // Format as 10-digit zero-padded string
+                        long accountNumber = (long)Math.Abs(accountValue);
+                        string formatted = accountNumber.ToString("D10");
+                        var formattedBytes = System.Text.Encoding.ASCII.GetBytes(formatted);
+                        Array.Copy(formattedBytes, 0, outputBuffer, mbFormattedAccount.Offset, 
+                                  Math.Min(formattedBytes.Length, mbFormattedAccount.Length));
+                        Console.WriteLine($"[MB2000][CNP_LOGIC] MB-FORMATTED-ACCOUNT: {formatted}");
+                    }
+                    else
+                    {
+                        // If decode fails, fill with spaces
+                        Array.Fill(outputBuffer, (byte)' ', mbFormattedAccount.Offset, mbFormattedAccount.Length);
+                        Console.WriteLine($"[MB2000][CNP_LOGIC] MB-FORMATTED-ACCOUNT: failed to decode, set to spaces");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[MB2000][CNP_LOGIC] Error: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// Apply date conversions using CONVERT-PYMMDD logic from setmb2000.cbl
+        /// Converts packed 2-byte year + text month/day → 4-digit year + month + day
+        /// </summary>
+        private void ApplyDateConversions(byte[] keyed, byte[] outputBuffer)
+        {
+            Console.WriteLine($"[MB2000][DATES] Applying date conversions (CONVERT-PYMMDD logic)");
+            
+            try
+            {
+                // Date conversion pattern: Unpack 2-byte year, add 1900, format as 4-digit string
+                // Pattern from COBOL CONVERT-PYMMDD (lines 439-446):
+                //   IF WS-PY NUMERIC
+                //      MOVE WS-PY TO OUT-YY
+                //      ADD 1900 TO OUT-YY
+                //      MOVE WS-MM TO OUT-MM
+                //      MOVE WS-DD TO OUT-DD
+                //   ELSE
+                //      MOVE SPACES TO OUT-YYYYMMDD
+                
+                // Define date field conversions (input offset → output field name)
+                var dateConversions = new[]
+                {
+                    // (inputYYOffset, inputYYLen, inputMMOffset, inputDDOffset, outputYYField, outputMMField, outputDDField)
+                    (1000, 2, 1002, 1004, "MB-STATEMENT-YY", "MB-STATEMENT-MM", "MB-STATEMENT-DD"),  // MB1100-STATEMENT-DATE
+                    (281, 2, 283, 285, "MB-LOAN-DUE-YY", "MB-LOAN-DUE-MM", "MB-LOAN-DUE-DD"),      // MB1100-DUE-DATE
+                    (299, 2, 301, 303, "MB-COUPON-TAPE-YY", "MB-COUPON-TAPE-MM", "MB-COUPON-TAPE-DD"), // MB1100-COUPON-TAPE-DATE
+                    (672, 2, 674, 676, "MB-1ST-DUE-YY", "MB-1ST-DUE-MM", "MB-1ST-DUE-DD"),         // MB1100-1ST-DUE-DATE
+                    (293, 2, 295, 297, "MB-BEG-HIST-YY", "MB-BEG-HIST-MM", "MB-BEG-HIST-DD"),      // BEG-HIST-DATE
+                    (722, 2, 724, 726, "MB-ARM-IR-YY", "MB-ARM-IR-MM", "MB-ARM-IR-DD"),            // MB1100-ARM-IR-CHG-YR-MO
+                    (728, 2, 730, 732, "MB-ARM-PI-CHG-YY", "MB-ARM-PI-CHG-MM", "MB-ARM-PI-CHG-DD"), // MB1100-ARM-PI-CHG-DATE
+                    (605, 2, 607, 609, "MB-TI-LOAN-YY", "MB-TI-LOAN-MM", "MB-TI-LOAN-DD"),         // MB1100-TI-LOAN-DATE (assuming structure)
+                };
+                
+                foreach (var (yyOff, yyLen, mmOff, ddOff, outYY, outMM, outDD) in dateConversions)
+                {
+                    // Check bounds
+                    if (yyOff + yyLen > keyed.Length || mmOff + 2 > keyed.Length || ddOff + 2 > keyed.Length)
+                    {
+                        Console.WriteLine($"[MB2000][DATES] Skipping {outYY}: input out of bounds");
+                        continue;
+                    }
+                    
+                    // Get output field definitions
+                    if (!_mb2000Layout.TryGetValue(outYY, out var yyField) ||
+                        !_mb2000Layout.TryGetValue(outMM, out var mmField) ||
+                        !_mb2000Layout.TryGetValue(outDD, out var ddField))
+                    {
+                        Console.WriteLine($"[MB2000][DATES] Skipping {outYY}: output fields not found");
+                        continue;
+                    }
+                    
+                    // Unpack the year (2-byte packed decimal)
+                    var yearBytes = keyed.AsSpan(yyOff, yyLen);
+                    int year = 0;
+                    bool isValidYear = false;
+                    
+                    // Try to unpack as packed decimal (scale 0 = integer)
+                    if (PackedDecimal.TryDecode(yearBytes, 0, out decimal yearDecimal))
+                    {
+                        year = (int)yearDecimal;
+                        
+                        // COBOL check: IF WS-PY NUMERIC
+                        // A valid year should be between 0 and 999 for a 2-byte packed field
+                        if (year >= 0 && year <= 999)
+                        {
+                            isValidYear = true;
+                            year += 1900;  // Add 1900 per COBOL logic
+                        }
+                    }
+                    
+                    if (isValidYear)
+                    {
+                        // Format year as 4-digit string
+                        string yearStr = year.ToString("D4");
+                        var yearOutBytes = System.Text.Encoding.ASCII.GetBytes(yearStr);
+                        Array.Copy(yearOutBytes, 0, outputBuffer, yyField.Offset, Math.Min(yearOutBytes.Length, yyField.Length));
+                        
+                        // Copy month and day as-is (they're already ASCII text)
+                        string mm = System.Text.Encoding.ASCII.GetString(keyed, mmOff, 2);
+                        string dd = System.Text.Encoding.ASCII.GetString(keyed, ddOff, 2);
+                        
+                        var mmBytes = System.Text.Encoding.ASCII.GetBytes(mm);
+                        var ddBytes = System.Text.Encoding.ASCII.GetBytes(dd);
+                        
+                        Array.Copy(mmBytes, 0, outputBuffer, mmField.Offset, Math.Min(mmBytes.Length, mmField.Length));
+                        Array.Copy(ddBytes, 0, outputBuffer, ddField.Offset, Math.Min(ddBytes.Length, ddField.Length));
+                        
+                        Console.WriteLine($"[MB2000][DATES] {outYY}: {yearStr}/{mm}/{dd}");
+                    }
+                    else
+                    {
+                        // Per COBOL: MOVE SPACES TO OUT-YYYYMMDD
+                        Array.Fill(outputBuffer, (byte)' ', yyField.Offset, yyField.Length);
+                        Array.Fill(outputBuffer, (byte)' ', mmField.Offset, mmField.Length);
+                        Array.Fill(outputBuffer, (byte)' ', ddField.Offset, ddField.Length);
+                        Console.WriteLine($"[MB2000][DATES] {outYY}: Invalid year, set to spaces");
+                    }
+                }
+                
+                // Handle MATURITY date (CONVERT-PYMM - only year and month)
+                // MB1100-LOAN-MAT-YY (319, 2 bytes packed), MB1100-LOAN-MAT-MM (321, 2 bytes text)
+                if (_mb2000Layout.TryGetValue("MB-MATURITY-YY", out var matYYField) &&
+                    _mb2000Layout.TryGetValue("MB-MATURITY-MM", out var matMMField))
+                {
+                    int matYYOff = 319;
+                    int matMMOff = 321;
+                    
+                    if (matYYOff + 2 <= keyed.Length && matMMOff + 2 <= keyed.Length)
+                    {
+                        var matYearBytes = keyed.AsSpan(matYYOff, 2);
+                        if (PackedDecimal.TryDecode(matYearBytes, 0, out decimal matYearDecimal))
+                        {
+                            int matYear = (int)matYearDecimal;
+                            
+                            if (matYear >= 0 && matYear <= 999)
+                            {
+                                matYear += 1900;
+                                string matYearStr = matYear.ToString("D4");
+                                var matYearOutBytes = System.Text.Encoding.ASCII.GetBytes(matYearStr);
+                                Array.Copy(matYearOutBytes, 0, outputBuffer, matYYField.Offset, Math.Min(matYearOutBytes.Length, matYYField.Length));
+                                
+                                string matMM = System.Text.Encoding.ASCII.GetString(keyed, matMMOff, 2);
+                                var matMMBytes = System.Text.Encoding.ASCII.GetBytes(matMM);
+                                Array.Copy(matMMBytes, 0, outputBuffer, matMMField.Offset, Math.Min(matMMBytes.Length, matMMField.Length));
+                                
+                                Console.WriteLine($"[MB2000][DATES] MB-MATURITY-YY: {matYearStr}/{matMM}");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[MB2000][DATES] Error applying date conversions: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// Apply client-specific business logic that can't be handled by simple field mappings
+        /// </summary>
+        private void ApplyClientSpecificLogic(byte[] keyed, byte[] outputBuffer)
+        {
+            // Extract client number from input (first 3 bytes)
+            string clientNumber = System.Text.Encoding.ASCII.GetString(keyed, 0, Math.Min(3, keyed.Length)).Trim();
+            Console.WriteLine($"[MB2000][CLIENT_LOGIC] Applying logic for client: {clientNumber}");
+            
+            // Client 503 specific logic (from BUILD-0503-FIELDS in setmb2000.cbl)
+            if (clientNumber == "503")
+            {
+                ApplyClient503Logic(keyed, outputBuffer);
+            }
+            // Add other clients as needed
+            // else if (clientNumber == "140") { ApplyClient140Logic(keyed, outputBuffer); }
+        }
+        
+        /// <summary>
+        /// Client 503 specific transformations (from BUILD-0503-FIELDS)
+        /// </summary>
+        private void ApplyClient503Logic(byte[] keyed, byte[] outputBuffer)
+        {
+            Console.WriteLine($"[MB2000][CLIENT_503] Applying client 503 specific logic");
+            
+            try
+            {
+                // 1. MB-OTHER-ACCOUNT: Reformatted account number (10 digits)
+                //    MOVE MB-ACCOUNT TO WS-ACCOUNT-10.
+                //    MOVE WS-ACCOUNT-10 TO MB-OTHER-ACCOUNT.
+                if (_mb2000Layout.TryGetValue("MB-ACCOUNT", out var mbAccount) &&
+                    _mb2000Layout.TryGetValue("MB-OTHER-ACCOUNT", out var mbOtherAccount))
+                {
+                    // Read MB-ACCOUNT (7-byte packed decimal at offset 10)
+                    string account = System.Text.Encoding.ASCII.GetString(outputBuffer, mbAccount.Offset, mbAccount.Length).Trim();
+                    // Format as 10 digits (pad with leading zeros)
+                    string formattedAccount = account.PadLeft(10, '0');
+                    var accountBytes = System.Text.Encoding.ASCII.GetBytes(formattedAccount);
+                    Array.Copy(accountBytes, 0, outputBuffer, mbOtherAccount.Offset, Math.Min(accountBytes.Length, mbOtherAccount.Length));
+                    Console.WriteLine($"[MB2000][503] MB-OTHER-ACCOUNT: {formattedAccount}");
+                }
+                
+                // 2. MB-BORR-DUE-DATE: Formatted date string (MM/DD/YYYY)
+                //    STRING MB-LOAN-DUE-MM '/' MB-LOAN-DUE-DD '/' MB-LOAN-DUE-YY DELIMITED BY SIZE INTO MB-BORR-DUE-DATE.
+                if (_mb2000Layout.TryGetValue("MB-LOAN-DUE-MM", out var dueMM) &&
+                    _mb2000Layout.TryGetValue("MB-LOAN-DUE-DD", out var dueDD) &&
+                    _mb2000Layout.TryGetValue("MB-LOAN-DUE-YY", out var dueYY) &&
+                    _mb2000Layout.TryGetValue("MB-BORR-DUE-DATE", out var borrDueDate))
+                {
+                    string mm = System.Text.Encoding.ASCII.GetString(outputBuffer, dueMM.Offset, dueMM.Length).Trim();
+                    string dd = System.Text.Encoding.ASCII.GetString(outputBuffer, dueDD.Offset, dueDD.Length).Trim();
+                    string yyyy = System.Text.Encoding.ASCII.GetString(outputBuffer, dueYY.Offset, dueYY.Length).Trim();
+                    
+                    if (!string.IsNullOrWhiteSpace(mm) && !string.IsNullOrWhiteSpace(dd) && !string.IsNullOrWhiteSpace(yyyy))
+                    {
+                        string formattedDate = $"{mm}/{dd}/{yyyy}";
+                        var dateBytes = System.Text.Encoding.ASCII.GetBytes(formattedDate);
+                        Array.Copy(dateBytes, 0, outputBuffer, borrDueDate.Offset, Math.Min(dateBytes.Length, borrDueDate.Length));
+                        Console.WriteLine($"[MB2000][503] MB-BORR-DUE-DATE: {formattedDate}");
+                    }
+                }
+                
+                // 3. MB-BORR-PMT-DUE: Copy of MB-TOTAL-AMOUNT-DUE
+                //    MOVE MB-TOTAL-AMOUNT-DUE TO MB-BORR-PMT-DUE.
+                if (_mb2000Layout.TryGetValue("MB-TOTAL-AMOUNT-DUE", out var totalDue) &&
+                    _mb2000Layout.TryGetValue("MB-BORR-PMT-DUE", out var borrPmtDue))
+                {
+                    // Both are numeric fields - copy the bytes directly
+                    Array.Copy(outputBuffer, totalDue.Offset, outputBuffer, borrPmtDue.Offset, Math.Min(totalDue.Length, borrPmtDue.Length));
+                    Console.WriteLine($"[MB2000][503] MB-BORR-PMT-DUE: copied from MB-TOTAL-AMOUNT-DUE");
+                }
+                
+                // 4. MB-1021-ACCELERATED-AMOUNT: From MB1500-ACCELERATED-AMOUNT
+                //    Already handled by overrides
+                
+                // 5. MB-REMITTANCE-IMB-CODE: From MB1500-CO-BORR-EMAIL-ADDR
+                //    MOVE MB1500-CO-BORR-EMAIL-ADDR TO MB-REMITTANCE-IMB-CODE.
+                if (_mb2000Layout.TryGetValue("MB-REMITTANCE-IMB-CODE", out var remittanceCode))
+                {
+                    // MB1500-CO-BORR-EMAIL-ADDR is at offset 1193, 66 bytes
+                    int srcOffset = 1193;
+                    int srcLength = 66;
+                    if (srcOffset + srcLength <= keyed.Length)
+                    {
+                        string coBorrEmail = System.Text.Encoding.ASCII.GetString(keyed, srcOffset, srcLength).Trim();
+                        var emailBytes = System.Text.Encoding.ASCII.GetBytes(coBorrEmail.PadRight(remittanceCode.Length, ' '));
+                        Array.Copy(emailBytes, 0, outputBuffer, remittanceCode.Offset, Math.Min(emailBytes.Length, remittanceCode.Length));
+                        Console.WriteLine($"[MB2000][503] MB-REMITTANCE-IMB-CODE: {coBorrEmail.Substring(0, Math.Min(30, coBorrEmail.Length))}...");
+                    }
+                }
+                
+                // 6. MB-FLEXFIELD1: From MB1100-BANK
+                //    MOVE MB1100-BANK TO MB-FLEXFIELD1.
+                if (_mb2000Layout.TryGetValue("MB-FLEXFIELD1", out var flexfield1))
+                {
+                    // MB1100-BANK is at offset 571, 3 bytes
+                    int srcOffset = 571;
+                    int srcLength = 3;
+                    if (srcOffset + srcLength <= keyed.Length)
+                    {
+                        string bank = System.Text.Encoding.ASCII.GetString(keyed, srcOffset, srcLength);
+                        var bankBytes = System.Text.Encoding.ASCII.GetBytes(bank.PadRight(flexfield1.Length, ' '));
+                        Array.Copy(bankBytes, 0, outputBuffer, flexfield1.Offset, Math.Min(bankBytes.Length, flexfield1.Length));
+                        Console.WriteLine($"[MB2000][503] MB-FLEXFIELD1: {bank}");
+                    }
+                }
+                
+                // 7. MB-FLEXFIELD2: From MB1100-PLS-CLT-ID
+                //    MOVE MB1100-PLS-CLT-ID TO MB-FLEXFIELD2.
+                if (_mb2000Layout.TryGetValue("MB-FLEXFIELD2", out var flexfield2))
+                {
+                    // MB1100-PLS-CLT-ID is at offset 779, 3 bytes
+                    int srcOffset = 779;
+                    int srcLength = 3;
+                    if (srcOffset + srcLength <= keyed.Length)
+                    {
+                        string plsCltId = System.Text.Encoding.ASCII.GetString(keyed, srcOffset, srcLength);
+                        var plsBytes = System.Text.Encoding.ASCII.GetBytes(plsCltId.PadRight(flexfield2.Length, ' '));
+                        Array.Copy(plsBytes, 0, outputBuffer, flexfield2.Offset, Math.Min(plsBytes.Length, flexfield2.Length));
+                        Console.WriteLine($"[MB2000][503] MB-FLEXFIELD2: {plsCltId}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[MB2000][CLIENT_503] Error applying client 503 logic: {ex.Message}");
+            }
         }
 
         /// <summary>

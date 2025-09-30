@@ -17,6 +17,14 @@
       "trimOutput": false
     },
     {
+      "source": "MB-FORMATTED-ACCOUNT",
+      "target": "MB-FORMATTED-ACCOUNT",
+      "sourceOffset": 17,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
       "source": "MB-SSN",
       "target": "MB-SSN",
       "sourceOffset": 37,

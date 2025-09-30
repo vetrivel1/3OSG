@@ -1,0 +1,211 @@
+{
+  "constants": [
+    {
+      "field": "Unknown",
+      "offset": 1070,
+      "length": 1,
+      "category": "CONSTANT_SPACES",
+      "value": "20",
+      "positions": 17
+    },
+    {
+      "field": "MB-ACS-CODE",
+      "offset": 412,
+      "length": 25,
+      "category": "CONSTANT_SPACES",
+      "value": "20202020202020202020202020202020202020202020202020",
+      "positions": 9
+    },
+    {
+      "field": "MB-ARM-IR-YY",
+      "offset": 645,
+      "length": 4,
+      "category": "CONSTANT_SPACES",
+      "value": "20202020",
+      "positions": 4
+    },
+    {
+      "field": "MB-TI-MIP-YTD",
+      "offset": 1472,
+      "length": 5,
+      "category": "CONSTANT_SPACES",
+      "value": "2020202020",
+      "positions": 4
+    },
+    {
+      "field": "MB-MOD-EFF-MMDD",
+      "offset": 1012,
+      "length": 4,
+      "category": "CONSTANT_EBCDIC_SPACES",
+      "value": "40404040",
+      "positions": 4
+    },
+    {
+      "field": "MB-ARM-PI-CHG-YY",
+      "offset": 653,
+      "length": 4,
+      "category": "CONSTANT_SPACES",
+      "value": "20202020",
+      "positions": 3
+    },
+    {
+      "field": "MB-LAST-YEAR-INT-PAID",
+      "offset": 929,
+      "length": 5,
+      "category": "CONSTANT_VALUE",
+      "value": "3030302020",
+      "positions": 3
+    },
+    {
+      "field": "MB-JOB",
+      "offset": 1971,
+      "length": 4,
+      "category": "CONSTANT_VALUE",
+      "value": "31343720",
+      "positions": 3
+    },
+    {
+      "field": "MB-FLEXFIELD3",
+      "offset": 1058,
+      "length": 12,
+      "category": "CONSTANT_SPACES",
+      "value": "202020202020202020202020",
+      "positions": 2
+    },
+    {
+      "field": "MB-STATEMENT-YY-R2",
+      "offset": 601,
+      "length": 2,
+      "category": "CONSTANT_SPACES",
+      "value": "2020",
+      "positions": 2
+    },
+    {
+      "field": "MB-STATEMENT-DD-R2",
+      "offset": 605,
+      "length": 2,
+      "category": "CONSTANT_SPACES",
+      "value": "2020",
+      "positions": 2
+    },
+    {
+      "field": "MB-ARM-IR-MM",
+      "offset": 649,
+      "length": 2,
+      "category": "CONSTANT_SPACES",
+      "value": "2020",
+      "positions": 2
+    },
+    {
+      "field": "MB-ARM-IR-DD",
+      "offset": 651,
+      "length": 2,
+      "category": "CONSTANT_SPACES",
+      "value": "2020",
+      "positions": 2
+    },
+    {
+      "field": "MB-ARM-PI-CHG-MM",
+      "offset": 657,
+      "length": 2,
+      "category": "CONSTANT_SPACES",
+      "value": "2020",
+      "positions": 2
+    },
+    {
+      "field": "MB-L-C-YTD",
+      "offset": 924,
+      "length": 5,
+      "category": "CONSTANT_VALUE",
+      "value": "2020000f30",
+      "positions": 2
+    },
+    {
+      "field": "MB-NEG-AM-PB-CAP-VALUE",
+      "offset": 965,
+      "length": 7,
+      "category": "CONSTANT_VALUE",
+      "value": "0c000f30303030",
+      "positions": 2
+    },
+    {
+      "field": "MB-INT-ONLY-EXP-MMDD",
+      "offset": 974,
+      "length": 3,
+      "category": "CONSTANT_VALUE",
+      "value": "000c00",
+      "positions": 2
+    },
+    {
+      "field": "MB-TRIAL-MOD-END-MMDD",
+      "offset": 998,
+      "length": 3,
+      "category": "CONSTANT_VALUE",
+      "value": "20000f",
+      "positions": 2
+    }
+  ],
+  "simple": [],
+  "complex": [
+    {
+      "field": "MB-CLIENT-FIELDS",
+      "variants": 24,
+      "positions": 55
+    },
+    {
+      "field": "MB-SERVICER-FIELDS",
+      "variants": 24,
+      "positions": 32
+    },
+    {
+      "field": "MB-1021-ACCELERATED-AMOUNT",
+      "variants": 22,
+      "positions": 10
+    },
+    {
+      "field": "MB-BORR-EMAIL-ADDR",
+      "variants": 24,
+      "positions": 8
+    },
+    {
+      "field": "MB-BORR-PMT-DUE",
+      "variants": 6,
+      "positions": 6
+    },
+    {
+      "field": "MB-SSN",
+      "variants": 24,
+      "positions": 5
+    },
+    {
+      "field": "MB-CO-SSN",
+      "variants": 12,
+      "positions": 5
+    },
+    {
+      "field": "MB-PLANET-AMOUNT",
+      "variants": 24,
+      "positions": 4
+    },
+    {
+      "field": "MB-TRAN-KEY",
+      "variants": 18,
+      "positions": 3
+    },
+    {
+      "field": "CONTAINER-KEY",
+      "variants": 24,
+      "positions": 3
+    },
+    {
+      "field": "MB-SEQ",
+      "variants": 24,
+      "positions": 3
+    },
+    {
+      "field": "MB-FIRST-PRIN-BAL",
+      "variants": 18,
+      "positions": 2
+    }
+  ]
+}

@@ -9,12 +9,20 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-LOAN-NO-7",
+      "source": "MB-ACCOUNT",
       "target": "MB-ACCOUNT",
-      "sourceOffset": 4,
+      "sourceOffset": 10,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
+    },
+    {
+      "source": "MB-FORMATTED-ACCOUNT",
+      "target": "MB-FORMATTED-ACCOUNT",
+      "sourceOffset": 17,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
     },
     {
       "source": "MB-SSN",
@@ -57,42 +65,42 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-29",
+      "source": "MB-BILL-NAME",
       "target": "MB-BILL-NAME",
-      "sourceOffset": 15,
-      "sourceLength": 29,
+      "sourceOffset": 58,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-292",
+      "source": "MB-BILL-LINE-2",
       "target": "MB-BILL-LINE-2",
-      "sourceOffset": 45,
-      "sourceLength": 29,
+      "sourceOffset": 118,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-3",
+      "source": "MB-BILL-LINE-3",
       "target": "MB-BILL-LINE-3",
-      "sourceOffset": 75,
-      "sourceLength": 30,
+      "sourceOffset": 178,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-4",
+      "source": "MB-BILL-LINE-4",
       "target": "MB-BILL-LINE-4",
-      "sourceOffset": 105,
-      "sourceLength": 30,
+      "sourceOffset": 238,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-5",
+      "source": "MB-BILL-LINE-5",
       "target": "MB-BILL-LINE-5",
       "sourceOffset": 135,
-      "sourceLength": 30,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -105,10 +113,10 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-6",
+      "source": "MB-BILL-CITY",
       "target": "MB-BILL-CITY",
       "sourceOffset": 165,
-      "sourceLength": 21,
+      "sourceLength": 51,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -148,7 +156,7 @@
       "source": "MB-PROPERTY-STREET",
       "target": "MB-PROPERTY-STREET",
       "sourceOffset": 198,
-      "sourceLength": 28,
+      "sourceLength": 50,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -156,7 +164,7 @@
       "source": "MB-PROPERTY-CITY",
       "target": "MB-PROPERTY-CITY",
       "sourceOffset": 226,
-      "sourceLength": 21,
+      "sourceLength": 30,
       "mode": "copyTrim",
       "trimOutput": true
     },

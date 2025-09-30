@@ -1,0 +1,52 @@
+[
+  {
+    "target": "Unknown",
+    "mode": "constant",
+    "value": "SPACES"
+  },
+  {
+    "target": "MB-ACS-CODE",
+    "mode": "constant",
+    "value": "SPACES"
+  },
+  {
+    "target": "MB-ARM-IR-YY",
+    "mode": "constant",
+    "value": "SPACES"
+  },
+  {
+    "target": "MB-TI-MIP-YTD",
+    "mode": "constant",
+    "value": "SPACES"
+  },
+  {
+    "target": "MB-MOD-EFF-MMDD",
+    "mode": "constant",
+    "value": "EBCDIC_SPACES"
+  },
+  {
+    "target": "MB-ARM-PI-CHG-YY",
+    "mode": "constant",
+    "value": "SPACES"
+  },
+  {
+    "target": "MB-LAST-YEAR-INT-PAID",
+    "mode": "constant",
+    "value": "000"
+  },
+  {
+    "target": "MB-JOB",
+    "mode": "constant",
+    "value": "147"
+  },
+  {
+    "target": "MB-FLEXFIELD3",
+    "mode": "constant",
+    "value": "SPACES"
+  },
+  {
+    "target": "MB-STATEMENT-YY-R2",
+    "mode": "constant",
+    "value": "SPACES"
+  }
+]

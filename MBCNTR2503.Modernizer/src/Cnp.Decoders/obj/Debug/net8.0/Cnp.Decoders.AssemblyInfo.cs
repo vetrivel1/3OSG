@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cnp.Decoders")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d1552741bcf18f4c7b11fad167b5ba1fffb23d1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5cda9b2cb7a6b5d293d0da605a1600358757bffb")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cnp.Decoders")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cnp.Decoders")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

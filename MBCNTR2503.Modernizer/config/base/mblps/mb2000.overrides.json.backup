@@ -9,12 +9,20 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-LOAN-NO-7",
+      "source": "MB-ACCOUNT",
       "target": "MB-ACCOUNT",
-      "sourceOffset": 4,
+      "sourceOffset": 10,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
+    },
+    {
+      "source": "MB-FORMATTED-ACCOUNT",
+      "target": "MB-FORMATTED-ACCOUNT",
+      "sourceOffset": 17,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
     },
     {
       "source": "MB-SSN",
@@ -57,42 +65,42 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-29",
+      "source": "MB-BILL-NAME",
       "target": "MB-BILL-NAME",
-      "sourceOffset": 15,
-      "sourceLength": 29,
+      "sourceOffset": 58,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-292",
+      "source": "MB-BILL-LINE-2",
       "target": "MB-BILL-LINE-2",
-      "sourceOffset": 45,
-      "sourceLength": 29,
+      "sourceOffset": 118,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-3",
+      "source": "MB-BILL-LINE-3",
       "target": "MB-BILL-LINE-3",
-      "sourceOffset": 75,
-      "sourceLength": 30,
+      "sourceOffset": 178,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-4",
+      "source": "MB-BILL-LINE-4",
       "target": "MB-BILL-LINE-4",
-      "sourceOffset": 105,
-      "sourceLength": 30,
+      "sourceOffset": 238,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-5",
+      "source": "MB-BILL-LINE-5",
       "target": "MB-BILL-LINE-5",
       "sourceOffset": 135,
-      "sourceLength": 30,
+      "sourceLength": 60,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -105,10 +113,10 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-NAME-ADD-6",
+      "source": "MB-BILL-CITY",
       "target": "MB-BILL-CITY",
       "sourceOffset": 165,
-      "sourceLength": 21,
+      "sourceLength": 51,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -129,7 +137,7 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-ZIP-4",
+      "source": "MB-ZIP-4",
       "target": "MB-ZIP-4",
       "sourceOffset": 194,
       "sourceLength": 4,
@@ -148,7 +156,7 @@
       "source": "MB-PROPERTY-STREET",
       "target": "MB-PROPERTY-STREET",
       "sourceOffset": 198,
-      "sourceLength": 28,
+      "sourceLength": 50,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -156,7 +164,7 @@
       "source": "MB-PROPERTY-CITY",
       "target": "MB-PROPERTY-CITY",
       "sourceOffset": 226,
-      "sourceLength": 21,
+      "sourceLength": 30,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -185,9 +193,9 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-STATE-CODE",
+      "source": "MB-STATE-CODE",
       "target": "MB-STATE-CODE",
-      "sourceOffset": 596,
+      "sourceOffset": 589,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -217,17 +225,17 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-STATEMENT-MM",
+      "source": "MB-STATEMENT-MM",
       "target": "MB-STATEMENT-MM",
-      "sourceOffset": 1002,
+      "sourceOffset": 648,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-STATEMENT-DD",
+      "source": "MB-STATEMENT-DD",
       "target": "MB-STATEMENT-DD",
-      "sourceOffset": 1004,
+      "sourceOffset": 650,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -321,17 +329,17 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-1ST-DUE-MM",
+      "source": "MB-1ST-DUE-MM",
       "target": "MB-1ST-DUE-MM",
-      "sourceOffset": 674,
+      "sourceOffset": 680,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-1ST-DUE-DD",
+      "source": "MB-1ST-DUE-DD",
       "target": "MB-1ST-DUE-DD",
-      "sourceOffset": 676,
+      "sourceOffset": 682,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -385,9 +393,9 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-ARM-IR-MM",
+      "source": "MB-ARM-IR-MM",
       "target": "MB-ARM-IR-MM",
-      "sourceOffset": 724,
+      "sourceOffset": 702,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -409,17 +417,17 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-ARM-PI-CHG-MM",
+      "source": "MB-ARM-PI-CHG-MM",
       "target": "MB-ARM-PI-CHG-MM",
-      "sourceOffset": 730,
+      "sourceOffset": 710,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-ARM-PI-CHG-DD",
+      "source": "MB-ARM-PI-CHG-DD",
       "target": "MB-ARM-PI-CHG-DD",
-      "sourceOffset": 732,
+      "sourceOffset": 712,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -481,9 +489,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-GRACE-DAYS-R",
+      "source": "MB-GRACE-DAYS-R",
       "target": "MB-GRACE-DAYS-R",
-      "sourceOffset": 581,
+      "sourceOffset": 661,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -513,9 +521,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-TYPE-LOAN",
+      "source": "MB-TYPE-LOAN",
       "target": "MB-TYPE-LOAN",
-      "sourceOffset": 569,
+      "sourceOffset": 741,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
@@ -545,31 +553,31 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-BILL-MODE",
+      "source": "MB-BILL-MODE",
       "target": "MB-BILL-MODE",
-      "sourceOffset": 589,
+      "sourceOffset": 747,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-LOAN-TERM",
+      "source": "MB-LOAN-TERM",
       "target": "MB-LOAN-TERM",
-      "sourceOffset": 598,
+      "sourceOffset": 748,
       "sourceLength": 2,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-BANKRUPT-CODE",
+      "source": "MB-BANKRUPT-CODE",
       "target": "MB-BANKRUPT-CODE",
-      "sourceOffset": 600,
+      "sourceOffset": 750,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-FIRST-PRIN-BAL",
+      "source": "MB-FIRST-PRIN-BAL",
       "target": "MB-FIRST-PRIN-BAL",
       "sourceOffset": 402,
       "sourceLength": 7,
@@ -585,7 +593,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-ESCROW-BAL",
+      "source": "MB-ESCROW-BAL",
       "target": "MB-ESCROW-BAL",
       "sourceOffset": 409,
       "sourceLength": 6,
@@ -601,25 +609,25 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-SUSPENSE-BAL",
+      "source": "MB-SUSPENSE-BAL",
       "target": "MB-SUSPENSE-BAL",
-      "sourceOffset": 421,
+      "sourceOffset": 490,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-RES-ESCROW",
+      "source": "MB-RES-ESCROW",
       "target": "MB-RES-ESCROW",
-      "sourceOffset": 428,
+      "sourceOffset": 497,
       "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-REP-RES-BAL",
+      "source": "MB-REP-RES-BAL",
       "target": "MB-REP-RES-BAL",
-      "sourceOffset": 434,
+      "sourceOffset": 503,
       "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
@@ -633,9 +641,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-DEFERRED-INT",
+      "source": "MB-DEFERRED-INT",
       "target": "MB-DEFERRED-INT",
-      "sourceOffset": 445,
+      "sourceOffset": 514,
       "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
@@ -673,7 +681,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-FIRST-P-I",
+      "source": "MB-FIRST-P-I",
       "target": "MB-FIRST-P-I",
       "sourceOffset": 329,
       "sourceLength": 6,
@@ -681,7 +689,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-2ND-P-I",
+      "source": "MB-2ND-P-I",
       "target": "MB-2ND-P-I",
       "sourceOffset": 700,
       "sourceLength": 4,
@@ -697,7 +705,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-COUNTY-TAX",
+      "source": "MB-COUNTY-TAX",
       "target": "MB-COUNTY-TAX",
       "sourceOffset": 340,
       "sourceLength": 5,
@@ -705,7 +713,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-CITY-TAX",
+      "source": "MB-CITY-TAX",
       "target": "MB-CITY-TAX",
       "sourceOffset": 345,
       "sourceLength": 5,
@@ -713,7 +721,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-HAZ-PREM",
+      "source": "MB-HAZ-PREM",
       "target": "MB-HAZ-PREM",
       "sourceOffset": 350,
       "sourceLength": 5,
@@ -721,7 +729,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MIP",
+      "source": "MB-MIP",
       "target": "MB-MIP",
       "sourceOffset": 355,
       "sourceLength": 5,
@@ -729,7 +737,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-LIEN",
+      "source": "MB-LIEN",
       "target": "MB-LIEN",
       "sourceOffset": 360,
       "sourceLength": 5,
@@ -737,7 +745,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-O-S-SPREAD",
+      "source": "MB-O-S-SPREAD",
       "target": "MB-O-S-SPREAD",
       "sourceOffset": 365,
       "sourceLength": 5,
@@ -745,7 +753,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-A-H-PREM",
+      "source": "MB-A-H-PREM",
       "target": "MB-A-H-PREM",
       "sourceOffset": 370,
       "sourceLength": 4,
@@ -753,7 +761,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-LIFE-PREM",
+      "source": "MB-LIFE-PREM",
       "target": "MB-LIFE-PREM",
       "sourceOffset": 374,
       "sourceLength": 4,
@@ -761,7 +769,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-REP-RES",
+      "source": "MB-REP-RES",
       "target": "MB-REP-RES",
       "sourceOffset": 378,
       "sourceLength": 5,
@@ -769,7 +777,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MISC-AMT",
+      "source": "MB-MISC-AMT",
       "target": "MB-MISC-AMT",
       "sourceOffset": 383,
       "sourceLength": 5,
@@ -777,7 +785,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-HUD-PART",
+      "source": "MB-HUD-PART",
       "target": "MB-HUD-PART",
       "sourceOffset": 388,
       "sourceLength": 5,
@@ -785,7 +793,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-BSC-AMT",
+      "source": "MB-BSC-AMT",
       "target": "MB-BSC-AMT",
       "sourceOffset": 393,
       "sourceLength": 4,
@@ -793,7 +801,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-L-C-AMT",
+      "source": "MB-L-C-AMT",
       "target": "MB-L-C-AMT",
       "sourceOffset": 397,
       "sourceLength": 5,
@@ -809,7 +817,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-DELQ-P-I",
+      "source": "MB-DELQ-P-I",
       "target": "MB-DELQ-P-I",
       "sourceOffset": 627,
       "sourceLength": 7,
@@ -817,7 +825,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-DELQ-ESC",
+      "source": "MB-DELQ-ESC",
       "target": "MB-DELQ-ESC",
       "sourceOffset": 634,
       "sourceLength": 7,
@@ -825,7 +833,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-DELQ-L-C",
+      "source": "MB-DELQ-L-C",
       "target": "MB-DELQ-L-C",
       "sourceOffset": 641,
       "sourceLength": 5,
@@ -833,7 +841,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-DELQ-INS",
+      "source": "MB-DELQ-INS",
       "target": "MB-DELQ-INS",
       "sourceOffset": 646,
       "sourceLength": 5,
@@ -841,7 +849,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-DELQ-OTHER",
+      "source": "MB-DELQ-OTHER",
       "target": "MB-DELQ-OTHER",
       "sourceOffset": 651,
       "sourceLength": 6,
@@ -849,7 +857,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-INTEREST-DUE",
+      "source": "MB-INTEREST-DUE",
       "target": "MB-INTEREST-DUE",
       "sourceOffset": 917,
       "sourceLength": 6,
@@ -857,7 +865,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-PRIN-YTD",
+      "source": "MB-PRIN-YTD",
       "target": "MB-PRIN-YTD",
       "sourceOffset": 460,
       "sourceLength": 7,
@@ -865,7 +873,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-INTEREST-YTD",
+      "source": "MB-INTEREST-YTD",
       "target": "MB-INTEREST-YTD",
       "sourceOffset": 467,
       "sourceLength": 7,
@@ -873,7 +881,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-TAXES-YTD",
+      "source": "MB-TAXES-YTD",
       "target": "MB-TAXES-YTD",
       "sourceOffset": 474,
       "sourceLength": 6,
@@ -881,7 +889,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-HAZARD-YTD",
+      "source": "MB-HAZARD-YTD",
       "target": "MB-HAZARD-YTD",
       "sourceOffset": 480,
       "sourceLength": 5,
@@ -889,7 +897,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MIP-YTD",
+      "source": "MB-MIP-YTD",
       "target": "MB-MIP-YTD",
       "sourceOffset": 485,
       "sourceLength": 5,
@@ -897,7 +905,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-LIEN-YTD",
+      "source": "MB-LIEN-YTD",
       "target": "MB-LIEN-YTD",
       "sourceOffset": 490,
       "sourceLength": 5,
@@ -905,7 +913,7 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-L-C-YTD",
+      "source": "MB-L-C-YTD",
       "target": "MB-L-C-YTD",
       "sourceOffset": 495,
       "sourceLength": 5,
@@ -937,9 +945,9 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-MODIFICATION-TYPE",
+      "source": "MB-MODIFICATION-TYPE",
       "target": "MB-MODIFICATION-TYPE",
-      "sourceOffset": 757,
+      "sourceOffset": 798,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
@@ -953,9 +961,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MOD-STATUS-MMDD",
+      "source": "MB-MOD-STATUS-MMDD",
       "target": "MB-MOD-STATUS-MMDD",
-      "sourceOffset": 786,
+      "sourceOffset": 802,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
@@ -977,9 +985,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MODIFICATION-PROGRAM",
+      "source": "MB-MODIFICATION-PROGRAM",
       "target": "MB-MODIFICATION-PROGRAM",
-      "sourceOffset": 734,
+      "sourceOffset": 810,
       "sourceLength": 4,
       "mode": "copyTrim",
       "trimOutput": true
@@ -993,33 +1001,33 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MODIFICATION-MMDD",
+      "source": "MB-MODIFICATION-MMDD",
       "target": "MB-MODIFICATION-MMDD",
-      "sourceOffset": 837,
+      "sourceOffset": 817,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
     },
     {
-      "source": "MB1100-DEFERRED-BAL-IND",
+      "source": "MB-DEFERRED-BAL-IND",
       "target": "MB-DEFERRED-BAL-IND",
-      "sourceOffset": 805,
+      "sourceOffset": 821,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-PAYMENT-OPTION-IND",
+      "source": "MB-PAYMENT-OPTION-IND",
       "target": "MB-PAYMENT-OPTION-IND",
-      "sourceOffset": 841,
+      "sourceOffset": 822,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-ORIG-LOAN-AMT",
+      "source": "MB-ORIG-LOAN-AMT",
       "target": "MB-ORIG-LOAN-AMT",
-      "sourceOffset": 842,
+      "sourceOffset": 823,
       "sourceLength": 5,
       "mode": "packed",
       "trimOutput": false
@@ -1041,9 +1049,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-INT-ONLY-EXP-MMDD",
+      "source": "MB-INT-ONLY-EXP-MMDD",
       "target": "MB-INT-ONLY-EXP-MMDD",
-      "sourceOffset": 856,
+      "sourceOffset": 832,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
@@ -1065,9 +1073,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-BORR-INCTV-ANNIV-MMDD",
+      "source": "MB-BORR-INCTV-ANNIV-MMDD",
       "target": "MB-BORR-INCTV-ANNIV-MMDD",
-      "sourceOffset": 866,
+      "sourceOffset": 840,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
@@ -1089,9 +1097,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-TRIAL-MOD-START-MMDD",
+      "source": "MB-TRIAL-MOD-START-MMDD",
       "target": "MB-TRIAL-MOD-START-MMDD",
-      "sourceOffset": 876,
+      "sourceOffset": 848,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
@@ -1105,9 +1113,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-TRIAL-MOD-END-MMDD",
+      "source": "MB-TRIAL-MOD-END-MMDD",
       "target": "MB-TRIAL-MOD-END-MMDD",
-      "sourceOffset": 882,
+      "sourceOffset": 855,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
@@ -1121,9 +1129,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MOD-REASON-CODE",
+      "source": "MB-MOD-REASON-CODE",
       "target": "MB-MOD-REASON-CODE",
-      "sourceOffset": 1006,
+      "sourceOffset": 860,
       "sourceLength": 5,
       "mode": "copyTrim",
       "trimOutput": true
@@ -1137,9 +1145,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-MOD-EFF-MMDD",
+      "source": "MB-MOD-EFF-MMDD",
       "target": "MB-MOD-EFF-MMDD",
-      "sourceOffset": 1013,
+      "sourceOffset": 868,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
@@ -1649,9 +1657,9 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-0140-OPT-OUT-CODE",
+      "source": "MB-0140-OPT-OUT-CODE",
       "target": "MB-0140-OPT-OUT-CODE",
-      "sourceOffset": 756,
+      "sourceOffset": 1226,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
@@ -3297,25 +3305,25 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-DIST-TYPE",
+      "source": "MB-DIST-TYPE",
       "target": "MB-DIST-TYPE",
-      "sourceOffset": 580,
+      "sourceOffset": 2667,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-MAN",
+      "source": "MB-MAN",
       "target": "MB-MAN",
-      "sourceOffset": 594,
+      "sourceOffset": 2668,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-2ND-MAN",
+      "source": "MB-2ND-MAN",
       "target": "MB-2ND-MAN",
-      "sourceOffset": 687,
+      "sourceOffset": 2669,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
@@ -3329,25 +3337,25 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-1ST-BASIS-CODE",
+      "source": "MB-1ST-BASIS-CODE",
       "target": "MB-1ST-BASIS-CODE",
-      "sourceOffset": 577,
+      "sourceOffset": 2671,
       "sourceLength": 3,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-BANK",
+      "source": "MB-BANK",
       "target": "MB-BANK",
-      "sourceOffset": 571,
+      "sourceOffset": 2674,
       "sourceLength": 3,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-AGGR",
+      "source": "MB-AGGR",
       "target": "MB-AGGR",
-      "sourceOffset": 574,
+      "sourceOffset": 2677,
       "sourceLength": 3,
       "mode": "copyTrim",
       "trimOutput": true
@@ -3361,33 +3369,33 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-2ND-CAT",
+      "source": "MB-2ND-CAT",
       "target": "MB-2ND-CAT",
-      "sourceOffset": 681,
+      "sourceOffset": 2683,
       "sourceLength": 3,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-ZONE-1",
+      "source": "MB-ZONE-1",
       "target": "MB-ZONE-1",
-      "sourceOffset": 590,
+      "sourceOffset": 2686,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-ZONE-2",
+      "source": "MB-ZONE-2",
       "target": "MB-ZONE-2",
-      "sourceOffset": 592,
+      "sourceOffset": 2688,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-TYPE-ACQ",
+      "source": "MB-TYPE-ACQ",
       "target": "MB-TYPE-ACQ",
-      "sourceOffset": 595,
+      "sourceOffset": 2690,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
@@ -3561,105 +3569,105 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-STOP-BILL-FLAG",
+      "source": "MB-STOP-BILL-FLAG",
       "target": "MB-STOP-BILL-FLAG",
-      "sourceOffset": 622,
+      "sourceOffset": 2731,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-BILLING-CYCLE",
+      "source": "MB-BILLING-CYCLE",
       "target": "MB-BILLING-CYCLE",
-      "sourceOffset": 623,
+      "sourceOffset": 2732,
       "sourceLength": 3,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-PAY-OPTION",
+      "source": "MB-PAY-OPTION",
       "target": "MB-PAY-OPTION",
-      "sourceOffset": 626,
+      "sourceOffset": 2735,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-DONT-PROCESS",
+      "source": "MB-DONT-PROCESS",
       "target": "MB-DONT-PROCESS",
-      "sourceOffset": 709,
+      "sourceOffset": 2736,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-PIF-STOP",
+      "source": "MB-PIF-STOP",
       "target": "MB-PIF-STOP",
-      "sourceOffset": 710,
+      "sourceOffset": 2737,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-FORECLOSURE-STOP",
+      "source": "MB-FORECLOSURE-STOP",
       "target": "MB-FORECLOSURE-STOP",
-      "sourceOffset": 711,
+      "sourceOffset": 2738,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-BAD-CK-STOP",
+      "source": "MB-BAD-CK-STOP",
       "target": "MB-BAD-CK-STOP",
-      "sourceOffset": 712,
+      "sourceOffset": 2739,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-NO-NOTICES",
+      "source": "MB-NO-NOTICES",
       "target": "MB-NO-NOTICES",
-      "sourceOffset": 713,
+      "sourceOffset": 2740,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-DONT-ANALYZE",
+      "source": "MB-DONT-ANALYZE",
       "target": "MB-DONT-ANALYZE",
-      "sourceOffset": 714,
+      "sourceOffset": 2741,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-A-H-FLAG",
+      "source": "MB-A-H-FLAG",
       "target": "MB-A-H-FLAG",
-      "sourceOffset": 715,
+      "sourceOffset": 2742,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-LIFE-FLAG",
+      "source": "MB-LIFE-FLAG",
       "target": "MB-LIFE-FLAG",
-      "sourceOffset": 716,
+      "sourceOffset": 2743,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-DISB-STOP",
+      "source": "MB-DISB-STOP",
       "target": "MB-DISB-STOP",
-      "sourceOffset": 717,
+      "sourceOffset": 2744,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-ARM-PLAN-ID",
+      "source": "MB-ARM-PLAN-ID",
       "target": "MB-ARM-PLAN-ID",
-      "sourceOffset": 718,
+      "sourceOffset": 2745,
       "sourceLength": 4,
       "mode": "copyTrim",
       "trimOutput": true
@@ -3673,97 +3681,97 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-PLS-CLT-ID",
+      "source": "MB-PLS-CLT-ID",
       "target": "MB-PLS-CLT-ID",
-      "sourceOffset": 779,
+      "sourceOffset": 2750,
       "sourceLength": 3,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-PAYMENT-OPTION-SWITCH",
+      "source": "MB-PAYMENT-OPTION-SWITCH",
       "target": "MB-PAYMENT-OPTION-SWITCH",
-      "sourceOffset": 760,
+      "sourceOffset": 2753,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-PAYMENT-OPT-4",
+      "source": "MB-PAYMENT-OPT-4",
       "target": "MB-PAYMENT-OPT-4",
-      "sourceOffset": 761,
+      "sourceOffset": 830,
       "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-PAYMENT-OPT-4-TOTDUE",
+      "source": "MB-PAYMENT-OPT-4-TOTDUE",
       "target": "MB-PAYMENT-OPT-4-TOTDUE",
-      "sourceOffset": 767,
+      "sourceOffset": 836,
       "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-DIST-TYPE-1-IO-FLAG",
+      "source": "MB-DIST-TYPE-1-IO-FLAG",
       "target": "MB-DIST-TYPE-1-IO-FLAG",
-      "sourceOffset": 773,
+      "sourceOffset": 2756,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-ARM-INT-ONLY-PI",
+      "source": "MB-ARM-INT-ONLY-PI",
       "target": "MB-ARM-INT-ONLY-PI",
-      "sourceOffset": 893,
+      "sourceOffset": 1401,
       "sourceLength": 6,
       "mode": "ebcdic_spaces",
       "trimOutput": false
     },
     {
-      "source": "MB1100-ARM-FULLY-AM-PI",
+      "source": "MB-ARM-FULLY-AM-PI",
       "target": "MB-ARM-FULLY-AM-PI",
-      "sourceOffset": 899,
+      "sourceOffset": 1407,
       "sourceLength": 6,
       "mode": "ebcdic_spaces",
       "trimOutput": false
     },
     {
-      "source": "MB1100-ARM-INT-ONLY-TOT",
+      "source": "MB-ARM-INT-ONLY-TOT",
       "target": "MB-ARM-INT-ONLY-TOT",
-      "sourceOffset": 905,
+      "sourceOffset": 1413,
       "sourceLength": 6,
       "mode": "ebcdic_spaces",
       "trimOutput": false
     },
     {
-      "source": "MB1100-ARM-FULLY-AM-TOT",
+      "source": "MB-ARM-FULLY-AM-TOT",
       "target": "MB-ARM-FULLY-AM-TOT",
-      "sourceOffset": 911,
+      "sourceOffset": 1419,
       "sourceLength": 6,
       "mode": "ebcdic_spaces",
       "trimOutput": false
     },
     {
-      "source": "MB1100-POST-PETITION-YY",
+      "source": "MB-POST-PETITION-YY",
       "target": "MB-POST-PETITION-YY",
-      "sourceOffset": 821,
+      "sourceOffset": 890,
       "sourceLength": 2,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-POST-PETITION-MMDD",
+      "source": "MB-POST-PETITION-MMDD",
       "target": "MB-POST-PETITION-MMDD",
-      "sourceOffset": 823,
+      "sourceOffset": 2764,
       "sourceLength": 4,
       "mode": "zonedDecimal",
       "trimOutput": false
     },
     {
-      "source": "MB1100-POST-PETITION-AMOUNT",
+      "source": "MB-POST-PETITION-AMOUNT",
       "target": "MB-POST-PETITION-AMOUNT",
-      "sourceOffset": 827,
+      "sourceOffset": 896,
       "sourceLength": 6,
       "mode": "packed",
       "trimOutput": false
@@ -3801,9 +3809,9 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-BANKRUPTCY-STATUS",
+      "source": "MB-BANKRUPTCY-STATUS",
       "target": "MB-BANKRUPTCY-STATUS",
-      "sourceOffset": 1030,
+      "sourceOffset": 2777,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
@@ -3817,33 +3825,33 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-NO-CHANGE-SCHED-IND",
+      "source": "MB-NO-CHANGE-SCHED-IND",
       "target": "MB-NO-CHANGE-SCHED-IND",
-      "sourceOffset": 1032,
+      "sourceOffset": 2779,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-MTGR-LANG-PREF",
+      "source": "MB-MTGR-LANG-PREF",
       "target": "MB-MTGR-LANG-PREF",
-      "sourceOffset": 782,
+      "sourceOffset": 2780,
       "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-FOR1-STATUS-CD",
+      "source": "MB-FOR1-STATUS-CD",
       "target": "MB-FOR1-STATUS-CD",
-      "sourceOffset": 1033,
+      "sourceOffset": 2782,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-BNK-DISCHARGE-IND",
+      "source": "MB-BNK-DISCHARGE-IND",
       "target": "MB-BNK-DISCHARGE-IND",
-      "sourceOffset": 1034,
+      "sourceOffset": 2783,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
@@ -3905,25 +3913,25 @@
       "trimOutput": false
     },
     {
-      "source": "MB1100-TI-MTG-CODE",
+      "source": "MB-TI-MTG-CODE",
       "target": "MB-TI-MTG-CODE",
-      "sourceOffset": 602,
+      "sourceOffset": 2949,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-TI-TRAN-56-SW",
+      "source": "MB-TI-TRAN-56-SW",
       "target": "MB-TI-TRAN-56-SW",
-      "sourceOffset": 603,
+      "sourceOffset": 2950,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
     },
     {
-      "source": "MB1100-TI-ZERO-PB-CODE",
+      "source": "MB-TI-ZERO-PB-CODE",
       "target": "MB-TI-ZERO-PB-CODE",
-      "sourceOffset": 604,
+      "sourceOffset": 2951,
       "sourceLength": 1,
       "mode": "copyTrim",
       "trimOutput": true
@@ -4441,25 +4449,25 @@
       "trimOutput": true
     },
     {
-      "source": "MB1100-TRAN-KEY",
+      "source": "MB-TRAN-KEY",
       "target": "MB-TRAN-KEY",
-      "sourceOffset": 1080,
+      "sourceOffset": 3375,
       "sourceLength": 7,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-TRAN-COUNT",
+      "source": "MB-TRAN-COUNT",
       "target": "MB-TRAN-COUNT",
-      "sourceOffset": 1087,
+      "sourceOffset": 3382,
       "sourceLength": 3,
       "mode": "packed",
       "trimOutput": false
     },
     {
-      "source": "MB1100-CONTAINER-KEY",
+      "source": "CONTAINER-KEY",
       "target": "CONTAINER-KEY",
-      "sourceOffset": 1091,
+      "sourceOffset": 3385,
       "sourceLength": 9,
       "mode": "zonedDecimal",
       "trimOutput": false
@@ -4517,112 +4525,6 @@
       "target": "MB-PLANET-DATE",
       "sourceOffset": 3430,
       "sourceLength": 6,
-      "mode": "copyTrim",
-      "trimOutput": true
-    },
-    {
-      "source": "MB1500-BORR-EMAIL-ADDR",
-      "target": "MB-BORR-EMAIL-ADDR",
-      "sourceOffset": 1100,
-      "sourceLength": 66,
-      "mode": "copyTrim",
-      "trimOutput": true
-    },
-    {
-      "source": "MB1500-E-CONSENT",
-      "target": "MB-E-CONSENT",
-      "sourceOffset": 1172,
-      "sourceLength": 1,
-      "mode": "copyTrim",
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-DRAFT-IND",
-      "target": "MB-DRAFT-IND",
-      "sourceOffset": 1173,
-      "sourceLength": 1,
-      "mode": "copyTrim",
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-EBPP-IND",
-      "target": "MB-EBPP-IND",
-      "sourceOffset": 1174,
-      "sourceLength": 2,
-      "mode": "copyTrim",
-      "trimOutput": true
-    },
-    {
-      "source": "MB1500-FOR1-SALE-DATE-YR",
-      "target": "MB-FOR1-SALE-DATE-YR",
-      "sourceOffset": 1176,
-      "sourceLength": 2,
-      "mode": "packed",
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-FOR1-SALE-DATE-MO",
-      "target": "MB-FOR1-SALE-DATE-MO",
-      "sourceOffset": 1178,
-      "sourceLength": 2,
-      "mode": "copyTrim",
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-FOR1-SALE-DATE-DA",
-      "target": "MB-FOR1-SALE-DATE-DA",
-      "sourceOffset": 1180,
-      "sourceLength": 2,
-      "mode": "copyTrim",
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-ACCELERATED-AMOUNT",
-      "target": "MB-ACCELERATED-AMOUNT",
-      "sourceOffset": 1182,
-      "sourceLength": 6,
-      "mode": "packed",
-      "impliedDecimalPlaces": 2,
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-ACCELERATED-REASON-CODE",
-      "target": "MB-ACCELERATED-REASON-CODE",
-      "sourceOffset": 1188,
-      "sourceLength": 2,
-      "mode": "copyTrim",
-      "trimOutput": true
-    },
-    {
-      "source": "MB1500-DELQ-DAYS",
-      "target": "MB-DELQ-DAYS",
-      "sourceOffset": 1190,
-      "sourceLength": 3,
-      "mode": "packed",
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-CO-BORR-EMAIL-ADDR",
-      "target": "MB-BORR-EMAIL-ADDR",
-      "sourceOffset": 1193,
-      "sourceLength": 66,
-      "mode": "copyTrim",
-      "trimOutput": true
-    },
-    {
-      "source": "MB1500-ACC-INT-DUE-CALC",
-      "target": "MB-1021-ACC-INT-DUE-CALC-AMT",
-      "sourceOffset": 1259,
-      "sourceLength": 6,
-      "mode": "packed",
-      "impliedDecimalPlaces": 2,
-      "trimOutput": false
-    },
-    {
-      "source": "MB1500-0310-LANGUAGE-CODE",
-      "target": "MB-FLEXFIELD3",
-      "sourceOffset": 1265,
-      "sourceLength": 2,
       "mode": "copyTrim",
       "trimOutput": true
     }

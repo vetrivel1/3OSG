@@ -17,6 +17,14 @@
       "trimOutput": false
     },
     {
+      "source": "MB-FORMATTED-ACCOUNT",
+      "target": "MB-FORMATTED-ACCOUNT",
+      "sourceOffset": 17,
+      "sourceLength": 10,
+      "mode": "copyTrim",
+      "trimOutput": true
+    },
+    {
       "source": "MB-SSN",
       "target": "MB-SSN",
       "sourceOffset": 37,
@@ -148,7 +156,7 @@
       "source": "MB-PROPERTY-STREET",
       "target": "MB-PROPERTY-STREET",
       "sourceOffset": 198,
-      "sourceLength": 28,
+      "sourceLength": 50,
       "mode": "copyTrim",
       "trimOutput": true
     },
@@ -156,7 +164,7 @@
       "source": "MB-PROPERTY-CITY",
       "target": "MB-PROPERTY-CITY",
       "sourceOffset": 226,
-      "sourceLength": 21,
+      "sourceLength": 30,
       "mode": "copyTrim",
       "trimOutput": true
     },
