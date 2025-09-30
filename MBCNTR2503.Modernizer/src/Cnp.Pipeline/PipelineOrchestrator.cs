@@ -115,34 +115,23 @@ public class PipelineOrchestrator
         var mapper = new MB2000FieldMapper(_schema, overridePath);
         var outputFile = Path.Combine(outDir, $"{jobId}p.set");
 
-        // *** FIX: Use original EBCDIC .dat file (4000-byte pure EBCDIC records) ***
-        // This allows all 566 overrides to be mapped with correct EBCDIC→ASCII conversion
-        using (var inStream = File.OpenRead(inputDat))
+        // MB2000 reads from 1500-byte .p.keyed files (not 4000-byte .dat!)
+        using (var inStream = File.OpenRead(keyedPFile))
         using (var outStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
         {
-            // Read pure EBCDIC 4000-byte records from input .dat file
-            const int container4000Len = 4000;
-            Console.WriteLine($"[PIPELINE][DBG] Reading input .dat with recordLen={container4000Len} (filtering P-records only)");
-            var buffer = new byte[container4000Len];
+            const int pKeyedLen = 1500;
+            var buffer = new byte[pKeyedLen];
             int bytesRead;
-            int totalRecords = 0;
-            int pRecordsProcessed = 0;
+            int recordsProcessed = 0;
             
-            while ((bytesRead = inStream.Read(buffer, 0, container4000Len)) == container4000Len)
+            while ((bytesRead = inStream.Read(buffer, 0, pKeyedLen)) == pKeyedLen)
             {
-                totalRecords++;
-                
-                // Filter to P-records only: Check byte 11 for record type
-                // In pure EBCDIC .dat file, byte 11 contains EBCDIC 'P' (0xD7) for P-records
-                if (buffer[11] == 0xD7)  // EBCDIC 'P'
-                {
-                    pRecordsProcessed++;
-                    var mapped = mapper.Map(buffer);
-                    outStream.Write(mapped, 0, mapped.Length);
-                }
+                recordsProcessed++;
+                var mapped = mapper.Map(buffer);
+                outStream.Write(mapped, 0, mapped.Length);
             }
             
-            Console.WriteLine($"[PIPELINE] MB2000: Processed {pRecordsProcessed} P-records out of {totalRecords} total records");
+            Console.WriteLine($"[PIPELINE] MB2000: Processed {recordsProcessed} P-records from .p.keyed");
         }
         Console.WriteLine("  Step 4: Done.");
 
