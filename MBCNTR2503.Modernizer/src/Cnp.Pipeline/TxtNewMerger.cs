@@ -40,14 +40,15 @@ public sealed class TxtNewMerger
 
         // Step 1: Calculate maximum line length from text file (replicating legacy fgets + strlen logic)
         int maxLineLength = CalculateMaxLineLength(txtFile);
-        // Note: Legacy ncpcntr5.c produced .length files with +1 byte discrepancy (likely due to
-        // compiler/platform quirk or manual edit). We replicate this for perfect parity.
-        int lengthFileValue = maxLineLength + CLIENT_OFFSET + 1; // +1 for legacy compatibility
-        int recordLength = maxLineLength + CLIENT_OFFSET;  // Actual record length for .new file
+    // Note: Some legacy environments showed a +1 discrepancy for .length, but expected
+    // baselines in this project do NOT include that quirk. Align to expected by writing
+    // the exact record length (text + client trailer bytes).
+    int recordLength = maxLineLength + CLIENT_OFFSET;  // Actual record length for .new file
+    int lengthFileValue = recordLength;                // Write exact record length (no +1)
 
         Console.WriteLine($"[TXT-NEW-MERGER] Max line length: {maxLineLength}, Length file value: {lengthFileValue}, Record length: {recordLength}");
 
-        // Step 2: Write .length file (with +1 legacy quirk)
+    // Step 2: Write .length file (aligned to expected – no legacy +1)
         WriteTextLengthFile(lengthFile, lengthFileValue);
 
         // Step 3: Generate .new file by merging text with binary trailing bytes (using actual record length)

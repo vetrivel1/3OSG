@@ -43,35 +43,43 @@
     ]
   },
   "packageFolders": {
-    "/Users/vshanmu/.nuget/packages/": {}
+    "C:\\Users\\Shan\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj",
+      "projectUniqueName": "C:\\Users\\Shan\\Documents\\3OSG\\MBCNTR2503.Modernizer\\src\\Cnp.Pipeline\\Cnp.Pipeline.csproj",
       "projectName": "Cnp.Pipeline",
-      "projectPath": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/Cnp.Pipeline.csproj",
-      "packagesPath": "/Users/vshanmu/.nuget/packages/",
-      "outputPath": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Pipeline/obj/",
+      "projectPath": "C:\\Users\\Shan\\Documents\\3OSG\\MBCNTR2503.Modernizer\\src\\Cnp.Pipeline\\Cnp.Pipeline.csproj",
+      "packagesPath": "C:\\Users\\Shan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Shan\\Documents\\3OSG\\MBCNTR2503.Modernizer\\src\\Cnp.Pipeline\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/vshanmu/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Shan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/Cnp.Decoders.csproj": {
-              "projectPath": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/Cnp.Decoders.csproj"
+            "C:\\Users\\Shan\\Documents\\3OSG\\MBCNTR2503.Modernizer\\src\\Cnp.Decoders\\Cnp.Decoders.csproj": {
+              "projectPath": "C:\\Users\\Shan\\Documents\\3OSG\\MBCNTR2503.Modernizer\\src\\Cnp.Decoders\\Cnp.Decoders.csproj"
             },
-            "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/Cnp.Schema.csproj": {
-              "projectPath": "/Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Schema/Cnp.Schema.csproj"
+            "C:\\Users\\Shan\\Documents\\3OSG\\MBCNTR2503.Modernizer\\src\\Cnp.Schema\\Cnp.Schema.csproj": {
+              "projectPath": "C:\\Users\\Shan\\Documents\\3OSG\\MBCNTR2503.Modernizer\\src\\Cnp.Schema\\Cnp.Schema.csproj"
             }
           }
         }
@@ -85,7 +93,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -106,7 +115,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.414/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

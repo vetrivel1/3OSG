@@ -10,3 +10,15 @@
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/refint/Cnp.Decoders.dll
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/Cnp.Decoders.pdb
 /Users/vshanmu/3OSG/MBCNTR2503.Modernizer/src/Cnp.Decoders/obj/Debug/net8.0/ref/Cnp.Decoders.dll
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\bin\Debug\net8.0\Cnp.Decoders.deps.json
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\bin\Debug\net8.0\Cnp.Decoders.dll
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\bin\Debug\net8.0\Cnp.Decoders.pdb
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\Cnp.Decoders.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\Cnp.Decoders.AssemblyInfoInputs.cache
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\Cnp.Decoders.AssemblyInfo.cs
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\Cnp.Decoders.csproj.CoreCompileInputs.cache
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\Cnp.Decoders.sourcelink.json
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\Cnp.Decoders.dll
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\refint\Cnp.Decoders.dll
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\Cnp.Decoders.pdb
+C:\Users\Shan\Documents\3OSG\MBCNTR2503.Modernizer\src\Cnp.Decoders\obj\Debug\net8.0\ref\Cnp.Decoders.dll

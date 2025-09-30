@@ -1,0 +1,81 @@
+================================================================================
+BATCH FILE COMPARISON SUMMARY REPORT
+================================================================================
+Generated: 2025-09-30 20:04:06
+
+SUMMARY STATISTICS:
+----------------------------------------
+Total files compared: 66
+Successful comparisons: 66
+Failed comparisons: 0
+Files that match: 66
+Files that don't match: 0
+
+FILE-BY-FILE RESULTS:
+----------------------------------------
+69172/69172.4300: ✅ MATCH
+69172/69172.4300.txt: ✅ MATCH
+69172/69172.4300.txt.length: ✅ MATCH
+69172/69172.4300.txt.new: ✅ MATCH
+69172/69172.4300.txt.suspect: ✅ MATCH
+69172/69172.dat.asc: ✅ MATCH
+69172/69172.dat.asc.11.1.d: ✅ MATCH
+69172/69172.dat.asc.11.1.p: ✅ MATCH
+69172/69172.dat.asc.11.1.p.keyed: ✅ MATCH
+69172/69172.dat.asc.11.1.s: ✅ MATCH
+69172/69172.dat.rectype: ✅ MATCH
+69172/69172.dat.total: ✅ MATCH
+69172/69172.ncpjax: ✅ MATCH
+69172/69172e.txt: ✅ MATCH
+69172/69172p.asc: ✅ MATCH
+69172/69172p.set: ✅ MATCH
+80147/80147.4300: ✅ MATCH
+80147/80147.4300.txt: ✅ MATCH
+80147/80147.4300.txt.length: ✅ MATCH
+80147/80147.4300.txt.new: ✅ MATCH
+80147/80147.4300.txt.suspect: ✅ MATCH
+80147/80147.dat.asc: ✅ MATCH
+80147/80147.dat.asc.11.1.d: ✅ MATCH
+80147/80147.dat.asc.11.1.p: ✅ MATCH
+80147/80147.dat.asc.11.1.p.keyed: ✅ MATCH
+80147/80147.dat.asc.11.1.s: ✅ MATCH
+80147/80147.dat.rectype: ✅ MATCH
+80147/80147.dat.total: ✅ MATCH
+80147/80147.ncpjax: ✅ MATCH
+80147/80147e.txt: ✅ MATCH
+80147/80147p.asc: ✅ MATCH
+80147/80147p.set: ✅ MATCH
+80299/80299.4300: ✅ MATCH
+80299/80299.4300.txt: ✅ MATCH
+80299/80299.4300.txt.length: ✅ MATCH
+80299/80299.4300.txt.new: ✅ MATCH
+80299/80299.4300.txt.suspect: ✅ MATCH
+80299/80299.dat.asc: ✅ MATCH
+80299/80299.dat.asc.11.1.d: ✅ MATCH
+80299/80299.dat.asc.11.1.p: ✅ MATCH
+80299/80299.dat.asc.11.1.p.keyed: ✅ MATCH
+80299/80299.dat.asc.11.1.s: ✅ MATCH
+80299/80299.dat.rectype: ✅ MATCH
+80299/80299.dat.total: ✅ MATCH
+80299/80299.ncpjax: ✅ MATCH
+80299/80299e.asc: ✅ MATCH
+80299/80299e.txt: ✅ MATCH
+80299/80299p.asc: ✅ MATCH
+80299/80299p.set: ✅ MATCH
+80362/80362.4300: ✅ MATCH
+80362/80362.4300.txt: ✅ MATCH
+80362/80362.4300.txt.length: ✅ MATCH
+80362/80362.4300.txt.new: ✅ MATCH
+80362/80362.4300.txt.suspect: ✅ MATCH
+80362/80362.dat.asc: ✅ MATCH
+80362/80362.dat.asc.11.1.d: ✅ MATCH
+80362/80362.dat.asc.11.1.p: ✅ MATCH
+80362/80362.dat.asc.11.1.p.keyed: ✅ MATCH
+80362/80362.dat.asc.11.1.s: ✅ MATCH
+80362/80362.dat.rectype: ✅ MATCH
+80362/80362.dat.total: ✅ MATCH
+80362/80362.ncpjax: ✅ MATCH
+80362/80362e.asc: ✅ MATCH
+80362/80362e.txt: ✅ MATCH
+80362/80362p.asc: ✅ MATCH
+80362/80362p.set: ✅ MATCH

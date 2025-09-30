@@ -189,7 +189,7 @@ public class EbcdicProcessor
         var outputBuffer = new byte[recordLen]; // Static output buffer size
         int recordCount = 0;
         int clientNumber = -1;
-        bool loanIsPacked = false;
+    // removed unused local loanIsPacked; using _loanIsPacked field instead
 
         var stopwatch = new System.Diagnostics.Stopwatch();
         stopwatch.Start();
@@ -386,11 +386,19 @@ public class EbcdicProcessor
                 }
                 else
                 {
+                    // Heuristic: Some NUMBER/Zoned fields are actually textual in specific clients.
+                    // If the EBCDIC slice contains alphabetic letters (A-Z), treat it as Standard text to avoid
+                    // mapping letters to digits (e.g., 'I' -> '9').
+                    var span = inputBuffer.AsSpan(field.Offset, field.Length);
+                    var effectiveMode = (mode == EbcdicAsciiConverter.ConversionMode.ZonedDecimal && ContainsEbcdicAlpha(span))
+                        ? EbcdicAsciiConverter.ConversionMode.Standard
+                        : mode;
+
                     EbcdicAsciiConverter.Convert(
-                        inputBuffer.AsSpan(field.Offset), 
+                        span, 
                         outputBuffer.AsSpan(field.Offset), 
                         field.Length, 
-                        mode);
+                        effectiveMode);
                 }
             }
             else
@@ -639,11 +647,16 @@ public class EbcdicProcessor
             }
             else
             {
+                var span = inputBuffer.AsSpan(field.Offset, field.Length);
+                var effectiveMode = (mode == EbcdicAsciiConverter.ConversionMode.ZonedDecimal && ContainsEbcdicAlpha(span))
+                    ? EbcdicAsciiConverter.ConversionMode.Standard
+                    : mode;
+
                 EbcdicAsciiConverter.Convert(
-                    inputBuffer.AsSpan(field.Offset), 
+                    span, 
                     outputBuffer.AsSpan(field.Offset), 
                     field.Length, 
-                    mode);
+                    effectiveMode);
             }
         }
 
@@ -1215,7 +1228,7 @@ public class EbcdicProcessor
                         }
                         if (w.TryGetProperty("source", out var src) && src.ValueKind == JsonValueKind.String)
                         {
-                            window.Source = src.GetString();
+                            window.Source = src.GetString() ?? string.Empty;
                         }
                         if (w.TryGetProperty("transforms", out var transformsEl) && transformsEl.ValueKind == JsonValueKind.Array)
                         {
@@ -1509,5 +1522,31 @@ public class EbcdicProcessor
             if (src[i] != 0x40) return false;
         }
         return true;
+    }
+
+    // Detect presence of alphabetic letters in an EBCDIC slice (IBM037). We treat bytes that map to A-Z/a-z
+    // as "alphabetic" to decide whether a field marked as ZonedDecimal should instead be treated as text.
+    private static bool ContainsEbcdicAlpha(ReadOnlySpan<byte> ebcdicSlice)
+    {
+        // Rough, fast check: use code page 37 to decode small slices and see if any ASCII letters appear.
+        // Limit decode to a small prefix for performance.
+        int len = Math.Min(ebcdicSlice.Length, 64);
+        if (len <= 0) return false;
+        try
+        {
+            var ascii = Encoding.ASCII;
+            var eb = Encoding.GetEncoding(37);
+            var chars = eb.GetChars(ebcdicSlice.Slice(0, len).ToArray());
+            for (int i = 0; i < chars.Length; i++)
+            {
+                char c = chars[i];
+                if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) return true;
+            }
+        }
+        catch
+        {
+            // On any failure, assume not alphabetic to avoid false positives
+        }
+        return false;
     }
 }

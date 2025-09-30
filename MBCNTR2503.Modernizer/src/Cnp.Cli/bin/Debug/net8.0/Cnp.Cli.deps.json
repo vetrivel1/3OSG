@@ -128,7 +128,7 @@
       "Cnp.Decoders/1.0.0": {
         "runtime": {
           "Cnp.Decoders.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -140,7 +140,7 @@
         },
         "runtime": {
           "Cnp.Pipeline.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -148,7 +148,7 @@
       "Cnp.Schema/1.0.0": {
         "runtime": {
           "Cnp.Schema.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
