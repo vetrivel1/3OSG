@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,111 @@ public class EbcdicProcessor
     private byte[] _processDate = new byte[6]; // Legacy ProcessDate storage
     private EbcdicOverrides _overrides = EbcdicOverrides.Default;
     private bool _loanIsPacked = false;
+    private TextWindowCache? _asciiWindowCache;
+
+    private sealed class TextWindowCache
+    {
+        private const int LogicalRecordLength = 1885; // text + client/trailer bytes preserved
+
+        private readonly Dictionary<(char type, int index), byte[]> _records;
+
+        private TextWindowCache(Dictionary<(char type, int index), byte[]> records)
+        {
+            _records = records;
+        }
+
+        public static TextWindowCache? Load(string jobId, string outputDir, string inputDir, bool verbose)
+        {
+            var candidates = new List<string>();
+            if (!string.IsNullOrEmpty(outputDir))
+            {
+                candidates.Add(Path.Combine(outputDir, $"{jobId}.4300.txt.new"));
+                candidates.Add(Path.Combine(outputDir, $"{jobId}.4300.txt"));
+            }
+            if (!string.IsNullOrEmpty(inputDir))
+            {
+                candidates.Add(Path.Combine(inputDir, $"{jobId}.4300.txt.new"));
+                candidates.Add(Path.Combine(inputDir, $"{jobId}.4300.txt"));
+            }
+
+            if (verbose)
+            {
+                Console.WriteLine($"[EBCDIC-PROCESSOR] Searching for .4300 text source, candidates:");
+                foreach (var candidate in candidates)
+                {
+                    var exists = File.Exists(candidate);
+                    Console.WriteLine($"  {candidate} - {(exists ? "EXISTS" : "NOT FOUND")}");
+                }
+            }
+
+            var source = candidates.FirstOrDefault(File.Exists);
+            if (source == null)
+            {
+                if (verbose)
+                {
+                    Console.WriteLine($"[EBCDIC-PROCESSOR] No .4300 text source found for job {jobId}; header windows will use fallback logic.");
+                }
+                return null;
+            }
+
+            if (verbose)
+            {
+                Console.WriteLine($"[EBCDIC-PROCESSOR] Loading ASCII window cache from {source}");
+            }
+
+            var map = new Dictionary<(char type, int index), byte[]>();
+            var counters = new Dictionary<char, int>();
+
+            using var reader = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var buffer = new byte[LogicalRecordLength];
+
+            while (reader.Read(buffer, 0, LogicalRecordLength) == LogicalRecordLength)
+            {
+                int firstPipe = Array.IndexOf(buffer, (byte)'|');
+                if (firstPipe < 0) continue;
+                int secondPipe = Array.IndexOf(buffer, (byte)'|', firstPipe + 1);
+                if (secondPipe < 0 || secondPipe + 1 >= buffer.Length) continue;
+                int thirdPipe = Array.IndexOf(buffer, (byte)'|', secondPipe + 1);
+                if (thirdPipe < 0) continue;
+
+                char recType = (char)buffer[secondPipe + 1];
+                if (recType != 'D' && recType != 'P' && recType != 'S')
+                {
+                    continue;
+                }
+
+                int idx = counters.TryGetValue(recType, out var current) ? current : 0;
+                counters[recType] = idx + 1;
+
+                var slice = new byte[LogicalRecordLength];
+                Array.Copy(buffer, slice, LogicalRecordLength);
+                map[(recType, idx)] = slice;
+            }
+
+            return new TextWindowCache(map);
+        }
+
+        public bool TryFill(char recordType, int index, int start, Span<byte> destination)
+        {
+            if (_records.TryGetValue((recordType, index), out var data))
+            {
+                if (start >= 0 && start < data.Length)
+                {
+                    int copyLength = Math.Min(destination.Length, data.Length - start);
+                    if (copyLength > 0)
+                    {
+                        data.AsSpan(start, copyLength).CopyTo(destination);
+                        if (copyLength < destination.Length)
+                        {
+                            destination.Slice(copyLength).Fill(0x20);
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
 
     public EbcdicProcessor(CompiledSchema schema, bool verbose = false)
     {
@@ -58,6 +164,7 @@ public class EbcdicProcessor
 
         // Load overrides (keep IBM037 standard; configure numeric/packed/DD selection and memmoves)
         TryLoadOverrides(Path.Combine(_schema.SourceDir, "ebcdic.overrides.json"));
+        _asciiWindowCache = TextWindowCache.Load(jobId, outputDir, Path.GetDirectoryName(inputDatFile) ?? string.Empty, _verbose);
 
         var outputAscFile = Path.Combine(outputDir, $"{jobId}.dat.asc");
         var outputPFile = Path.Combine(outputDir, $"{jobId}.dat.asc.11.1.p");
@@ -163,6 +270,8 @@ public class EbcdicProcessor
         Console.WriteLine($"[EBCDIC-PROCESSOR] P records: {_pRecordCount}");
         Console.WriteLine($"[EBCDIC-PROCESSOR] S records: {_sRecordCount}");
         Console.WriteLine($"[EBCDIC-PROCESSOR] D records: {_dRecordCount}");
+
+        _asciiWindowCache = null; // release cached window data for next job
     }
 
     /// <summary>
@@ -184,6 +293,7 @@ public class EbcdicProcessor
         NormalizeHeaderWindow(outputBuffer, inputBuffer, 'D');
         ApplyDeltaAfterStandard('D', outputBuffer);
         ApplyNormalizeRules('D', outputBuffer, inputBuffer);
+        InjectAsciiTextSegments('D', _dRecordCount, outputBuffer, inputBuffer);
         asciiWriter.Write(outputBuffer, 0, 1500);
         dWriter.Write(outputBuffer, 0, 1500);
     }
@@ -236,15 +346,35 @@ public class EbcdicProcessor
                 Console.WriteLine();
             }
             
-            // Packed decimal fields should be copied raw, not converted
+            // Legacy mbcnvt0.c applies FieldIsPacked() runtime check for DataType==2 fields
+            // If a field is marked as "Packed Number" but doesn't actually contain packed data,
+            // we need to determine if it's blank (EBCDIC spaces) or contains text:
+            // - Blank (all EBCDIC spaces 0x40): Keep as-is (copy raw) - legacy preserves EBCDIC spaces in packed fields
+            // - Contains text: Convert EBCDIC→ASCII
             if (mode == EbcdicAsciiConverter.ConversionMode.CopyRaw)
             {
-                // Raw copy for packed fields in .dat.asc stage
-                Buffer.BlockCopy(inputBuffer, field.Offset, outputBuffer, field.Offset, field.Length);
+                // Check if field actually contains packed data OR is all EBCDIC spaces (blank)
+                bool isPacked = IsFieldPacked(inputBuffer, field.Offset, field.Length);
+                bool isBlank = AllEbcSpaces(inputBuffer.AsSpan(field.Offset, field.Length));
                 
-                if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null && field.Name.Contains("annual-int"))
+                if (isPacked || isBlank)
                 {
-                    Console.WriteLine($"[DEBUG] Copied packed field {field.Name} raw: {BitConverter.ToString(inputBuffer, field.Offset, field.Length)}");
+                    // Field is truly packed OR blank (EBCDIC spaces) - copy raw to preserve original encoding
+                    Buffer.BlockCopy(inputBuffer, field.Offset, outputBuffer, field.Offset, field.Length);
+                    
+                    if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null && field.Name.Contains("annual-int"))
+                    {
+                        Console.WriteLine($"[DEBUG] Copied field {field.Name} raw (packed={isPacked}, blank={isBlank}): {BitConverter.ToString(inputBuffer, field.Offset, field.Length)}");
+                    }
+                }
+                else
+                {
+                    // Field is marked as packed but contains actual text - convert as Standard (EBCDIC→ASCII)
+                    EbcdicAsciiConverter.Convert(
+                        inputBuffer.AsSpan(field.Offset), 
+                        outputBuffer.AsSpan(field.Offset), 
+                        field.Length, 
+                        EbcdicAsciiConverter.ConversionMode.Standard);
                 }
             }
             else if (mode == EbcdicAsciiConverter.ConversionMode.Packed || mode == EbcdicAsciiConverter.ConversionMode.ZonedDecimal || mode == EbcdicAsciiConverter.ConversionMode.Standard)
@@ -386,11 +516,56 @@ public class EbcdicProcessor
         ApplyDeltaAfterStandard('P', outputBuffer);
         // Apply normalize rules if configured
         ApplyNormalizeRules('P', outputBuffer, inputBuffer);
+        InjectAsciiTextSegments('P', _pRecordCount, outputBuffer, inputBuffer);
 
         // Write to both main ASCII file and P split file
         NormalizeHeaderWindow(outputBuffer, inputBuffer, 'P');
         asciiWriter.Write(outputBuffer, 0, 1500);
         pWriter.Write(outputBuffer, 0, 1500);
+    }
+
+    private void InjectAsciiTextSegments(char recordType, int logicalIndex, byte[] outputBuffer, byte[] inputBuffer)
+    {
+        if (_overrides.HeaderWindows == null || !_overrides.HeaderWindows.Enabled)
+        {
+            return;
+        }
+
+        foreach (var window in _overrides.HeaderWindows.Windows)
+        {
+            if (!window.AppliesTo(recordType, logicalIndex))
+            {
+                continue;
+            }
+
+            int start = window.Start;
+            int end = window.End;
+            if (start < 0 || end >= outputBuffer.Length || end < start)
+            {
+                continue;
+            }
+
+            int len = end - start + 1;
+            Span<byte> destination = outputBuffer.AsSpan(start, len);
+
+            bool filledFromCache = false;
+            if (window.Source == "4300" && _asciiWindowCache != null)
+            {
+                filledFromCache = _asciiWindowCache.TryFill(recordType, logicalIndex, start, destination);
+                if (_verbose && recordType == 'S' && start == 1001 && logicalIndex < 5)
+                {
+                    var dataHex = BitConverter.ToString(destination.ToArray()).Replace("-","");
+                    Console.WriteLine($"[DEBUG][InjectASCII] S-record #{logicalIndex}, window [{start}..{start+destination.Length-1}]: filled={filledFromCache}, data={dataHex}");
+                }
+            }
+
+            if (!filledFromCache && inputBuffer.Length >= end + 1)
+            {
+                inputBuffer.AsSpan(start, len).CopyTo(destination);
+            }
+
+            window.ApplyTransformsInPlace(destination);
+        }
     }
 
     /// <summary>
@@ -431,6 +606,32 @@ public class EbcdicProcessor
                 continue;
 
             var mode = GetConfiguredMode(field.DataType);
+            
+            // Legacy mbcnvt0.c applies FieldIsPacked() runtime check for DataType==2 fields
+            // Behavior differs by record type:
+            // P-records: Blank packed fields (EBCDIC spaces) → Keep as EBCDIC spaces (0x40)
+            // S-records: Blank packed fields (EBCDIC spaces) → Convert to ASCII spaces (0x20)
+            if (mode == EbcdicAsciiConverter.ConversionMode.CopyRaw)
+            {
+                // Check if field actually contains packed data OR is all EBCDIC spaces (blank)
+                bool isPacked = IsFieldPacked(inputBuffer, field.Offset, field.Length);
+                bool isBlank = AllEbcSpaces(inputBuffer.AsSpan(field.Offset, field.Length));
+                
+                if (!isPacked && !isBlank)
+                {
+                    // Field is marked as packed but contains actual text - convert as Standard (EBCDIC→ASCII)
+                    mode = EbcdicAsciiConverter.ConversionMode.Standard;
+                }
+                else if (isBlank)
+                {
+                    // S-records: Legacy converts blank packed fields (EBCDIC spaces) to ASCII spaces
+                    // This differs from P-records where blank packed fields are preserved as EBCDIC spaces
+                    for (int i = 0; i < field.Length; i++) outputBuffer[field.Offset + i] = (byte)' '; // ASCII space
+                    continue; // Skip normal conversion
+                }
+                // Otherwise (actually packed): keep CopyRaw mode to preserve packed data
+            }
+            
             if (mode == EbcdicAsciiConverter.ConversionMode.ZonedDecimal && AllEbcSpaces(inputBuffer.AsSpan(field.Offset, field.Length)))
             {
                 // For blank zoned decimals in S records, legacy renders spaces, not zeros
@@ -485,6 +686,7 @@ public class EbcdicProcessor
         // These specific positions should be ASCII spaces in S records
         var finalCleanupAreas = new (int offset, int length)[]
         {
+            (1001, 10),  // The [1001-1010] window - legacy always outputs ASCII spaces here
             (1017, 20),  // The exact problem area 1017-1036
         };
         
@@ -506,22 +708,14 @@ public class EbcdicProcessor
             var hdr810 = string.Join(" ", outputBuffer.Skip(8).Take(3).Select(b => $"0x{b:X2}"));
             Console.WriteLine($"[DEBUG][S] hdr[5..6]={hdr56} hdr[8..10]={hdr810}");
         }
-
-        // Apply configured narrow deltas after IBM037 decoding (e.g., convert 0x40→0x20 in specific S ranges)
+        // Apply deltas if configured
         ApplyDeltaAfterStandard('S', outputBuffer);
         // Apply normalize rules if configured
         ApplyNormalizeRules('S', outputBuffer, inputBuffer);
+        // Inject ASCII text segments from .4300.txt.new cache
+        InjectAsciiTextSegments('S', _sRecordCount, outputBuffer, inputBuffer);
 
-        // Normalize common windows for S as well
-        NormalizeCommonWindows(outputBuffer);
-        if (Environment.GetEnvironmentVariable("STEP1_DEBUG") != null)
-        {
-            var hdr56 = string.Join(" ", outputBuffer.Skip(5).Take(2).Select(b => $"0x{b:X2}"));
-            var hdr810 = string.Join(" ", outputBuffer.Skip(8).Take(3).Select(b => $"0x{b:X2}"));
-            Console.WriteLine($"[DEBUG][S] hdr[5..6]={hdr56} hdr[8..10]={hdr810}");
-        }
-
-        // Write to both main ASCII file and S split file
+        // Final normalization for header sentinels [9-10] (MUST be after all processing)
         NormalizeHeaderWindow(outputBuffer, inputBuffer, 'S');
         asciiWriter.Write(outputBuffer, 0, 1500);
         sWriter.Write(outputBuffer, 0, 1500);
@@ -827,6 +1021,7 @@ public class EbcdicProcessor
         public Dictionary<char, List<Move>> PostProcess { get; set; } = new();
         public DeltaConfig DeltaAfter { get; set; } = new();
         public NormalizeConfig Normalize { get; set; } = new();
+        public HeaderWindowsConfig? HeaderWindows { get; set; }
 
         public static EbcdicOverrides Default => new EbcdicOverrides
         {
@@ -994,6 +1189,81 @@ public class EbcdicProcessor
                 ov.Normalize = nc;
             }
 
+            if (root.TryGetProperty("headerWindows", out var hw))
+            {
+                var hwc = new HeaderWindowsConfig();
+                if (hw.TryGetProperty("enabled", out var en))
+                {
+                    hwc.Enabled = en.GetBoolean();
+                }
+                if (hw.TryGetProperty("windows", out var windowsEl) && windowsEl.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var w in windowsEl.EnumerateArray())
+                    {
+                        var window = new HeaderWindow();
+                        if (w.TryGetProperty("record", out var rec) && rec.ValueKind == JsonValueKind.String)
+                        {
+                            window.Record = rec.GetString()![0];
+                        }
+                        if (w.TryGetProperty("start", out var start) && start.ValueKind == JsonValueKind.Number)
+                        {
+                            window.Start = start.GetInt32();
+                        }
+                        if (w.TryGetProperty("end", out var end) && end.ValueKind == JsonValueKind.Number)
+                        {
+                            window.End = end.GetInt32();
+                        }
+                        if (w.TryGetProperty("source", out var src) && src.ValueKind == JsonValueKind.String)
+                        {
+                            window.Source = src.GetString();
+                        }
+                        if (w.TryGetProperty("transforms", out var transformsEl) && transformsEl.ValueKind == JsonValueKind.Array)
+                        {
+                            foreach (var t in transformsEl.EnumerateArray())
+                            {
+                        if (t.TryGetProperty("type", out var type) && type.ValueKind == JsonValueKind.String)
+                                {
+                                    var transformType = type.GetString()?.ToLowerInvariant();
+                                    if (transformType == "replace")
+                                    {
+                                if (t.TryGetProperty("from", out var from) && from.ValueKind == JsonValueKind.String &&
+                                    t.TryGetProperty("to", out var to) && to.ValueKind == JsonValueKind.String)
+                                        {
+                                        var fromStr = from.GetString()!;
+                                        var toStr = to.GetString()!;
+                                        if (fromStr.Length > 0 && toStr.Length > 0)
+                                        {
+                                            window.Transforms.Add(new ReplaceTransform
+                                            {
+                                                From = (byte)fromStr[0],
+                                                To = (byte)toStr[0]
+                                            });
+                                        }
+                                        }
+                                    }
+                                    else if (transformType == "remove")
+                                    {
+                                if (t.TryGetProperty("char", out var charTransform) && charTransform.ValueKind == JsonValueKind.String)
+                                        {
+                                        var charStr = charTransform.GetString()!;
+                                        if (charStr.Length > 0)
+                                        {
+                                            window.Transforms.Add(new RemoveTransform
+                                            {
+                                                Char = (byte)charStr[0]
+                                            });
+                                        }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        hwc.Windows.Add(window);
+                    }
+                }
+                ov.HeaderWindows = hwc;
+            }
+
             return ov;
         }
 
@@ -1032,6 +1302,75 @@ public class EbcdicProcessor
             public List<byte> SetBytes { get; } = new();
             public int? RepeatEvery { get; set; }
             public bool UseInputIbm037 { get; set; }
+        }
+
+        public sealed class HeaderWindowsConfig
+        {
+            public bool Enabled { get; set; }
+            public List<HeaderWindow> Windows { get; } = new();
+        }
+
+        public sealed class HeaderWindow
+        {
+            public char Record { get; set; }
+            public int Start { get; set; }
+            public int End { get; set; }
+            public string Source { get; set; } = "4300"; // Default to 4300 text source
+            public List<Transform> Transforms { get; } = new();
+
+            public bool AppliesTo(char recordType, int logicalIndex)
+            {
+                // Check if this window applies to the given record type
+                // Note: logicalIndex is the record number (0, 1, 2, ...), while Start/End are byte offsets
+                // Currently we apply to all records of matching type; future enhancement could add record index filtering
+                return char.ToUpperInvariant(Record) == char.ToUpperInvariant(recordType);
+            }
+
+            public void ApplyTransformsInPlace(Span<byte> buffer)
+            {
+                foreach (var transform in Transforms)
+                {
+                    transform.Apply(buffer);
+                }
+            }
+        }
+
+        public abstract class Transform
+        {
+            public abstract void Apply(Span<byte> buffer);
+        }
+
+        public sealed class ReplaceTransform : Transform
+        {
+            public byte From { get; set; }
+            public byte To { get; set; }
+
+            public override void Apply(Span<byte> buffer)
+            {
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    if (buffer[i] == From)
+                    {
+                        buffer[i] = To;
+                    }
+                }
+            }
+        }
+
+        public sealed class RemoveTransform : Transform
+        {
+            public byte Char { get; set; }
+
+            public override void Apply(Span<byte> buffer)
+            {
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    if (buffer[i] == Char)
+                    {
+                        buffer[i] = 0x20; // Replace with ASCII space
+                    }
+                }
+            }
         }
     }
 
@@ -1145,13 +1484,22 @@ public class EbcdicProcessor
         {
             EbcdicAsciiConverter.Convert(inputBuffer.AsSpan(4), outputBuffer.AsSpan(4), 7, EbcdicAsciiConverter.ConversionMode.Standard);
         }
-        // S-record header bytes 9-10 must be ASCII spaces
-        if (recordType == 'S')
+        // Header sentinels at offsets 9-10 must mirror legacy mbcnvt0.
+        // Pull the raw bytes from the input record and translate only the EBCDIC spaces (0x40) to ASCII spaces.
+        byte headerHi = inputBuffer.Length > 9 ? inputBuffer[9] : outputBuffer[9];
+        byte headerLo = inputBuffer.Length > 10 ? inputBuffer[10] : outputBuffer[10];
+        if (headerHi == 0x40) headerHi = 0x20;
+        if (headerLo == 0x40) headerLo = 0x20;
+        
+        // D-records: Special mapping for byte 10: 0x0F → 0xA9 (legacy sentinel placeholder)
+        if (recordType == 'D' && headerLo == 0x0F)
         {
-            outputBuffer[9] = 0x20;
-            outputBuffer[10] = 0x20;
+            headerLo = 0xA9;
         }
-        // No further placeholder mapping needed once loan number is properly decoded
+        
+        outputBuffer[9] = headerHi;
+        outputBuffer[10] = headerLo;
+        // No further placeholder mapping needed once loan number and header sentinels are re-applied.
     }
 
     private static bool AllEbcSpaces(ReadOnlySpan<byte> src)

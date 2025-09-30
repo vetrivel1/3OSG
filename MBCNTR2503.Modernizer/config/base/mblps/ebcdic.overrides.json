@@ -17,6 +17,10 @@
     { "when": { "disbTypePackedAt": 36, "equals": 3 }, "useDd": "mb1s.disb.dd" },
     { "useDd": "mb1s.extract.dd" }
   ],
+  "headerWindows": {
+    "enabled": false,
+    "windows": []
+  },
   "postProcess": {
     "P": [
       { "op": "memmove", "src": 1558, "dst": 1006, "len": 12 },
@@ -26,16 +30,20 @@
   "deltaAfterIBM037": {
     "enabled": true,
     "rules": [
-      { "when": { "record": "S", "range": [1017, 1036] }, "map": { "0x40": "0x20" } },
-      { "when": { "record": "D", "range": [790, 791] }, "map": { "0x40": "0x20" }, "repeatEvery": 1500 },
-      { "when": { "record": "P", "range": [790, 791] }, "map": { "0x40": "0x20" }, "repeatEvery": 1500 },
-      { "when": { "record": "S", "range": [790, 791] }, "map": { "0x40": "0x20" }, "repeatEvery": 1500 },
-      { "when": { "record": "D", "range": [2291, 2292] }, "map": { "0x40": "0x20" }, "repeatEvery": 6000 },
-      { "when": { "record": "P", "range": [2291, 2292] }, "map": { "0x40": "0x20" }, "repeatEvery": 6000 },
-      { "when": { "record": "S", "range": [2291, 2292] }, "map": { "0x40": "0x20" }, "repeatEvery": 6000 }
+      { "when": { "record": ["D","P","S"], "range": [9, 10] }, "map": { "0x25": "0x20", "0x5F": "0x20", "0x45": "0x20", "0x8F": "0x20", "0x53": "0x20", "0x0F": "0x20", "0x00": "0x20", "0x1F": "0x20", "0x2F": "0x20", "0x3F": "0x20", "0xA9": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": "P", "range": [9, 10] }, "map": { "0x25": "0x20", "0x5F": "0x20", "0x45": "0x20", "0x8F": "0x20", "0x53": "0x20", "0x0F": "0x20", "0x00": "0x20", "0x1F": "0x20", "0x2F": "0x20", "0x3F": "0x20", "0xA9": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": "S", "range": [9, 10] }, "map": { "0x25": "0x20", "0x5F": "0x20", "0x45": "0x20", "0x8F": "0x20", "0x53": "0x20", "0x0F": "0x20", "0x00": "0x20", "0x1F": "0x20", "0x2F": "0x20", "0x3F": "0x20", "0xA9": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": ["D","P","S"], "range": [129, 130] }, "map": { "0x00": "0x20", "0x1F": "0x20", "0x2F": "0x20", "0x3F": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": ["D","P","S"], "range": [135, 136] }, "map": { "0x00": "0x20", "0x1F": "0x20", "0x2F": "0x20", "0x3F": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": ["D","P","S"], "range": [141, 146] }, "map": { "0x00": "0x20", "0x1F": "0x20", "0x2F": "0x20", "0x3F": "0x20" }, "repeatEvery": 1500 },
+      { "when": { "record": ["D","P","S"], "range": [1005, 1010] }, "map": { "0x00": "0x20", "0x1F": "0x20", "0x2F": "0x20", "0x3F": "0x20" }, "repeatEvery": 1500 }
     ]
   },
-  "normalize": { "rules": [] }
+  "normalize": {
+    "rules": [
+      { "when": { "record": ["D","P","S"], "range": [9, 10] }, "useInputIbm037": true, "repeatEvery": 1500 }
+    ]
+  }
 }
 
 

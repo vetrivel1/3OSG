@@ -80,6 +80,7 @@ else if (args.Length > 0 && args[0] == "ebcdic-to-ascii")
 {
     string? job = null; string? input = null; string? outDir = null; string? schemaDir = null;
     bool debug = false;
+    bool verbose = false;
     for (int i = 1; i < args.Length; i++)
     {
         if (args[i] == "--job" && i + 1 < args.Length) job = args[++i];
@@ -87,6 +88,7 @@ else if (args.Length > 0 && args[0] == "ebcdic-to-ascii")
         else if (args[i] == "--out" && i + 1 < args.Length) outDir = args[++i];
         else if (args[i] == "--schema" && i + 1 < args.Length) schemaDir = args[++i];
         else if (args[i] == "--debug") debug = true;
+        else if (args[i] == "--verbose") verbose = true;
     }
     if (job == null || input == null || outDir == null || schemaDir == null)
     {
@@ -98,7 +100,7 @@ else if (args.Length > 0 && args[0] == "ebcdic-to-ascii")
     var compiled = SchemaCompiler.Compile(schemaDir);
     Console.WriteLine("Schema compiled successfully.");
     if (debug) Environment.SetEnvironmentVariable("STEP1_DEBUG", "1");
-    var ebcdicProcessor = new EbcdicProcessor(compiled);
+    var ebcdicProcessor = new EbcdicProcessor(compiled, verbose);
     ebcdicProcessor.ProcessDatToAsc(job, input, outDir);
     return;
 }
