@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cnp.Cli")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae3b2f8e3ceb41a1c9fb9fd87da97919a1435bf8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+722043d59cddd10552e1556eee354a8768cb4073")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cnp.Cli")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cnp.Cli")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

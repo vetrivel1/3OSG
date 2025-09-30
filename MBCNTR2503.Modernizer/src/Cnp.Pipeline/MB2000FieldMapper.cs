@@ -25,9 +25,13 @@ namespace Cnp.Pipeline
         public List<MB2000OverrideEntry> Overrides { get; set; } = new List<MB2000OverrideEntry>();
     }
 
+    // Holds MB2000 output field layout
+    internal class MB2000FieldDef { public int Offset; public int Length; public string Type; public MB2000FieldDef(int off, int len, string ty){ Offset=off; Length=len; Type=ty;} }
+    
     public class MB2000FieldMapper
     {
         private static readonly Dictionary<string, FieldMetadata> _fieldMetadata = LoadFieldMetadata();
+        private readonly Dictionary<string, MB2000FieldDef> _mb2000Layout;
 
         private static Dictionary<string, FieldMetadata> LoadFieldMetadata()
         {
@@ -112,6 +116,53 @@ namespace Cnp.Pipeline
             });
             _overrides = config?.Overrides ?? new List<MB2000OverrideEntry>();
             Console.WriteLine($"[MB2000] Loaded {_overrides.Count} overrides from {overridePath}");
+            
+            // Load MB2000 output schema
+            _mb2000Layout = LoadMB2000Schema(overridePath);
+            Console.WriteLine($"[MB2000] Loaded {_mb2000Layout.Count} field definitions from mb2000.dd");
+        }
+        
+        private Dictionary<string, MB2000FieldDef> LoadMB2000Schema(string overridePath)
+        {
+            var layout = new Dictionary<string, MB2000FieldDef>(StringComparer.OrdinalIgnoreCase);
+            
+            // Find mb2000.dd in the same directory as the overrides file
+            var overrideDir = Path.GetDirectoryName(overridePath);
+            var mb2000DdPath = Path.Combine(overrideDir, "mb2000.dd");
+            
+            if (!File.Exists(mb2000DdPath))
+            {
+                Console.WriteLine($"[MB2000] WARNING: mb2000.dd not found at {mb2000DdPath}, will use Container4000 schema as fallback");
+                return layout; // Return empty, will fall back to old behavior
+            }
+            
+            Console.WriteLine($"[MB2000] Loading MB2000 output schema from: {mb2000DdPath}");
+            
+            foreach (var line in File.ReadLines(mb2000DdPath))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+                
+                // Parse DD format: FieldName, Offset, Length, Type, DecimalPlaces
+                var parts = line.Split(',').Select(p => p.Trim()).ToArray();
+                if (parts.Length >= 4)
+                {
+                    string name = parts[0];
+                    if (int.TryParse(parts[1], out int offset) && 
+                        int.TryParse(parts[2], out int length))
+                    {
+                        string type = parts[3];
+                        layout[name] = new MB2000FieldDef(offset, length, type);
+                        
+                        // Debug first 5 fields
+                        if (layout.Count <= 5)
+                        {
+                            Console.WriteLine($"[MB2000] Loaded field: {name} at offset {offset}, length {length}, type {type}");
+                        }
+                    }
+                }
+            }
+            
+            return layout;
         }
 
         public byte[] Map(byte[] keyed)
@@ -121,8 +172,33 @@ namespace Cnp.Pipeline
             // Debug overrides usage and schema length
             Console.WriteLine($"[MB2000][DBG] Map start: overrides={_overrides.Count}, schemaLength={outLen}");
             var outputBuffer = new byte[outLen];
-            // Initialize with spaces (do not copy raw keyed data)
+            
+            // Initialize with ASCII spaces as default (most common in legacy output)
             for (int i = 0; i < outLen; i++) outputBuffer[i] = 0x20;
+            
+            // Initialize packed decimal field regions with nulls (based on MB2000 schema analysis)
+            var nullRegions = new (int start, int length)[]
+            {
+                (10, 6), (43, 4), (668, 23), (699, 49), (761, 66),
+                (832, 75), (913, 9), (949, 6), (962, 3), (972, 21),
+                (1224, 5), (1935, 29)
+            };
+            foreach (var (start, length) in nullRegions)
+            {
+                for (int i = start; i < start + length && i < outLen; i++)
+                    outputBuffer[i] = 0x00;
+            }
+            
+            // Initialize control regions with EBCDIC spaces (0x40)
+            var ebcdicRegions = new (int start, int length)[]
+            {
+                (1012, 11), (1388, 12), (1401, 26), (1431, 6)
+            };
+            foreach (var (start, length) in ebcdicRegions)
+            {
+                for (int i = start; i < start + length && i < outLen; i++)
+                    outputBuffer[i] = 0x40;
+            }
             
             Console.WriteLine($"[MB2000] Processing record, applying {_overrides.Count} overrides");
             int appliedCount = 0;
@@ -150,12 +226,21 @@ namespace Cnp.Pipeline
                     Console.WriteLine($"[MB2000][DBG] Skipping '{ov.Target}': sourceLength={ov.SourceLength}");
                     continue;
                 }
-                var fieldModel = _schema.Container4000.Fields.FirstOrDefault(f => f.Name.Equals(ov.Target, StringComparison.OrdinalIgnoreCase));
-                if (fieldModel == null)
+                
+                // Look up field in MB2000 output schema (NOT Container4000!)
+                if (!_mb2000Layout.TryGetValue(ov.Target, out var mb2000Field))
                 {
-                    Console.WriteLine($"[MB2000][DBG] Skipping '{ov.Target}': no field in schema");
-                    continue;
+                    // Fallback to Container4000 if MB2000 schema not loaded or field not found
+                    var fieldModel = _schema.Container4000.Fields.FirstOrDefault(f => f.Name.Equals(ov.Target, StringComparison.OrdinalIgnoreCase));
+                    if (fieldModel == null)
+                    {
+                        Console.WriteLine($"[MB2000][DBG] Skipping '{ov.Target}': not found in MB2000 schema or Container4000");
+                        continue;
+                    }
+                    Console.WriteLine($"[MB2000][FALLBACK] Using Container4000 offset for '{ov.Target}' (MB2000 schema missing this field)");
+                    mb2000Field = new MB2000FieldDef(fieldModel.Offset, fieldModel.Length, "Unknown");
                 }
+                
                 int srcOff = ov.SourceOffset;
                 int srcLen = ov.SourceLength;
                 if (srcOff < 0 || srcOff + srcLen > keyed.Length)
@@ -163,8 +248,10 @@ namespace Cnp.Pipeline
                     Console.WriteLine($"[MB2000][DBG] Skipping '{ov.Target}': source bounds [{srcOff},{srcLen}] exceed input length {keyed.Length}");
                     continue;
                 }
-                int destOff = fieldModel.Offset;
-                int destLen = fieldModel.Length;
+                
+                // Use MB2000 schema for destination offset and length!
+                int destOff = mb2000Field.Offset;
+                int destLen = mb2000Field.Length;
                 if (destOff < 0 || destOff + destLen > outputBuffer.Length)
                 {
                     Console.WriteLine($"[MB2000][DBG] Skipping '{ov.Target}': destination bounds [{destOff},{destLen}] exceed output length {outputBuffer.Length}");
