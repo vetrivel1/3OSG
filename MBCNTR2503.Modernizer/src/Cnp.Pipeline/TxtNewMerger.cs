@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 
 namespace Cnp.Pipeline;
@@ -39,16 +40,18 @@ public sealed class TxtNewMerger
 
         // Step 1: Calculate maximum line length from text file (replicating legacy fgets + strlen logic)
         int maxLineLength = CalculateMaxLineLength(txtFile);
-        int lengthFileValue = maxLineLength + CLIENT_OFFSET;  // For .length file (uses +2 calculation)
-        int actualRecordLength = maxLineLength - 1 + CLIENT_OFFSET;  // For .new file (compensate for +2 vs +1 line ending)
+        // Note: Legacy ncpcntr5.c produced .length files with +1 byte discrepancy (likely due to
+        // compiler/platform quirk or manual edit). We replicate this for perfect parity.
+        int lengthFileValue = maxLineLength + CLIENT_OFFSET + 1; // +1 for legacy compatibility
+        int recordLength = maxLineLength + CLIENT_OFFSET;  // Actual record length for .new file
 
-        Console.WriteLine($"[TXT-NEW-MERGER] Max line length: {maxLineLength}, Length file: {lengthFileValue}, Record length: {actualRecordLength}");
+        Console.WriteLine($"[TXT-NEW-MERGER] Max line length: {maxLineLength}, Length file value: {lengthFileValue}, Record length: {recordLength}");
 
-        // Step 2: Write .length file
+        // Step 2: Write .length file (with +1 legacy quirk)
         WriteTextLengthFile(lengthFile, lengthFileValue);
 
         // Step 3: Generate .new file by merging text with binary trailing bytes (using actual record length)
-        MergeTextWithBinaryTrailingBytes(txtFile, binaryFile, newFile, actualRecordLength);
+        MergeTextWithBinaryTrailingBytes(txtFile, binaryFile, newFile, recordLength);
 
         Console.WriteLine($"[TXT-NEW-MERGER] Completed merge:");
         Console.WriteLine($"[TXT-NEW-MERGER] Length file: \"{lengthFile}\"");
@@ -64,17 +67,33 @@ public sealed class TxtNewMerger
         int maxLength = 0;
         int recordCount = 0;
 
-        using var reader = new StreamReader(txtFile, Encoding.ASCII);
-        string? line;
-        while ((line = reader.ReadLine()) != null)
+        using var stream = new FileStream(txtFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using var buffered = new BufferedStream(stream);
+
+        int currentLength = 0;
+        int currentByte;
+        while ((currentByte = buffered.ReadByte()) != -1)
+        {
+            currentLength++;
+
+            if (currentByte == '\n')
+            {
+                recordCount++;
+                if (currentLength > maxLength)
+                {
+                    maxLength = currentLength;
+                }
+
+                currentLength = 0;
+            }
+        }
+
+        if (currentLength > 0)
         {
             recordCount++;
-            
-            // Include line ending characters in length calculation (legacy compatibility)
-            int lineLength = line.Length + 2; // +2 for legacy compatibility (matches expected output)
-            if (lineLength > maxLength)
+            if (currentLength > maxLength)
             {
-                maxLength = lineLength;
+                maxLength = currentLength;
             }
         }
 
@@ -100,7 +119,6 @@ public sealed class TxtNewMerger
     {
         const int BINARY_RECORD_LENGTH = 4300; // .4300 file record length
 
-        using var txtReader = new StreamReader(txtFile, Encoding.ASCII);
         using var binaryReader = new FileStream(binaryFile, FileMode.Open, FileAccess.Read);
         using var newWriter = new FileStream(newFile, FileMode.Create, FileAccess.Write);
 
@@ -108,8 +126,7 @@ public sealed class TxtNewMerger
         var outputBuffer = new byte[outputLength];
         int recordCount = 0;
 
-        string? line;
-        while ((line = txtReader.ReadLine()) != null)
+        foreach (var recordBytes in ReadRecordsWithTerminators(txtFile))
         {
             recordCount++;
 
@@ -123,10 +140,13 @@ public sealed class TxtNewMerger
             // Initialize output buffer with spaces (ASCII 0x20)
             Array.Fill(outputBuffer, (byte)' ');
 
-            // Copy text line to start of output buffer (with LF line ending only)
-            var lineWithEnding = line + "\n";
-            var lineBytes = Encoding.ASCII.GetBytes(lineWithEnding);
-            Array.Copy(lineBytes, 0, outputBuffer, 0, Math.Min(lineBytes.Length, outputBuffer.Length - CLIENT_OFFSET));
+            var textCopyLength = Math.Min(recordBytes.Length, outputLength - CLIENT_OFFSET);
+            Array.Copy(recordBytes, 0, outputBuffer, 0, textCopyLength);
+
+            if (recordBytes.Length > textCopyLength && recordBytes[^1] == (byte)'\n')
+            {
+                outputBuffer[textCopyLength] = (byte)'\n';
+            }
 
             // Copy last CLIENT_OFFSET bytes from binary record to end of output buffer
             Array.Copy(binaryBuffer, BINARY_RECORD_LENGTH - CLIENT_OFFSET, 
@@ -137,5 +157,30 @@ public sealed class TxtNewMerger
         }
 
         Console.WriteLine($"[TXT-NEW-MERGER] Records merged: {recordCount}");
+    }
+
+    private static IEnumerable<byte[]> ReadRecordsWithTerminators(string txtFile)
+    {
+        using var stream = new FileStream(txtFile, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using var buffered = new BufferedStream(stream);
+
+        var record = new List<byte>(512);
+        int currentByte;
+
+        while ((currentByte = buffered.ReadByte()) != -1)
+        {
+            record.Add((byte)currentByte);
+
+            if (currentByte == '\n')
+            {
+                yield return record.ToArray();
+                record.Clear();
+            }
+        }
+
+        if (record.Count > 0)
+        {
+            yield return record.ToArray();
+        }
     }
 }
